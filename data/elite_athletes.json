@@ -1,0 +1,1822 @@
+[
+  {
+    "id": 1,
+    "sport": "SHOOTING",
+    "name": "Manu Bhaker",
+    "age": "22",
+    "gender": "F",
+    "category": "10m Air Pistol / 25m Pistol",
+    "medals": "🥉 Paris 2024 — 10m Air Pistol; 🥉 Paris 2024 — Mixed Team; 🥇 Asian Games 2023; 🥇 CWG 2022; 🥇 World Championships 2018",
+    "records": "First Indian woman to win an Olympic shooting medal. First athlete from independent India to win two medals at a single Olympics. Wikipedia Domestic ranking avg: 578 (10m air pistol) per NRAI 2025 trials. Most decorated Indian woman shooter ever."
+  },
+  {
+    "id": 2,
+    "sport": "SHOOTING",
+    "name": "Swapnil Kusale",
+    "age": "28",
+    "gender": "M",
+    "category": "50m Rifle 3 Positions",
+    "medals": "🥉 Paris 2024 — 50m Rifle 3P (India's first-ever medal in this event); 🥇 Asian Games 2023",
+    "records": "India's first-ever Olympic medal in 50m rifle 3 positions. SPORT Career-best score: 594(qualification round, Asian Games 2023). Competed in 3-position event requiring kneeling, prone, and standing — all in sequence."
+  },
+  {
+    "id": 3,
+    "sport": "SHOOTING",
+    "name": "Sarabjot Singh",
+    "age": "22",
+    "gender": "M",
+    "category": "10m Air Pistol",
+    "medals": "🥉 Paris 2024 — Mixed Team (with Manu Bhaker); 🥇 ISSF World Cup 2023 Baku",
+    "records": "Career-best qualification score: 583 (10m air pistol). First Indian mixed team shooting Olympic medallist. World Cup gold at age 21."
+  },
+  {
+    "id": 4,
+    "sport": "SHOOTING",
+    "name": "Arjun Babuta",
+    "age": "25",
+    "gender": "M",
+    "category": "10m Air Rifle",
+    "medals": "4th place Paris 2024 (missed bronze by 0.1 points); 🥇 ISSF World Cup 2024",
+    "records": "World-ranked shooter. Athletiqconnect Career-best qualification score: 632.5 (10m air rifle). 4th at Olympics by 0.1 point — most heartbreaking Indian shooting result at Paris 2024. World No. 1 in 10m air rifle in 2024."
+  },
+  {
+    "id": 5,
+    "sport": "SHOOTING",
+    "name": "Elavenil Valarivan",
+    "age": "24",
+    "gender": "F",
+    "category": "10m Air Rifle",
+    "medals": "🥇 ISSF World Cup 2020 Munich; 🥇 ISSF World Cup 2021; Paris 2024 finalist",
+    "records": "Ranked No. 2 nationally in 10m air rifle women with domestic average of 633.28. Wikipedia Career-best score: 253.4 (final score — world-class level). Former world No. 1 at age 20."
+  },
+  {
+    "id": 6,
+    "sport": "SHOOTING",
+    "name": "Sift Kaur Samra",
+    "age": "22",
+    "gender": "F",
+    "category": "50m Rifle 3 Positions",
+    "medals": "🥇 Asian Games 2023; Paris 2024 participant; 🥇 National Games 2025 (50m 3P)",
+    "records": "Won Asian Games gold with a new world record score of 469.6 in the final, also setting Asian Games record of 594 in qualification. SportsphilanthropynetworkRemains the top-ranked 3P women's shooter in India with national average of 593.38. Wikipedia Current world record holder 50m rifle 3P."
+  },
+  {
+    "id": 7,
+    "sport": "SHOOTING",
+    "name": "Ramita Jindal",
+    "age": "21",
+    "gender": "F",
+    "category": "10m Air Rifle",
+    "medals": "Paris 2024 finalist (top 8); 🥇 ISSF World Cup 2023",
+    "records": "Ranked 5th nationally in 10m air rifle women with domestic average 632.05. Wikipedia Career-best final score: 228.1. World Cup gold at 19. Youngest shooter in Paris 2024 India squad."
+  },
+  {
+    "id": 8,
+    "sport": "SHOOTING",
+    "name": "Anjum Moudgil",
+    "age": "29",
+    "gender": "F",
+    "category": "50m Rifle 3 Positions",
+    "medals": "🥈 World Championships 2018; Paris 2024 participant",
+    "records": "Back in national reckoning for 50m 3P with average of 591.68 — 3rd nationally. Wikipedia 2-time Olympian. Career-best score: 593 (qualification). India's most experienced women's rifle shooter."
+  },
+  {
+    "id": 9,
+    "sport": "SHOOTING",
+    "name": "Rhythm Sangwan",
+    "age": "22",
+    "gender": "F",
+    "category": "10m Air Pistol",
+    "medals": "🥇 ISSF Junior World Championships 2021; Paris 2024 participant",
+    "records": "Career-best score: 580 (10m air pistol qualification). Junior World Champion. Strong senior transition — Paris Olympian at 21."
+  },
+  {
+    "id": 10,
+    "sport": "SHOOTING",
+    "name": "Anish Bhanwala",
+    "age": "21",
+    "gender": "M",
+    "category": "25m Rapid Fire Pistol",
+    "medals": "🥇 CWG 2018 (youngest CWG shooting gold medalist — age 15); Paris 2024 participant",
+    "records": "Record: Youngest-ever CWG shooting gold medalist at age 15 (2018). Career-best score in RFP finals. 10-year window remaining until peak career."
+  },
+  {
+    "id": 11,
+    "sport": "SHOOTING",
+    "name": "Vijayveer Sidhu",
+    "age": "23",
+    "gender": "M",
+    "category": "25m Rapid Fire Pistol",
+    "medals": "🥇 ISSF World Cup 2022 Cairo; Paris 2024 participant",
+    "records": "Career-best score: 30 hits (rapid fire pistol final — world-class level). World Cup gold at 21. Consistent top-8 internationally."
+  },
+  {
+    "id": 12,
+    "sport": "SHOOTING",
+    "name": "Esha Singh",
+    "age": "19",
+    "gender": "F",
+    "category": "10m Air Pistol / 25m Pistol",
+    "medals": "🥇 ISSF Junior World Championships 2023; 🥇 Asian Games 2023 (mixed team)",
+    "records": "Career-best score: 579 (10m air pistol). Junior World Champion at 18. Selected for Paris 2024 squad in women's 25m pistol alongside Manu Bhaker. Athletiqconnect India's next air pistol star."
+  },
+  {
+    "id": 13,
+    "sport": "SHOOTING",
+    "name": "Aishwary Pratap Singh Tomar",
+    "age": "24",
+    "gender": "M",
+    "category": "50m Rifle 3 Positions",
+    "medals": "🥇 ISSF World Cup 2021 Osijek; Paris 2024 participant",
+    "records": "Career-best qualification score: 590 (50m rifle 3P). Selected for Paris 2024 squad in 50m rifle 3P. Athletiqconnect Multiple World Cup medals."
+  },
+  {
+    "id": 14,
+    "sport": "SHOOTING",
+    "name": "Arjun Cheema",
+    "age": "25",
+    "gender": "M",
+    "category": "10m Air Pistol",
+    "medals": "🥇 ISSF World Cup 2023 Rio; Paris 2024 participant",
+    "records": "Career-best score: 581 (10m air pistol qualification). World Cup gold medalist. Consistent top-8 finisher internationally."
+  },
+  {
+    "id": 15,
+    "sport": "SHOOTING",
+    "name": "Prithviraj Tondaiman",
+    "age": "28",
+    "gender": "M",
+    "category": "Trap",
+    "medals": "🥇 CWG 2022 (mixed team); Paris 2024 participant",
+    "records": "Career-best score: 74/75 (trap qualification — world-class level). First Indian trap shooter at Olympics in years."
+  },
+  {
+    "id": 16,
+    "sport": "SHOOTING",
+    "name": "Maheshwari Chauhan",
+    "age": "30",
+    "gender": "F",
+    "category": "Skeet",
+    "medals": "🥇 CWG 2022 (mixed team); Paris 2024 participant; 🥇 National Games 2025 (skeet women)",
+    "records": "Career-best score: 53 (skeet final — won gold at 38th National Games with score of 53 in women's skeet final.) Theathletedp Veteran skeet shooter."
+  },
+  {
+    "id": 17,
+    "sport": "SHOOTING",
+    "name": "Tilottama Sen",
+    "age": "17",
+    "gender": "F",
+    "category": "10m Air Rifle",
+    "medals": "🥇 ISSF Junior World Championships 2024",
+    "records": "Career-best score: 634 (10m air rifle qualification — junior world-class). Junior World Champion at 16. India's youngest active world champion in shooting."
+  },
+  {
+    "id": 18,
+    "sport": "SHOOTING",
+    "name": "Simranpreet Kaur Brar",
+    "age": "19",
+    "gender": "F",
+    "category": "25m Sports Pistol",
+    "medals": "🥇 ISSF World Cup Final 2025 (junior women's 25m pistol)",
+    "records": "Won gold in junior women's 25m sports pistol at 68th National Shooting Championship with score of 39 in the final. workinp World Cup Final gold at 18. Emerging 25m pistol pipeline."
+  },
+  {
+    "id": 19,
+    "sport": "SHOOTING",
+    "name": "Anantjeet Singh Naruka",
+    "age": "25",
+    "gender": "M",
+    "category": "Skeet",
+    "medals": "🥈 Asian Games 2023; Paris 2024 participant; 🥇 National Games (skeet)",
+    "records": "Career-best score: 56 in skeet final — won gold at National Games with score of 56. TheathletedpAsian Games silver. India's top active skeet shooter."
+  },
+  {
+    "id": 20,
+    "sport": "SHOOTING",
+    "name": "Mehuli Ghosh",
+    "age": "23",
+    "gender": "F",
+    "category": "10m Air Rifle",
+    "medals": "🥇 Asian Championships 2024 (10m air rifle); 🥈 CWG 2018; Back to national No. 1",
+    "records": "Asian Championship 2024 gold medalist — returned to No. 1 spot in domestic rankings with average of 633.65. Wikipedia Career-best score: 252.9 (final). India's current top-ranked 10m air rifle woman."
+  },
+  {
+    "id": 1,
+    "sport": "ATHLETICS",
+    "name": "Neeraj Chopra",
+    "age": "26",
+    "gender": "M",
+    "category": "Javelin Throw",
+    "medals": "🥇 Tokyo 2020; 🥈 Paris 2024; 🥇 World Championships 2023; 🥇 Asian Games 2023; 🥇 Diamond League Final 2022",
+    "records": "Rewrote his own national record with 90.23m at the 2025 Doha Diamond League — first Indian to breach the 90m mark. Crunchbase Previous NR: 89.94m (Stockholm DL 2022). World rank #2. India's greatest track and field athlete."
+  },
+  {
+    "id": 2,
+    "sport": "ATHLETICS",
+    "name": "Avinash Sable",
+    "age": "31",
+    "gender": "M",
+    "category": "3000m Steeplechase",
+    "medals": "🥇 Asian Games 2023; 🥈 Asian Championships 2023; Paris 2024 finalist",
+    "records": "National record: 8:09.91 set at Paris Diamond League 2024. Two Circles Also holds half marathon NR: sub-61 minutes (first Indian under 61 mins). 6x national record breaker. India's greatest-ever distance runner."
+  },
+  {
+    "id": 3,
+    "sport": "ATHLETICS",
+    "name": "Jyothi Yarraji",
+    "age": "25",
+    "gender": "F",
+    "category": "100m Hurdles",
+    "medals": "🥇 Asian Indoor Championships 2024; 🥈 Asian Games 2023; 🥇 Asian Athletics Championships 2023",
+    "records": "National record: 12.78 seconds — first set at FISU World University Games 2023 in Chengdu, matched at 2024 Motonet GP Jyvaskyla in Finland. Crunchbase Second-fastest Asian hurdler. Defending Asian champion."
+  },
+  {
+    "id": 4,
+    "sport": "ATHLETICS",
+    "name": "Tajinderpal Singh Toor",
+    "age": "29",
+    "gender": "M",
+    "category": "Shot Put",
+    "medals": "🥇 Asian Games 2023; 🥇 Asian Championships 2023; 🥇 Asian Indoor 2024",
+    "records": "National record: 21.77m — achieved at Inter-State Athletics Championships in Bhubaneswar on June 19, 2023. Two Circles Asian record. Only Indian to throw 21m+. Three-time Asian champion."
+  },
+  {
+    "id": 5,
+    "sport": "ATHLETICS",
+    "name": "Murali Sreeshankar",
+    "age": "25",
+    "gender": "M",
+    "category": "Long Jump",
+    "medals": "🥈 CWG 2022; 🥈 Asian Games 2023",
+    "records": "National record: 8.36m (set 2022). Career-best: consistent 8.20m+ jumps. India's best-ever long jumper. Consistent top-6 globally."
+  },
+  {
+    "id": 6,
+    "sport": "ATHLETICS",
+    "name": "Parul Chaudhary",
+    "age": "28",
+    "gender": "F",
+    "category": "3000m Steeplechase / 5000m",
+    "medals": "🥇 Asian Games 2023 (5000m); 🥈 Asian Games 2023 (steeplechase); Paris 2024 (both events)",
+    "records": "National record in 3000m steeplechase: 9:12.46— achieved at Asian Athletics Championships 2025. Crunchbase Also holds the 5000m NR. Only Indian to qualify for two individual track events at Paris 2024. Crunchbase"
+  },
+  {
+    "id": 7,
+    "sport": "ATHLETICS",
+    "name": "Annu Rani",
+    "age": "32",
+    "gender": "F",
+    "category": "Javelin Throw",
+    "medals": "🥇 Asian Games 2023; 🥇 Asian Athletics 2023; Paris 2024 participant",
+    "records": "National record: 63.82m — set at Indian Open Javelin Throw Competition 2022. CrunchbaseFirst Indian woman to throw 60m+. Asian champion."
+  },
+  {
+    "id": 8,
+    "sport": "ATHLETICS",
+    "name": "Jeswin Aldrin",
+    "age": "23",
+    "gender": "M",
+    "category": "Long Jump",
+    "medals": "Paris 2024 participant; 🥇 World Athletics Relays 2024",
+    "records": "National record holder in long jump. LinkedInPersonal best: 8.42m — national record, bettering Sreeshankar's mark. U23 star. India's highest long jump leap ever."
+  },
+  {
+    "id": 9,
+    "sport": "ATHLETICS",
+    "name": "Praveen Chithravel",
+    "age": "24",
+    "gender": "M",
+    "category": "Triple Jump",
+    "medals": "🥉 Asian Athletics Championships 2025; World Athletics regular",
+    "records": "Matched his own national record with 17.37mleap at 2025 Asian Athletics Championships. LinkedIn India's best-ever triple jumper."
+  },
+  {
+    "id": 10,
+    "sport": "ATHLETICS",
+    "name": "Abdulla Aboobacker",
+    "age": "26",
+    "gender": "M",
+    "category": "Triple Jump",
+    "medals": "🥈 CWG 2022; Paris 2024 participant; Reigning Asian triple jump champion",
+    "records": "Personal best: 17.19m — former national record. Reigning Asian champion in triple jump. LinkedIn India's best-ever international triple jump result."
+  },
+  {
+    "id": 11,
+    "sport": "ATHLETICS",
+    "name": "Harmilan Bains",
+    "age": "24",
+    "gender": "F",
+    "category": "800m / 1500m",
+    "medals": "🥇 Asian Indoor 2024 (1500m); 🥈 Asian Games 2023 (both events)",
+    "records": "National record 1500m: 4:05.39. National record 800m: 2:00.19. Daughter of Olympian Madhuri Singh. India's best middle-distance woman."
+  },
+  {
+    "id": 12,
+    "sport": "ATHLETICS",
+    "name": "Priyanka Goswami",
+    "age": "28",
+    "gender": "F",
+    "category": "20km Race Walk",
+    "medals": "🥈 CWG 2022; 🥇 Asian Race Walking 2024; Paris 2024",
+    "records": "National record: 1:28:45 — set at National Open Race Walking Championships, February 14, 2021. Two Circles India's best-ever women's race walker."
+  },
+  {
+    "id": 13,
+    "sport": "ATHLETICS",
+    "name": "Vithya Ramraj",
+    "age": "25",
+    "gender": "F",
+    "category": "400m Hurdles",
+    "medals": "🥇 Asian Games 2023 (relay); Paris 2024 relay",
+    "records": "Matched PT Usha's legendary 400m hurdles national record of 55.42 seconds at Asian Games 2023 in Hangzhou heats Crunchbase — a record that had stood 39 years."
+  },
+  {
+    "id": 14,
+    "sport": "ATHLETICS",
+    "name": "Tejaswin Shankar",
+    "age": "25",
+    "gender": "M",
+    "category": "Decathlon / High Jump",
+    "medals": "🥈 CWG 2022 (high jump); Paris 2024 (decathlon)",
+    "records": "Decathlon national record: 8,057 points — achieved at 2026 Federation Cup in Ranchi. Crunchbase Also holds high jump NR: 2.29m. India's only world-class decathlete."
+  },
+  {
+    "id": 15,
+    "sport": "ATHLETICS",
+    "name": "Gurindervir Singh",
+    "age": "25",
+    "gender": "M",
+    "category": "100m Sprint",
+    "medals": "🥇 Federation Cup 2026 (100m)",
+    "records": "Reclaimed the 100m national record with 10.09 seconds at Federation Cup 2026 in Ranchi. Crunchbase India's fastest man. First Indian to break 10.10 seconds officially."
+  },
+  {
+    "id": 16,
+    "sport": "ATHLETICS",
+    "name": "Kishore Jena",
+    "age": "27",
+    "gender": "M",
+    "category": "Javelin Throw",
+    "medals": "Paris 2024 participant; 🥈 Asian Games 2023",
+    "records": "Personal best: 87.54m — closest Indian to Neeraj Chopra. India's #2 javelin thrower. Strong 2028 contender."
+  },
+  {
+    "id": 17,
+    "sport": "ATHLETICS",
+    "name": "Shaili Singh",
+    "age": "21",
+    "gender": "F",
+    "category": "Long Jump",
+    "medals": "🥈 World U20 Championships 2022; 🥇 Asian U20 2023",
+    "records": "Personal best: 6.76m — national U20 record. Trained by PT Usha at TOPS academy. India's top U23 women's long jumper globally."
+  },
+  {
+    "id": 18,
+    "sport": "ATHLETICS",
+    "name": "Suraj Panwar",
+    "age": "21",
+    "gender": "M",
+    "category": "Race Walk",
+    "medals": "🥇 World U20 Race Walk 2022; Paris 2024 participant",
+    "records": "Personal best: 1:19:47 (20km race walk) — set at Paris 2024. World U20 Race Walk champion at 17. India's youngest Paris 2024 athletics representative."
+  },
+  {
+    "id": 19,
+    "sport": "ATHLETICS",
+    "name": "Yashvir Singh",
+    "age": "24",
+    "gender": "M",
+    "category": "Javelin Throw",
+    "medals": "🥇 Indian Open Athletics 2025; Asian Athletics Championships 2025 representative",
+    "records": "Personal best: 82.57m — set at Gumi Asian Athletics Championships 2025. Two CirclesTop-5 Indian javelin thrower. 2028 Olympic pipeline."
+  },
+  {
+    "id": 20,
+    "sport": "ATHLETICS",
+    "name": "Rohan Yadav",
+    "age": "17",
+    "gender": "M",
+    "category": "Javelin Throw",
+    "medals": "🥇 Asian U18 Athletics 2024",
+    "records": "Personal best: 76.40m (U18 national record). U17/U18 javelin star. Coaches identify as the most likely next Neeraj. Enormous 2032 potential."
+  },
+  {
+    "id": 1,
+    "sport": "WRESTLING",
+    "name": "Aman Sehrawat",
+    "age": "22",
+    "gender": "M",
+    "category": "57kg Freestyle",
+    "medals": "🥉 Paris 2024 Olympics; 🥇 Asian Championships 2023; 🥉 Asian Games 2023; 🥇 U23 World Championships 2022",
+    "records": "India's youngest-ever individual Olympic medallist. Highest world ranking: No. 2 (August 19, 2024). Two Circles Career record: Olympic bronze + U23 World gold + Asian champion — all by age 21. Trained at Chhatrasal alongside Sushil Kumar, Ravi Dahiya, Bajrang Punia."
+  },
+  {
+    "id": 2,
+    "sport": "WRESTLING",
+    "name": "Antim Panghal",
+    "age": "21",
+    "gender": "F",
+    "category": "53kg Freestyle",
+    "medals": "🥉 World Championships 2023; 🥇 U20 World Championships 2022 + 2023; 🥉 Asian Games 2023",
+    "records": "Highest world ranking: No. 1 (2025). World Championship finalist 2023 and 2025. BloombergIndia's first-ever U20 world champion — also first to defend the title. WSC Sports Career record: Back-to-back U20 World golds + Senior World bronze + World No. 1."
+  },
+  {
+    "id": 3,
+    "sport": "WRESTLING",
+    "name": "Bajrang Punia",
+    "age": "32",
+    "gender": "M",
+    "category": "65kg Freestyle",
+    "medals": "🥉 Tokyo 2020; 🥇 CWG 2018 + 2022; 🥇 Asian Games 2018; 🥉 World Championships 2022",
+    "records": "4 World Championship medals — only Indian wrestler with this record. PLOS Career record: Olympic bronze + 4 World medals + 2 CWG golds + 2 Asian Games golds. Most decorated active Indian male wrestler historically. Currently in political controversy."
+  },
+  {
+    "id": 4,
+    "sport": "WRESTLING",
+    "name": "Ravi Kumar Dahiya",
+    "age": "27",
+    "gender": "M",
+    "category": "57kg Freestyle",
+    "medals": "🥈 Tokyo 2020; 🥇 Asian Championships 2020 + 2021 + 2022 (three consecutive)",
+    "records": "Career record: Olympic silver + 3 consecutive Asian titles + World Championships bronze 2019. 3 consecutive Asian Championships golds is an Indian record in wrestling. Injury kept him out of Paris 2024."
+  },
+  {
+    "id": 5,
+    "sport": "WRESTLING",
+    "name": "Vinesh Phogat",
+    "age": "29",
+    "gender": "F",
+    "category": "50kg Freestyle",
+    "medals": "Paris 2024 — DQ from gold final; 🥇 CWG 2018 + 2022; 🥇 Asian Games 2018 + 2022; 🥈 World Championships 2018",
+    "records": "Career record: Most decorated Indian woman wrestler— 2 Asian Games golds, 2 CWG golds, World silver, World bronze. DQ from gold at Paris 2024 by 100 grams overweight. Retired post-Paris."
+  },
+  {
+    "id": 6,
+    "sport": "WRESTLING",
+    "name": "Anshu Malik",
+    "age": "23",
+    "gender": "F",
+    "category": "57kg Freestyle",
+    "medals": "🥈 World Championships 2021; 🥇 CWG 2022; Paris 2024 participant",
+    "records": "Record: First Indian woman to win World Championships silver (2021 at age 19). Career-best world ranking: No. 3 (57kg). CWG champion."
+  },
+  {
+    "id": 7,
+    "sport": "WRESTLING",
+    "name": "Deepak Punia",
+    "age": "25",
+    "gender": "M",
+    "category": "86kg Freestyle",
+    "medals": "🥈 World Championships 2019; 🥇 CWG 2022; Paris 2024 participant",
+    "records": "Record: World Championships silver at 19 — youngest-ever Indian male World Championship finalist. CWG champion. Career-best world ranking: Top 5 in 86kg."
+  },
+  {
+    "id": 8,
+    "sport": "WRESTLING",
+    "name": "Mansi Ahlawat",
+    "age": "22",
+    "gender": "F",
+    "category": "59kg Freestyle",
+    "medals": "🥉 World Championships 2024 Tirana; 🥇 Asian U23 2024",
+    "records": "Career record: Senior World bronze at 21 + Asian U23 gold in same year. India's most recent World Championship medallist in wrestling. Career-best world ranking: Top 8 (59kg)."
+  },
+  {
+    "id": 9,
+    "sport": "WRESTLING",
+    "name": "Reetika Hooda",
+    "age": "22",
+    "gender": "F",
+    "category": "76kg Freestyle",
+    "medals": "Paris 2024 participant; 🥇 CWG 2022; 🥇 Asian Championships 2022",
+    "records": "Career record: CWG gold + Asian championship gold in same year at 21. Career-best world ranking: Top 6 (76kg). One of India's strongest women's wrestlers physically."
+  },
+  {
+    "id": 10,
+    "sport": "WRESTLING",
+    "name": "Nisha Dahiya",
+    "age": "24",
+    "gender": "F",
+    "category": "68kg Freestyle",
+    "medals": "Paris 2024 participant; 🥇 Asian Championships 2021",
+    "records": "Career record: Asian champion at 21. Career-best world ranking: Top 10 (68kg). Strong senior pipeline."
+  },
+  {
+    "id": 11,
+    "sport": "WRESTLING",
+    "name": "Priya Malik",
+    "age": "20",
+    "gender": "F",
+    "category": "76kg Freestyle",
+    "medals": "🥇 U20 World Championships 2021",
+    "records": "Record: Junior World Champion at 17. Career-best ranking: Top 15 U20 globally. Enormous long-term potential — will peak at 2028–2032."
+  },
+  {
+    "id": 12,
+    "sport": "WRESTLING",
+    "name": "Jyoti Berwal",
+    "age": "19",
+    "gender": "F",
+    "category": "76kg Freestyle",
+    "medals": "🥇 U20 World Championships 2024; 🥇 Asian U20 2024",
+    "records": "Record: Double U20 gold (World + Asian) in 2024 — only Indian wrestler to do both in same year at U20. India's brightest current U20 wrestling talent."
+  },
+  {
+    "id": 13,
+    "sport": "WRESTLING",
+    "name": "Sushil Kumar",
+    "age": "41",
+    "gender": "M",
+    "category": "74kg Freestyle",
+    "medals": "🥇 World Championships 2010; 🥉 Athens 2004; 🥈 London 2012",
+    "records": "Record: India's only Wrestling World Champion. Only Indian to win 2 individual Olympic medals before Neeraj Chopra. Career: Olympic bronze + Olympic silver + World gold. Legal issues have sidelined him."
+  },
+  {
+    "id": 14,
+    "sport": "WRESTLING",
+    "name": "Mohit Grewal",
+    "age": "27",
+    "gender": "M",
+    "category": "125kg Freestyle",
+    "medals": "🥇 CWG 2022; 🥈 Asian Championships 2023",
+    "records": "Career record: CWG champion + Asian silver. Career-best world ranking: Top 8 (125kg). India's best-ever super heavyweight wrestler."
+  },
+  {
+    "id": 15,
+    "sport": "WRESTLING",
+    "name": "Gourav Baliyan",
+    "age": "27",
+    "gender": "M",
+    "category": "79kg Freestyle",
+    "medals": "🥇 Asian Championships 2020; 🥈 Asian Games 2023",
+    "records": "Career record: Asian champion + Asian Games silver. Career-best world ranking: Top 8 (79kg). Consistent international performer."
+  },
+  {
+    "id": 16,
+    "sport": "WRESTLING",
+    "name": "Pooja Gehlot",
+    "age": "24",
+    "gender": "F",
+    "category": "53kg Freestyle",
+    "medals": "🥈 CWG 2022; 🥇 Asian Championships 2022",
+    "records": "Career record: Asian champion + CWG silver. Career-best world ranking: Top 10 (53kg). Strong 2028 candidate."
+  },
+  {
+    "id": 17,
+    "sport": "WRESTLING",
+    "name": "Nitika Dahiya",
+    "age": "18",
+    "gender": "F",
+    "category": "62kg",
+    "medals": "🥇 U20 World Championships 2024",
+    "records": "Record: Junior World Champion 2024 at age 17. Career-best: World No. 1 U20 (62kg). Enormous long-term potential — 2032 Olympic target."
+  },
+  {
+    "id": 18,
+    "sport": "WRESTLING",
+    "name": "Sachin Malik",
+    "age": "19",
+    "gender": "M",
+    "category": "67kg Greco-Roman",
+    "medals": "🥇 U20 World Championships 2024",
+    "records": "Record: India's best-ever Greco-Roman result at U20 World level. Junior world champion 2024. First significant Indian success in Greco-Roman in years."
+  },
+  {
+    "id": 19,
+    "sport": "WRESTLING",
+    "name": "Sujeet Kalkal",
+    "age": "23",
+    "gender": "M",
+    "category": "74kg Freestyle",
+    "medals": "🥈 U23 World Championships 2022; 🥇 Asian U23 2022",
+    "records": "Career record: U23 World silver + Asian U23 gold. Career-best world ranking: Top 12 (74kg, U23). Strong transition to senior level underway."
+  },
+  {
+    "id": 20,
+    "sport": "WRESTLING",
+    "name": "Divya Kakran",
+    "age": "25",
+    "gender": "F",
+    "category": "68kg Freestyle",
+    "medals": "🥇 Asian Championships 2021; 🥈 CWG 2022",
+    "records": "Career record: Asian champion + CWG silver. Career-best world ranking: Top 10 (68kg). Veteran of Indian women's wrestling."
+  },
+  {
+    "id": 1,
+    "sport": "BADMINTON",
+    "name": "PV Sindhu",
+    "age": "29",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥉 Tokyo 2020; 🥇 World Championships 2019; 🥈 World Championships 2018; 🥈 Rio 2016; 🥇 CWG 2018 + 2022",
+    "records": "Career-best world ranking: World No. 2 (2017). 5 World Championship medals — most by any Indian badminton player. 2-time Olympic medallist. Most decorated Indian woman athlete."
+  },
+  {
+    "id": 2,
+    "sport": "BADMINTON",
+    "name": "Satwiksairaj Rankireddy",
+    "age": "24",
+    "gender": "M",
+    "category": "Men's Doubles",
+    "medals": "Paris 2024 QF; 🥇 Asian Games 2023; 🥉 World Championships 2023; 🥇 Indonesia Open 2023 (Super 1000)",
+    "records": "Holds the record for longest duration as World No. 1 among Indian badminton players — surpassed Saina Nehwal's record of nine consecutive weeks at the top in May 2024. The Week Career-best: World No. 1doubles (with Chirag). First Indian doubles pair to reach world No. 1. Wikipedia"
+  },
+  {
+    "id": 3,
+    "sport": "BADMINTON",
+    "name": "Chirag Shetty",
+    "age": "27",
+    "gender": "M",
+    "category": "Men's Doubles",
+    "medals": "Paris 2024 QF; 🥇 Asian Games 2023; World No. 1 doubles (with Satwik)",
+    "records": "Together with Satwik, holds the record for longest duration as World No. 1 in Indian badminton history. The Week Career-best: World No. 1 (2023–24). Reigning Asian Games champions. Wikipedia First Indian pair to win Super 1000 (Indonesia Open 2023)."
+  },
+  {
+    "id": 4,
+    "sport": "BADMINTON",
+    "name": "Lakshya Sen",
+    "age": "23",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "4th place Paris 2024 (semifinal); 🥉 World Championships 2021; 🥇 CWG 2022",
+    "records": "Career-best world ranking: World No. 6 (2022). Broke into world top 10 with career-best of No. 6. pressreader First Indian men's singles shuttler to reach Olympic semifinal (Paris 2024). CWG champion at 20."
+  },
+  {
+    "id": 5,
+    "sport": "BADMINTON",
+    "name": "HS Prannoy",
+    "age": "31",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥉 World Championships 2023; Paris 2024 R16; 🥇 French Open 2022",
+    "records": "Career-best world ranking: World No. 6 (2018 + matched 2023). World Championships bronze at 31 — career peak performance. Global Times Most consistent Indian men's singles player of the 2022–24 era."
+  },
+  {
+    "id": 6,
+    "sport": "BADMINTON",
+    "name": "Kidambi Srikanth",
+    "age": "31",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥈 World Championships 2021; 4x Super Series titles; Former world No. 1",
+    "records": "Career-best ranking: World No. 1 (January 2018) — one of only three Indians to have held world No. 1 in badminton (with Prakash Padukone 1980 and Saina Nehwal 2015). The Week First Indian man to reach World Championships final."
+  },
+  {
+    "id": 7,
+    "sport": "BADMINTON",
+    "name": "Saina Nehwal",
+    "age": "34",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥉 London 2012; 🥇 CWG 2010 + 2018; Former world No. 1",
+    "records": "Career-best ranking: World No. 1 (2015). First Indian to achieve World No. 1 in women's singles. The WeekIndia's first Olympic badminton medallist. 5 World Championship medals. Pioneer of Indian women's badminton."
+  },
+  {
+    "id": 8,
+    "sport": "BADMINTON",
+    "name": "Treesa Jolly",
+    "age": "21",
+    "gender": "F",
+    "category": "Women's Doubles",
+    "medals": "🥇 India Open 2022; Multiple Super 500 wins; 🥈 Uber Cup 2022",
+    "records": "Career-best world ranking: World No. 11 (2024) — achieved career-best world ranking of 11 in BWF World Rankings with partner Gayatri Gopichand. tribuneindia Youngest Indian to win a BWF Super 500 title."
+  },
+  {
+    "id": 9,
+    "sport": "BADMINTON",
+    "name": "Gayatri Gopichand",
+    "age": "22",
+    "gender": "F",
+    "category": "Women's Doubles",
+    "medals": "🥇 India Open 2022; Multiple Super 500 wins; 🥈 Uber Cup 2022",
+    "records": "Career-best: World No. 11 (with Treesa). Daughter of coach Pullela Gopichand. First daughter of a top coach to represent India at this level."
+  },
+  {
+    "id": 10,
+    "sport": "BADMINTON",
+    "name": "Ashwini Ponnappa",
+    "age": "34",
+    "gender": "F",
+    "category": "Women's / Mixed Doubles",
+    "medals": "🥇 CWG 2010 (mixed doubles); 🥇 Asian Championships 2024 (doubles); Paris 2024",
+    "records": "Career-best ranking: World No. 8 (mixed doubles with Jwala Gutta, 2011). India's most experienced active doubles player — 15+ year international career."
+  },
+  {
+    "id": 11,
+    "sport": "BADMINTON",
+    "name": "Tanisha Crasto",
+    "age": "22",
+    "gender": "F",
+    "category": "Mixed / Women's Doubles",
+    "medals": "🥈 Asian Championships 2023 (mixed doubles); Paris 2024 participant",
+    "records": "Career-best world ranking: World No. 18 (mixed doubles with Ishaan Bhatnagar). Youngest player in India's Paris 2024 squad. High future potential."
+  },
+  {
+    "id": 12,
+    "sport": "BADMINTON",
+    "name": "Unnati Hooda",
+    "age": "17",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥇 Dutch Open 2023 (Super 100); Ranked inside world top 100 at age 16",
+    "records": "Career-best ranking: World No. 67 at age 16. Youngest Indian player to win an international title. tribuneindiaIndia's most exciting U17 star."
+  },
+  {
+    "id": 13,
+    "sport": "BADMINTON",
+    "name": "Ayush Shetty",
+    "age": "18",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 World Junior Championships 2023",
+    "records": "Record: World Junior Champion at 17 (2023) — first Indian men's singles junior world champion. Career-best junior ranking: World No. 1 junior. Most exciting U18 singles prospect India has produced in years."
+  },
+  {
+    "id": 14,
+    "sport": "BADMINTON",
+    "name": "MR Arjun",
+    "age": "26",
+    "gender": "M",
+    "category": "Men's Doubles",
+    "medals": "🥇 Asian Games 2023 (team); Multiple Super 500 results",
+    "records": "Career-best doubles ranking: World No. 25 (with Dhruv Kapila). Asian Games team gold member."
+  },
+  {
+    "id": 15,
+    "sport": "BADMINTON",
+    "name": "Malvika Bansod",
+    "age": "23",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "Multiple Super 100 titles; National top-3",
+    "records": "Career-best world ranking: World No. 46. Consistent top-50 performer. Strong women's singles successor to Sindhu."
+  },
+  {
+    "id": 16,
+    "sport": "BADMINTON",
+    "name": "Priyanshu Rajawat",
+    "age": "23",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 Orleans Masters 2023; Multiple Super 100 titles",
+    "records": "Career-best ranking: World No. 28. India's 3rd-ranked men's singles — strong 2028 LA contender."
+  },
+  {
+    "id": 17,
+    "sport": "BADMINTON",
+    "name": "Kiran George",
+    "age": "23",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "Multiple Super 100 titles; National top-5",
+    "records": "Career-best ranking: World No. 52. Consistent Super 100/300 winner. Possible 2028 pipeline."
+  },
+  {
+    "id": 18,
+    "sport": "BADMINTON",
+    "name": "Tasnim Mir",
+    "age": "19",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥇 Bulgaria International 2022; Former world No. 1 junior",
+    "records": "Record: World No. 1 junior ranking at age 16 — highest-ever ranking by an Indian U17 women's singles player. Currently transitioning to senior level."
+  },
+  {
+    "id": 19,
+    "sport": "BADMINTON",
+    "name": "Ishaan Bhatnagar",
+    "age": "24",
+    "gender": "M",
+    "category": "Mixed Doubles",
+    "medals": "🥈 Asian Championships 2023 (mixed doubles with Tanisha); Paris 2024 squad",
+    "records": "Career-best ranking: World No. 18 (mixed doubles). India's top mixed doubles male player."
+  },
+  {
+    "id": 20,
+    "sport": "BADMINTON",
+    "name": "Aditi Bhatt",
+    "age": "16",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥇 Asian U17 Championships 2024",
+    "records": "Career-best: Asian U17 champion 2024. Currently under Gopichand's direct coaching. India's top U17 women's singles player. 2032 Olympic target."
+  },
+  {
+    "id": 1,
+    "sport": "HOCKEY",
+    "name": "Harmanpreet Singh",
+    "age": "28",
+    "gender": "M",
+    "category": "Drag-flicker / Defender",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023; 🥇 Asian Champions Trophy 2024",
+    "records": "Scored 10 goals in 8 matches at Paris 2024 — tournament's top scorer. ESPN Scored more than 200 international goals for India. sportskeeda 3-time FIH Player of the Year (2021, 2022, 2024) — no other Indian has won it more than twice. ESPN India's highest-scoring modern-era player."
+  },
+  {
+    "id": 2,
+    "sport": "HOCKEY",
+    "name": "PR Sreejesh",
+    "age": "36",
+    "gender": "M",
+    "category": "Goalkeeper",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023; 🥇 CWG 2014",
+    "records": "Won Goalkeeper of the Year at FIH Hockey Stars Awards 2024 for the third time — 2021, 2022, and 2024. ESPNRecord: 3-time FIH Goalkeeper of the Year — most by any Asian goalkeeper. 3-time Olympian. Retired after Paris 2024 on a bronze medal. Greatest Indian goalkeeper ever."
+  },
+  {
+    "id": 3,
+    "sport": "HOCKEY",
+    "name": "Manpreet Singh",
+    "age": "32",
+    "gender": "M",
+    "category": "Midfielder",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023; FIH Player of Year 2019",
+    "records": "Career record: FIH Player of the Year 2019 — only Indian to win it in that decade. 3-time Olympian. 200+ international caps. India's greatest-ever midfielder."
+  },
+  {
+    "id": 4,
+    "sport": "HOCKEY",
+    "name": "Vivek Sagar Prasad",
+    "age": "25",
+    "gender": "M",
+    "category": "Midfielder",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: 2 Olympic bronze medals by age 25 — only Indian hockey player to achieve this at that age. FIH Rising Star nominee 2021. India's most dynamic young midfielder."
+  },
+  {
+    "id": 5,
+    "sport": "HOCKEY",
+    "name": "Amit Rohidas",
+    "age": "30",
+    "gender": "M",
+    "category": "Defender",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: 3-time Olympian + 2 Olympic bronze medals. Known for the highest drag-flick speed measured in Indian hockey at national camps. Core of India's back four."
+  },
+  {
+    "id": 6,
+    "sport": "HOCKEY",
+    "name": "Mandeep Singh",
+    "age": "29",
+    "gender": "M",
+    "category": "Forward",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: 2 Olympic bronze medals + Asian Games gold. 100+ international goals for India. Key forward across both Olympic campaigns."
+  },
+  {
+    "id": 7,
+    "sport": "HOCKEY",
+    "name": "Nilakanta Sharma",
+    "age": "27",
+    "gender": "M",
+    "category": "Midfielder",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: 2 Olympic bronze medals. 150+ international caps. Consistent box-to-box midfielder across both Olympic cycles."
+  },
+  {
+    "id": 8,
+    "sport": "HOCKEY",
+    "name": "Abhishek",
+    "age": "23",
+    "gender": "M",
+    "category": "Forward",
+    "medals": "Paris 2024 participant; 🥇 Asian Games 2023; FIH Rising Star 2023",
+    "records": "One of the new players who shone brightly — fourth-highest goal-scorer in the FIH Pro League 2023. Olympics FIH Rising Star of the Year 2023 — highest honour for a young player globally in hockey. Youngest key player in Paris 2024 squad."
+  },
+  {
+    "id": 9,
+    "sport": "HOCKEY",
+    "name": "Jugraj Singh",
+    "age": "23",
+    "gender": "M",
+    "category": "Drag-flicker",
+    "medals": "🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: Drag-flick conversion rate of 73% in penalty corners at Paris 2024 — second-highest in the tournament. Harmanpreet's direct successor."
+  },
+  {
+    "id": 10,
+    "sport": "HOCKEY",
+    "name": "Sukhjit Singh",
+    "age": "25",
+    "gender": "M",
+    "category": "Defender",
+    "medals": "🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: Emerged as first-choice left back at Paris 2024. 0 goals conceded in last 3 Paris 2024 matches when fully fit. Key to India's defensive solidity."
+  },
+  {
+    "id": 11,
+    "sport": "HOCKEY",
+    "name": "Salima Tete",
+    "age": "23",
+    "gender": "F",
+    "category": "Women's Captain / Midfielder",
+    "medals": "🥈 CWG 2022; 🥇 Asian Games 2022; 🥇 Asian Champions Trophy 2023",
+    "records": "Career record: Arjuna Award 2024 — youngest-ever hockey player to receive it at national level. 100+ international caps. India's best young women's player and captain."
+  },
+  {
+    "id": 12,
+    "sport": "HOCKEY",
+    "name": "Vandana Katariya",
+    "age": "31",
+    "gender": "F",
+    "category": "Forward",
+    "medals": "🥈 CWG 2022; 🥇 Asian Games 2022; Tokyo 2020",
+    "records": "Record: India's all-time leading women's hockey goal scorer — 60+ international goals. First Indian woman to score a hat-trick at Olympics (Tokyo 2020 vs South Africa)."
+  },
+  {
+    "id": 13,
+    "sport": "HOCKEY",
+    "name": "Gurjit Kaur",
+    "age": "28",
+    "gender": "F",
+    "category": "Drag-flicker / Defender",
+    "medals": "🥈 CWG 2022; 🥇 Asian Games 2022; Tokyo 2020",
+    "records": "Record: Best drag-flick conversion rate in women's Asian hockey — penalty corner specialist with 70%+ conversion in major tournaments. India's premier women's drag-flicker."
+  },
+  {
+    "id": 14,
+    "sport": "HOCKEY",
+    "name": "Deep Grace Ekka",
+    "age": "29",
+    "gender": "F",
+    "category": "Defender",
+    "medals": "🥈 CWG 2022; 🥇 Asian Games 2022; 2-time Olympian",
+    "records": "Career record: 2 Olympics + Asian Games gold + CWG silver. 150+ international caps. India's most experienced women's defender."
+  },
+  {
+    "id": 15,
+    "sport": "HOCKEY",
+    "name": "Navneet Kaur",
+    "age": "27",
+    "gender": "F",
+    "category": "Forward",
+    "medals": "🥈 CWG 2022; 🥇 Asian Games 2022",
+    "records": "Career record: Top-3 scorer for India women's team in last 3 years. Explosive forward. Key to women's team attack across all major tournaments."
+  },
+  {
+    "id": 16,
+    "sport": "HOCKEY",
+    "name": "Lalit Upadhyay",
+    "age": "29",
+    "gender": "M",
+    "category": "Forward",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 Asian Games 2023",
+    "records": "Career record: 2 Olympic bronze medals + Asian Games gold. 100+ international goals. Clinical finisher across both Olympic campaigns."
+  },
+  {
+    "id": 17,
+    "sport": "HOCKEY",
+    "name": "Araijeet Singh Hundal",
+    "age": "20",
+    "gender": "M",
+    "category": "Forward",
+    "medals": "Paris 2024 participant; 🥇 Junior Asia Cup 2023; 🥇 Junior World Cup 2023",
+    "records": "Career record: Junior Asia Cup + Junior World Cup gold — best U21 forward record in Indian hockey in years. Already tested in Olympic environment at 19."
+  },
+  {
+    "id": 18,
+    "sport": "HOCKEY",
+    "name": "Sushila Chanu Pukhrambam",
+    "age": "31",
+    "gender": "F",
+    "category": "Midfielder",
+    "medals": "🥈 CWG 2022; 🥇 Asian Games 2022; 3-time Olympian",
+    "records": "Record: 3 Olympic appearances — most by any active Indian women's hockey player. 200+ international caps. Most experienced active women's player."
+  },
+  {
+    "id": 19,
+    "sport": "HOCKEY",
+    "name": "Mumtaz Khan",
+    "age": "22",
+    "gender": "F",
+    "category": "Forward",
+    "medals": "🥇 Junior Asia Cup Women 2023; Rising women's team regular",
+    "records": "Career record: Junior Asia Cup gold. India's most dynamic young women's forward. Will be at peak for 2028 and 2032 Olympics."
+  },
+  {
+    "id": 20,
+    "sport": "HOCKEY",
+    "name": "Hardik Singh",
+    "age": "25",
+    "gender": "M",
+    "category": "Midfielder",
+    "medals": "🥉 Tokyo 2020; 🥉 Paris 2024; 🥇 FIH Player of the Year 2023",
+    "records": "Record: FIH Player of the Year 2023 ESPN — only Indian to win the award in back-to-back years (Indians won it 2021, 2022, 2023, 2024 consecutively). 2 Olympic bronze medals. India's most creative midfielder."
+  },
+  {
+    "id": 1,
+    "sport": "BOXING",
+    "name": "Lovlina Borgohain",
+    "age": "27",
+    "gender": "F",
+    "category": "75kg",
+    "medals": "🥉 Tokyo 2020; 🥇 World Championships 2023 (75kg); 🥉 Asian Games 2023; 🥇 CWG 2022",
+    "records": "Only active Indian Olympic boxing medallist. One of only three Indian boxers to have won an Olympic medal — Vijender Singh bronze 2008, Mary Kom bronze 2012, Lovlina bronze Tokyo 2020. sportskeeda 2-time World Championships medallist (gold 2023, bronze 2019)."
+  },
+  {
+    "id": 2,
+    "sport": "BOXING",
+    "name": "Nikhat Zareen",
+    "age": "28",
+    "gender": "F",
+    "category": "50–52kg",
+    "medals": "🥇 World Championships 2022 + 2023 (back-to-back); 🥇 CWG 2022; 🥉 Asian Games 2023; Paris 2024 R16",
+    "records": "Just two bouts lost since 2022. Has beaten everyone in 52kg during that time. ESPN Only Indian boxer with back-to-back World Championship golds. Record: 2 World titles in consecutive years (2022, 2023) — no Indian boxer male or female has done this."
+  },
+  {
+    "id": 3,
+    "sport": "BOXING",
+    "name": "Nishant Dev",
+    "age": "23",
+    "gender": "M",
+    "category": "71kg",
+    "medals": "Paris 2024 QF; 🥉 World Championships 2023; 🥇 Asian Championships 2024",
+    "records": "First Indian boxer to secure Paris 2024 quota after making the semi-finals of the 71kg category at the World Olympic Boxing Qualifiers. ESPN Personal record: World Championships bronze at age 21. India's highest-ranked active men's boxer (71kg)."
+  },
+  {
+    "id": 4,
+    "sport": "BOXING",
+    "name": "Amit Panghal",
+    "age": "29",
+    "gender": "M",
+    "category": "51kg",
+    "medals": "🥇 CWG 2022; 🥈 World Championships 2019; 🥇 Asian Games 2018; Paris 2024 R16",
+    "records": "First Indian male boxer to win a World Championships silver medal. sportskeeda Former world No. 1 ranking in 52kg — highest ranking ever by an Indian male boxer."
+  },
+  {
+    "id": 5,
+    "sport": "BOXING",
+    "name": "Preeti Pawar",
+    "age": "23",
+    "gender": "F",
+    "category": "54kg",
+    "medals": "Paris 2024 debut; 🥉 Asian Championships 2023; 🥉 Asian Games 2022",
+    "records": "3 international medals by age 22. Paris 2024 Olympic debutant. Best finish: Asian Championships bronze 2023."
+  },
+  {
+    "id": 6,
+    "sport": "BOXING",
+    "name": "Jaismine Lamboria",
+    "age": "24",
+    "gender": "F",
+    "category": "57–60kg",
+    "medals": "🥇 World Championships 2025 (57kg gold — beat Olympic silver medallist); 🥉 CWG 2022; Paris 2024 R32",
+    "records": "Won 2025 World Championships gold in 57kg with a 4-1 split decision win over Poland's Julia Szeremeta, 2024 Olympic silver medallist. Olympics Career-defining win over an Olympic silver medallist."
+  },
+  {
+    "id": 7,
+    "sport": "BOXING",
+    "name": "Shiva Thapa",
+    "age": "31",
+    "gender": "M",
+    "category": "63.5kg",
+    "medals": "🥉 Asian Games 2014 + 2018; 5x Asian Championships medals; 🥉 CWG 2014",
+    "records": "Five-time Asian medallist Olympics — most Asian medals by any Indian male boxer ever. Career record: 5 Asian medals across 3 different weight classes."
+  },
+  {
+    "id": 8,
+    "sport": "BOXING",
+    "name": "Deepak Bhoria",
+    "age": "25",
+    "gender": "M",
+    "category": "51kg",
+    "medals": "🥉 World Championships 2023; 🥈 Asian Championships 2023; 🥇 Asian Games 2023 (team)",
+    "records": "World Championships bronze at 22. Career record: 3 major international medals in 12 months (2023). Fastest hands measured in Indian boxing at national camps."
+  },
+  {
+    "id": 9,
+    "sport": "BOXING",
+    "name": "Narender Berwal",
+    "age": "24",
+    "gender": "M",
+    "category": "+92kg",
+    "medals": "🥈 Asian Championships 2023; 🥇 Youth World Championships 2021",
+    "records": "Youth World Champion at 19. India's first Youth World champion in super heavyweight. Career record: 2 international medals — best super heavyweight record in Indian history."
+  },
+  {
+    "id": 10,
+    "sport": "BOXING",
+    "name": "Mary Kom",
+    "age": "41",
+    "gender": "F",
+    "category": "48–51kg",
+    "medals": "🥉 London 2012; 🥇 World Championships 2002, 2005, 2006, 2008, 2010, 2018 (6 golds); 🥈 Asian Games 2014",
+    "records": "Record: 6 World Championship golds — no boxer male or female from India or Asia has matched this. Most decorated Indian boxer of all time."
+  },
+  {
+    "id": 11,
+    "sport": "BOXING",
+    "name": "Arundhati Choudhary",
+    "age": "25",
+    "gender": "F",
+    "category": "66kg",
+    "medals": "🥉 Asian Championships 2023; 🥈 CWG 2022 team; 🥇 National champion 2023–24",
+    "records": "Asian bronze + CWG silver in same year (2022–23). Best: World No. 12 in 66kg."
+  },
+  {
+    "id": 12,
+    "sport": "BOXING",
+    "name": "Minakshi",
+    "age": "22",
+    "gender": "F",
+    "category": "48kg",
+    "medals": "🥇 Asian Championships 2022; 🥈 World Championships 2022",
+    "records": "World Championships silver + Asian gold in same year at age 20. Filling Mary Kom's 48kg legacy. Personal record: World No. 3 in 48kg (2022)."
+  },
+  {
+    "id": 13,
+    "sport": "BOXING",
+    "name": "Ankushita Boro",
+    "age": "24",
+    "gender": "F",
+    "category": "60kg",
+    "medals": "🥇 Asian Championships 2022; 🥈 CWG 2022; 🥉 Asian Games 2023",
+    "records": "3 international medals in 18 months across 3 different tournaments. Asian champion at 21."
+  },
+  {
+    "id": 14,
+    "sport": "BOXING",
+    "name": "Parveen Hooda",
+    "age": "24",
+    "gender": "F",
+    "category": "57kg",
+    "medals": "🥉 World Championships 2022; 🥉 CWG 2022",
+    "records": "World Championships bronze at 21. WADA suspension ruled out Paris 2024. If reinstated, World No. 8 level."
+  },
+  {
+    "id": 15,
+    "sport": "BOXING",
+    "name": "Alfiya Pathan",
+    "age": "23",
+    "gender": "F",
+    "category": "81kg",
+    "medals": "🥉 World Championships 2021; 🥇 CWG 2022",
+    "records": "World Championships bronze at 19 + CWG gold at 20. India's best-ever 81kg boxer — two senior international medals before age 21."
+  },
+  {
+    "id": 16,
+    "sport": "BOXING",
+    "name": "Sachin Siwach",
+    "age": "24",
+    "gender": "M",
+    "category": "57kg",
+    "medals": "🥉 Asian Championships 2022; 🥈 Youth World Championships 2022",
+    "records": "Youth World silver + Asian bronze. Army boxer. Consistent transition to senior level."
+  },
+  {
+    "id": 17,
+    "sport": "BOXING",
+    "name": "Vishwanath Suresh",
+    "age": "20",
+    "gender": "M",
+    "category": "57kg",
+    "medals": "🥇 Youth World Championships 2024; 🥇 Asian Youth Championships 2024",
+    "records": "Youth World + Asian double gold in 2024 — only Indian boxer to win both in same year at U20 level."
+  },
+  {
+    "id": 18,
+    "sport": "BOXING",
+    "name": "Rohit Tokas",
+    "age": "23",
+    "gender": "M",
+    "category": "71kg",
+    "medals": "🥇 Asian U22 Championships 2023; 🥈 Youth World Championships 2022",
+    "records": "U22 Asian champion at 21. Direct pipeline successor to Nishant Dev."
+  },
+  {
+    "id": 19,
+    "sport": "BOXING",
+    "name": "Sanjeet",
+    "age": "29",
+    "gender": "M",
+    "category": "92kg",
+    "medals": "🥈 Asian Championships 2021; 🥉 Asian Games 2023",
+    "records": "Career record: 2 Asian-level medals. India's most consistent 92kg boxer."
+  },
+  {
+    "id": 20,
+    "sport": "BOXING",
+    "name": "Govind Sahani",
+    "age": "17",
+    "gender": "M",
+    "category": "46kg",
+    "medals": "🥇 Youth World Championships 2023; 🥇 Asian Youth Championships 2023",
+    "records": "World + Asian gold double at U17 level at age 16 — youngest Indian World champion in boxing history. 2032 Olympic target."
+  },
+  {
+    "id": 1,
+    "sport": "WEIGHTLIFTING",
+    "name": "Mirabai Chanu",
+    "age": "31",
+    "gender": "F",
+    "category": "48–49kg",
+    "medals": "🥈 Tokyo 2020; 4th Paris 2024 (missed bronze by 1kg); 🥇 World Championships 2017; 🥇 CWG 2022; 🥈 World Championships 2025",
+    "records": "At World Weightlifting Championships 2025 in Norway, won silver with 199kg total and set new national records in Clean & Jerk (115kg) and total lift (199kg). The Bridge Personal best total: 207kg (49kg category). National records: Snatch 88kg, C&J 119kg, Total 207kg (49kg). India's most decorated weightlifter."
+  },
+  {
+    "id": 2,
+    "sport": "WEIGHTLIFTING",
+    "name": "Jeremy Lalrinnunga",
+    "age": "22",
+    "gender": "M",
+    "category": "67–73kg",
+    "medals": "🥇 Youth Olympics 2018 (first Indian Youth Olympic gold); 🥇 CWG 2022 (67kg — Games record 300kg); 🥇 Commonwealth Championships 2021",
+    "records": "Still holds the world record in Youth World Championships 67kg with his performances. CRW Flags CWG record: 300kg total (140kg snatch + 160kg C&J) at Birmingham 2022. Youth Olympic champion. India's only Youth Olympic gold medallist."
+  },
+  {
+    "id": 3,
+    "sport": "WEIGHTLIFTING",
+    "name": "Achinta Sheuli",
+    "age": "23",
+    "gender": "M",
+    "category": "73kg",
+    "medals": "🥇 CWG 2022 (Games record 313kg); 🥇 Commonwealth Championships 2021; 🥈 Asian Championships 2021",
+    "records": "CWG record: 313kg total (143kg snatch + 170kg C&J) at Birmingham 2022 — Games record. Set new national records in Snatch (143kg) C&J (173kg) and total (316kg) at Commonwealth Championships 2021. Olympics"
+  },
+  {
+    "id": 4,
+    "sport": "WEIGHTLIFTING",
+    "name": "Bindyarani Devi",
+    "age": "26",
+    "gender": "F",
+    "category": "55kg",
+    "medals": "🥈 CWG 2022 (55kg); 🥇 Commonwealth Championships 2021; 🥉 Asian Championships 2022",
+    "records": "Holds all three national records in women's 55kg — Snatch: 88kg (National Games 2025), C&J: 119kg, Total: 202kg (CWG 2022). ESPN Broke Mirabai's national snatch record at National Games 2025."
+  },
+  {
+    "id": 5,
+    "sport": "WEIGHTLIFTING",
+    "name": "Sanket Mahadev Sargar",
+    "age": "23",
+    "gender": "M",
+    "category": "55–61kg",
+    "medals": "🥈 CWG 2022 (55kg — set Games record before injury forced him to lower attempts); 🥇 Commonwealth Championships 2021",
+    "records": "CWG silver despite competing injured. Games record attempt: 113kg snatch. National record in 55kg."
+  },
+  {
+    "id": 6,
+    "sport": "WEIGHTLIFTING",
+    "name": "Gyaneshwari Yadav",
+    "age": "21",
+    "gender": "F",
+    "category": "49kg",
+    "medals": "5th World Championships 2024; 🥇 National Championships 2024",
+    "records": "Fifth-place finish at World Championships in Chanu's absence — total 186kg. Olympics Best performance without Mirabai present. National champion 2024. India's next 49kg hope."
+  },
+  {
+    "id": 7,
+    "sport": "WEIGHTLIFTING",
+    "name": "Gurdeep Singh",
+    "age": "29",
+    "gender": "M",
+    "category": "+109kg",
+    "medals": "🥉 CWG 2022; 🥇 Commonwealth Championships 2021; 🥉 Asian Championships 2021",
+    "records": "National record: 390kg total (CWG 2022). India's best-ever super heavyweight lift. 3 international medals."
+  },
+  {
+    "id": 8,
+    "sport": "WEIGHTLIFTING",
+    "name": "Harshada Garud",
+    "age": "19",
+    "gender": "F",
+    "category": "45kg",
+    "medals": "🥇 Youth World Championships 2023; 🥇 Asian Youth Championships 2023",
+    "records": "Youth World record: lifted 153kg total (67kg snatch + 86kg C&J) at Youth Worlds 2023 — set Youth World Championship record. India's youngest active world champion."
+  },
+  {
+    "id": 9,
+    "sport": "WEIGHTLIFTING",
+    "name": "Popy Hazarika",
+    "age": "22",
+    "gender": "F",
+    "category": "59kg",
+    "medals": "🥇 Junior World Championships 2023; 🥇 Asian Youth Championships 2022",
+    "records": "Junior World Champion — lifted 203kg total at Junior Worlds 2023. Northeast India's most decorated young lifter."
+  },
+  {
+    "id": 10,
+    "sport": "WEIGHTLIFTING",
+    "name": "Jhilli Dalabehera",
+    "age": "21",
+    "gender": "F",
+    "category": "49kg",
+    "medals": "🥈 Junior World Championships 2022; 🥇 Asian Youth Championships 2022",
+    "records": "Personal best: 173kg total (78kg snatch + 95kg C&J). Junior World silver. Odisha-based — India's 2nd strongest active 49kg lifter."
+  },
+  {
+    "id": 11,
+    "sport": "WEIGHTLIFTING",
+    "name": "Vanshaj",
+    "age": "18",
+    "gender": "M",
+    "category": "61kg",
+    "medals": "🥇 Youth World Championships 2024; 🥈 Asian Youth Championships 2024",
+    "records": "Youth World record: 261kg total at Youth Worlds 2024 — set Youth World Championship record in 61kg. India's most exciting teenage male lifter."
+  },
+  {
+    "id": 12,
+    "sport": "WEIGHTLIFTING",
+    "name": "Ajay Singh",
+    "age": "24",
+    "gender": "M",
+    "category": "73kg",
+    "medals": "🥈 Commonwealth Championships 2023; 🥉 Asian Championships 2023",
+    "records": "Personal best: 330kg total in 73kg. National runner-up to Achinta. 2028 contender."
+  },
+  {
+    "id": 13,
+    "sport": "WEIGHTLIFTING",
+    "name": "Preetismita Bhoi",
+    "age": "18",
+    "gender": "F",
+    "category": "44kg",
+    "medals": "🥇 Youth CWG Championships 2025 (44kg); 🥇 Commonwealth youth records in all 3 lifts",
+    "records": "Set Commonwealth youth records in all three categories at Commonwealth Weightlifting Championships 2025. Olympics Three youth Commonwealth records in a single competition at age 17."
+  },
+  {
+    "id": 14,
+    "sport": "WEIGHTLIFTING",
+    "name": "Dharmajyoti Dewgharia",
+    "age": "18",
+    "gender": "M",
+    "category": "56kg",
+    "medals": "🥇 Commonwealth Weightlifting Championships 2025 youth (56kg); set youth C&J + total Commonwealth records",
+    "records": "Lifted 224kg (97kg snatch + 127kg C&J) — set youth Commonwealth records in C&J and total. Olympics Most decorated Indian youth male lifter in 2025."
+  },
+  {
+    "id": 15,
+    "sport": "WEIGHTLIFTING",
+    "name": "Rakhi Halder",
+    "age": "27",
+    "gender": "F",
+    "category": "71kg",
+    "medals": "🥈 Commonwealth Championships 2022; 🥇 National champion 3x",
+    "records": "National record in 71kg: 241kg total. India's best active 71kg lifter. 3x national champion."
+  },
+  {
+    "id": 16,
+    "sport": "WEIGHTLIFTING",
+    "name": "Herojit Singh",
+    "age": "23",
+    "gender": "M",
+    "category": "61kg",
+    "medals": "🥉 Asian Championships 2022; 🥇 National champion 2023",
+    "records": "Personal best: 285kg total in 61kg. National champion. Manipur Army lifter with strong 2028 pathway."
+  },
+  {
+    "id": 17,
+    "sport": "WEIGHTLIFTING",
+    "name": "Deepak Lather",
+    "age": "26",
+    "gender": "M",
+    "category": "69kg",
+    "medals": "🥉 CWG 2018; Former national record holder 69kg",
+    "records": "CWG bronze at 19 — still youngest Indian CWG weightlifting medallist at time of achievement. Personal best: 317kg total (69kg)."
+  },
+  {
+    "id": 18,
+    "sport": "WEIGHTLIFTING",
+    "name": "Tulasi Devi",
+    "age": "23",
+    "gender": "F",
+    "category": "55kg",
+    "medals": "🥉 Commonwealth Championships 2023; National champion 2022–23",
+    "records": "Personal best: 195kg total in 55kg. National champion. CWG 2026 contender."
+  },
+  {
+    "id": 19,
+    "sport": "WEIGHTLIFTING",
+    "name": "Sanjita Chanu",
+    "age": "30",
+    "gender": "F",
+    "category": "53kg",
+    "medals": "🥇 CWG 2014 + 2018; Former world No. 1",
+    "records": "Career record: 2 CWG golds in same weight class — only Indian female lifter with back-to-back CWG titles. Former world No. 1 ranking."
+  },
+  {
+    "id": 20,
+    "sport": "WEIGHTLIFTING",
+    "name": "Karnam Malleswari(legend/mentor)",
+    "age": "51",
+    "gender": "F",
+    "category": "—",
+    "medals": "🥉 Sydney 2000; 🥇 World Championships 1993 + 1994",
+    "records": "Record: India's first female Olympic medallist. 2x World Champion — only Indian woman lifter to achieve this. Now SAI national coach."
+  },
+  {
+    "id": 1,
+    "sport": "ARCHERY",
+    "name": "Dhiraj Bommadevara",
+    "age": "23",
+    "gender": "M",
+    "category": "Recurve",
+    "medals": "Paris 2024 — 4th (mixed team); 🥇 World Cup 2024 Stage 1 men's team; 🥇 Asian Championships 2025 individual",
+    "records": "Collected eight medals across individual, men's team and mixed team events in 2023 and 2024 World Cup stages. Drishti IAS First Indian male recurve Asian individual champion. ESPN World ranking: Top 10 recurve globally (2025). Personal best score: 699/720 (qualification round)."
+  },
+  {
+    "id": 2,
+    "sport": "ARCHERY",
+    "name": "Deepika Kumari",
+    "age": "30",
+    "gender": "F",
+    "category": "Recurve",
+    "medals": "4x Olympian; 🥈 World Cup 2024 Stage 1 Shanghai; 🥈 World Cup Final 2024; 🥇 CWG 2010 (2 golds)",
+    "records": "Former world No. 1. Olympics Career record: 4 Olympic appearances — most by any Indian archer. Personal best: 686/720 (qualification round). World No. 1 held in 2011–12. Most decorated Indian woman archer."
+  },
+  {
+    "id": 3,
+    "sport": "ARCHERY",
+    "name": "Ankita Bhakat",
+    "age": "26",
+    "gender": "F",
+    "category": "Recurve",
+    "medals": "Paris 2024 4th (mixed team); 🥇 Asian Championships 2025 (individual)",
+    "records": "First Indian women's recurve individual Asian champion. ESPN Record: India's first women's recurve Asian individual title. World ranking: Top 15 recurve women globally (2025). Personal best qualification score: 676/720."
+  },
+  {
+    "id": 4,
+    "sport": "ARCHERY",
+    "name": "Aditi Swami",
+    "age": "19",
+    "gender": "F",
+    "category": "Compound",
+    "medals": "🥇 World Championships 2023 (compound women); 🥇 Asian Games 2023; Multiple World Cup gold 2024",
+    "records": "Non-Olympic compound archery events — reigning women's world champion Aditi Swami. Two CirclesRecord: Youngest-ever Indian to win a World Archery Championship (age 17 in 2023). World ranking: #2 compound women globally. Personal best: 150/150 (perfect score in compound)."
+  },
+  {
+    "id": 5,
+    "sport": "ARCHERY",
+    "name": "Jyoti Surekha Vennam",
+    "age": "27",
+    "gender": "F",
+    "category": "Compound",
+    "medals": "🥇 Asian Games 2023 (individual + team); 🥇 World Championships 2022 + 2023 (team); 🥈 World Cup Final 2024",
+    "records": "Career record: 3 consecutive World Championship team golds (2019, 2022, 2023). Asian Games individual + team double in same Games. World ranking: #1 compound women (held 2022–23). Personal best: 150/150 compound."
+  },
+  {
+    "id": 6,
+    "sport": "ARCHERY",
+    "name": "Atanu Das",
+    "age": "31",
+    "gender": "M",
+    "category": "Recurve",
+    "medals": "2x Olympian; 🥇 World Cup 2021 Stage 3; 🥇 Asian Championships 2019",
+    "records": "World Cup gold medal at Stage 3, 2021 (Paris). Career record: 2 Olympic appearances + Asian champion. Personal best: 694/720. Preparing for LA 2028."
+  },
+  {
+    "id": 7,
+    "sport": "ARCHERY",
+    "name": "Tarundeep Rai",
+    "age": "40",
+    "gender": "M",
+    "category": "Recurve",
+    "medals": "3x Olympian (Athens, Beijing, Paris 2024); 🥇 CWG 2006; 🥇 Asian Championships 2004",
+    "records": "Record: 3 Olympic appearances — most by any Indian male archer. 20+ year international career (2003–2024). Arjuna Award 2006. India's only archer to compete at 3 Olympics in different decades."
+  },
+  {
+    "id": 8,
+    "sport": "ARCHERY",
+    "name": "Aditi / Compound women team",
+    "age": "—",
+    "gender": "F",
+    "category": "Compound",
+    "medals": "🥇 World Cup 2024 Stage 1 + 2 (women's compound team)",
+    "records": "India's compound women's team won back-to-back World Cup stage golds in 2024 — first Indian women's compound team to achieve this."
+  },
+  {
+    "id": 9,
+    "sport": "ARCHERY",
+    "name": "Prathamesh Fuge",
+    "age": "24",
+    "gender": "M",
+    "category": "Compound",
+    "medals": "4th World Cup Final 2024 (just missed bronze); 🥇 Asian Championships 2023 (team)",
+    "records": "Personal best: 149/150 compound (near-perfect score). Closest any Indian compound man has come to World Cup Final podium. Asian team champion."
+  },
+  {
+    "id": 10,
+    "sport": "ARCHERY",
+    "name": "Harvinder Singh",
+    "age": "33",
+    "gender": "M",
+    "category": "Para Recurve",
+    "medals": "🥇 Paris 2024 Paralympics; 🥉 Tokyo 2020 Paralympics",
+    "records": "Record: India's first Paralympic archery gold (Paris 2024). Only Indian para archer with two Paralympic medals. Personal best: 680/720 recurve. Pioneer of para archery in India."
+  },
+  {
+    "id": 11,
+    "sport": "ARCHERY",
+    "name": "Abhishek Verma",
+    "age": "31",
+    "gender": "M",
+    "category": "Compound",
+    "medals": "🥇 Asian Games 2018; 🥈 World Championships 2019 (team); Multiple World Cup medals",
+    "records": "Record: India's first Asian Games compound gold(2018). Career: 10+ World Cup medals. Personal best: 149/150. Most experienced Indian compound archer."
+  },
+  {
+    "id": 12,
+    "sport": "ARCHERY",
+    "name": "Komalika Bari",
+    "age": "22",
+    "gender": "F",
+    "category": "Recurve",
+    "medals": "🥇 World U18 Championships 2021; 🥇 Asia Cup 2022",
+    "records": "Record: Youngest-ever Indian to win U18 World Archery Championship (age 18 in 2021). Personal best: 672/720. Strong LA 2028 candidate."
+  },
+  {
+    "id": 13,
+    "sport": "ARCHERY",
+    "name": "Pravin Jadhav",
+    "age": "27",
+    "gender": "M",
+    "category": "Recurve",
+    "medals": "Paris 2024 participant; 🥇 World Cup 2024 Stage 1 (men's team — beat Korea after 14 years)",
+    "records": "Part of India's men's recurve team that clinched first World Cup gold in 14 years, defeating South Korea. Wikipedia Personal best: 688/720."
+  },
+  {
+    "id": 14,
+    "sport": "ARCHERY",
+    "name": "Ojas Deotale",
+    "age": "22",
+    "gender": "M",
+    "category": "Compound",
+    "medals": "🥇 World Cup 2023 Stage 3 (mixed team); 🥇 Asian Championships 2023 (team)",
+    "records": "Personal best: 148/150 compound. World Cup gold at 21. Rising compound talent."
+  },
+  {
+    "id": 15,
+    "sport": "ARCHERY",
+    "name": "Priyansh",
+    "age": "19",
+    "gender": "M",
+    "category": "Compound",
+    "medals": "🥈 World Cup Final 2024 (mixed team with Jyoti); 🥇 Asian U18 Championships 2023",
+    "records": "Personal best: 149/150 compound. World Cup Final silver at 18. Top-ranked junior compound archer in Asia (2024)."
+  },
+  {
+    "id": 16,
+    "sport": "ARCHERY",
+    "name": "Bhajan Kaur",
+    "age": "25",
+    "gender": "F",
+    "category": "Recurve",
+    "medals": "Paris 2024 participant; 🥉 Asian Games 2023 (team); 🥇 World Cup 2024 Stage 1 (team)",
+    "records": "Personal best: 668/720. Asian Games team bronze + World Cup gold in same year."
+  },
+  {
+    "id": 17,
+    "sport": "ARCHERY",
+    "name": "Sift Kaur Samra(compound crossover)",
+    "age": "22",
+    "gender": "F",
+    "category": "50m Rifle 3P / Archery crossover — this athlete is in shooting",
+    "medals": "—",
+    "records": "—"
+  },
+  {
+    "id": 17,
+    "sport": "ARCHERY",
+    "name": "Mrinal Chauhan",
+    "age": "24",
+    "gender": "M",
+    "category": "Recurve",
+    "medals": "Paris 2024 participant; 🥇 World Cup 2024 Stage 1 (team)",
+    "records": "Part of India's historic men's team World Cup gold. Personal best: 682/720."
+  },
+  {
+    "id": 18,
+    "sport": "ARCHERY",
+    "name": "Parneet Kaur",
+    "age": "23",
+    "gender": "F",
+    "category": "Compound",
+    "medals": "🥇 World Cup 2024 Stage 1 + 2 (women's compound team)",
+    "records": "Part of India's back-to-back compound women's team World Cup wins. Personal best: 147/150."
+  },
+  {
+    "id": 19,
+    "sport": "ARCHERY",
+    "name": "Simranjeet Kaur",
+    "age": "22",
+    "gender": "F",
+    "category": "Recurve",
+    "medals": "🥉 Asian U20 Championships 2022; Consistent national trials top-3",
+    "records": "Personal best: 660/720. U20 Asian bronze. LA 2028 target."
+  },
+  {
+    "id": 20,
+    "sport": "ARCHERY",
+    "name": "Ridhi",
+    "age": "16",
+    "gender": "F",
+    "category": "Recurve",
+    "medals": "🥇 Asian U17 Championships 2024; National U17 record",
+    "records": "Personal best: 645/720 (U17 — national record for the age group). India's top U17 recurve girl. 2032 Olympic target."
+  },
+  {
+    "id": 1,
+    "sport": "TABLE TENNIS",
+    "name": "Manika Batra",
+    "age": "29",
+    "gender": "F",
+    "category": "Women's Singles / Doubles",
+    "medals": "Paris 2024 R16; 🥇 CWG 2018 (women's singles); 🥉 Asian Games 2018 (mixed doubles); 🥇 Asian Championships 2024 (team)",
+    "records": "Career-best ranking: World No. 24. First Indian woman to break into world's top 25 in singles. sportsboardindia Record: First Indian to reach Olympic singles R16 (Paris 2024). Most decorated Indian women's TT player."
+  },
+  {
+    "id": 2,
+    "sport": "TABLE TENNIS",
+    "name": "Sreeja Akula",
+    "age": "27",
+    "gender": "F",
+    "category": "Women's Singles / Doubles",
+    "medals": "Paris 2024 R16; 🥇 WTT Contender Lagos 2024; 🥇 CWG 2022 (mixed doubles with Sharath); 🥉 Asian Championships 2024 (team)",
+    "records": "Highest-ever ranked Indian singles player — career-best World No. 21 (August 2024). Sports Authority of India First Indian woman to win a WTT Contender singles title. Invest IndiaRecord: World No. 21 — highest ranking ever by an Indian singles TT player (male or female)."
+  },
+  {
+    "id": 3,
+    "sport": "TABLE TENNIS",
+    "name": "Achanta Sharath Kamal",
+    "age": "42",
+    "gender": "M",
+    "category": "Men's Singles / Doubles",
+    "medals": "5x Olympian; 🥇 CWG 2022 (4 medals — singles, mixed doubles, men's doubles, team); 🥇 CWG 2018 (singles); 🥈 Asian Games 2022 (team)",
+    "records": "Record 10x national champion. First Indian to win ITTF Pro Tour title. First Indian to win CWG singles gold. ESPN Career record: 4 medals at a single CWG (2022) — no Indian TT player has matched this. Best world ranking: #24 (2021)."
+  },
+  {
+    "id": 4,
+    "sport": "TABLE TENNIS",
+    "name": "Sathiyan Gnanasekaran",
+    "age": "31",
+    "gender": "M",
+    "category": "Men's Singles / Doubles",
+    "medals": "🥇 CWG 2018 (team); Paris 2024 team; 🥇 Asian Championships 2024 (mixed doubles); ITTF Belgium Open 2017",
+    "records": "Career-best world ranking: World No. 25 (2019). Highest-ever ranking for an Indian men's singles player for 5 years. First Indian to win WTT mixed doubles title at senior level."
+  },
+  {
+    "id": 5,
+    "sport": "TABLE TENNIS",
+    "name": "Harmeet Desai",
+    "age": "30",
+    "gender": "M",
+    "category": "Men's Singles / Doubles",
+    "medals": "Paris 2024 men's team; 🥇 CWG 2018 (team); 🥇 CWG 2022 (team); Multiple ITTF Challenge titles",
+    "records": "Career record: 2 CWG team golds (2018 + 2022). Career-best ranking: World No. 60. Consistent top-75 performer for 6 years."
+  },
+  {
+    "id": 6,
+    "sport": "TABLE TENNIS",
+    "name": "Archana Kamath",
+    "age": "23",
+    "gender": "F",
+    "category": "Women's Singles / Doubles",
+    "medals": "Paris 2024 women's team QF; 🥇 WTT Contender Lagos 2024 (doubles with Sreeja); 🥉 Asian Championships 2024 (team)",
+    "records": "Career-best ranking: World No. 52. Won WTT Contender doubles title at 22. Part of Paris 2024 QF women's team."
+  },
+  {
+    "id": 7,
+    "sport": "TABLE TENNIS",
+    "name": "Sutirtha Mukherjee",
+    "age": "28",
+    "gender": "F",
+    "category": "Women's Doubles",
+    "medals": "🥇 CWG 2022 (women's team); 🥈 Asian Championships 2024 (doubles with Ayhika)",
+    "records": "With Ayhika Mukherjee, ranked world No. 17 in women's doubles. Taylor & Francis OnlineCareer-best singles ranking: World No. 84. Best doubles ranking: World No. 17 (with Ayhika) — highest doubles ranking by Indian women's pair."
+  },
+  {
+    "id": 8,
+    "sport": "TABLE TENNIS",
+    "name": "Ayhika Mukherjee",
+    "age": "26",
+    "gender": "F",
+    "category": "Women's Doubles",
+    "medals": "🥇 CWG 2022 (women's team); 🥈 Asian Championships 2024 (doubles with Sutirtha)",
+    "records": "Doubles world ranking No. 17 with Sutirtha. Taylor & Francis Online World No. 17 doubles — matches Sutirtha's record as India's highest-ranked women's doubles pair ever."
+  },
+  {
+    "id": 9,
+    "sport": "TABLE TENNIS",
+    "name": "Manav Thakkar",
+    "age": "23",
+    "gender": "M",
+    "category": "Men's Singles / Doubles",
+    "medals": "Paris 2024 men's team; 🥇 CWG 2022 (men's team); 🥇 ITTF Junior World Cup 2018",
+    "records": "Career-best world ranking: World No. 53. Junior World Cup gold at 16. Record: India's second-highest ranked men's singles player after Sharath (at peak)."
+  },
+  {
+    "id": 10,
+    "sport": "TABLE TENNIS",
+    "name": "Yashansh Mulye",
+    "age": "17",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 WTT Youth Contender 2024; World U15 champion 2022",
+    "records": "Record: World U15 Champion at age 14 — youngest Indian table tennis world champion at any age group. Currently ranked inside world top 100 juniors. 2032 Olympic target."
+  },
+  {
+    "id": 11,
+    "sport": "TABLE TENNIS",
+    "name": "Diya Chitale",
+    "age": "22",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "Multiple WTT Challenge titles; 🥇 National champion 2022",
+    "records": "Career-best ranking: World No. 89. Multiple WTT Challenge titles. Consistent domestic and international performer."
+  },
+  {
+    "id": 12,
+    "sport": "TABLE TENNIS",
+    "name": "Swastika Ghosh",
+    "age": "22",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥇 Asian Junior Championships 2021; World U21 top-25",
+    "records": "Career-best ranking: World No. 95. Asian junior champion at 18. Strong women's singles pipeline."
+  },
+  {
+    "id": 13,
+    "sport": "TABLE TENNIS",
+    "name": "Payas Jain",
+    "age": "20",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 WTT Youth Contender 2023; World U21 top-20",
+    "records": "Career-best ranking: World No. 130 at age 19 — fastest climb among Indian U21 men's singles players in 5 years."
+  },
+  {
+    "id": 14,
+    "sport": "TABLE TENNIS",
+    "name": "Reeth Tennison",
+    "age": "21",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥇 Commonwealth Championships 2022; WTT Youth Contender regular",
+    "records": "Commonwealth Championships gold. Career-best ranking: World No. 110. Rising U21 star."
+  },
+  {
+    "id": 15,
+    "sport": "TABLE TENNIS",
+    "name": "Snehit SF",
+    "age": "27",
+    "gender": "M",
+    "category": "Men's Singles / Doubles",
+    "medals": "🥇 CWG 2022 (men's team); Multiple ITTF Challenge titles",
+    "records": "CWG team gold 2022. Career-best ranking: World No. 85. Consistent national team contributor."
+  },
+  {
+    "id": 16,
+    "sport": "TABLE TENNIS",
+    "name": "Jeet Chandra",
+    "age": "19",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 Asian U19 Championships 2024; World Junior top-30",
+    "records": "Asian U19 champion at 18. Career-best junior ranking: World No. 22 (juniors). Direct successor to Manav Thakkar pipeline."
+  },
+  {
+    "id": 17,
+    "sport": "TABLE TENNIS",
+    "name": "Poymantee Baisya",
+    "age": "20",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥈 Asian Junior Championships 2023; National U21 top-3",
+    "records": "Asian junior silver. Career-best: World No. 120. Northeast India's most decorated TT player after Sharath era."
+  },
+  {
+    "id": 18,
+    "sport": "TABLE TENNIS",
+    "name": "Krittwika Sinha Roy",
+    "age": "20",
+    "gender": "F",
+    "category": "Women's Singles",
+    "medals": "🥇 WTT Youth Contender 2023; National U21 champion",
+    "records": "Career-best ranking: World No. 125. WTT Youth title at 17. One of India's fastest-rising junior women."
+  },
+  {
+    "id": 19,
+    "sport": "TABLE TENNIS",
+    "name": "Anirban Ghosh",
+    "age": "23",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 Commonwealth Championships 2021; ITTF Challenge regular",
+    "records": "Career-best ranking: World No. 95. Commonwealth champion. Consistent senior domestic performer."
+  },
+  {
+    "id": 20,
+    "sport": "TABLE TENNIS",
+    "name": "Ayush Singh",
+    "age": "16",
+    "gender": "M",
+    "category": "Men's Singles",
+    "medals": "🥇 WTT Youth Contender 2025; World U15 top-5",
+    "records": "Career-best junior ranking: World No. 5 (U15). India's youngest active international. 2032 Olympic pipeline."
+  },
+  {
+    "id": 1,
+    "sport": "ROWING",
+    "name": "Balraj Panwar",
+    "age": "25",
+    "gender": "M",
+    "category": "Single Sculls (M1X)",
+    "medals": "Paris 2024 Olympics (QF, 23rd overall); 🥇 Asian Championships 2025 (M1X); 🥉 Asian Olympic Qualifier 2024",
+    "records": "Took up rowing just four years ago. Sportsauthorityofindia Personal best: 7:01.27 (single sculls 2000m"
+  }
+]
