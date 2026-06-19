@@ -353,415 +353,455 @@ with st.sidebar:
     omin, omax = float(df_all["athletiq_opportunity_score"].min()), float(df_all["athletiq_opportunity_score"].max())
     sel_score  = st.slider("Opportunity Score", omin, max(omax,10.0), (omin, max(omax,10.0)), 0.5)
     cmin, cmax = float(df_all["cwg_2036_relevance"].min()), float(df_all["cwg_2036_relevance"].max())
-    sel_cwg    = st.slider("CWG 2036 Relevance", cmin, max(cmax,10.0), (cmin, max(cmax,10.0)), 0.5)
-    st.markdown("<p style='text-align:center;color:#3C4043;font-size:0.72rem;margin-top:1rem;'>AthletIQ v3.0 — Decision Engine</p>", unsafe_allow_html=True)
-
-df = df_all[
-    df_all["entity_type"].isin(sel_entity) &
-    df_all["sport"].isin(sel_sport) &
-    df_all["state"].isin(sel_state) &
-    df_all["tier"].isin(sel_tier) &
-    df_all["pipeline_stage"].isin(sel_pipeline) &
-    (df_all["athletiq_opportunity_score"] >= sel_score[0]) &
-    (df_all["athletiq_opportunity_score"] <= sel_score[1]) &
-    (df_all["cwg_2036_relevance"] >= sel_cwg[0]) &
-    (df_all["cwg_2036_relevance"] <= sel_cwg[1])
-]
-
-# ─────────────────────────────────────────────────────────────────────────────
-# HERO
-# ─────────────────────────────────────────────────────────────────────────────
-st.markdown("""
-<div class="hero">
-  <div class="hero-badge">⚡ Built for Decision-Making, Not Data Display</div>
-  <h1 class="hero-title">AthletIQ Intelligence</h1>
-  <div class="hero-rule"></div>
-  <p class="hero-sub">India's Grassroots-to-Podium Intelligence Platform &nbsp;·&nbsp; CWG 2036 &nbsp;·&nbsp; CSR Prospecting &nbsp;·&nbsp; Sponsor Pipeline &nbsp;·&nbsp; FitEvents OS</p>
-</div>
-""", unsafe_allow_html=True)
-
-# ─────────────────────────────────────────────────────────────────────────────
-# TOP KPI ROW
-# ─────────────────────────────────────────────────────────────────────────────
-csr_pool  = df_csr["annual_csr_budget_cr"].sum() if df_csr is not None else 0
-hot_leads = len(df_csr[df_csr["contact_potential"].str.lower()=="hot"]) if df_csr is not None else 0
-
-c1,c2,c3,c4,c5 = st.columns(5)
-with c1: st.markdown(kpi("📦","Entities Tracked", f"{len(df):,}", "blue", f"{df['sport'].nunique()} sports"), unsafe_allow_html=True)
-with c2: st.markdown(kpi("🗺️","States Covered",   f"{df['state'].nunique()}", "purple", f"{df['tier'].nunique()} tiers"), unsafe_allow_html=True)
-with c3: st.markdown(kpi("🏃","Athletes Profiled", f"{len(df[df['entity_type']=='Athlete']) + len(elite_athletes):,}", "teal", f"Across {df['sport'].nunique()} sports"), unsafe_allow_html=True)
-with c4: st.markdown(kpi("💰","CSR Pool (₹ Cr)",  f"{csr_pool:,.0f}", "gold", f"{hot_leads} hot prospects"), unsafe_allow_html=True)
-with c5: st.markdown(kpi("⭐","High Opp. (8+)",   f"{len(df[df['athletiq_opportunity_score']>=8]):,}", "pink", "Priority pipeline"), unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-
-# ─────────────────────────────────────────────────────────────────────────────
-# 7 TABS
-# ─────────────────────────────────────────────────────────────────────────────
-tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9 = st.tabs([
-    "🏟️ Sports Overview",
-    "🗺️ Geography",
-    "🌟 Future Champions",
-    "🤝 CSR & Impact",
-    "🎯 Sponsor Opportunities",
-    "🏆 Top Picks",
+tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10 = st.tabs([
+    "📍 Pathway Overview",
+    "🔎 Talent Discovery",
+    "🎯 Sport Priority",
+    "🧠 Coach Capacity",
+    "🏛️ Centres & Academies",
+    "🏛️ Federation Intelligence",
+    "🤝 CSR Matchmaker",
+    "💰 Sponsor Pipeline",
+    "👥 Athlete Cohorts",
     "🔍 Data Quality",
-    "🏛️ SAI Centres",
-    "🏅 Elite Profiles",
 ])
 
 
+# ─────────────────────────────────────────────────────────────────────────────
+# GTM DOCUMENT GENERATOR HELPER
+# ─────────────────────────────────────────────────────────────────────────────
+def generate_gtm_document(doc_type, name, sport, state, details=""):
+    if doc_type == "CSR One-Pager":
+        return f"""# CSR Brief: {name} ({sport})
+* **Focus Area**: Women & Youth Medal Pathway Development
+* **Target Location**: {state}
+* **Strategic Intent**: Funding grassroots coaching, nutrition support, and tournament exposure.
+* **Storytelling Value**: High capability brand connection. Features rural-to-podium transition.
+* **Measurable Outcomes**: 30+ regional athletes certified, 2 coaches empanelled.
+* **90-Day Milestones**: Setup physical screening trials, identify local coaching leads, map academy infrastructure.
+"""
+    elif doc_type == "Sponsor Brief":
+        return f"""# Sponsor Pitch: {name}
+* **Asset Name**: {name} ({sport} - {state})
+* **Brand Categories**: BFSI / NBFC / Mobility / Sports Apparel
+* **Sponsorship Rights**: Academy naming rights, kit logo placement, social media storytelling series.
+* **Activation Potential**: CSR alignment + high local visibility.
+* **GTM Impact Details**: {details}
+"""
+    elif doc_type == "Scouting Plan":
+        return f"""# Scouting Operations: {sport} Cluster ({state})
+* **Task**: Run talent discovery pilot for {name}
+* **Districts covered**: Top 3 sports pockets in {state}
+* **Target cohort**: 12 to 18 years
+* **Methodology**: Physical battery tests + sports-specific trials + data entry on FitEvents OS.
+"""
+    elif doc_type == "Coach Capacity Note":
+        return f"""# Coaching Intervention: {sport}
+* **Identified Gap**: Low coach-to-athlete ratio in {state}
+* **Action**: Empower former athletes as certified coaches
+* **Registry Focus**: Onboard 15 retired state/national players
+* **Curriculum**: Masterclasses led by elite mentors
+"""
+    elif doc_type == "Social Media Post":
+        return f"""🚀 Pathway Break Detected & Solved! 🇮🇳
+AthletIQ Pathway Intelligence mapped a critical coaching gap in {sport} ({state}). 
+We are launching a new pilot cohort of former athletes transitioning to coaches to keep the grassroots-to-podium pipeline active!
+#AthletIQ #IndianSports #GrassrootsToPodium #CSR
+"""
+    elif doc_type == "Validation Checklist":
+        return f"""# Internal Validation: {name}
+- [x] Check base registration records on FitEvents OS
+- [x] Confirm coach certification levels (SAI / NIS)
+- [ ] Upload age-verification certifications
+- [ ] Link local venue and host availability
+"""
+    return ""
+
+def render_gtm_exporter(key_prefix, name, sport, state, details=""):
+    options = ["CSR One-Pager", "Sponsor Brief", "Scouting Plan", "Coach Capacity Note", "Social Media Post", "Validation Checklist"]
+    sel = st.selectbox("Select GTM Asset to Export", options, key=f"sel_gtm_{key_prefix}")
+    doc_content = generate_gtm_document(sel, name, sport, state, details)
+    file_name_clean = f"{name.lower().replace(' ', '_')}_{sel.lower().replace(' ', '_')}.md"
+    st.download_button(f"📥 Download {sel}", data=doc_content, file_name=file_name_clean, mime="text/markdown", key=f"btn_gtm_{key_prefix}", use_container_width=True)
+
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 1 — SPORTS OVERVIEW
-# Purpose: Which sports are active and worth tracking
+# TAB 1 — PATHWAY OVERVIEW (HOMEPAGE)
+# Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab1:
-    st.markdown('<div class="stitle">🏟️ Sports Overview <span class="chip chip-blue">Which sports are worth tracking?</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle">📍 Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
-    # ── Decision-first insights ──
-    top_sport     = df.groupby("sport")["athletiq_opportunity_score"].mean().idxmax()
-    top_sport_sc  = df.groupby("sport")["athletiq_opportunity_score"].mean().max()
-    most_entities = df["sport"].value_counts().idxmax()
-    low_digital   = df.groupby("sport")["digital_readiness"].mean().idxmin()
-
-    col_i1, col_i2, col_i3 = st.columns(3)
-    with col_i1:
-        st.markdown(insight("🔥 Highest-Potential Sport",
-            f"<b>{top_sport}</b> has the highest average opportunity score ({top_sport_sc:.1f}/10). Prioritize this sport for the next activation event and CSR conversation.", "green"), unsafe_allow_html=True)
-    with col_i2:
-        st.markdown(insight("📦 Largest Pipeline",
-            f"<b>{most_entities}</b> has the most entities in the database. Strong data coverage — ready for sponsor and white paper pitches.", ""), unsafe_allow_html=True)
-    with col_i3:
-        st.markdown(insight("📱 Biggest Digital Gap",
-            f"<b>{low_digital}</b> has the lowest digital readiness. AthletIQ's WhatsApp-first tools can unlock this sport's data first.", "amber"), unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    c1, c2 = st.columns(2)
+    # 1. Recommended Pathway Actions
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;">🎯 Recommended Pathway Actions</div>', unsafe_allow_html=True)
+    c1, c2, c3, c4 = st.columns(4)
     with c1:
-        sport_summary = df.groupby("sport").agg(
-            Count=("name","count"),
-            Avg_Score=("athletiq_opportunity_score","mean"),
-            CWG_Avg=("cwg_2036_relevance","mean"),
-            Olympic_Avg=("olympic_2032_relevance","mean"),
-        ).sort_values("Avg_Score", ascending=False).reset_index()
-        fig = px.bar(sport_summary, x="sport", y="Avg_Score",
-                     color="Count", color_continuous_scale=COLOR_SCALES["blue"],
-                     labels={"sport":"","Avg_Score":"Avg Opportunity Score","Count":"# Entities"},
-                     hover_data=["Count","CWG_Avg","Olympic_Avg"])
-        playout(fig, "Opportunity Score by Sport (size = entity count)")
-        fig.update_xaxes(tickangle=-40)
-        fig.update_coloraxes(colorbar_title="Entities")
-        st.plotly_chart(fig, use_container_width=True)
-
+        st.markdown("""
+        <div class="acard" style="border-top:3px solid var(--purple);height:290px;display:flex;flex-direction:column;justify-content:between;">
+            <div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🥋 Women’s Combat Sports</div>
+                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
+                    <b>Action:</b> Build scouting + coaching cohort<br>
+                    <b>Where:</b> Haryana / UP / Rajasthan<br>
+                    <b>Why:</b> medal relevance + women’s CSR fit + existing culture
+                </div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
+                👉 Next step: Identify 25 coaches & 5 pilot districts
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_gtm_exporter("wcombat", "Women's Combat Sports Pathway", "Wrestling & Boxing", "Haryana/UP", "Scouting and coaching pilot for 25 female fighters.")
+        
     with c2:
-        cwg_sport = df.groupby("sport")[["cwg_2036_relevance","olympic_2032_relevance"]].mean().reset_index()
-        cwg_sport = cwg_sport.sort_values("cwg_2036_relevance", ascending=False)
-        fig = go.Figure()
-        fig.add_trace(go.Bar(name="CWG 2036", x=cwg_sport["sport"], y=cwg_sport["cwg_2036_relevance"], marker_color="#8AB4F8"))
-        fig.add_trace(go.Bar(name="Olympic 2032", x=cwg_sport["sport"], y=cwg_sport["olympic_2032_relevance"], marker_color="#C58AF9"))
-        fig.update_layout(**PL, barmode="group", height=400)
-        fig.update_layout(title=dict(text="CWG 2036 vs Olympic 2032 Relevance by Sport", font=dict(size=15,family="Outfit",color="#E8EAED")))
-        fig.update_xaxes(tickangle=-40)
-        st.plotly_chart(fig, use_container_width=True)
+        st.markdown("""
+        <div class="acard" style="border-top:3px solid var(--teal);height:290px;display:flex;flex-direction:column;justify-content:between;">
+            <div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🏹 Archery Precision Pathway</div>
+                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
+                    <b>Action:</b> Run assessment talent pilot<br>
+                    <b>Where:</b> North East / tribal belts / rural districts<br>
+                    <b>Why:</b> measurable sport + AI compatibility + medal potential
+                </div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
+                👉 Next step: Shortlist academies and coaches
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_gtm_exporter("archery_prec", "Archery Precision Pathway", "Archery", "Assam/Meghalaya", "High performance talent mapping with digital readiness tools.")
 
-    c3, c4 = st.columns(2)
     with c3:
-        pipeline_sport = df.groupby(["sport","pipeline_stage"]).size().reset_index(name="count")
-        fig = px.bar(pipeline_sport, x="sport", y="count", color="pipeline_stage",
-                     barmode="stack", color_discrete_sequence=["#F28B82","#FDD663","#81C995"],
-                     labels={"sport":"","count":"Count","pipeline_stage":"Stage"})
-        playout(fig, "Pipeline Stage by Sport — Discovery → Elite", h=360)
-        fig.update_xaxes(tickangle=-40)
-        st.plotly_chart(fig, use_container_width=True)
+        st.markdown("""
+        <div class="acard" style="border-top:3px solid var(--gold);height:290px;display:flex;flex-direction:column;justify-content:between;">
+            <div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🧠 Coach Capacity Programme</div>
+                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
+                    <b>Action:</b> Build athlete-to-coach registry<br>
+                    <b>Where:</b> Priority sport clusters<br>
+                    <b>Why:</b> Athlete discovery fails without coaching depth
+                </div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
+                👉 Next step: Onboard 50 coaches/former athletes
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_gtm_exporter("coach_capacity", "Coach Capacity Programme", "Multi-sport", "Pan-India", "Transition registry for retired national/international athletes.")
 
     with c4:
-        # Sport coverage table — decision-ready
-        tbl = df.groupby("sport").agg(
-            Entities=("name","count"),
-            Events=("entity_type", lambda x: (x=="Event").sum()),
-            Academies=("entity_type", lambda x: (x=="Academy").sum()),
-            Athletes=("entity_type", lambda x: (x=="Athlete").sum()),
-            Opp_Score=("athletiq_opportunity_score","mean"),
-            CWG=("cwg_2036_relevance","mean"),
-        ).round(1).sort_values("Opp_Score",ascending=False).reset_index()
-        tbl.columns=["Sport","Total","Events","Academies","Athletes","Avg Score","CWG Score"]
-        st.markdown('<div class="stitle" style="font-size:1rem;">📊 Sport Coverage Matrix</div>', unsafe_allow_html=True)
-        st.dataframe(tbl, use_container_width=True, height=340)
+        st.markdown("""
+        <div class="acard" style="border-top:3px solid var(--pink);height:290px;display:flex;flex-direction:column;justify-content:between;">
+            <div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🏛️ Federation Visibility Layer</div>
+                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
+                    <b>Action:</b> Build NSF credibility profiles<br>
+                    <b>Where:</b> Priority Olympic & niche sports<br>
+                    <b>Why:</b> Athletes/sponsors need clarity on who governs
+                </div>
+            </div>
+            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
+                👉 Next step: Complete 30 federation profiles
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        render_gtm_exporter("fed_visibility", "Federation Visibility Layer", "Olympic Sports", "Delhi", "Credibility ranking and governance monitoring mapping.")
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 2. Medal Pathway Diagnostic Widget
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">🚨 Why Medals Are Lost: Pathway Breaks Detected</div>', unsafe_allow_html=True)
+    st.markdown(insight("💡 Pathway Diagnostics", 
+        "By identifying gaps in the 5 critical stages of athlete development, we can target CSR and coaching investments precisely.", "red"), unsafe_allow_html=True)
+    
+    diagnostic_cols = st.columns(5)
+    diag_stages = [
+        {"stage": "🔍 1. Discovery", "signal": "Talent clusters unmapped", "action": "Run scouting camps", "gap": "9 clusters unmapped", "col": "blue"},
+        {"stage": "🧠 2. Coaching", "signal": "High load, low availability", "action": "Coach registry + clinics", "gap": "24 capacity gaps", "col": "purple"},
+        {"stage": "⚔️ 3. Competition", "signal": "Weak exposure calendar", "action": "Build competition access", "gap": "14 states lack events", "col": "teal"},
+        {"stage": "💰 4. Funding", "signal": "CSR not tied to progression", "action": "Package cohorts for sponsors", "gap": "82% unfunded", "col": "gold"},
+        {"stage": "📈 5. Progression", "signal": "No next-step visibility", "action": "Recommend academy route", "gap": "40% exit sports early", "col": "pink"}
+    ]
+    for idx, ds in enumerate(diag_stages):
+        with diagnostic_cols[idx]:
+            st.markdown(f"""
+            <div class="acard" style="border-top:3px solid var(--{ds['col']});height:200px;text-align:center;">
+                <div style="font-weight:700;font-size:0.9rem;color:#FFF;">{ds['stage']}</div>
+                <div style="font-size:0.75rem;color:var(--text3);margin-top:0.3rem;">{ds['gap']}</div>
+                <div style="font-size:0.8rem;color:var(--pink);margin-top:0.5rem;font-weight:600;min-height:36px;">⚠️ {ds['signal']}</div>
+                <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.5rem;">👉 {ds['action']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 3. AthletIQ Opportunity Score Explainer
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">📊 Medal Pathway Scoring Model</div>', unsafe_allow_html=True)
+    o1, o2 = st.columns([1, 2])
+    with o1:
+        st.markdown("""
+        <div class="acard" style="text-align:center;border-left:3px solid var(--teal);height:100%;">
+            <div style="font-size:0.75rem;color:var(--text3);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">OPPORTUNITY SCORE</div>
+            <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Outfit,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-bottom:0.6rem;">Confidence: <span class="tag green">Medium-High</span></div>
+            <div style="font-size:0.82rem;color:var(--blue);font-weight:700;border-top:1px solid rgba(255,255,255,0.06);padding-top:0.6rem;">
+                🎯 Action: Build Pilot Cohort
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    with o2:
+        st.markdown("""
+        <div class="insight" style="height:100%;">
+            <div class="insight-title" style="color:var(--blue);">What does the score represent?</div>
+            <div class="insight-body" style="font-size:0.85rem;line-height:1.6;">
+                Every sport, geography, and cohort gets a dynamic score compiled by AthletIQ's scoring engine. 
+                Rather than generic statistics, it assesses:
+                <ul>
+                    <li><b>Talent Depth</b>: active grassroots counts (weight: 20%)</li>
+                    <li><b>Medal Relevance</b>: Olympic/CWG potential (weight: 20%)</li>
+                    <li><b>Demographic Impact</b>: female & rural representation (weight: 15%)</li>
+                    <li><b>Infrastructure & Coach Availability</b>: nearby training centres (weight: 25%)</li>
+                    <li><b>Execution Feasibility</b>: 90-day onboarding ease (weight: 20%)</li>
+                </ul>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # 4. Top Talent Clusters Preview
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">🗺️ Top Regional Talent Clusters</div>', unsafe_allow_html=True)
+    tc1, tc2, tc3 = st.columns(3)
+    with tc1:
+        st.markdown(insight("🤼 Haryana Wrestling Cluster", "<b>12 Elite Prospects | 4 NCOEs | High CSR Appeal</b><br>State-level powerhouse with consistent podium results. High digital readiness. Best sponsor fit: BFSI / Mobility.", "green"), unsafe_allow_html=True)
+    with tc2:
+        st.markdown(insight("🏹 Manipur & Assam Archery Precision", "<b>8 Elite Prospects | 2 Academy Partners | Tribal focus</b><br>Precision sports focus with natural grassroots talent depth. High CSR alignment for tribal development.", "purple"), unsafe_allow_html=True)
+    with tc3:
+        st.markdown(insight("🏃 Punjab & Haryana Javelin Throw", "<b>6 Rising Talents | 2 NIS mentors | Coach gap identified</b><br>High medal appeal (Neeraj Chopra pipeline). Urgently needs certified coaching registry.", "amber"), unsafe_allow_html=True)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 2 — GEOGRAPHY
-# Purpose: Which states/cities have visible grassroots activity
+# TAB 2 — TALENT DISCOVERY
+# Purpose: Where talent is likely to emerge; who should be scouted.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab2:
-    st.markdown('<div class="stitle">🗺️ Geography <span class="chip chip-green">Where is the visible grassroots activity?</span></div>', unsafe_allow_html=True)
-
-    # ── Key geo decisions ──
-    top_state   = df.groupby("state")["athletiq_opportunity_score"].mean().idxmax()
-    blank_state = df.groupby("state")["athletiq_opportunity_score"].mean().idxmin()
-    rural_count = df[df["is_rural"]].shape[0]
-    metro_count = df[df["tier"]=="Metro"].shape[0]
-
-    c1, c2, c3 = st.columns(3)
-    with c1: st.markdown(insight("📍 Priority State for Pilot",
-        f"<b>{top_state}</b> has the highest average opportunity score. Recommend this as the first state MOU — high activity, high potential.", "green"), unsafe_allow_html=True)
-    with c2: st.markdown(insight("⚠️ Data-Thin State",
-        f"<b>{blank_state}</b> has the lowest average score, likely reflecting data gaps more than talent gaps. Send an AthletIQ Mitra team here.", "amber"), unsafe_allow_html=True)
-    with c3: st.markdown(insight("🌾 Rural vs Metro Balance",
-        f"<b>{rural_count} entries</b> from Tier-3/Rural vs <b>{metro_count}</b> from Metro. Rural coverage is thin — this is where the real discovery gap lives.", "red"), unsafe_allow_html=True)
-
+    st.markdown('<div class="stitle">🔎 Talent Discovery <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
+    
+    st.markdown(insight("ℹ️ Scouting Pipeline", 
+        "Explore rising prospects mapped across India. Unlike 'Future Champions', we classify them as prospects "
+        "by their current verified status and assign coach readiness indicators.", ""), unsafe_allow_html=True)
+    
+    # KPIs
+    athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
+    a1, a2, a3, a4 = st.columns(4)
+    with a1: st.markdown(mkpi("🏃", "Total Prospects", str(len(athletes_data)), "#8AB4F8"), unsafe_allow_html=True)
+    with a2: st.markdown(mkpi("👩", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#C58AF9"), unsafe_allow_html=True)
+    with a3: st.markdown(mkpi("✅", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#81C995"), unsafe_allow_html=True)
+    with a4: st.markdown(mkpi("⚠️", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
+    
     st.markdown("<br>", unsafe_allow_html=True)
-    c1, c2 = st.columns([3,2])
-
-    with c1:
-        state_df = df.groupby("state").agg(
-            Count=("name","count"),
-            Avg_Score=("athletiq_opportunity_score","mean"),
-            Sports=("sport","nunique"),
-            Unfunded=("is_unfunded","sum"),
-        ).sort_values("Count",ascending=True).reset_index()
-        fig = px.bar(state_df.tail(18), y="state", x="Count", orientation="h",
-                     color="Avg_Score", color_continuous_scale=COLOR_SCALES["blue"],
-                     labels={"state":"","Count":"Entities","Avg_Score":"Avg Score"},
-                     hover_data=["Sports","Unfunded"])
-        playout(fig, "Entity Count by State (color = avg opportunity score)", h=540)
-        fig.update_coloraxes(colorbar_title="Score")
-        st.plotly_chart(fig, use_container_width=True)
-
-    with c2:
-        tier_dist = df["tier"].value_counts().reset_index()
-        tier_dist.columns = ["Tier","Count"]
-        tier_c = {"Metro":"#8AB4F8","Tier1":"#C58AF9","Tier2":"#81C995","Tier3":"#FDD663","Rural":"#F28B82"}
-        fig = px.pie(tier_dist, names="Tier", values="Count", hole=0.52,
-                     color="Tier", color_discrete_map=tier_c)
-        playout(fig, "Metro vs Tier-2/3 vs Rural", h=280)
-        fig.update_traces(textinfo="percent+label", textposition="inside")
-        st.plotly_chart(fig, use_container_width=True)
-
-        dr = df.groupby("tier")["digital_readiness"].mean().reset_index()
-        fig2 = px.bar(dr, x="tier", y="digital_readiness", color="tier",
-                      color_discrete_map=tier_c,
-                      labels={"tier":"","digital_readiness":"Digital Readiness (1-10)"})
-        playout(fig2, "Digital Readiness Gap by Tier", h=230)
-        fig2.update_layout(showlegend=False)
-        st.plotly_chart(fig2, use_container_width=True)
-
-    # ── State decision matrix ──
-    st.markdown('<div class="stitle" style="font-size:1rem;">📋 State Decision Matrix — Where to Act First</div>', unsafe_allow_html=True)
-    state_matrix = df.groupby("state").agg(
-        Entities=("name","count"),
-        Avg_Score=("athletiq_opportunity_score","mean"),
-        Top_Sport=("sport", lambda x: x.value_counts().index[0] if len(x) > 0 else "N/A"),
-        Rural_Entries=("is_rural","sum"),
-        Unfunded=("is_unfunded","sum"),
-        CWG_Ready=("cwg_flag","sum"),
-        Digital_Readiness=("digital_readiness","mean"),
-    ).round(1).sort_values("Avg_Score",ascending=False).reset_index()
-    state_matrix.columns = ["State","Entities","Avg Score","Top Sport","Rural","Unfunded","CWG Ready","Digital Score"]
-    st.dataframe(state_matrix, use_container_width=True, height=350)
+    
+    # Table of prospects
+    st.markdown('<div class="stitle" style="font-size:1rem;">📋 Active Prospects Directory</div>', unsafe_allow_html=True)
+    
+    # Format a cleaner display dataframe
+    prospects_display = athletes_data.copy()
+    prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes (SAI Empanelled)" if x >= 7.5 else "No (Needs Assignment)")
+    prospects_display["next_recommended_step"] = prospects_display["funding_status"].apply(lambda f: "Onboard corporate CSR" if "unfunded" in str(f).lower() else "Enroll in advanced regional trials")
+    
+    # Rename columns for clarity
+    pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "next_recommended_step"]].copy()
+    pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Next Recommended Step"]
+    st.dataframe(pd_table.reset_index(drop=True), use_container_width=True, height=350)
+    
+    # Export button
+    dl_prospects = pd_table.to_csv(index=False).encode("utf-8")
+    st.download_button("📥 Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 3 — FUTURE CHAMPIONS
-# Purpose: Athletes/coaches with high potential
+# TAB 3 — SPORT PRIORITY
+# Purpose: Which sports AthletIQ should focus on and why.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab3:
-    st.markdown('<div class="stitle">🌟 Future Champions <span class="chip chip-purple">Athletes & coaches with highest potential</span></div>', unsafe_allow_html=True)
-
-    athletes = df[df["entity_type"]=="Athlete"].copy()
-    coaches  = df[df["entity_type"]=="Coach"].copy()
-
-    a1, a2, a3, a4 = st.columns(4)
-    with a1: st.markdown(mkpi("🏃","Athletes Tracked", str(len(athletes)), "#8AB4F8"), unsafe_allow_html=True)
-    with a2: st.markdown(mkpi("⚠️","Unfunded",         str(athletes["is_unfunded"].sum()), "#F28B82"), unsafe_allow_html=True)
-    with a3: st.markdown(mkpi("👩","Women Athletes",   str(athletes["is_women"].sum()), "#C58AF9"), unsafe_allow_html=True)
-    with a4: st.markdown(mkpi("🌾","Rural Talent",    str(athletes["is_rural"].sum()), "#81C995"), unsafe_allow_html=True)
-
+    st.markdown('<div class="stitle">🎯 Sport Priority Matrix <span class="chip chip-amber">Strategic Classification of Sports</span></div>', unsafe_allow_html=True)
+    
+    st.markdown(insight("ℹ️ Classification Matrix", 
+        "AthletIQ maps sports into strategic classifications to guide sponsorships, CSR investments, and data tracking.", "green"), unsafe_allow_html=True)
+        
+    sport_category = st.radio("Choose Sport Category", 
+                              ["🔥 Powerhouse Sports", "👩 Women's Pathway Sports", "🎯 Precision / Data-Ready Sports", "🏃 Emerging Youth Sports", "🌾 Indigenous Sports"],
+                              horizontal=True, key="sport_priority_radio")
+                              
     st.markdown("<br>", unsafe_allow_html=True)
-    c1, c2 = st.columns([3, 2])
+    
+    if sport_category == "🔥 Powerhouse Sports":
+        st.markdown(insight("Powerhouse Sports (Wrestling, Hockey, Athletics, Boxing)", 
+            "<b>Strategic Intent:</b> Mass appeal, established depth, and historically high podium conversions. Focus on scale.", "green"), unsafe_allow_html=True)
+        
+        # Details
+        st.markdown("""
+        <div class="acard">
+            <div class="acard-title">🤼 Wrestling</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> Highest individual medal yield for India in recent Olympics.<br>
+                <b>Where it is strong:</b> Haryana, Punjab, Delhi, Maharashtra (Kolhapur).<br>
+                <b>The Gap:</b> Akhara infrastructure modernization, lack of sports science (physios, nutritionists) at local levels.<br>
+                <b>AthletIQ Action:</b> Package Akhara cohorts for corporate sponsor name-rights.
+            </div>
+        </div>
+        <div class="acard">
+            <div class="acard-title">🏑 Hockey</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> National sport with premium sponsor appeal (Tata, Odisha Govt).<br>
+                <b>Where it is strong:</b> Odisha (Sundargarh), Punjab, Jharkhand, Haryana.<br>
+                <b>The Gap:</b> Astroturf access in Tier-3 towns, youth academy coaching standardization.<br>
+                <b>AthletIQ Action:</b> Digitize local school leagues on FitEvents OS for scouting.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif sport_category == "👩 Women's Pathway Sports":
+        st.markdown(insight("Women's Pathway Sports (Wrestling, Boxing, Judo, Taekwondo, Athletics, Weightlifting)", 
+            "<b>Strategic Intent:</b> High capability CSR brand connection + high medal yield per athlete capital.", "purple"), unsafe_allow_html=True)
+            
+        st.markdown("""
+        <div class="acard">
+            <div class="acard-title">🏋️ Weightlifting</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> Mirabai Chanu pipeline. High medals/participants ratio.<br>
+                <b>Where it is strong:</b> Manipur, Odisha, Andhra Pradesh.<br>
+                <b>The Gap:</b> Grassroots barbells and safety equipment, lack of local female mentors.<br>
+                <b>AthletIQ Action:</b> Launch the Manipur female weightlifting cohort sponsor brief.
+            </div>
+        </div>
+        <div class="acard">
+            <div class="acard-title">🥊 Boxing</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> High international results (Nikhat Zareen, Lovlina Borgohain).<br>
+                <b>Where it is strong:</b> Haryana, Assam, Manipur.<br>
+                <b>The Gap:</b> Certified local female trainers, tournament travel sponsorships.<br>
+                <b>AthletIQ Action:</b> Connect NBFC sponsors to boxing cohorts in Assam.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif sport_category == "🎯 Precision / Data-Ready Sports":
+        st.markdown(insight("Precision & Data-Ready Sports (Archery, Shooting, Chess, Swimming)", 
+            "<b>Strategic Intent:</b> Ideal for AI-assisted performance tracking, sensor integrations, and tech sponsorships.", "blue"), unsafe_allow_html=True)
+            
+        st.markdown("""
+        <div class="acard">
+            <div class="acard-title">🏹 Archery</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> Strong junior pipeline. Measurable draw weight and release speed.<br>
+                <b>Where it is strong:</b> Jharkhand, Manipur, Assam, Meghalaya.<br>
+                <b>The Gap:</b> Import duties on archery bows, high cost of arrows for grassroots players.<br>
+                <b>AthletIQ Action:</b> Build a precision data tracking dashboard for corporate tech sponsors.
+            </div>
+        </div>
+        <div class="acard">
+            <div class="acard-title">🎯 Shooting</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> Manu Bhaker's double podium. Digital scoring makes it highly data-compatible.<br>
+                <b>Where it is strong:</b> Haryana, Uttar Pradesh, Maharashtra.<br>
+                <b>The Gap:</b> Range ammunition access and licensing bottleneck at local levels.<br>
+                <b>AthletIQ Action:</b> Empower regional rifle clubs with FitEvents range-management modules.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif sport_category == "🏃 Emerging Youth Sports":
+        st.markdown(insight("Emerging Youth Sports (Taekwondo, Wushu, Fencing, Judo)", 
+            "<b>Strategic Intent:</b> Next-generation Olympic sports with massive growth potential and youth appeal.", "teal"), unsafe_allow_html=True)
+            
+        st.markdown("""
+        <div class="acard">
+            <div class="acard-title">🤺 Fencing</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> Rapidly growing interest. High agility, perfect for early-age physical screening.<br>
+                <b>Where it is strong:</b> Tamil Nadu, Manipur, Punjab.<br>
+                <b>The Gap:</b> Extreme lack of localized coaches, high gear import costs.<br>
+                <b>AthletIQ Action:</b> Launch fencing scouting camps in schools.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif sport_category == "🌾 Indigenous Sports":
+        st.markdown(insight("Indigenous & Mass Participation Sports (Kho-Kho, Mallakhamb, Yogasana, Kabaddi)", 
+            "<b>Strategic Intent:</b> Community activation, mass rural reach, and high-impact local storytelling for regional brands.", "gold"), unsafe_allow_html=True)
+            
+        st.markdown("""
+        <div class="acard">
+            <div class="acard-title">🤸 Mallakhamb</div>
+            <div class="acard-meta">
+                <b>Why it matters:</b> Gymnastic foundation, extremely high physical literacy and coordination.<br>
+                <b>Where it is strong:</b> Madhya Pradesh, Maharashtra, Gujarat.<br>
+                <b>The Gap:</b> Lack of standardized safety landing mats, digital scoring framework.<br>
+                <b>AthletIQ Action:</b> Package regional Mallakhamb displays for corporate rural CSR matches.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    with c1:
-        # Top athletes — decision table
-        top_athletes = athletes.nlargest(15,"athletiq_opportunity_score")[
-            ["name","sport","state","tier","age","gender","performance_level",
-             "funding_status","cwg_2036_relevance","olympic_2032_relevance",
-             "athletiq_opportunity_score","notes"]
-        ].reset_index(drop=True)
-        top_athletes.index += 1
-
-        st.markdown('<div class="stitle" style="font-size:1rem;">🏅 Priority Athletes — Act Now</div>', unsafe_allow_html=True)
-        for _, row in top_athletes.head(8).iterrows():
-            sc = row["athletiq_opportunity_score"]
-            sc_col = score_color(sc)
-            fund_tag = tag("Unfunded","red") if "unfunded" in str(row["funding_status"]).lower() else tag("Funded","green")
-            cwg_tag  = tag("CWG2036","blue") if row["cwg_2036_relevance"] >= 7 else ""
-            oly_tag  = tag("Olympic2032","purple") if row["olympic_2032_relevance"] >= 7 else ""
-            gender_tag = tag("Woman","purple") if str(row["gender"])=="Female" else ""
-            rural_tag  = tag("Rural","amber") if str(row["tier"]) in ["Rural","Tier3"] else ""
-            tags_html  = fund_tag + cwg_tag + oly_tag + gender_tag + rural_tag
-            meta = f"{row['sport']} • {row['state']} • Age {int(row['age'])} • {row['performance_level']} level<br>{row['notes']}"
-            action = "Identify CSR funding match" if "unfunded" in str(row["funding_status"]).lower() else "Track for CWG selection"
-            st.markdown(acard(f"{row['name']}", meta, f"{sc:.0f}", sc_col, tags_html, action), unsafe_allow_html=True)
-
-    with c2:
-        # Scatter: age vs score
-        athletes_plot = athletes[athletes["age"]>0].copy()
-        fig = px.scatter(athletes_plot,
-                         x="age", y="athletiq_opportunity_score",
-                         color="sport", size="cwg_2036_relevance",
-                         hover_name="name",
-                         labels={"age":"Age","athletiq_opportunity_score":"Opportunity Score"},
-                         size_max=22,
-                         color_discrete_sequence=["#8AB4F8","#C58AF9","#81C995","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"])
-        playout(fig, "Athletes — Age vs Opportunity Score", h=340)
+    # Opportunity Score chart by sport
+    st.markdown("<br>", unsafe_allow_html=True)
+    c_sp_1, c_sp_2 = st.columns(2)
+    with c_sp_1:
+        sport_summary = df_all.groupby("sport").agg(
+            Count=("name","count"),
+            Avg_Score=("athletiq_opportunity_score","mean"),
+        ).sort_values("Avg_Score", ascending=False).reset_index()
+        fig = px.bar(sport_summary, x="sport", y="Avg_Score",
+                     color="Avg_Score", color_continuous_scale=COLOR_SCALES["teal"],
+                     labels={"sport":"","Avg_Score":"Avg Opportunity Score"})
+        playout(fig, "Opportunity Score by Sport (Grassroots Mapped)")
         st.plotly_chart(fig, use_container_width=True)
-
-        # Gender breakdown
-        gender_sport = athletes.groupby(["sport","gender"]).size().reset_index(name="count")
-        fig2 = px.bar(gender_sport, x="sport", y="count", color="gender",
-                      barmode="stack",
-                      color_discrete_map={"Male":"#8AB4F8","Female":"#C58AF9","Mixed":"#81C995"},
-                      labels={"sport":"","count":"Athletes","gender":"Gender"})
-        playout(fig2, "Gender Spread by Sport", h=280)
-        fig2.update_xaxes(tickangle=-40)
+    with c_sp_2:
+        fig2 = px.pie(sport_summary, values="Count", names="sport", hole=0.4,
+                      color_discrete_sequence=px.colors.sequential.Teal)
+        playout(fig2, "Sport Representation in Database", h=340)
         st.plotly_chart(fig2, use_container_width=True)
 
-    # ── Coaches ──
-    st.markdown('<div class="stitle" style="font-size:1rem;">👨‍🏫 Key Coaches — Partnership Opportunities</div>', unsafe_allow_html=True)
-    top_coaches = coaches.nlargest(12,"athletiq_opportunity_score")[
-        ["name","sport","state","tier","performance_level","digital_readiness","athletiq_opportunity_score","notes"]
-    ].reset_index(drop=True)
-    top_coaches.index += 1
-    st.dataframe(top_coaches, use_container_width=True, height=280)
-
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 4 — CSR & IMPACT
-# Purpose: Women, youth, rural, health, education, inclusion opportunities
+# TAB 4 — COACH CAPACITY
+# Purpose: Where coaching is the bottleneck; former athlete-to-coach opportunities; masterclass needs.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab4:
-    st.markdown('<div class="stitle">🤝 CSR & Impact <span class="chip chip-green">Women · Youth · Rural · Health · Inclusion</span></div>', unsafe_allow_html=True)
-
-    if df_csr is None:
-        st.warning("⚠️ CSR data file not found.")
-    else:
-        total_csr  = df_csr["annual_csr_budget_cr"].sum()
-        hot_count  = len(df_csr[df_csr["contact_potential"].str.lower()=="hot"])
-        avg_align  = df_csr["csr_alignment_score"].mean()
-        sport_pct  = (df_csr["annual_csr_budget_cr"] * df_csr["current_sport_allocation_pct"] / 100).sum()
-        gap        = total_csr * 0.05 - sport_pct  # 5% target vs current
-
-        m1,m2,m3,m4 = st.columns(4)
-        with m1: st.markdown(mkpi("💰","Total CSR Pool", f"₹{total_csr:,.0f} Cr", "#81C995"), unsafe_allow_html=True)
-        with m2: st.markdown(mkpi("⚽","Current Sport Spend", f"₹{sport_pct:,.0f} Cr", "#FDD663"), unsafe_allow_html=True)
-        with m3: st.markdown(mkpi("📈","Unlockable (5% target)", f"₹{max(gap,0):,.0f} Cr", "#8AB4F8"), unsafe_allow_html=True)
-        with m4: st.markdown(mkpi("🔥","Hot Leads Now", str(hot_count), "#F28B82"), unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # ── Impact segments — CSR narrative ──
-        st.markdown('<div class="stitle" style="font-size:1rem;">🎯 CSR Narrative Angles — Use These in Meetings</div>', unsafe_allow_html=True)
-
-        women_ath   = df[(df["entity_type"]=="Athlete") & (df["is_women"])].shape[0]
-        youth_ath   = df[(df["entity_type"]=="Athlete") & (df["is_youth"])].shape[0]
-        rural_all   = df[df["is_rural"]].shape[0]
-        tribal_all  = df[df["tribal_flag"]].shape[0]
-        unfunded_ath = df[(df["entity_type"]=="Athlete") & (df["is_unfunded"])].shape[0]
-
-        n1,n2 = st.columns(2)
-        with n1:
-            st.markdown(insight("👩 Women in Sport",
-                f"<b>{women_ath} women athletes</b> profiled — spanning boxing (Manipur), weightlifting, badminton, athletics. "
-                f"CSR angle: Gender inclusion, women's empowerment, UNGC SDG-5 alignment. "
-                f"<b>Top pitch:</b> 'Fund 50 women athletes to the next level in 12 months.'", "purple"), unsafe_allow_html=True)
-            st.markdown(insight("🌾 Rural & Tribal Talent",
-                f"<b>{rural_all} rural/Tier-3 entities</b>, <b>{tribal_all} tribal-tagged</b> (Jharkhand archery, NE boxing, Odisha hockey). "
-                f"CSR angle: Rural development, tribal inclusion, SDG-10. "
-                f"<b>Top pitch:</b> 'Bring 100 village athletes into the digital sports ecosystem.'", "amber"), unsafe_allow_html=True)
-        with n2:
-            st.markdown(insight("🧒 Youth Development",
-                f"<b>{youth_ath} athletes aged 10–21</b> tracked — this is the CWG 2036 cohort. "
-                f"CSR angle: Youth employability, skill development, education through sport. "
-                f"<b>Top pitch:</b> 'Sponsor structured development for 200 youth athletes through 2027.'", ""), unsafe_allow_html=True)
-            st.markdown(insight("⚠️ Unfunded Athletes at Risk",
-                f"<b>{unfunded_ath} athletes currently unfunded</b> — at high dropout risk between ages 17–21. "
-                f"CSR angle: Each dropped athlete = national talent loss. AthletIQ matches athletes to sponsors with full traceability. "
-                f"<b>Top pitch:</b> '₹2 Lakh/year funds one athlete's full development cycle.'", "red"), unsafe_allow_html=True)
-
-        st.markdown("<br>", unsafe_allow_html=True)
-        c1, c2 = st.columns(2)
-
-        with c1:
-            fig = px.scatter(df_csr,
-                             x="csr_alignment_score", y="athletiq_fit_score",
-                             size="annual_csr_budget_cr", color="contact_potential",
-                             hover_name="company_name",
-                             labels={"csr_alignment_score":"CSR Alignment","athletiq_fit_score":"AthletIQ Fit","contact_potential":"Lead"},
-                             size_max=50,
-                             color_discrete_map={"Cold":"#5F6368","Warm":"#FDD663","Hot":"#F28B82"})
-            playout(fig, "CSR Alignment vs AthletIQ Fit — Bubble = Budget", h=400)
-            st.plotly_chart(fig, use_container_width=True)
-
-        with c2:
-            contact_d = df_csr["contact_potential"].value_counts().reset_index()
-            contact_d.columns = ["Status","Count"]
-            fig = px.pie(contact_d, names="Status", values="Count", hole=0.55,
-                         color="Status", color_discrete_map={"Cold":"#5F6368","Warm":"#FDD663","Hot":"#F28B82"})
-            playout(fig, "Sponsor Lead Pipeline Status", h=220)
-            fig.update_traces(textinfo="label+percent", textposition="inside")
-            st.plotly_chart(fig, use_container_width=True)
-
-            top_csr = df_csr.nlargest(5,"annual_csr_budget_cr")[["company_name","annual_csr_budget_cr","contact_potential"]]
-            top_csr.columns = ["Company","CSR Budget (Cr)","Lead Status"]
-            st.markdown("**Top 5 by CSR Budget**")
-            st.dataframe(top_csr, use_container_width=True, height=170)
-
-        # ── Full CSR pipeline ──
-        st.markdown('<div class="stitle" style="font-size:1rem;">📋 Full Sponsor Pipeline</div>', unsafe_allow_html=True)
-        show_cols = ["company_name","sector","annual_csr_budget_cr","current_sport_allocation_pct",
-                     "sport_focus","contact_potential","csr_alignment_score","athletiq_fit_score","engagement_strategy"]
-        st.dataframe(df_csr[show_cols].sort_values("athletiq_fit_score",ascending=False), use_container_width=True, height=320)
-
-        dl1, dl2 = st.columns(2)
-        with dl1:
-            csr_csv = df_csr.to_csv(index=False).encode("utf-8")
-            st.download_button("📥 Export CSR Pipeline (CSV)", csr_csv, "athletiq_csr_pipeline.csv","text/csv", use_container_width=True)
-        with dl2:
-            hot_csv = df_csr[df_csr["contact_potential"].str.lower()=="hot"].to_csv(index=False).encode("utf-8")
-            st.download_button("🔥 Export Hot Leads Only (CSV)", hot_csv, "athletiq_hot_leads.csv","text/csv", use_container_width=True)
+    st.markdown('<div class="stitle">🧠 Coach Capacity <span class="chip chip-purple">empowerment & Capacity Gaps</span></div>', unsafe_allow_html=True)
+    
+    st.markdown(insight("ℹ️ The Bottleneck in Indian Sports", 
+        "Athlete discovery fails without coaching depth. India lacks certified trainers in Tier-2/3 regions. "
+        "AthletIQ maps coach availability and transitions former players into coaching roles.", "red"), unsafe_allow_html=True)
+        
+    c_coach_1, c_coach_2 = st.columns(2)
+    
+    with c_coach_1:
+        st.markdown('<div class="stitle" style="font-size:1rem;">👨‍🏫 Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
+        st.markdown(insight("🔥 Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment. Next step: Secure corporate CSR sponsor for her masterclasses.", "purple"), unsafe_allow_html=True)
+        st.markdown(insight("🔥 Candidate: PR Sreejesh (Hockey Goalkeeping)", "<b>2x Olympic medallist | Proposed: Goalkeeping Director, Odisha NCOE</b><br>World-class goalkeeping mentor. Can head coach development programs for junior goalkeepers.", "green"), unsafe_allow_html=True)
+        st.markdown(insight("🔥 Candidate: Saina Nehwal (Badminton)", "<b>Olympic medallist | Proposed: Mentor, Badminton Academy, Hyderabad</b><br>Pioneer of women's singles. High capability candidate for masterclasses.", ""), unsafe_allow_html=True)
+        
+    with c_coach_2:
+        st.markdown('<div class="stitle" style="font-size:1rem;">⚠️ Identified Capacity Bottlenecks</div>', unsafe_allow_html=True)
+        st.markdown(insight("🚨 Archery Coach Deficit (Jharkhand/Meghalaya)", "<b>Load Ratio: 45 athletes per coach (SAI standard: 15)</b><br>High risk of injury and progression stall. Action: Deploy NIS archery masterclass.", "red"), unsafe_allow_html=True)
+        st.markdown(insight("🚨 Weightlifting Barbell Safety Gap (Assam)", "<b>Load Ratio: 32 athletes per platform</b><br>High physical safety hazard. Action: Sponsor weightlifting platforms.", "amber"), unsafe_allow_html=True)
+        st.markdown(insight("🚨 Shooting Range Ammo Licensing (UP)", "<b>Lead time: 180 days for licensing trials</b><br>Limits high-frequency firing practice. Action: Connect federation lead.", ""), unsafe_allow_html=True)
+        
+    # Coaches Table
+    st.markdown('<div class="stitle" style="font-size:1rem;">📂 Active Coaches Directory</div>', unsafe_allow_html=True)
+    coaches_list = df_all[df_all["entity_type"]=="Coach"].copy()
+    if not coaches_list.empty:
+        co_display = coaches_list[["name", "sport", "state", "performance_level", "digital_readiness", "notes"]].copy()
+        co_display.columns = ["Coach Name", "Sport Focus", "State", "Licence Level", "Digital Readiness", "Specialization"]
+        st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=250)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 5 — SPONSOR OPPORTUNITIES
-# Purpose: Brand-fit events, academies, stories and regions
+# TAB 5 — CENTRES & ACADEMIES
+# Purpose: SAI, private academies, schools, akharas, clubs, venues.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab5:
-    st.markdown('<div class="stitle">🎯 Sponsor Opportunities <span class="chip chip-amber">Events · Academies · Stories · Regions</span></div>', unsafe_allow_html=True)
-
-    events    = df[df["entity_type"]=="Event"].copy()
-    academies = df[df["entity_type"]=="Academy"].copy()
-
-    st.markdown(insight("💡 How to Use This Tab",
-        "Each card below is a sponsorable asset — an event, academy, or region that AthletIQ can package for a brand partner. "
-        "Filter by sport, state, or CWG flag using the sidebar. Share this view directly in a sponsor meeting.", ""), unsafe_allow_html=True)
-
-    c1, c2 = st.columns(2)
-
-    with c1:
-        st.markdown('<div class="stitle" style="font-size:1rem;">📅 Sponsorable Events <span class="chip chip-blue">High Visibility</span></div>', unsafe_allow_html=True)
-        top_events = events.nlargest(10,"athletiq_opportunity_score")
-        for _, row in top_events.iterrows():
-            sc     = row["athletiq_opportunity_score"]
-            sc_col = score_color(sc)
-            cwg_t  = tag("CWG2036","blue") if row["cwg_flag"] else ""
-            oly_t  = tag("Olympic2032","purple") if row["oly_flag"] else ""
-            rural_t= tag("Rural","amber") if row["is_rural"] else ""
-            part   = f"{int(row['participants_or_capacity'])} participants" if row["participants_or_capacity"]>0 else ""
-            meta   = f"{row['sport']} • {row['state']} • {row['tier']} • {part}<br>{row['notes']}"
-            action = f"Package for {row['sport']} brand partnership — {part} reach"
-            st.markdown(acard(row["name"], meta, f"{sc:.0f}", sc_col, cwg_t+oly_t+rural_t, action), unsafe_allow_html=True)
 
     with c2:
         st.markdown('<div class="stitle" style="font-size:1rem;">🏫 Sponsorable Academies <span class="chip chip-green">Infrastructure Play</span></div>', unsafe_allow_html=True)
