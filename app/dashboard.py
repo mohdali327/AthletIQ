@@ -814,11 +814,20 @@ def render_sai_card(centre, score, rank):
       <div class="acard-tags" style="margin-top:0.6rem;">{sport_tags}</div>
     </div>"""
 
-
+# Render the Hero Branding Banner at the top
+st.markdown("""
+<div class="hero">
+  <div class="hero-badge"><span class="dot dot-green"></span> Live Pathway Tracking</div>
+  <h1 class="hero-title">AthletIQ Pathway Intelligence</h1>
+  <p class="hero-sub">Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.<br>
+  <span style="color:var(--blue);font-weight:700;">Built to decide where to scout, coach, fund and activate.</span></p>
+  <div class="hero-rule"></div>
+</div>
+""", unsafe_allow_html=True)
 
 tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10 = st.tabs([
     "📍 Pathway Overview",
-    "🔎 Talent Discovery",
+    "🔎 Discovery & Leagues",
     "🎯 Sport Priority",
     "🧠 Coach Capacity",
     "🏛️ Centres & Academies",
@@ -893,7 +902,114 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 with tab1:
     st.markdown('<div class="stitle">📍 Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
-    # 1. Recommended Pathway Actions
+    # 1. Dynamic Grassroots-to-Podium Conversion Funnel
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;">🏆 Grassroots-to-Podium Conversion Funnel</div>', unsafe_allow_html=True)
+    st.markdown(insight("💡 Dynamic Conversion Pipeline", 
+        "Track athlete progression across India's decentralized sports framework (ASMITA & Khelo India models). Filter by sport and gender to analyze pipeline drop-offs.", "blue"), unsafe_allow_html=True)
+    
+    col_f1, col_f2 = st.columns([1, 1])
+    with col_f1:
+        f_sport = st.selectbox("Filter Funnel by Sport Focus", ["All Sports", "Wrestling", "Boxing", "Archery", "Hockey", "Athletics"], key="funnel_sport_select")
+    with col_f2:
+        f_gender = st.selectbox("Filter Funnel by Gender", ["All", "Male", "Female"], key="funnel_gender_select")
+        
+    # Data dictionary for dynamic funnel
+    funnel_data = {
+        "All Sports": {
+            "All":    [300000, 22400, 3100, 580, 78],
+            "Male":   [165000, 12100, 1650, 310, 42],
+            "Female": [135000, 10300, 1450, 270, 36],
+        },
+        "Wrestling": {
+            "All":    [60000, 4800, 680, 140, 22],
+            "Male":   [35000, 2800, 400, 80, 12],
+            "Female": [25000, 2000, 280, 60, 10],
+        },
+        "Boxing": {
+            "All":    [45000, 3200, 480, 95, 14],
+            "Male":   [24000, 1800, 280, 55, 8],
+            "Female": [21000, 1400, 200, 40, 6],
+        },
+        "Archery": {
+            "All":    [25000, 1900, 310, 65, 8],
+            "Male":   [13000, 1000, 160, 35, 4],
+            "Female": [12000, 900, 150, 30, 4],
+        },
+        "Hockey": {
+            "All":    [85000, 6100, 820, 160, 24],
+            "Male":   [48000, 3400, 460, 90, 13],
+            "Female": [37000, 2700, 360, 70, 11],
+        },
+        "Athletics": {
+            "All":    [85000, 6400, 810, 120, 10],
+            "Male":   [45000, 3100, 350, 50, 5],
+            "Female": [40000, 3300, 460, 70, 5],
+        }
+    }
+    
+    funnel_vals = funnel_data[f_sport][f_gender]
+    stages = [
+        "1. District / Grassroots Leagues",
+        "2. State Championships",
+        "3. Zonal High-Performance",
+        "4. National Camps / NCOEs",
+        "5. Elite International / Podium"
+    ]
+    
+    col_funnel_chart, col_funnel_diag = st.columns([3, 2])
+    
+    with col_funnel_chart:
+        fig_funnel = go.Figure(go.Funnel(
+            y = stages,
+            x = funnel_vals,
+            textinfo = "value+percent initial",
+            marker = {"color": ["#8AB4F8", "#C58AF9", "#81C995", "#FCAD70", "#F28B82"]},
+            connector = {"fillcolor": "rgba(255,255,255,0.03)"}
+        ))
+        playout(fig_funnel, f"Grassroots-to-Podium Funnel — {f_sport} ({f_gender})", h=450)
+        st.plotly_chart(fig_funnel, use_container_width=True)
+        
+    with col_funnel_diag:
+        st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0;">🛡️ Pipeline Blocker & Leakage Analysis</div>', unsafe_allow_html=True)
+        
+        # Calculate transition rates
+        t1_rate = (funnel_vals[1] / funnel_vals[0]) * 100
+        t2_rate = (funnel_vals[2] / funnel_vals[1]) * 100
+        t3_rate = (funnel_vals[3] / funnel_vals[2]) * 100
+        t4_rate = (funnel_vals[4] / funnel_vals[3]) * 100
+        
+        st.markdown(f"""
+        <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">District ➔ State Transition: {t1_rate:.1f}%</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
+                <b>Leakage Blocker:</b> Lack of standardized equipment kits & travel funding in Tier-3 districts.<br>
+                <b>Recommended CSR Intervention:</b> Support village-level league travel grants.
+            </div>
+        </div>
+        <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">State ➔ Zonal Transition: {t2_rate:.1f}%</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
+                <b>Leakage Blocker:</b> Insufficient NIS certified coaches and sports science clinics at state levels.<br>
+                <b>Recommended Intervention:</b> Train former state athletes as district coaches.
+            </div>
+        </div>
+        <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">Zonal ➔ National Transition: {t3_rate:.1f}%</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
+                <b>Leakage Blocker:</b> Lack of specialized residential sports academy placements and advanced nutrition.<br>
+                <b>Recommended Intervention:</b> Partner with private/SAI NCOE centres.
+            </div>
+        </div>
+        <div class="acard" style="border-left:3px solid var(--pink);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">National ➔ Elite Transition: {t4_rate:.1f}%</div>
+            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
+                <b>Leakage Blocker:</b> Insufficient corporate sponsorship for international exposure tournaments.<br>
+                <b>Recommended Intervention:</b> Align private sponsor contracts to elite athletes.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # 2. Recommended Pathway Actions
     st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;">🎯 Recommended Pathway Actions</div>', unsafe_allow_html=True)
     c1, c2, c3, c4 = st.columns(4)
     with c1:
@@ -970,7 +1086,7 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 2. Medal Pathway Diagnostic Widget
+    # 3. Medal Pathway Diagnostic Widget
     st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">🚨 Why Medals Are Lost: Pathway Breaks Detected</div>', unsafe_allow_html=True)
     st.markdown(insight("💡 Pathway Diagnostics", 
         "By identifying gaps in the 5 critical stages of athlete development, we can target CSR and coaching investments precisely.", "red"), unsafe_allow_html=True)
@@ -996,7 +1112,7 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 3. AthletIQ Opportunity Score Explainer
+    # 4. AthletIQ Opportunity Score Explainer
     st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">📊 Medal Pathway Scoring Model</div>', unsafe_allow_html=True)
     o1, o2 = st.columns([1, 2])
     with o1:
@@ -1030,7 +1146,7 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # 4. Top Talent Clusters Preview
+    # 5. Top Talent Clusters Preview
     st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">🗺️ Top Regional Talent Clusters</div>', unsafe_allow_html=True)
     tc1, tc2, tc3 = st.columns(3)
     with tc1:
@@ -1046,38 +1162,84 @@ with tab1:
 # Purpose: Where talent is likely to emerge; who should be scouted.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab2:
-    st.markdown('<div class="stitle">🔎 Talent Discovery <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle">🔎 Discovery & Leagues <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Scouting Pipeline", 
-        "Explore rising prospects mapped across India. Unlike 'Future Champions', we classify them as prospects "
-        "by their current verified status and assign coach readiness indicators.", ""), unsafe_allow_html=True)
+    disc_tabs = st.tabs(["🏆 Grassroots Leagues Tracker", "🏃 Emerging Athlete Prospects"])
     
-    # KPIs
-    athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
-    a1, a2, a3, a4 = st.columns(4)
-    with a1: st.markdown(mkpi("🏃", "Total Prospects", str(len(athletes_data)), "#8AB4F8"), unsafe_allow_html=True)
-    with a2: st.markdown(mkpi("👩", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#C58AF9"), unsafe_allow_html=True)
-    with a3: st.markdown(mkpi("✅", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#81C995"), unsafe_allow_html=True)
-    with a4: st.markdown(mkpi("⚠️", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
-    
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Table of prospects
-    st.markdown('<div class="stitle" style="font-size:1rem;">📋 Active Prospects Directory</div>', unsafe_allow_html=True)
-    
-    # Format a cleaner display dataframe
-    prospects_display = athletes_data.copy()
-    prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes (SAI Empanelled)" if x >= 7.5 else "No (Needs Assignment)")
-    prospects_display["next_recommended_step"] = prospects_display["funding_status"].apply(lambda f: "Onboard corporate CSR" if "unfunded" in str(f).lower() else "Enroll in advanced regional trials")
-    
-    # Rename columns for clarity
-    pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "next_recommended_step"]].copy()
-    pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Next Recommended Step"]
-    st.dataframe(pd_table.reset_index(drop=True), use_container_width=True, height=350)
-    
-    # Export button
-    dl_prospects = pd_table.to_csv(index=False).encode("utf-8")
-    st.download_button("📥 Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True)
+    with disc_tabs[0]:
+        st.markdown(insight("ℹ️ Decentralized Leagues Tracker", 
+            "Track local, district, state, and zonal tournaments mapping both Male & Female athletes. Inspired by the Khelo India and ASMITA frameworks.", "purple"), unsafe_allow_html=True)
+        
+        # League Stats KPIs
+        l1, l2, l3, l4 = st.columns(4)
+        with l1: st.markdown(mkpi("🏆", "Total Leagues", "2,840+", "#8AB4F8"), unsafe_allow_html=True)
+        with l2: st.markdown(mkpi("📍", "Districts Mapped", "582", "#C58AF9"), unsafe_allow_html=True)
+        with l3: st.markdown(mkpi("👦", "Male Participants", "176,400+", "#81C995"), unsafe_allow_html=True)
+        with l4: st.markdown(mkpi("👧", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
+        
+        # Participation Chart (Male vs Female)
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">📊 Gender-Inclusive Participation across Core Sports</div>', unsafe_allow_html=True)
+        participation_data = pd.DataFrame([
+            {"Sport": "Wrestling", "Gender": "Male", "Participants": 35000},
+            {"Sport": "Wrestling", "Gender": "Female", "Participants": 25000},
+            {"Sport": "Boxing", "Gender": "Male", "Participants": 24000},
+            {"Sport": "Boxing", "Gender": "Female", "Participants": 21000},
+            {"Sport": "Archery", "Gender": "Male", "Participants": 13000},
+            {"Sport": "Archery", "Gender": "Female", "Participants": 12000},
+            {"Sport": "Hockey", "Gender": "Male", "Participants": 48000},
+            {"Sport": "Hockey", "Gender": "Female", "Participants": 37000},
+            {"Sport": "Athletics", "Gender": "Male", "Participants": 45000},
+            {"Sport": "Athletics", "Gender": "Female", "Participants": 40000},
+        ])
+        fig_participation = px.bar(participation_data, x="Sport", y="Participants", color="Gender",
+                                     barmode="group", color_discrete_map={"Male": "#8AB4F8", "Female": "#C58AF9"},
+                                     labels={"Participants": "Total Mapped Participants", "Sport": ""})
+        playout(fig_participation, "Decentralized Leagues Participation", h=350)
+        st.plotly_chart(fig_participation, use_container_width=True)
+        
+        # Directory of Leagues
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">📋 Active Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
+        leagues_df = df_all[df_all["entity_type"]=="Event"].copy()
+        if not leagues_df.empty:
+            leagues_disp = leagues_df[["name", "sport", "performance_level", "gender", "state", "participants_or_capacity", "funding_status"]].copy()
+            leagues_disp.columns = ["Tournament/League Name", "Sport", "League Level", "Gender", "State", "Participants", "Funding Status"]
+            st.dataframe(leagues_disp.reset_index(drop=True), use_container_width=True, height=280)
+            
+            # Export button
+            dl_leagues = leagues_disp.to_csv(index=False).encode("utf-8")
+            st.download_button("📥 Download Leagues Directory (CSV)", dl_leagues, "grassroots_leagues.csv", "text/csv", use_container_width=True, key="btn_dl_leagues")
+            
+    with disc_tabs[1]:
+        st.markdown(insight("ℹ️ Scouting Pipeline", 
+            "Explore rising prospects mapped across India. Unlike 'Future Champions', we classify them as prospects "
+            "by their current verified status and assign coach readiness indicators.", ""), unsafe_allow_html=True)
+        
+        # KPIs
+        athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
+        a1, a2, a3, a4 = st.columns(4)
+        with a1: st.markdown(mkpi("🏃", "Total Prospects", str(len(athletes_data)), "#8AB4F8"), unsafe_allow_html=True)
+        with a2: st.markdown(mkpi("👩", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#C58AF9"), unsafe_allow_html=True)
+        with a3: st.markdown(mkpi("✅", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#81C995"), unsafe_allow_html=True)
+        with a4: st.markdown(mkpi("⚠️", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Table of prospects
+        st.markdown('<div class="stitle" style="font-size:1rem;">📋 Active Prospects Directory</div>', unsafe_allow_html=True)
+        
+        # Format a cleaner display dataframe
+        prospects_display = athletes_data.copy()
+        prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes (SAI Empanelled)" if x >= 7.5 else "No (Needs Assignment)")
+        prospects_display["next_recommended_step"] = prospects_display["funding_status"].apply(lambda f: "Onboard corporate CSR" if "unfunded" in str(f).lower() else "Enroll in advanced regional trials")
+        
+        # Rename columns for clarity
+        pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "next_recommended_step"]].copy()
+        pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Next Recommended Step"]
+        st.dataframe(pd_table.reset_index(drop=True), use_container_width=True, height=350)
+        
+        # Export button
+        dl_prospects = pd_table.to_csv(index=False).encode("utf-8")
+        st.download_button("📥 Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True, key="btn_dl_prospects")
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1518,18 +1680,19 @@ with tab9:
     cohort_tabs = st.tabs(["👥 Combat Sports Cohort", "🏹 NE Precision Archery", "🏋️ Weightlifting Power", "🔍 Search Individual Profiles"])
     
     with cohort_tabs[0]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🥋 Women\'s Combat Sports Cohort (Wrestling & Boxing)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;">🥋 Combat Sports Cohort (Wrestling & Boxing - Men & Women)</div>', unsafe_allow_html=True)
         st.markdown(insight("🎯 Target Sponsor Fit: NBFC / BFSI / FMCG / Mobility", 
-            "<b>Impact Metrics:</b> 8 female wrestlers & boxers assessed · 2 regional akharas supported · 3 travel sponsorships.<br>"
+            "<b>Impact Metrics:</b> 8 wrestlers & boxers (Male & Female) assessed · 2 regional akharas supported · 3 travel sponsorships.<br>"
             "<b>Annual Funding Target:</b> ₹24 Lakhs total package", "purple"), unsafe_allow_html=True)
             
-        combat_athletes = [a for a in elite_athletes if a["sport"] in ["WRESTLING", "BOXING"] and a["gender"] == "F"][:6]
+        combat_athletes = [a for a in elite_athletes if a["sport"] in ["WRESTLING", "BOXING"]][:6]
         cols = st.columns(3)
         for idx, ca in enumerate(combat_athletes):
             with cols[idx % 3]:
+                g_tag = "👩" if ca["gender"] == "F" else "👦"
                 st.markdown(f"""
                 <div class="acard" style="border-top:3px solid var(--purple);height:170px;">
-                    <div class="acard-title">{ca['name']} ({ca['sport']})</div>
+                    <div class="acard-title">{g_tag} {ca['name']} ({ca['sport']})</div>
                     <div class="acard-meta" style="margin-top:0.4rem;">
                         <b>Category:</b> {ca['category']} &nbsp;|&nbsp; Age {ca['age']}<br>
                         🏆 Medals: {ca['medals'][:50]}...
@@ -1537,7 +1700,7 @@ with tab9:
                 </div>
                 """, unsafe_allow_html=True)
         st.download_button("📥 Download Combat Sports Sponsor Pitch Brief", 
-                           data=generate_gtm_document("Sponsor Brief", "Women's Combat Sports Cohort", "Wrestling & Boxing", "Haryana/Assam", "Empower 8 women fighters"),
+                           data=generate_gtm_document("Sponsor Brief", "Combat Sports Cohort", "Wrestling & Boxing", "Haryana/Assam", "Empower 8 athletes (Male & Female)"),
                            file_name="combat_cohort_pitch.md", key="btn_gtm_combat_cohort")
                            
     with cohort_tabs[1]:
