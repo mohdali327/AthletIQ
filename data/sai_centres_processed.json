@@ -1,0 +1,4503 @@
+[
+  {
+    "name": "SAI Chatrapati Sambhajinagar (NCOE)",
+    "city": "Chatrapati Sambhajinagar",
+    "state": "Maharashtra",
+    "type": "NCOE",
+    "region": "Mumbai",
+    "lat": 19.8762,
+    "lng": 75.3433,
+    "sports": [
+      "Archery",
+      "Archery-Para",
+      "Boxing",
+      "Fencing",
+      "Fencing-Para",
+      "Gymnastics",
+      "Hockey",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Archery": 32,
+      "Archery-Para": 8,
+      "Boxing": 34,
+      "Fencing": 44,
+      "Fencing-Para": 8,
+      "Gymnastics": 20,
+      "Hockey": 40,
+      "Weightlifting": 49
+    },
+    "capacity": 235,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 19,
+    "sports_coaches": {
+      "Archery": 2,
+      "Archery-Para": 1,
+      "Boxing": 2,
+      "Fencing": 3,
+      "Fencing-Para": 1,
+      "Gymnastics": 0,
+      "Hockey": 3,
+      "Weightlifting": 4
+    },
+    "facilities": "Training arenas and boarding for Archery, Archery-Para, Boxing, Fencing",
+    "notes": "SAI regional training centre supporting 8 disciplines in Maharashtra."
+  },
+  {
+    "name": "SAI Guwahati (NCOE)",
+    "city": "Guwahati",
+    "state": "Assam",
+    "type": "NCOE",
+    "region": "Guwahati",
+    "lat": 26.1445,
+    "lng": 91.7362,
+    "sports": [
+      "Archery",
+      "Boxing",
+      "Cycling",
+      "Fencing",
+      "Football",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Archery": 10,
+      "Boxing": 30,
+      "Cycling": 38,
+      "Fencing": 20,
+      "Football": 10,
+      "Taekwondo": 20
+    },
+    "capacity": 128,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 12,
+    "sports_coaches": {
+      "Archery": 0,
+      "Boxing": 0,
+      "Cycling": 3,
+      "Fencing": 1,
+      "Football": 0,
+      "Taekwondo": 1
+    },
+    "facilities": "Training arenas and boarding for Archery, Boxing, Cycling, Fencing",
+    "notes": "SAI regional training centre supporting 6 disciplines in Assam."
+  },
+  {
+    "name": "SAI Itanagar (NCOE)",
+    "city": "Itanagar",
+    "state": "Arunachal Pradesh",
+    "type": "NCOE",
+    "region": "Guwahati",
+    "lat": 27.1022,
+    "lng": 93.6919,
+    "sports": [
+      "Archery",
+      "Boxing",
+      "Weightlifting",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Archery": 0,
+      "Boxing": 13,
+      "Weightlifting": 20,
+      "Wushu": 22
+    },
+    "capacity": 55,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Archery": 0,
+      "Boxing": 0,
+      "Weightlifting": 1,
+      "Wushu": 1
+    },
+    "facilities": "Training arenas and boarding for Archery, Boxing, Weightlifting, Wushu",
+    "notes": "SAI regional training centre supporting 4 disciplines in Arunachal Pradesh."
+  },
+  {
+    "name": "SAI Imphal (NCOE)",
+    "city": "Imphal",
+    "state": "Manipur",
+    "type": "NCOE",
+    "region": "Imphal",
+    "lat": 24.817,
+    "lng": 93.9368,
+    "sports": [
+      "Archery",
+      "Cycling",
+      "Fencing",
+      "Football",
+      "Hockey",
+      "Judo",
+      "Weightlifting",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Archery": 23,
+      "Cycling": 31,
+      "Fencing": 20,
+      "Football": 34,
+      "Hockey": 50,
+      "Judo": 15,
+      "Weightlifting": 25,
+      "Wushu": 35
+    },
+    "capacity": 233,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 20,
+    "sports_coaches": {
+      "Archery": 1,
+      "Cycling": 2,
+      "Fencing": 1,
+      "Football": 1,
+      "Hockey": 1,
+      "Judo": 1,
+      "Weightlifting": 2,
+      "Wushu": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Cycling, Fencing, Football",
+    "notes": "SAI regional training centre supporting 8 disciplines in Manipur."
+  },
+  {
+    "name": "SAI Kolkata (NCOE)",
+    "city": "Kolkata",
+    "state": "West Bengal",
+    "type": "NCOE",
+    "region": "Kolkata",
+    "lat": 22.5726,
+    "lng": 88.3639,
+    "sports": [
+      "Archery",
+      "Archery-Para",
+      "Athletics",
+      "Athletics-Para",
+      "Gymnastics",
+      "Hockey",
+      "Table Tennis"
+    ],
+    "sports_capacity": {
+      "Archery": 45,
+      "Archery-Para": 10,
+      "Athletics": 24,
+      "Athletics-Para": 10,
+      "Gymnastics": 41,
+      "Hockey": 38,
+      "Table Tennis": 22
+    },
+    "capacity": 190,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 17,
+    "sports_coaches": {
+      "Archery": 0,
+      "Archery-Para": 0,
+      "Athletics": 2,
+      "Athletics-Para": 1,
+      "Gymnastics": 3,
+      "Hockey": 1,
+      "Table Tennis": 4
+    },
+    "facilities": "Training arenas and boarding for Archery, Archery-Para, Athletics, Athletics-Para",
+    "notes": "SAI regional training centre supporting 7 disciplines in West Bengal."
+  },
+  {
+    "name": "SAI Sonepat (NCOE)",
+    "city": "Sonepat",
+    "state": "Haryana",
+    "type": "NCOE",
+    "region": "Sonepat",
+    "lat": 28.9931,
+    "lng": 77.0151,
+    "sports": [
+      "Archery",
+      "Archery-Para",
+      "Athletics",
+      "Hockey",
+      "Kabaddi",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Archery": 90,
+      "Archery-Para": 20,
+      "Athletics": 30,
+      "Hockey": 77,
+      "Kabaddi": 44,
+      "Wrestling": 65
+    },
+    "capacity": 326,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 25,
+    "sports_coaches": {
+      "Archery": 7,
+      "Archery-Para": 1,
+      "Athletics": 2,
+      "Hockey": 6,
+      "Kabaddi": 6,
+      "Wrestling": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Archery-Para, Athletics, Hockey",
+    "notes": "SAI regional training centre supporting 6 disciplines in Haryana."
+  },
+  {
+    "name": "SAI Hyderabad (STC)",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 17.385,
+    "lng": 78.4867,
+    "sports": [
+      "Archery",
+      "Athletics",
+      "Gymnastics",
+      "Hockey",
+      "Kabaddi"
+    ],
+    "sports_capacity": {
+      "Archery": 20,
+      "Athletics": 23,
+      "Gymnastics": 0,
+      "Hockey": 40,
+      "Kabaddi": 15
+    },
+    "capacity": 98,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 9,
+    "sports_coaches": {
+      "Archery": 1,
+      "Athletics": 4,
+      "Gymnastics": 0,
+      "Hockey": 6,
+      "Kabaddi": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Athletics, Gymnastics, Hockey",
+    "notes": "SAI regional training centre supporting 5 disciplines in Telangana."
+  },
+  {
+    "name": "SAI Dhar (STC)",
+    "city": "Dhar",
+    "state": "MP",
+    "type": "STC",
+    "region": "Bhopal",
+    "lat": 22.5973,
+    "lng": 75.2969,
+    "sports": [
+      "Archery",
+      "Badminton",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Archery": 30,
+      "Badminton": 9,
+      "Taekwondo": 30
+    },
+    "capacity": 69,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Archery": 2,
+      "Badminton": 1,
+      "Taekwondo": 2
+    },
+    "facilities": "Training arenas and boarding for Archery, Badminton, Taekwondo",
+    "notes": "SAI regional training centre supporting 3 disciplines in MP."
+  },
+  {
+    "name": "SAI Raipur (STC)",
+    "city": "Raipur",
+    "state": "Chhattisgarh",
+    "type": "STC",
+    "region": "Bhopal",
+    "lat": 21.2514,
+    "lng": 81.6296,
+    "sports": [
+      "Archery",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Archery": 28,
+      "Volleyball": 32
+    },
+    "capacity": 60,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Archery": 1,
+      "Volleyball": 1
+    },
+    "facilities": "Training arenas and boarding for Archery, Volleyball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Chhattisgarh."
+  },
+  {
+    "name": "SAI Shillong (STC)",
+    "city": "Shillong",
+    "state": "Meghalaya",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 25.5788,
+    "lng": 91.8933,
+    "sports": [
+      "Archery",
+      "Athletics",
+      "Boxing",
+      "Football",
+      "Judo",
+      "Karate",
+      "Sepaktakraw"
+    ],
+    "sports_capacity": {
+      "Archery": 20,
+      "Athletics": 27,
+      "Boxing": 30,
+      "Football": 3,
+      "Judo": 19,
+      "Karate": 25,
+      "Sepaktakraw": 10
+    },
+    "capacity": 134,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 13,
+    "sports_coaches": {
+      "Archery": 1,
+      "Athletics": 2,
+      "Boxing": 2,
+      "Football": 1,
+      "Judo": 1,
+      "Karate": 5,
+      "Sepaktakraw": 1
+    },
+    "facilities": "Training arenas and boarding for Archery, Athletics, Boxing, Football",
+    "notes": "SAI regional training centre supporting 7 disciplines in Meghalaya."
+  },
+  {
+    "name": "SAI Kokrajhar (STC)",
+    "city": "Kokrajhar",
+    "state": "Assam",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Archery",
+      "Athletics",
+      "Boxing",
+      "Football",
+      "Hockey",
+      "Kabaddi",
+      "Taekwondo",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Archery": 24,
+      "Athletics": 25,
+      "Boxing": 24,
+      "Football": 24,
+      "Hockey": 25,
+      "Kabaddi": 18,
+      "Taekwondo": 26,
+      "Wushu": 24
+    },
+    "capacity": 190,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 13,
+    "sports_coaches": {
+      "Archery": 2,
+      "Athletics": 2,
+      "Boxing": 2,
+      "Football": 0,
+      "Hockey": 2,
+      "Kabaddi": 1,
+      "Taekwondo": 2,
+      "Wushu": 2
+    },
+    "facilities": "Training arenas and boarding for Archery, Athletics, Boxing, Football",
+    "notes": "SAI regional training centre supporting 8 disciplines in Assam."
+  },
+  {
+    "name": "SAI Namchi (STC)",
+    "city": "Namchi",
+    "state": "Sikkim",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 27.533,
+    "lng": 88.5122,
+    "sports": [
+      "Archery",
+      "Boxing",
+      "Football",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Archery": 9,
+      "Boxing": 6,
+      "Football": 16,
+      "Taekwondo": 14
+    },
+    "capacity": 45,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Archery": 1,
+      "Boxing": 1,
+      "Football": 1,
+      "Taekwondo": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Boxing, Football, Taekwondo",
+    "notes": "SAI regional training centre supporting 4 disciplines in Sikkim."
+  },
+  {
+    "name": "SAI Hazaribagh (STC)",
+    "city": "Hazaribagh",
+    "state": "Jharkhand",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 23.6102,
+    "lng": 85.2799,
+    "sports": [
+      "Archery",
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Archery": 23,
+      "Hockey": 40
+    },
+    "capacity": 63,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Archery": 0,
+      "Hockey": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Hockey",
+    "notes": "SAI regional training centre supporting 2 disciplines in Jharkhand."
+  },
+  {
+    "name": "SAI Ranchi (STC)",
+    "city": "Ranchi",
+    "state": "Jharkhand",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 23.3441,
+    "lng": 85.3096,
+    "sports": [
+      "Archery",
+      "Athletics",
+      "Football",
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Archery": 11,
+      "Athletics": 25,
+      "Football": 0,
+      "Hockey": 32
+    },
+    "capacity": 68,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Archery": 1,
+      "Athletics": 2,
+      "Football": 0,
+      "Hockey": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Athletics, Football, Hockey",
+    "notes": "SAI regional training centre supporting 4 disciplines in Jharkhand."
+  },
+  {
+    "name": "SAI Sundargarh (STC)",
+    "city": "Sundargarh",
+    "state": "Odisha",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 20.9517,
+    "lng": 85.0985,
+    "sports": [
+      "Archery",
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Archery": 15,
+      "Hockey": 50
+    },
+    "capacity": 65,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Archery": 1,
+      "Hockey": 4
+    },
+    "facilities": "Training arenas and boarding for Archery, Hockey",
+    "notes": "SAI regional training centre supporting 2 disciplines in Odisha."
+  },
+  {
+    "name": "SAI Jalpaiguri (STC)",
+    "city": "Jalpaiguri",
+    "state": "West Bengal",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 22.9868,
+    "lng": 87.855,
+    "sports": [
+      "Archery",
+      "Athletics",
+      "Football",
+      "Gymnastics",
+      "Table Tennis"
+    ],
+    "sports_capacity": {
+      "Archery": 16,
+      "Athletics": 27,
+      "Football": 16,
+      "Gymnastics": 14,
+      "Table Tennis": 8
+    },
+    "capacity": 81,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Archery": 1,
+      "Athletics": 1,
+      "Football": 1,
+      "Gymnastics": 1,
+      "Table Tennis": 1
+    },
+    "facilities": "Training arenas and boarding for Archery, Athletics, Football, Gymnastics",
+    "notes": "SAI regional training centre supporting 5 disciplines in West Bengal."
+  },
+  {
+    "name": "SAI Lebong (STC)",
+    "city": "Lebong",
+    "state": "West Bengal",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 22.9868,
+    "lng": 87.855,
+    "sports": [
+      "Archery",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Archery": 12,
+      "Football": 0
+    },
+    "capacity": 12,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Archery": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Football",
+    "notes": "SAI regional training centre supporting 2 disciplines in West Bengal."
+  },
+  {
+    "name": "SAI Gurukul Archery Academy, Tikri, Meerut (Extension Centre)",
+    "city": "Gurukul Archery Academy, Tikri, Meerut",
+    "state": "Uttar Pradesh",
+    "type": "Extension Centre",
+    "region": "Lucknow",
+    "lat": 26.8467,
+    "lng": 80.9462,
+    "sports": [
+      "Archery"
+    ],
+    "sports_capacity": {
+      "Archery": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Archery": 0
+    },
+    "facilities": "Training arenas and boarding for Archery",
+    "notes": "SAI regional training centre supporting 1 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Hindustan Aeronautic Limited (HAL), Koraput (Extension Centre)",
+    "city": "Hindustan Aeronautic Limited (HAL), Koraput",
+    "state": "Odisha",
+    "type": "Extension Centre",
+    "region": "Kolkata",
+    "lat": 20.9517,
+    "lng": 85.0985,
+    "sports": [
+      "Archery",
+      "Athletics",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Archery": 0,
+      "Athletics": 0,
+      "Football": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Archery": 0,
+      "Athletics": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Archery, Athletics, Football",
+    "notes": "SAI regional training centre supporting 3 disciplines in Odisha."
+  },
+  {
+    "name": "SAI Dakha Devi Rasiwasia College, Chabua (Extension Centre)",
+    "city": "Dakha Devi Rasiwasia College, Chabua",
+    "state": "Assam",
+    "type": "Extension Centre",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Archery"
+    ],
+    "sports_capacity": {
+      "Archery": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Archery": 0
+    },
+    "facilities": "Training arenas and boarding for Archery",
+    "notes": "SAI regional training centre supporting 1 disciplines in Assam."
+  },
+  {
+    "name": "SAI Trivandrum (NCOE)",
+    "city": "Trivandrum",
+    "state": "Kerala",
+    "type": "NCOE",
+    "region": "LNCPE",
+    "lat": 10.8505,
+    "lng": 76.2711,
+    "sports": [
+      "Athletics",
+      "Athletics-Para",
+      "Cycling",
+      "Fencing",
+      "Football",
+      "Taekwondo",
+      "Taekwondo-Para",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Athletics": 80,
+      "Athletics-Para": 6,
+      "Cycling": 40,
+      "Fencing": 19,
+      "Football": 20,
+      "Taekwondo": 30,
+      "Taekwondo-Para": 8,
+      "Volleyball": 47
+    },
+    "capacity": 250,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 19,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Athletics-Para": 0,
+      "Cycling": 3,
+      "Fencing": 1,
+      "Football": 1,
+      "Taekwondo": 2,
+      "Taekwondo-Para": 0,
+      "Volleyball": 3
+    },
+    "facilities": "Training arenas and boarding for Athletics, Athletics-Para, Cycling, Fencing",
+    "notes": "SAI regional training centre supporting 8 disciplines in Kerala."
+  },
+  {
+    "name": "SAI Bangalore (NCOE)",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "type": "NCOE",
+    "region": "Bangalore",
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "sports": [
+      "Athletics",
+      "Athletics-Para",
+      "Hockey",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Athletics": 116,
+      "Athletics-Para": 20,
+      "Hockey": 81,
+      "Volleyball": 27
+    },
+    "capacity": 244,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 21,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Athletics-Para": 0,
+      "Hockey": 6,
+      "Volleyball": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Athletics-Para, Hockey, Volleyball",
+    "notes": "SAI regional training centre supporting 4 disciplines in Karnataka."
+  },
+  {
+    "name": "SAI Bhopal (NCOE)",
+    "city": "Bhopal",
+    "state": "Madhya Pradesh",
+    "type": "NCOE",
+    "region": "Bhopal",
+    "lat": 23.2599,
+    "lng": 77.4126,
+    "sports": [
+      "Athletics",
+      "Hockey",
+      "Judo",
+      "Judo- Para",
+      "Kayaking & Canoeing"
+    ],
+    "sports_capacity": {
+      "Athletics": 48,
+      "Hockey": 89,
+      "Judo": 121,
+      "Judo- Para": 10,
+      "Kayaking & Canoeing": 50
+    },
+    "capacity": 318,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 28,
+    "sports_coaches": {
+      "Athletics": 4,
+      "Hockey": 7,
+      "Judo": 0,
+      "Judo- Para": 1,
+      "Kayaking & Canoeing": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Hockey, Judo, Judo- Para",
+    "notes": "SAI regional training centre supporting 5 disciplines in Madhya Pradesh."
+  },
+  {
+    "name": "SAI Hamirpur (NCOE)",
+    "city": "Hamirpur",
+    "state": "Himachal Pradesh",
+    "type": "NCOE",
+    "region": "Chandigarh",
+    "lat": 31.6844,
+    "lng": 76.5213,
+    "sports": [
+      "Athletics",
+      "Badminton",
+      "Boxing",
+      "Hockey",
+      "Judo",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Badminton": 0,
+      "Boxing": 0,
+      "Hockey": 0,
+      "Judo": 0,
+      "Wrestling": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Badminton": 0,
+      "Boxing": 0,
+      "Hockey": 0,
+      "Judo": 0,
+      "Wrestling": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Badminton, Boxing, Hockey",
+    "notes": "SAI regional training centre supporting 6 disciplines in Himachal Pradesh."
+  },
+  {
+    "name": "SAI Lucknow (NCOE)",
+    "city": "Lucknow",
+    "state": "Uttar Pradesh",
+    "type": "NCOE",
+    "region": "Lucknow",
+    "lat": 26.8467,
+    "lng": 80.9462,
+    "sports": [
+      "Athletics",
+      "Hockey",
+      "Powerlifting-para",
+      "Taekwondo",
+      "Taekwondo-Para",
+      "Weightlifting",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Athletics": 10,
+      "Hockey": 85,
+      "Powerlifting-para": 10,
+      "Taekwondo": 38,
+      "Taekwondo-Para": 10,
+      "Weightlifting": 45,
+      "Wrestling": 33
+    },
+    "capacity": 231,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 20,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Hockey": 7,
+      "Powerlifting-para": 1,
+      "Taekwondo": 3,
+      "Taekwondo-Para": 1,
+      "Weightlifting": 3,
+      "Wrestling": 2
+    },
+    "facilities": "Training arenas and boarding for Athletics, Hockey, Powerlifting-para, Taekwondo",
+    "notes": "SAI regional training centre supporting 7 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Patiala (NCOE)",
+    "city": "Patiala",
+    "state": "Punjab",
+    "type": "NCOE",
+    "region": "NSNIS",
+    "lat": 30.3398,
+    "lng": 76.3869,
+    "sports": [
+      "Athletics",
+      "Cycling",
+      "Cycling-Para",
+      "Fencing",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Athletics": 80,
+      "Cycling": 65,
+      "Cycling-Para": 10,
+      "Fencing": 39,
+      "Weightlifting": 60
+    },
+    "capacity": 254,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 23,
+    "sports_coaches": {
+      "Athletics": 6,
+      "Cycling": 5,
+      "Cycling-Para": 1,
+      "Fencing": 3,
+      "Weightlifting": 5
+    },
+    "facilities": "Training arenas and boarding for Athletics, Cycling, Cycling-Para, Fencing",
+    "notes": "SAI regional training centre supporting 5 disciplines in Punjab."
+  },
+  {
+    "name": "SAI Eluru (STC)",
+    "city": "Eluru",
+    "state": "Andhra Pradesh",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 15.9129,
+    "lng": 79.74,
+    "sports": [
+      "Athletics",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Athletics": 33,
+      "Weightlifting": 25
+    },
+    "capacity": 58,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Athletics": 2,
+      "Weightlifting": 2
+    },
+    "facilities": "Training arenas and boarding for Athletics, Weightlifting",
+    "notes": "SAI regional training centre supporting 2 disciplines in Andhra Pradesh."
+  },
+  {
+    "name": "SAI Badal (STC)",
+    "city": "Badal",
+    "state": "Punjab",
+    "type": "STC",
+    "region": "Zirakpur",
+    "lat": 31.1471,
+    "lng": 75.3412,
+    "sports": [
+      "Athletics",
+      "Boxing",
+      "Hockey",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Athletics": 15,
+      "Boxing": 15,
+      "Hockey": 24,
+      "Volleyball": 18
+    },
+    "capacity": 72,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Boxing": 1,
+      "Hockey": 2,
+      "Volleyball": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Boxing, Hockey, Volleyball",
+    "notes": "SAI regional training centre supporting 4 disciplines in Punjab."
+  },
+  {
+    "name": "SAI Tinsukia (STC)",
+    "city": "Tinsukia",
+    "state": "Assam",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Athletics",
+      "Football",
+      "Judo"
+    ],
+    "sports_capacity": {
+      "Athletics": 11,
+      "Football": 0,
+      "Judo": 24
+    },
+    "capacity": 35,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Football": 0,
+      "Judo": 2
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football, Judo",
+    "notes": "SAI regional training centre supporting 3 disciplines in Assam."
+  },
+  {
+    "name": "SAI Nicobar (STC)",
+    "city": "Nicobar",
+    "state": "A & N",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 11.7401,
+    "lng": 92.6586,
+    "sports": [
+      "Athletics",
+      "Cycling",
+      "Football",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Athletics": 19,
+      "Cycling": 25,
+      "Football": 0,
+      "Weightlifting": 25
+    },
+    "capacity": 69,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Cycling": 2,
+      "Football": 0,
+      "Weightlifting": 2
+    },
+    "facilities": "Training arenas and boarding for Athletics, Cycling, Football, Weightlifting",
+    "notes": "SAI regional training centre supporting 4 disciplines in A & N."
+  },
+  {
+    "name": "SAI Cuttack (STC)",
+    "city": "Cuttack",
+    "state": "Odisha",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 20.5124,
+    "lng": 85.883,
+    "sports": [
+      "Athletics",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Athletics": 30,
+      "Football": 0
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football",
+    "notes": "SAI regional training centre supporting 2 disciplines in Odisha."
+  },
+  {
+    "name": "SAI Agartala (STC)",
+    "city": "Agartala",
+    "state": "Tripura",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 23.8315,
+    "lng": 91.2868,
+    "sports": [
+      "Athletics",
+      "Football",
+      "Gymnastics",
+      "Swimming"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Football": 11,
+      "Gymnastics": 14,
+      "Swimming": 10
+    },
+    "capacity": 35,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Football": 1,
+      "Gymnastics": 1,
+      "Swimming": 4
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football, Gymnastics, Swimming",
+    "notes": "SAI regional training centre supporting 4 disciplines in Tripura."
+  },
+  {
+    "name": "SAI Bareily (STC)",
+    "city": "Bareily",
+    "state": "Uttar Pradesh",
+    "type": "STC",
+    "region": "Lucknow",
+    "lat": 26.8467,
+    "lng": 80.9462,
+    "sports": [
+      "Athletics",
+      "Hockey",
+      "Sepaktakraw"
+    ],
+    "sports_capacity": {
+      "Athletics": 17,
+      "Hockey": 20,
+      "Sepaktakraw": 18
+    },
+    "capacity": 55,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Hockey": 4,
+      "Sepaktakraw": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Hockey, Sepaktakraw",
+    "notes": "SAI regional training centre supporting 3 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Saifai (STC)",
+    "city": "Saifai",
+    "state": "Uttar Pradesh",
+    "type": "STC",
+    "region": "Lucknow",
+    "lat": 26.8467,
+    "lng": 80.9462,
+    "sports": [
+      "Athletics",
+      "Handball"
+    ],
+    "sports_capacity": {
+      "Athletics": 12,
+      "Handball": 30
+    },
+    "capacity": 42,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Athletics": 4,
+      "Handball": 5
+    },
+    "facilities": "Training arenas and boarding for Athletics, Handball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Varanasi (STC)",
+    "city": "Varanasi",
+    "state": "Uttar Pradesh",
+    "type": "STC",
+    "region": "Lucknow",
+    "lat": 25.3176,
+    "lng": 82.9739,
+    "sports": [
+      "Athletics",
+      "Basketball",
+      "Boxing",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Athletics": 44,
+      "Basketball": 20,
+      "Boxing": 20,
+      "Wrestling": 10
+    },
+    "capacity": 94,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 9,
+    "sports_coaches": {
+      "Athletics": 3,
+      "Basketball": 1,
+      "Boxing": 4,
+      "Wrestling": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Basketball, Boxing, Wrestling",
+    "notes": "SAI regional training centre supporting 4 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Kashipur (STC)",
+    "city": "Kashipur",
+    "state": "Uttrakhand",
+    "type": "STC",
+    "region": "Lucknow",
+    "lat": 29.2134,
+    "lng": 78.9574,
+    "sports": [
+      "Athletics",
+      "Boxing",
+      "Taekwondo",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Athletics": 10,
+      "Boxing": 34,
+      "Taekwondo": 20,
+      "Weightlifting": 7
+    },
+    "capacity": 71,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Boxing": 2,
+      "Taekwondo": 1,
+      "Weightlifting": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Boxing, Taekwondo, Weightlifting",
+    "notes": "SAI regional training centre supporting 4 disciplines in Uttrakhand."
+  },
+  {
+    "name": "SAI Bhiwani (STC)",
+    "city": "Bhiwani",
+    "state": "Haryana",
+    "type": "STC",
+    "region": "Sonepat",
+    "lat": 29.0588,
+    "lng": 76.0856,
+    "sports": [
+      "Athletics",
+      "Boxing",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Athletics": 10,
+      "Boxing": 26,
+      "Wrestling": 25
+    },
+    "capacity": 61,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Boxing": 2,
+      "Wrestling": 2
+    },
+    "facilities": "Training arenas and boarding for Athletics, Boxing, Wrestling",
+    "notes": "SAI regional training centre supporting 3 disciplines in Haryana."
+  },
+  {
+    "name": "SAI Hisar (STC)",
+    "city": "Hisar",
+    "state": "Haryana",
+    "type": "STC",
+    "region": "Sonepat",
+    "lat": 29.1492,
+    "lng": 75.7217,
+    "sports": [
+      "Athletics",
+      "Boxing",
+      "Hockey",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Athletics": 30,
+      "Boxing": 60,
+      "Hockey": 35,
+      "Wrestling": 60
+    },
+    "capacity": 185,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 14,
+    "sports_coaches": {
+      "Athletics": 2,
+      "Boxing": 5,
+      "Hockey": 2,
+      "Wrestling": 5
+    },
+    "facilities": "Training arenas and boarding for Athletics, Boxing, Hockey, Wrestling",
+    "notes": "SAI regional training centre supporting 4 disciplines in Haryana."
+  },
+  {
+    "name": "SAI Calicut (STC)",
+    "city": "Calicut",
+    "state": "Kerala",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 10.8505,
+    "lng": 76.2711,
+    "sports": [
+      "Athletics",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Athletics": 17,
+      "Volleyball": 22
+    },
+    "capacity": 39,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Volleyball": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Volleyball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Kerala."
+  },
+  {
+    "name": "SAI Kollam (STC)",
+    "city": "Kollam",
+    "state": "Kerala",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 10.8505,
+    "lng": 76.2711,
+    "sports": [
+      "Athletics",
+      "Football",
+      "Hockey",
+      "Kabaddi"
+    ],
+    "sports_capacity": {
+      "Athletics": 28,
+      "Football": 0,
+      "Hockey": 42,
+      "Kabaddi": 10
+    },
+    "capacity": 80,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 6,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Football": 0,
+      "Hockey": 3,
+      "Kabaddi": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football, Hockey, Kabaddi",
+    "notes": "SAI regional training centre supporting 4 disciplines in Kerala."
+  },
+  {
+    "name": "SAI Thalaserry (STC)",
+    "city": "Thalaserry",
+    "state": "Kerala",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 10.8505,
+    "lng": 76.2711,
+    "sports": [
+      "Athletics",
+      "Fencing",
+      "Gymnastics",
+      "Volleyball",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Athletics": 17,
+      "Fencing": 21,
+      "Gymnastics": 10,
+      "Volleyball": 17,
+      "Wrestling": 17
+    },
+    "capacity": 82,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Fencing": 1,
+      "Gymnastics": 1,
+      "Volleyball": 1,
+      "Wrestling": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Fencing, Gymnastics, Volleyball",
+    "notes": "SAI regional training centre supporting 5 disciplines in Kerala."
+  },
+  {
+    "name": "SAI Androth (STC)",
+    "city": "Androth",
+    "state": "Lakshadweep",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 10.5667,
+    "lng": 72.6417,
+    "sports": [
+      "Athletics",
+      "Football",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Football": 0,
+      "Volleyball": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Football": 0,
+      "Volleyball": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football, Volleyball",
+    "notes": "SAI regional training centre supporting 3 disciplines in Lakshadweep."
+  },
+  {
+    "name": "SAI Chennai (STC)",
+    "city": "Chennai",
+    "state": "Tamil Nadu",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 13.0827,
+    "lng": 80.2707,
+    "sports": [
+      "Athletics",
+      "Football",
+      "Kabaddi",
+      "Table Tennis"
+    ],
+    "sports_capacity": {
+      "Athletics": 15,
+      "Football": 0,
+      "Kabaddi": 16,
+      "Table Tennis": 0
+    },
+    "capacity": 31,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Athletics": 1,
+      "Football": 0,
+      "Kabaddi": 4,
+      "Table Tennis": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football, Kabaddi, Table Tennis",
+    "notes": "SAI regional training centre supporting 4 disciplines in Tamil Nadu."
+  },
+  {
+    "name": "SAI Mayiladuthurai (STC)",
+    "city": "Mayiladuthurai",
+    "state": "Tamil Nadu",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 11.1271,
+    "lng": 78.6569,
+    "sports": [
+      "Athletics",
+      "Basketball",
+      "Boxing",
+      "Kabaddi",
+      "Volleyball",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Athletics": 25,
+      "Basketball": 11,
+      "Boxing": 10,
+      "Kabaddi": 24,
+      "Volleyball": 15,
+      "Weightlifting": 20
+    },
+    "capacity": 105,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 9,
+    "sports_coaches": {
+      "Athletics": 2,
+      "Basketball": 4,
+      "Boxing": 4,
+      "Kabaddi": 2,
+      "Volleyball": 1,
+      "Weightlifting": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics, Basketball, Boxing, Kabaddi",
+    "notes": "SAI regional training centre supporting 6 disciplines in Tamil Nadu."
+  },
+  {
+    "name": "SAI LBS Govt. Degree College, Kotputli (Extension Centre)",
+    "city": "LBS Govt. Degree College, Kotputli",
+    "state": "Rajasthan",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Athletics",
+      "Basketball",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Basketball": 0,
+      "Football": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Basketball": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Basketball, Football",
+    "notes": "SAI regional training centre supporting 3 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Jawahar Navodaya Vidyala, Paota Jaipur (Extension Centre)",
+    "city": "Jawahar Navodaya Vidyala, Paota Jaipur",
+    "state": "Rajasthan",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Athletics",
+      "Basketball",
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Basketball": 0,
+      "Hockey": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Basketball": 0,
+      "Hockey": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Basketball, Hockey",
+    "notes": "SAI regional training centre supporting 3 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI P.SUB. Govt. College, Hamirpur (Extension Centre)",
+    "city": "P.SUB. Govt. College, Hamirpur",
+    "state": "Himachal Pradesh",
+    "type": "Extension Centre",
+    "region": "Chandigarh",
+    "lat": 31.1048,
+    "lng": 77.1734,
+    "sports": [
+      "Athletics"
+    ],
+    "sports_capacity": {
+      "Athletics": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics",
+    "notes": "SAI regional training centre supporting 1 disciplines in Himachal Pradesh."
+  },
+  {
+    "name": "SAI Ramakrishna Mission, Raygada (Extension Centre)",
+    "city": "Ramakrishna Mission, Raygada",
+    "state": "Odisha",
+    "type": "Extension Centre",
+    "region": "Kolkata",
+    "lat": 20.9517,
+    "lng": 85.0985,
+    "sports": [
+      "Athletics",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football",
+    "notes": "SAI regional training centre supporting 2 disciplines in Odisha."
+  },
+  {
+    "name": "SAI St. Teresa Girls Hr. Sec.,  Darjeeling (Extension Centre)",
+    "city": "St. Teresa Girls Hr. Sec.,  Darjeeling",
+    "state": "West Bengal",
+    "type": "Extension Centre",
+    "region": "Kolkata",
+    "lat": 22.9868,
+    "lng": 87.855,
+    "sports": [
+      "Athletics",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football",
+    "notes": "SAI regional training centre supporting 2 disciplines in West Bengal."
+  },
+  {
+    "name": "SAI Tata Steel Limited, Jamshedpur (Extension Centre)",
+    "city": "Tata Steel Limited, Jamshedpur",
+    "state": "Jharkhand",
+    "type": "Extension Centre",
+    "region": "Kolkata",
+    "lat": 23.6102,
+    "lng": 85.2799,
+    "sports": [
+      "Athletics",
+      "Boxing"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Boxing": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Boxing": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Boxing",
+    "notes": "SAI regional training centre supporting 2 disciplines in Jharkhand."
+  },
+  {
+    "name": "SAI MAHCHS School, Majuli (Extension Centre)",
+    "city": "MAHCHS School, Majuli",
+    "state": "Assam",
+    "type": "Extension Centre",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Athletics",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Athletics": 0,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Athletics, Football",
+    "notes": "SAI regional training centre supporting 2 disciplines in Assam."
+  },
+  {
+    "name": "SAI Gandhinagar (NCOE)",
+    "city": "Gandhinagar",
+    "state": "Gujarat",
+    "type": "NCOE",
+    "region": "Gandhinagar",
+    "lat": 23.2156,
+    "lng": 72.6369,
+    "sports": [
+      "Athletics-Para",
+      "Badminton-Para",
+      "Fencing-Para",
+      "Handball",
+      "Kabaddi",
+      "Kho-Kho",
+      "Powerlifting-Para",
+      "Swimming-Para",
+      "Table Tennis-Para"
+    ],
+    "sports_capacity": {
+      "Athletics-Para": 40,
+      "Badminton-Para": 12,
+      "Fencing-Para": 20,
+      "Handball": 60,
+      "Kabaddi": 90,
+      "Kho-Kho": 30,
+      "Powerlifting-Para": 16,
+      "Swimming-Para": 20,
+      "Table Tennis-Para": 20
+    },
+    "capacity": 308,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 24,
+    "sports_coaches": {
+      "Athletics-Para": 1,
+      "Badminton-Para": 1,
+      "Fencing-Para": 1,
+      "Handball": 5,
+      "Kabaddi": 7,
+      "Kho-Kho": 5,
+      "Powerlifting-Para": 4,
+      "Swimming-Para": 1,
+      "Table Tennis-Para": 1
+    },
+    "facilities": "Training arenas and boarding for Athletics-Para, Badminton-Para, Fencing-Para, Handball",
+    "notes": "SAI regional training centre supporting 9 disciplines in Gujarat."
+  },
+  {
+    "name": "SAI Jammu (STC)",
+    "city": "Jammu",
+    "state": "Jammu & Kashmir",
+    "type": "STC",
+    "region": "Zirakpur",
+    "lat": 32.7266,
+    "lng": 74.857,
+    "sports": [
+      "Badminton",
+      "Basketball",
+      "Volleyball",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Badminton": 0,
+      "Basketball": 20,
+      "Volleyball": 20,
+      "Wushu": 0
+    },
+    "capacity": 40,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Badminton": 0,
+      "Basketball": 1,
+      "Volleyball": 0,
+      "Wushu": 0
+    },
+    "facilities": "Training arenas and boarding for Badminton, Basketball, Volleyball, Wushu",
+    "notes": "SAI regional training centre supporting 4 disciplines in Jammu & Kashmir."
+  },
+  {
+    "name": "SAI Yanam (STC)",
+    "city": "Yanam",
+    "state": "Puducherry",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 11.9416,
+    "lng": 79.8083,
+    "sports": [
+      "Badminton",
+      "Swimming"
+    ],
+    "sports_capacity": {
+      "Badminton": 15,
+      "Swimming": 15
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Badminton": 0,
+      "Swimming": 1
+    },
+    "facilities": "Training arenas and boarding for Badminton, Swimming",
+    "notes": "SAI regional training centre supporting 2 disciplines in Puducherry."
+  },
+  {
+    "name": "SAI Kendriya Vidyalaya No.3 Surat (Extension Centre)",
+    "city": "Kendriya Vidyalaya No.3 Surat",
+    "state": "Gujarat",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 22.2587,
+    "lng": 71.1924,
+    "sports": [
+      "Badminton"
+    ],
+    "sports_capacity": {
+      "Badminton": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Badminton": 0
+    },
+    "facilities": "Training arenas and boarding for Badminton",
+    "notes": "SAI regional training centre supporting 1 disciplines in Gujarat."
+  },
+  {
+    "name": "SAI University of Rajasthan, Jaipur (Extension Centre)",
+    "city": "University of Rajasthan, Jaipur",
+    "state": "Rajasthan",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Badminton",
+      "Table Tennis",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Badminton": 0,
+      "Table Tennis": 0,
+      "Wrestling": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Badminton": 0,
+      "Table Tennis": 0,
+      "Wrestling": 0
+    },
+    "facilities": "Training arenas and boarding for Badminton, Table Tennis, Wrestling",
+    "notes": "SAI regional training centre supporting 3 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Naranpura (NCOE)",
+    "city": "Naranpura",
+    "state": "Gujarat",
+    "type": "NCOE",
+    "region": "Gandhinagar",
+    "lat": 22.2587,
+    "lng": 71.1924,
+    "sports": [
+      "Basketball",
+      "Taekwondo",
+      "Volleyball",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Basketball": 40,
+      "Taekwondo": 40,
+      "Volleyball": 40,
+      "Wushu": 40
+    },
+    "capacity": 160,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 14,
+    "sports_coaches": {
+      "Basketball": 1,
+      "Taekwondo": 3,
+      "Volleyball": 0,
+      "Wushu": 3
+    },
+    "facilities": "Training arenas and boarding for Basketball, Taekwondo, Volleyball, Wushu",
+    "notes": "SAI regional training centre supporting 4 disciplines in Gujarat."
+  },
+  {
+    "name": "SAI Dharwad (STC)",
+    "city": "Dharwad",
+    "state": "Karnataka",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 15.4589,
+    "lng": 75.0078,
+    "sports": [
+      "Basketball",
+      "Kabaddi",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Basketball": 10,
+      "Kabaddi": 17,
+      "Wrestling": 25
+    },
+    "capacity": 52,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Basketball": 4,
+      "Kabaddi": 0,
+      "Wrestling": 2
+    },
+    "facilities": "Training arenas and boarding for Basketball, Kabaddi, Wrestling",
+    "notes": "SAI regional training centre supporting 3 disciplines in Karnataka."
+  },
+  {
+    "name": "SAI Jabalpur (STC)",
+    "city": "Jabalpur",
+    "state": "MP",
+    "type": "STC",
+    "region": "Bhopal",
+    "lat": 22.9734,
+    "lng": 78.6569,
+    "sports": [
+      "Basketball",
+      "Karate"
+    ],
+    "sports_capacity": {
+      "Basketball": 20,
+      "Karate": 15
+    },
+    "capacity": 35,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Basketball": 1,
+      "Karate": 1
+    },
+    "facilities": "Training arenas and boarding for Basketball, Karate",
+    "notes": "SAI regional training centre supporting 2 disciplines in MP."
+  },
+  {
+    "name": "SAI Rajnandgaon (STC)",
+    "city": "Rajnandgaon",
+    "state": "Chhattisgarh",
+    "type": "STC",
+    "region": "Bhopal",
+    "lat": 21.2787,
+    "lng": 81.8661,
+    "sports": [
+      "Basketball",
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Basketball": 55,
+      "Hockey": 25
+    },
+    "capacity": 80,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Basketball": 4,
+      "Hockey": 5
+    },
+    "facilities": "Training arenas and boarding for Basketball, Hockey",
+    "notes": "SAI regional training centre supporting 2 disciplines in Chhattisgarh."
+  },
+  {
+    "name": "SAI Salem (STC)",
+    "city": "Salem",
+    "state": "Tamil Nadu",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 11.6643,
+    "lng": 78.146,
+    "sports": [
+      "Basketball",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Basketball": 14,
+      "Taekwondo": 18
+    },
+    "capacity": 32,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Basketball": 1,
+      "Taekwondo": 1
+    },
+    "facilities": "Training arenas and boarding for Basketball, Taekwondo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Tamil Nadu."
+  },
+  {
+    "name": "SAI Sigra (NCOE)",
+    "city": "Sigra",
+    "state": "Uttar Pradesh",
+    "type": "NCOE",
+    "region": "Lucknow",
+    "lat": 26.8467,
+    "lng": 80.9462,
+    "sports": [
+      "Boxing",
+      "Fencing",
+      "Shooting",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Boxing": 40,
+      "Fencing": 40,
+      "Shooting": 40,
+      "Wrestling": 40
+    },
+    "capacity": 160,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 12,
+    "sports_coaches": {
+      "Boxing": 3,
+      "Fencing": 3,
+      "Shooting": 3,
+      "Wrestling": 3
+    },
+    "facilities": "Training arenas and boarding for Boxing, Fencing, Shooting, Wrestling",
+    "notes": "SAI regional training centre supporting 4 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Rohtak (NCOE)",
+    "city": "Rohtak",
+    "state": "Haryana",
+    "type": "NCOE",
+    "region": "Sonepat",
+    "lat": 28.8955,
+    "lng": 76.6066,
+    "sports": [
+      "Boxing"
+    ],
+    "sports_capacity": {
+      "Boxing": 182
+    },
+    "capacity": 182,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 17,
+    "sports_coaches": {
+      "Boxing": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing",
+    "notes": "SAI regional training centre supporting 1 disciplines in Haryana."
+  },
+  {
+    "name": "SAI Vishakhapatnam (STC)",
+    "city": "Vishakhapatnam",
+    "state": "Andhra Pradesh",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 17.6869,
+    "lng": 83.2185,
+    "sports": [
+      "Boxing",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Boxing": 39,
+      "Volleyball": 36
+    },
+    "capacity": 75,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 8,
+    "sports_coaches": {
+      "Boxing": 3,
+      "Volleyball": 3
+    },
+    "facilities": "Training arenas and boarding for Boxing, Volleyball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Andhra Pradesh."
+  },
+  {
+    "name": "SAI Bilaspur (STC)",
+    "city": "Bilaspur",
+    "state": "Himachal Pradesh",
+    "type": "STC",
+    "region": "Zirakpur",
+    "lat": 31.1048,
+    "lng": 77.1734,
+    "sports": [
+      "Boxing",
+      "Kabaddi",
+      "Kayak & Canoe",
+      "Rowing"
+    ],
+    "sports_capacity": {
+      "Boxing": 20,
+      "Kabaddi": 20,
+      "Kayak & Canoe": 15,
+      "Rowing": 15
+    },
+    "capacity": 70,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 6,
+    "sports_coaches": {
+      "Boxing": 1,
+      "Kabaddi": 1,
+      "Kayak & Canoe": 1,
+      "Rowing": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Kabaddi, Kayak & Canoe, Rowing",
+    "notes": "SAI regional training centre supporting 4 disciplines in Himachal Pradesh."
+  },
+  {
+    "name": "SAI Kargil (STC)",
+    "city": "Kargil",
+    "state": "Ladakh",
+    "type": "STC",
+    "region": "Zirakpur",
+    "lat": 34.1526,
+    "lng": 77.577,
+    "sports": [
+      "Boxing",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Boxing": 30,
+      "Taekwondo": 30
+    },
+    "capacity": 60,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Boxing": 2,
+      "Taekwondo": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Taekwondo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Ladakh."
+  },
+  {
+    "name": "SAI Mastunasahib (STC)",
+    "city": "Mastunasahib",
+    "state": "Punjab",
+    "type": "STC",
+    "region": "Zirakpur",
+    "lat": 31.1471,
+    "lng": 75.3412,
+    "sports": [
+      "Boxing",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Boxing": 15,
+      "Volleyball": 25
+    },
+    "capacity": 40,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Boxing": 0,
+      "Volleyball": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Volleyball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Punjab."
+  },
+  {
+    "name": "SAI Jodhpur (STC)",
+    "city": "Jodhpur",
+    "state": "Rajasthan",
+    "type": "STC",
+    "region": "Gandhinagar",
+    "lat": 26.2389,
+    "lng": 73.0243,
+    "sports": [
+      "Boxing",
+      "Gymnastics"
+    ],
+    "sports_capacity": {
+      "Boxing": 30,
+      "Gymnastics": 0
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Boxing": 5,
+      "Gymnastics": 0
+    },
+    "facilities": "Training arenas and boarding for Boxing, Gymnastics",
+    "notes": "SAI regional training centre supporting 2 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Naharlagun (STC)",
+    "city": "Naharlagun",
+    "state": "Arunachal Pradesh",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 28.218,
+    "lng": 94.7278,
+    "sports": [
+      "Boxing",
+      "Karate",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Boxing": 30,
+      "Karate": 30,
+      "Taekwondo": 25
+    },
+    "capacity": 85,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Boxing": 2,
+      "Karate": 5,
+      "Taekwondo": 5
+    },
+    "facilities": "Training arenas and boarding for Boxing, Karate, Taekwondo",
+    "notes": "SAI regional training centre supporting 3 disciplines in Arunachal Pradesh."
+  },
+  {
+    "name": "SAI Golaghat (STC)",
+    "city": "Golaghat",
+    "state": "Assam",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Boxing",
+      "Football"
+    ],
+    "sports_capacity": {
+      "Boxing": 29,
+      "Football": 0
+    },
+    "capacity": 29,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Boxing": 1,
+      "Football": 0
+    },
+    "facilities": "Training arenas and boarding for Boxing, Football",
+    "notes": "SAI regional training centre supporting 2 disciplines in Assam."
+  },
+  {
+    "name": "SAI Solalgaon (STC)",
+    "city": "Solalgaon",
+    "state": "Assam",
+    "type": "STC",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Boxing",
+      "Football",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Boxing": 15,
+      "Football": 19,
+      "Weightlifting": 15
+    },
+    "capacity": 49,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Boxing": 4,
+      "Football": 4,
+      "Weightlifting": 0
+    },
+    "facilities": "Training arenas and boarding for Boxing, Football, Weightlifting",
+    "notes": "SAI regional training centre supporting 3 disciplines in Assam."
+  },
+  {
+    "name": "SAI Imphal (STC)",
+    "city": "Imphal",
+    "state": "Manipur",
+    "type": "STC",
+    "region": "Imphal",
+    "lat": 24.817,
+    "lng": 93.9368,
+    "sports": [
+      "Boxing",
+      "Gymnastics",
+      "Karate",
+      "Sepaktakraw",
+      "Wrestling",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Boxing": 35,
+      "Gymnastics": 16,
+      "Karate": 14,
+      "Sepaktakraw": 33,
+      "Wrestling": 16,
+      "Wushu": 12
+    },
+    "capacity": 126,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 11,
+    "sports_coaches": {
+      "Boxing": 2,
+      "Gymnastics": 1,
+      "Karate": 1,
+      "Sepaktakraw": 1,
+      "Wrestling": 1,
+      "Wushu": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Gymnastics, Karate, Sepaktakraw",
+    "notes": "SAI regional training centre supporting 6 disciplines in Manipur."
+  },
+  {
+    "name": "SAI Utlou (STC)",
+    "city": "Utlou",
+    "state": "Manipur",
+    "type": "STC",
+    "region": "Imphal",
+    "lat": 24.6637,
+    "lng": 93.9063,
+    "sports": [
+      "Boxing",
+      "Football",
+      "Taekwondo",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Boxing": 25,
+      "Football": 0,
+      "Taekwondo": 25,
+      "Weightlifting": 25
+    },
+    "capacity": 75,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Boxing": 2,
+      "Football": 0,
+      "Taekwondo": 2,
+      "Weightlifting": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Football, Taekwondo, Weightlifting",
+    "notes": "SAI regional training centre supporting 4 disciplines in Manipur."
+  },
+  {
+    "name": "SAI Dimapur (STC)",
+    "city": "Dimapur",
+    "state": "Nagaland",
+    "type": "STC",
+    "region": "Imphal",
+    "lat": 25.9089,
+    "lng": 93.728,
+    "sports": [
+      "Boxing",
+      "Football",
+      "Sepaktakraw"
+    ],
+    "sports_capacity": {
+      "Boxing": 19,
+      "Football": 20,
+      "Sepaktakraw": 23
+    },
+    "capacity": 62,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Boxing": 1,
+      "Football": 1,
+      "Sepaktakraw": 4
+    },
+    "facilities": "Training arenas and boarding for Boxing, Football, Sepaktakraw",
+    "notes": "SAI regional training centre supporting 3 disciplines in Nagaland."
+  },
+  {
+    "name": "SAI Aizawl (STC)",
+    "city": "Aizawl",
+    "state": "Mizoram",
+    "type": "STC",
+    "region": "Imphal",
+    "lat": 23.7271,
+    "lng": 92.7176,
+    "sports": [
+      "Boxing",
+      "Judo",
+      "Taekwondo",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Boxing": 28,
+      "Judo": 25,
+      "Taekwondo": 11,
+      "Weightlifting": 6
+    },
+    "capacity": 70,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Boxing": 0,
+      "Judo": 0,
+      "Taekwondo": 1,
+      "Weightlifting": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Judo, Taekwondo, Weightlifting",
+    "notes": "SAI regional training centre supporting 4 disciplines in Mizoram."
+  },
+  {
+    "name": "SAI Aizawl (Lunglei) (STC)",
+    "city": "Aizawl (Lunglei)",
+    "state": "Mizoram",
+    "type": "STC",
+    "region": "Imphal",
+    "lat": 23.1645,
+    "lng": 92.9376,
+    "sports": [
+      "Boxing",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Boxing": 14,
+      "Taekwondo": 15
+    },
+    "capacity": 29,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Boxing": 1,
+      "Taekwondo": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Taekwondo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Mizoram."
+  },
+  {
+    "name": "SAI Peddem (STC)",
+    "city": "Peddem",
+    "state": "Goa",
+    "type": "STC",
+    "region": "Mumbai",
+    "lat": 15.2993,
+    "lng": 74.124,
+    "sports": [
+      "Boxing",
+      "Judo"
+    ],
+    "sports_capacity": {
+      "Boxing": 20,
+      "Judo": 20
+    },
+    "capacity": 40,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Boxing": 0,
+      "Judo": 1
+    },
+    "facilities": "Training arenas and boarding for Boxing, Judo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Goa."
+  },
+  {
+    "name": "SAI I.G. Stadium (NCOE)",
+    "city": "I.G. Stadium",
+    "state": "Delhi (UT)",
+    "type": "NCOE",
+    "region": "HQ",
+    "lat": 28.7041,
+    "lng": 77.1025,
+    "sports": [
+      "Cycling",
+      "Cycling-Para",
+      "Gymnastics"
+    ],
+    "sports_capacity": {
+      "Cycling": 24,
+      "Cycling-Para": 10,
+      "Gymnastics": 40
+    },
+    "capacity": 74,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Cycling": 5,
+      "Cycling-Para": 1,
+      "Gymnastics": 3
+    },
+    "facilities": "Training arenas and boarding for Cycling, Cycling-Para, Gymnastics",
+    "notes": "SAI regional training centre supporting 3 disciplines in Delhi (UT)."
+  },
+  {
+    "name": "SAI Kurukshetra (STC)",
+    "city": "Kurukshetra",
+    "state": "Haryana",
+    "type": "STC",
+    "region": "Sonepat",
+    "lat": 29.0588,
+    "lng": 76.0856,
+    "sports": [
+      "Cycling",
+      "Hockey",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Cycling": 10,
+      "Hockey": 23,
+      "Volleyball": 20
+    },
+    "capacity": 53,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Cycling": 1,
+      "Hockey": 1,
+      "Volleyball": 1
+    },
+    "facilities": "Training arenas and boarding for Cycling, Hockey, Volleyball",
+    "notes": "SAI regional training centre supporting 3 disciplines in Haryana."
+  },
+  {
+    "name": "SAI Port Blair (STC)",
+    "city": "Port Blair",
+    "state": "A & N",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 11.6234,
+    "lng": 92.7265,
+    "sports": [
+      "Football",
+      "Kayak & Canoe",
+      "Rowing"
+    ],
+    "sports_capacity": {
+      "Football": 20,
+      "Kayak & Canoe": 26,
+      "Rowing": 36
+    },
+    "capacity": 82,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Football": 1,
+      "Kayak & Canoe": 2,
+      "Rowing": 3
+    },
+    "facilities": "Training arenas and boarding for Football, Kayak & Canoe, Rowing",
+    "notes": "SAI regional training centre supporting 3 disciplines in A & N."
+  },
+  {
+    "name": "SAI Mayo College, Ajmer (Extension Centre)",
+    "city": "Mayo College, Ajmer",
+    "state": "Rajasthan",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Football",
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Football": 0,
+      "Hockey": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Football": 0,
+      "Hockey": 0
+    },
+    "facilities": "Training arenas and boarding for Football, Hockey",
+    "notes": "SAI regional training centre supporting 2 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Sri Kalyan Singh Rajkiya Sr.Sec. School, Jaipur (Extension Centre)",
+    "city": "Sri Kalyan Singh Rajkiya Sr.Sec. School, Jaipur",
+    "state": "Rajasthan",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Football",
+      "Kabaddi"
+    ],
+    "sports_capacity": {
+      "Football": 0,
+      "Kabaddi": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Football": 0,
+      "Kabaddi": 0
+    },
+    "facilities": "Training arenas and boarding for Football, Kabaddi",
+    "notes": "SAI regional training centre supporting 2 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Scottish University Mission Institution, Kalimpong (Extension Centre)",
+    "city": "Scottish University Mission Institution, Kalimpong",
+    "state": "West Bengal",
+    "type": "Extension Centre",
+    "region": "Kolkata",
+    "lat": 22.9868,
+    "lng": 87.855,
+    "sports": [
+      "Football",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Football": 0,
+      "Taekwondo": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Football": 0,
+      "Taekwondo": 0
+    },
+    "facilities": "Training arenas and boarding for Football, Taekwondo",
+    "notes": "SAI regional training centre supporting 2 disciplines in West Bengal."
+  },
+  {
+    "name": "SAI Govt. Boys MP Hr. Sec. School, Indore (Extension Centre)",
+    "city": "Govt. Boys MP Hr. Sec. School, Indore",
+    "state": "Madhya Pradesh",
+    "type": "Extension Centre",
+    "region": "Bhopal",
+    "lat": 22.9734,
+    "lng": 78.6569,
+    "sports": [
+      "Gymnastics",
+      "Kho-Kho",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Gymnastics": 0,
+      "Kho-Kho": 0,
+      "Wrestling": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Gymnastics": 0,
+      "Kho-Kho": 0,
+      "Wrestling": 0
+    },
+    "facilities": "Training arenas and boarding for Gymnastics, Kho-Kho, Wrestling",
+    "notes": "SAI regional training centre supporting 3 disciplines in Madhya Pradesh."
+  },
+  {
+    "name": "SAI Kurnool (STC)",
+    "city": "Kurnool",
+    "state": "Andhra Pradesh",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 15.9129,
+    "lng": 79.74,
+    "sports": [
+      "Handball",
+      "Taekwondo"
+    ],
+    "sports_capacity": {
+      "Handball": 20,
+      "Taekwondo": 20
+    },
+    "capacity": 40,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Handball": 1,
+      "Taekwondo": 0
+    },
+    "facilities": "Training arenas and boarding for Handball, Taekwondo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Andhra Pradesh."
+  },
+  {
+    "name": "SAI Ludhiana (STC)",
+    "city": "Ludhiana",
+    "state": "Punjab",
+    "type": "STC",
+    "region": "Zirakpur",
+    "lat": 30.901,
+    "lng": 75.8573,
+    "sports": [
+      "Handball",
+      "Judo"
+    ],
+    "sports_capacity": {
+      "Handball": 20,
+      "Judo": 20
+    },
+    "capacity": 40,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 4,
+    "sports_coaches": {
+      "Handball": 1,
+      "Judo": 1
+    },
+    "facilities": "Training arenas and boarding for Handball, Judo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Punjab."
+  },
+  {
+    "name": "SAI Kandivali (NCOE)",
+    "city": "Kandivali",
+    "state": "Maharashtra",
+    "type": "NCOE",
+    "region": "Mumbai",
+    "lat": 19.7515,
+    "lng": 75.7139,
+    "sports": [
+      "Hockey",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Hockey": 40,
+      "Wrestling": 56
+    },
+    "capacity": 96,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Hockey": 3,
+      "Wrestling": 4
+    },
+    "facilities": "Training arenas and boarding for Hockey, Wrestling",
+    "notes": "SAI regional training centre supporting 2 disciplines in Maharashtra."
+  },
+  {
+    "name": "SAI MDCNS (NCOE)",
+    "city": "MDCNS",
+    "state": "Delhi (UT)",
+    "type": "NCOE",
+    "region": "HQ",
+    "lat": 28.7041,
+    "lng": 77.1025,
+    "sports": [
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Hockey": 65
+    },
+    "capacity": 65,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Hockey": 5
+    },
+    "facilities": "Training arenas and boarding for Hockey",
+    "notes": "SAI regional training centre supporting 1 disciplines in Delhi (UT)."
+  },
+  {
+    "name": "SAI Bangalore (STC)",
+    "city": "Bangalore",
+    "state": "Karnataka",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 12.9716,
+    "lng": 77.5946,
+    "sports": [
+      "Hockey",
+      "Judo"
+    ],
+    "sports_capacity": {
+      "Hockey": 40,
+      "Judo": 17
+    },
+    "capacity": 57,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Hockey": 0,
+      "Judo": 0
+    },
+    "facilities": "Training arenas and boarding for Hockey, Judo",
+    "notes": "SAI regional training centre supporting 2 disciplines in Karnataka."
+  },
+  {
+    "name": "SAI Madikeri (STC)",
+    "city": "Madikeri",
+    "state": "Karnataka",
+    "type": "STC",
+    "region": "Bangalore",
+    "lat": 15.3173,
+    "lng": 75.7139,
+    "sports": [
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Hockey": 50
+    },
+    "capacity": 50,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Hockey": 0
+    },
+    "facilities": "Training arenas and boarding for Hockey",
+    "notes": "SAI regional training centre supporting 1 disciplines in Karnataka."
+  },
+  {
+    "name": "SAI Alwar (STC)",
+    "city": "Alwar",
+    "state": "Rajasthan",
+    "type": "STC",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Hockey",
+      "Shooting"
+    ],
+    "sports_capacity": {
+      "Hockey": 22,
+      "Shooting": 30
+    },
+    "capacity": 52,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 6,
+    "sports_coaches": {
+      "Hockey": 1,
+      "Shooting": 5
+    },
+    "facilities": "Training arenas and boarding for Hockey, Shooting",
+    "notes": "SAI regional training centre supporting 2 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Aizawl (Thenzawl) (STC)",
+    "city": "Aizawl (Thenzawl)",
+    "state": "Mizoram",
+    "type": "STC",
+    "region": "Imphal",
+    "lat": 23.1645,
+    "lng": 92.9376,
+    "sports": [
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Hockey": 40
+    },
+    "capacity": 40,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Hockey": 3
+    },
+    "facilities": "Training arenas and boarding for Hockey",
+    "notes": "SAI regional training centre supporting 1 disciplines in Mizoram."
+  },
+  {
+    "name": "SAI Govt. College, Ajmer (Extension Centre)",
+    "city": "Govt. College, Ajmer",
+    "state": "Rajasthan",
+    "type": "Extension Centre",
+    "region": "Gandhinagar",
+    "lat": 27.0238,
+    "lng": 74.2179,
+    "sports": [
+      "Hockey"
+    ],
+    "sports_capacity": {
+      "Hockey": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Hockey": 0
+    },
+    "facilities": "Training arenas and boarding for Hockey",
+    "notes": "SAI regional training centre supporting 1 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Ponda (STC)",
+    "city": "Ponda",
+    "state": "Goa",
+    "type": "STC",
+    "region": "Mumbai",
+    "lat": 15.2993,
+    "lng": 74.124,
+    "sports": [
+      "Judo"
+    ],
+    "sports_capacity": {
+      "Judo": 30
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Judo": 2
+    },
+    "facilities": "Training arenas and boarding for Judo",
+    "notes": "SAI regional training centre supporting 1 disciplines in Goa."
+  },
+  {
+    "name": "SAI Bawana (STC)",
+    "city": "Bawana",
+    "state": "Delhi",
+    "type": "STC",
+    "region": "Sonepat",
+    "lat": 28.7041,
+    "lng": 77.1025,
+    "sports": [
+      "Judo",
+      "Sepaktakraw"
+    ],
+    "sports_capacity": {
+      "Judo": 15,
+      "Sepaktakraw": 15
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Judo": 0,
+      "Sepaktakraw": 1
+    },
+    "facilities": "Training arenas and boarding for Judo, Sepaktakraw",
+    "notes": "SAI regional training centre supporting 2 disciplines in Delhi."
+  },
+  {
+    "name": "SAI Thrissur (STC)",
+    "city": "Thrissur",
+    "state": "Kerala",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 10.8505,
+    "lng": 76.2711,
+    "sports": [
+      "Judo",
+      "Swimming"
+    ],
+    "sports_capacity": {
+      "Judo": 25,
+      "Swimming": 15
+    },
+    "capacity": 40,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Judo": 2,
+      "Swimming": 0
+    },
+    "facilities": "Training arenas and boarding for Judo, Swimming",
+    "notes": "SAI regional training centre supporting 2 disciplines in Kerala."
+  },
+  {
+    "name": "SAI Dibrugarh Judo Association, Dibrugarh (Extension Centre)",
+    "city": "Dibrugarh Judo Association, Dibrugarh",
+    "state": "Assam",
+    "type": "Extension Centre",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Judo"
+    ],
+    "sports_capacity": {
+      "Judo": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Judo": 0
+    },
+    "facilities": "Training arenas and boarding for Judo",
+    "notes": "SAI regional training centre supporting 1 disciplines in Assam."
+  },
+  {
+    "name": "SAI Dharamshala (NCOE)",
+    "city": "Dharamshala",
+    "state": "Himachal Pradesh",
+    "type": "NCOE",
+    "region": "Chandigarh",
+    "lat": 32.219,
+    "lng": 76.3234,
+    "sports": [
+      "Kabaddi",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Kabaddi": 30,
+      "Volleyball": 24
+    },
+    "capacity": 54,
+    "gender": [
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 6,
+    "sports_coaches": {
+      "Kabaddi": 2,
+      "Volleyball": 2
+    },
+    "facilities": "Training arenas and boarding for Kabaddi, Volleyball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Himachal Pradesh."
+  },
+  {
+    "name": "SAI Jaipur (STC)",
+    "city": "Jaipur",
+    "state": "Rajasthan",
+    "type": "STC",
+    "region": "Gandhinagar",
+    "lat": 26.9124,
+    "lng": 75.7873,
+    "sports": [
+      "Kabaddi",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Kabaddi": 15,
+      "Weightlifting": 15
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 3,
+    "sports_coaches": {
+      "Kabaddi": 1,
+      "Weightlifting": 4
+    },
+    "facilities": "Training arenas and boarding for Kabaddi, Weightlifting",
+    "notes": "SAI regional training centre supporting 2 disciplines in Rajasthan."
+  },
+  {
+    "name": "SAI Puducherry (STC)",
+    "city": "Puducherry",
+    "state": "Puducherry",
+    "type": "STC",
+    "region": "LNCPE",
+    "lat": 11.9416,
+    "lng": 79.8083,
+    "sports": [
+      "Kabaddi",
+      "Kho-Kho",
+      "Sepaktakraw",
+      "Volleyball",
+      "Weightlifting"
+    ],
+    "sports_capacity": {
+      "Kabaddi": 10,
+      "Kho-Kho": 15,
+      "Sepaktakraw": 20,
+      "Volleyball": 12,
+      "Weightlifting": 15
+    },
+    "capacity": 72,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Kabaddi": 1,
+      "Kho-Kho": 1,
+      "Sepaktakraw": 1,
+      "Volleyball": 1,
+      "Weightlifting": 0
+    },
+    "facilities": "Training arenas and boarding for Kabaddi, Kho-Kho, Sepaktakraw, Volleyball",
+    "notes": "SAI regional training centre supporting 5 disciplines in Puducherry."
+  },
+  {
+    "name": "SAI Alleppey (NCOE)",
+    "city": "Alleppey",
+    "state": "Kerala",
+    "type": "NCOE",
+    "region": "LNCPE",
+    "lat": 10.8505,
+    "lng": 76.2711,
+    "sports": [
+      "Kayaking & Canoeing",
+      "Kayaking & Canoeing-Para",
+      "Rowing"
+    ],
+    "sports_capacity": {
+      "Kayaking & Canoeing": 50,
+      "Kayaking & Canoeing-Para": 6,
+      "Rowing": 60
+    },
+    "capacity": 116,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 10,
+    "sports_coaches": {
+      "Kayaking & Canoeing": 4,
+      "Kayaking & Canoeing-Para": 4,
+      "Rowing": 5
+    },
+    "facilities": "Training arenas and boarding for Kayaking & Canoeing, Kayaking & Canoeing-Para, Rowing",
+    "notes": "SAI regional training centre supporting 3 disciplines in Kerala."
+  },
+  {
+    "name": "SAI Jagatpur (NCOE)",
+    "city": "Jagatpur",
+    "state": "Odisha",
+    "type": "NCOE",
+    "region": "Kolkata",
+    "lat": 20.9517,
+    "lng": 85.0985,
+    "sports": [
+      "Kayaking & Canoeing",
+      "Rowing"
+    ],
+    "sports_capacity": {
+      "Kayaking & Canoeing": 55,
+      "Rowing": 46
+    },
+    "capacity": 101,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 6,
+    "sports_coaches": {
+      "Kayaking & Canoeing": 4,
+      "Rowing": 3
+    },
+    "facilities": "Training arenas and boarding for Kayaking & Canoeing, Rowing",
+    "notes": "SAI regional training centre supporting 2 disciplines in Odisha."
+  },
+  {
+    "name": "SAI Water Sports, Nehru Park, Dal Lake, Srinagar (Extension Centre)",
+    "city": "Water Sports, Nehru Park, Dal Lake, Srinagar",
+    "state": "Jammu & Kashmir",
+    "type": "Extension Centre",
+    "region": "Chandigarh",
+    "lat": 33.7782,
+    "lng": 76.5762,
+    "sports": [
+      "Kayaking & Canoeing"
+    ],
+    "sports_capacity": {
+      "Kayaking & Canoeing": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Kayaking & Canoeing": 0
+    },
+    "facilities": "Training arenas and boarding for Kayaking & Canoeing",
+    "notes": "SAI regional training centre supporting 1 disciplines in Jammu & Kashmir."
+  },
+  {
+    "name": "SAI Patna (STC)",
+    "city": "Patna",
+    "state": "Bihar",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 25.5941,
+    "lng": 85.1376,
+    "sports": [
+      "Sepaktakraw",
+      "Taekwondo",
+      "Wushu"
+    ],
+    "sports_capacity": {
+      "Sepaktakraw": 12,
+      "Taekwondo": 15,
+      "Wushu": 15
+    },
+    "capacity": 42,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 5,
+    "sports_coaches": {
+      "Sepaktakraw": 4,
+      "Taekwondo": 1,
+      "Wushu": 4
+    },
+    "facilities": "Training arenas and boarding for Sepaktakraw, Taekwondo, Wushu",
+    "notes": "SAI regional training centre supporting 3 disciplines in Bihar."
+  },
+  {
+    "name": "SAI Dr. KSSR (NCOE)",
+    "city": "Dr. KSSR",
+    "state": "Delhi (UT)",
+    "type": "NCOE",
+    "region": "HQ",
+    "lat": 28.7041,
+    "lng": 77.1025,
+    "sports": [
+      "Shooting",
+      "Shooting-Para"
+    ],
+    "sports_capacity": {
+      "Shooting": 89,
+      "Shooting-Para": 25
+    },
+    "capacity": 114,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 7,
+    "sports_coaches": {
+      "Shooting": 1,
+      "Shooting-Para": 2
+    },
+    "facilities": "Training arenas and boarding for Shooting, Shooting-Para",
+    "notes": "SAI regional training centre supporting 2 disciplines in Delhi (UT)."
+  },
+  {
+    "name": "SAI Tikamgarh (STC)",
+    "city": "Tikamgarh",
+    "state": "MP",
+    "type": "STC",
+    "region": "Bhopal",
+    "lat": 22.9734,
+    "lng": 78.6569,
+    "sports": [
+      "Softball"
+    ],
+    "sports_capacity": {
+      "Softball": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Softball": 0
+    },
+    "facilities": "Training arenas and boarding for Softball",
+    "notes": "SAI regional training centre supporting 1 disciplines in MP."
+  },
+  {
+    "name": "SAI Dr. SPMSPC (NCOE)",
+    "city": "Dr. SPMSPC",
+    "state": "Delhi (UT)",
+    "type": "NCOE",
+    "region": "HQ",
+    "lat": 28.7041,
+    "lng": 77.1025,
+    "sports": [
+      "Swimming"
+    ],
+    "sports_capacity": {
+      "Swimming": 20
+    },
+    "capacity": 20,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 2,
+    "sports_coaches": {
+      "Swimming": 1
+    },
+    "facilities": "Training arenas and boarding for Swimming",
+    "notes": "SAI regional training centre supporting 1 disciplines in Delhi (UT)."
+  },
+  {
+    "name": "SAI Bolpur (STC)",
+    "city": "Bolpur",
+    "state": "West Bengal",
+    "type": "STC",
+    "region": "Kolkata",
+    "lat": 22.9868,
+    "lng": 87.855,
+    "sports": [
+      "Table Tennis"
+    ],
+    "sports_capacity": {
+      "Table Tennis": 20
+    },
+    "capacity": 20,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Table Tennis": 1
+    },
+    "facilities": "Training arenas and boarding for Table Tennis",
+    "notes": "SAI regional training centre supporting 1 disciplines in West Bengal."
+  },
+  {
+    "name": "SAI Table Tennis Academy at Jorhat (Extension Centre)",
+    "city": "Table Tennis Academy at Jorhat",
+    "state": "Assam",
+    "type": "Extension Centre",
+    "region": "Guwahati",
+    "lat": 26.2006,
+    "lng": 92.9376,
+    "sports": [
+      "Table Tennis"
+    ],
+    "sports_capacity": {
+      "Table Tennis": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Table Tennis": 0
+    },
+    "facilities": "Training arenas and boarding for Table Tennis",
+    "notes": "SAI regional training centre supporting 1 disciplines in Assam."
+  },
+  {
+    "name": "SAI Raibareily (STC)",
+    "city": "Raibareily",
+    "state": "Uttar Pradesh",
+    "type": "STC",
+    "region": "Lucknow",
+    "lat": 26.8467,
+    "lng": 80.9462,
+    "sports": [
+      "Taekwondo",
+      "Volleyball"
+    ],
+    "sports_capacity": {
+      "Taekwondo": 15,
+      "Volleyball": 15
+    },
+    "capacity": 30,
+    "gender": [
+      "Male",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 1,
+    "sports_coaches": {
+      "Taekwondo": 1,
+      "Volleyball": 1
+    },
+    "facilities": "Training arenas and boarding for Taekwondo, Volleyball",
+    "notes": "SAI regional training centre supporting 2 disciplines in Uttar Pradesh."
+  },
+  {
+    "name": "SAI Ext. Centre Khandwa (Extension Centre)",
+    "city": "Ext. Centre Khandwa",
+    "state": "Madhya Pradesh",
+    "type": "Extension Centre",
+    "region": "Bhopal",
+    "lat": 22.9734,
+    "lng": 78.6569,
+    "sports": [
+      "Taekwondo",
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Taekwondo": 0,
+      "Wrestling": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Taekwondo": 0,
+      "Wrestling": 0
+    },
+    "facilities": "Training arenas and boarding for Taekwondo, Wrestling",
+    "notes": "SAI regional training centre supporting 2 disciplines in Madhya Pradesh."
+  },
+  {
+    "name": "SAI Govt. Sr.Sec. School, Dhawal, Mandi (Extension Centre)",
+    "city": "Govt. Sr.Sec. School, Dhawal, Mandi",
+    "state": "Himachal Pradesh",
+    "type": "Extension Centre",
+    "region": "Chandigarh",
+    "lat": 31.1048,
+    "lng": 77.1734,
+    "sports": [
+      "Wrestling"
+    ],
+    "sports_capacity": {
+      "Wrestling": 0
+    },
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "District",
+      "State"
+    ],
+    "age_min": 10,
+    "age_max": 18,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {
+      "Wrestling": 0
+    },
+    "facilities": "Training arenas and boarding for Wrestling",
+    "notes": "SAI regional training centre supporting 1 disciplines in Himachal Pradesh."
+  },
+  {
+    "name": "SAI Zirakpur (NCOE)",
+    "city": "Zirakpur",
+    "state": "Chandigarh",
+    "type": "NCOE",
+    "region": "Chandigarh",
+    "lat": 30.6426,
+    "lng": 76.8173,
+    "sports": [],
+    "sports_capacity": {},
+    "capacity": 0,
+    "gender": [
+      "Male",
+      "Female",
+      "Mixed"
+    ],
+    "performance": [
+      "National",
+      "International"
+    ],
+    "age_min": 12,
+    "age_max": 25,
+    "nearby_states": [],
+    "coaches": 0,
+    "sports_coaches": {},
+    "facilities": "Training arenas and boarding for ",
+    "notes": "SAI regional training centre supporting 0 disciplines in Chandigarh."
+  }
+]

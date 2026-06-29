@@ -354,392 +354,66 @@ with st.sidebar:
     sel_score  = st.slider("Opportunity Score", omin, max(omax,10.0), (omin, max(omax,10.0)), 0.5)
     cmin, cmax = float(df_all["cwg_2036_relevance"].min()), float(df_all["cwg_2036_relevance"].max())
 
-SAI_CENTRES = [
-    {
-        "name": "NIS Patiala (National Institute of Sports)",
-        "city": "Patiala", "state": "Punjab",
-        "type": "NCOE", "region": "North",
-        "sports": ["Athletics","Wrestling","Boxing","Football","Hockey","Gymnastics","Swimming","Judo","Weightlifting","Cycling","Fencing"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 14, "age_max": 26,
-        "performance": ["National","International"],
-        "capacity": 500,
-        "facilities": "Olympic track · Wrestling halls · Olympic pool · Boxing rings · Football ground · Sports Science Lab · Hostel",
-        "coaches": 120,
-        "flagship": True,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "India's premier sports institute. Best for national/international-level athletes across all Olympic disciplines. SAI's flagship NCOE.",
-        "nearby_states": ["Punjab","Haryana","Himachal Pradesh","Jammu & Kashmir","Delhi","Uttar Pradesh"],
-    },
-    {
-        "name": "SAI NCOE Bangalore",
-        "city": "Bangalore", "state": "Karnataka",
-        "type": "NCOE", "region": "South",
-        "sports": ["Athletics","Hockey","Taekwondo","Weightlifting","Badminton","Football","Swimming"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 14, "age_max": 25,
-        "performance": ["State","National","International"],
-        "capacity": 300,
-        "facilities": "Athletics track · Hockey turf · Badminton courts · Swimming pool · Gymnasium · Hostel",
-        "coaches": 70,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Strong in athletics and hockey. Para-athletics support available. Good for South Indian athletes reducing travel burden.",
-        "nearby_states": ["Karnataka","Tamil Nadu","Kerala","Andhra Pradesh","Telangana","Goa"],
-    },
-    {
-        "name": "SAI NCOE Sonipat",
-        "city": "Sonipat", "state": "Haryana",
-        "type": "NCOE", "region": "North",
-        "sports": ["Wrestling","Athletics","Boxing","Kabaddi","Judo"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 13, "age_max": 24,
-        "performance": ["District","State","National"],
-        "capacity": 280,
-        "facilities": "Wrestling halls · Athletics track · Boxing rings · Kabaddi courts · Hostel",
-        "coaches": 55,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "India's wrestling capital. Haryana athletes get proximity advantage. Excellent for rural wrestlers moving into structured training.",
-        "nearby_states": ["Haryana","Delhi","Punjab","Uttar Pradesh","Rajasthan"],
-    },
-    {
-        "name": "SAI NCOE Bhopal",
-        "city": "Bhopal", "state": "Madhya Pradesh",
-        "type": "NCOE", "region": "Central",
-        "sports": ["Athletics","Boxing","Hockey","Judo","Canoeing","Kabaddi","Wrestling"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 14, "age_max": 25,
-        "performance": ["State","National"],
-        "capacity": 320,
-        "facilities": "Athletics track · Boxing rings · Hockey turf · Kayak/Canoe facility · Hostel · Sports Science support",
-        "coaches": 60,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Central India hub. Strong for boxing and hockey. Excellent gateway for athletes from MP, CG, and surrounding tribal regions.",
-        "nearby_states": ["Madhya Pradesh","Chhattisgarh","Rajasthan","Maharashtra","Uttar Pradesh"],
-    },
-    {
-        "name": "SAI NERC Imphal",
-        "city": "Imphal", "state": "Manipur",
-        "type": "NCOE", "region": "Northeast",
-        "sports": ["Boxing","Football","Weightlifting","Archery","Athletics"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 13, "age_max": 24,
-        "performance": ["District","State","National"],
-        "capacity": 200,
-        "facilities": "Boxing rings · Football ground · Weightlifting hall · Archery range · Hostel",
-        "coaches": 45,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Northeast's most important SAI centre. Mary Kom's home base. Best for NE athletes to train locally. Boxing and weightlifting powerhouse.",
-        "nearby_states": ["Manipur","Nagaland","Mizoram","Assam","Meghalaya","Tripura","Arunachal Pradesh"],
-    },
-    {
-        "name": "SAI NCOE Kolkata",
-        "city": "Kolkata", "state": "West Bengal",
-        "type": "NCOE", "region": "East",
-        "sports": ["Archery","Athletics","Gymnastics","Hockey","Table Tennis","Football","Swimming"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 14, "age_max": 25,
-        "performance": ["State","National"],
-        "capacity": 260,
-        "facilities": "Archery range · Athletics track · Gymnastics hall · Hockey turf · TT tables · Pool · Hostel",
-        "coaches": 58,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "East India hub. Strong in archery (Deepika Kumari connection). Table tennis growing fast. Good for WB, Jharkhand, Odisha athletes.",
-        "nearby_states": ["West Bengal","Jharkhand","Odisha","Bihar","Assam"],
-    },
-    {
-        "name": "SAI STC Rohtak",
-        "city": "Rohtak", "state": "Haryana",
-        "type": "STC", "region": "North",
-        "sports": ["Wrestling","Boxing","Athletics","Kabaddi"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 10, "age_max": 21,
-        "performance": ["Village","District","State"],
-        "capacity": 180,
-        "facilities": "Wrestling akharas · Boxing rings · Athletics track · Hostel",
-        "coaches": 30,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Grassroots feeder centre for NIS Patiala. Ideal for young rural wrestlers and boxers from Haryana. SAI's discovery pipeline entry point.",
-        "nearby_states": ["Haryana","Delhi","Punjab","Rajasthan"],
-    },
-    {
-        "name": "SAI STC Lucknow",
-        "city": "Lucknow", "state": "Uttar Pradesh",
-        "type": "STC", "region": "North",
-        "sports": ["Athletics","Hockey","Wrestling","Boxing","Shooting","Badminton"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 10, "age_max": 22,
-        "performance": ["District","State"],
-        "capacity": 220,
-        "facilities": "Athletics track · Hockey turf · Shooting range · Boxing rings · Hostel",
-        "coaches": 40,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Primary SAI centre for UP athletes. Shooting range is a key asset — UP has strong Olympian shooting history from this belt.",
-        "nearby_states": ["Uttar Pradesh","Bihar","Madhya Pradesh","Uttarakhand"],
-    },
-    {
-        "name": "SAI STC Gandhinagar",
-        "city": "Gandhinagar", "state": "Gujarat",
-        "type": "STC", "region": "West",
-        "sports": ["Wrestling","Boxing","Athletics","Volleyball","Kabaddi","Swimming"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 22,
-        "performance": ["State","National"],
-        "capacity": 200,
-        "facilities": "Wrestling halls · Boxing rings · Athletics track · Volleyball courts · Pool · Hostel",
-        "coaches": 38,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Primary SAI centre for West India. Gujarat athletes avoid long travel. Growing wrestling and boxing pipeline feeding into Patiala.",
-        "nearby_states": ["Gujarat","Rajasthan","Maharashtra","Madhya Pradesh"],
-    },
-    {
-        "name": "SAI STC Thiruvananthapuram (LNCPE)",
-        "city": "Thiruvananthapuram", "state": "Kerala",
-        "type": "STC", "region": "South",
-        "sports": ["Athletics","Badminton","Football","Swimming","Volleyball","Table Tennis"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 13, "age_max": 23,
-        "performance": ["State","National"],
-        "capacity": 220,
-        "facilities": "Athletics track · Badminton courts · Football ground · Pool · TT tables · Hostel",
-        "coaches": 45,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "South Kerala hub. LNCPE is one of India's oldest sports institutes. PV Sindhu-effect driving badminton boom in this region.",
-        "nearby_states": ["Kerala","Tamil Nadu","Karnataka"],
-    },
-    {
-        "name": "SAI STC Pune",
-        "city": "Pune", "state": "Maharashtra",
-        "type": "STC", "region": "West",
-        "sports": ["Boxing","Shooting","Athletics","Wrestling","Swimming","Cycling"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 24,
-        "performance": ["State","National"],
-        "capacity": 240,
-        "facilities": "Boxing rings · Shooting range · Athletics track · Pool · Cycling track · Hostel",
-        "coaches": 48,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Maharashtra's primary SAI centre. Strong shooting infrastructure — Anjali Bhagwat connection. Cycling is growing rapidly here.",
-        "nearby_states": ["Maharashtra","Goa","Karnataka","Madhya Pradesh"],
-    },
-    {
-        "name": "SAI NCOE Delhi (Jawaharlal Nehru Stadium)",
-        "city": "New Delhi", "state": "Delhi",
-        "type": "NCOE", "region": "North",
-        "sports": ["Athletics","Boxing","Wrestling","Shooting","Badminton","Volleyball"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 15, "age_max": 28,
-        "performance": ["National","International"],
-        "capacity": 350,
-        "facilities": "Olympic track · Boxing rings · Shooting range · Badminton courts · Gymnasium · Sports Science Lab",
-        "coaches": 80,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "National-level camp venue. Best for athletes who already have national selection and need camp-level preparation for international events.",
-        "nearby_states": ["Delhi","Haryana","Uttar Pradesh","Punjab","Rajasthan","Uttarakhand"],
-    },
-    {
-        "name": "SAI NCOE Jamshedpur",
-        "city": "Jamshedpur", "state": "Jharkhand",
-        "type": "NCOE", "region": "East",
-        "sports": ["Hockey","Football","Archery","Athletics"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 22,
-        "performance": ["District","State","National"],
-        "capacity": 180,
-        "facilities": "Hockey turf · Football ground · Archery range · Athletics track · Hostel",
-        "coaches": 35,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Jharkhand tribal talent pipeline. Hockey and archery are natural strengths from this region (Deepika Kumari's home state).",
-        "nearby_states": ["Jharkhand","Odisha","West Bengal","Bihar","Chhattisgarh"],
-    },
-    {
-        "name": "SAI STC Shillong",
-        "city": "Shillong", "state": "Meghalaya",
-        "type": "STC", "region": "Northeast",
-        "sports": ["Archery","Football","Athletics","Boxing"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 10, "age_max": 21,
-        "performance": ["Village","District","State"],
-        "capacity": 120,
-        "facilities": "Archery range · Football ground · Athletics track · Hostel",
-        "coaches": 22,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Key SAI feeder for Meghalaya and surrounding NE states. Entry point for tribal archery and football talent into the SAI system.",
-        "nearby_states": ["Meghalaya","Assam","Nagaland","Tripura","Manipur","Mizoram"],
-    },
-    {
-        "name": "SAI STC Guwahati",
-        "city": "Guwahati", "state": "Assam",
-        "type": "STC", "region": "Northeast",
-        "sports": ["Athletics","Football","Boxing","Wrestling","Volleyball"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 11, "age_max": 22,
-        "performance": ["District","State"],
-        "capacity": 150,
-        "facilities": "Athletics track · Football ground · Boxing rings · Hostel",
-        "coaches": 28,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Regional hub for Assam and NE athletes. Gateway to Imphal NCOE for athletes who advance to state/national level.",
-        "nearby_states": ["Assam","Meghalaya","Nagaland","Arunachal Pradesh","Tripura"],
-    },
-    {
-        "name": "SAI STC Chandigarh",
-        "city": "Chandigarh", "state": "Chandigarh",
-        "type": "STC", "region": "North",
-        "sports": ["Hockey","Athletics","Wrestling","Cycling","Shooting"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 22,
-        "performance": ["State","National"],
-        "capacity": 160,
-        "facilities": "Hockey turf · Athletics track · Cycling velodrome · Shooting range · Hostel",
-        "coaches": 32,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Close to NIS Patiala — athletes can easily upgrade. Strong cycling facility. Good for Punjab/Haryana hockey and cycling athletes.",
-        "nearby_states": ["Punjab","Haryana","Himachal Pradesh","Chandigarh"],
-    },
-    {
-        "name": "SAI STC Jalandhar",
-        "city": "Jalandhar", "state": "Punjab",
-        "type": "STC", "region": "North",
-        "sports": ["Hockey","Wrestling","Athletics","Boxing"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 10, "age_max": 21,
-        "performance": ["Village","District","State"],
-        "capacity": 140,
-        "facilities": "Hockey turf · Wrestling halls · Athletics track · Hostel",
-        "coaches": 25,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Deep grassroots feeder. Jalandhar is India's hockey heartland. Rural hockey players from Punjab villages enter the SAI system here.",
-        "nearby_states": ["Punjab","Haryana","Himachal Pradesh"],
-    },
-    {
-        "name": "SAI STC Hyderabad",
-        "city": "Hyderabad", "state": "Telangana",
-        "type": "STC", "region": "South",
-        "sports": ["Athletics","Badminton","Boxing","Football","Table Tennis","Shooting"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 23,
-        "performance": ["State","National"],
-        "capacity": 200,
-        "facilities": "Athletics track · Badminton courts · Shooting range · Football ground · Hostel",
-        "coaches": 40,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Growing hub for AP and Telangana athletes. Badminton boom post-Sindhu. Shooting growing fast with infrastructure investment.",
-        "nearby_states": ["Telangana","Andhra Pradesh","Karnataka","Maharashtra"],
-    },
-    {
-        "name": "SAI STC Chennai",
-        "city": "Chennai", "state": "Tamil Nadu",
-        "type": "STC", "region": "South",
-        "sports": ["Athletics","Chess","Table Tennis","Badminton","Football","Swimming"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 24,
-        "performance": ["State","National"],
-        "capacity": 190,
-        "facilities": "Athletics track · TT tables · Chess academy · Badminton courts · Pool · Hostel",
-        "coaches": 38,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "TN's primary SAI centre. Chess is a unique offering (Viswanathan Anand effect). Strong athletics with TN sprinting culture.",
-        "nearby_states": ["Tamil Nadu","Kerala","Karnataka","Andhra Pradesh"],
-    },
-    {
-        "name": "SAI STC Bhubaneswar",
-        "city": "Bhubaneswar", "state": "Odisha",
-        "type": "STC", "region": "East",
-        "sports": ["Hockey","Athletics","Football","Archery","Boxing"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 23,
-        "performance": ["District","State","National"],
-        "capacity": 220,
-        "facilities": "World-class hockey turf · Athletics track · Football ground · Archery range · Hostel",
-        "coaches": 45,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Odisha is India's new hockey capital (Kalinga Stadium). SAI centre here feeds into Indian hockey national team pipeline directly.",
-        "nearby_states": ["Odisha","Jharkhand","Chhattisgarh","West Bengal","Andhra Pradesh"],
-    },
-    {
-        "name": "SAI STC Jaipur",
-        "city": "Jaipur", "state": "Rajasthan",
-        "type": "STC", "region": "North",
-        "sports": ["Wrestling","Athletics","Archery","Kabaddi","Volleyball","Shooting"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 11, "age_max": 22,
-        "performance": ["District","State"],
-        "capacity": 150,
-        "facilities": "Wrestling halls · Athletics track · Archery range · Shooting range · Hostel",
-        "coaches": 28,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Rajasthan's primary SAI centre. Rural wrestler and kabaddi talent pipeline. Archery growing from tribal communities in Udaipur/Banswara.",
-        "nearby_states": ["Rajasthan","Gujarat","Madhya Pradesh","Haryana","Uttar Pradesh"],
-    },
-    {
-        "name": "SAI STC Ranchi",
-        "city": "Ranchi", "state": "Jharkhand",
-        "type": "STC", "region": "East",
-        "sports": ["Hockey","Archery","Football","Athletics","Wrestling"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 10, "age_max": 21,
-        "performance": ["Village","District","State"],
-        "capacity": 130,
-        "facilities": "Hockey turf · Archery range · Football ground · Athletics track · Hostel",
-        "coaches": 24,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Tribal grassroots feeder in Jharkhand. Archery natural talent hotspot. MS Dhoni's home city — cricket culture, but hockey and archery are the real SAI strengths.",
-        "nearby_states": ["Jharkhand","Bihar","Odisha","West Bengal","Chhattisgarh"],
-    },
-    {
-        "name": "SAI STC Gwalior",
-        "city": "Gwalior", "state": "Madhya Pradesh",
-        "type": "STC", "region": "Central",
-        "sports": ["Wrestling","Athletics","Shooting","Boxing","Cycling"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 12, "age_max": 22,
-        "performance": ["District","State"],
-        "capacity": 140,
-        "facilities": "Wrestling halls · Athletics track · Shooting range · Cycling track · Hostel",
-        "coaches": 26,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Central India's secondary SAI centre. Cycling is unique strength. Wrestling pipeline feeding into Bhopal NCOE and then Patiala.",
-        "nearby_states": ["Madhya Pradesh","Uttar Pradesh","Rajasthan","Chhattisgarh"],
-    },
-    {
-        "name": "SAI STC Nagpur",
-        "city": "Nagpur", "state": "Maharashtra",
-        "type": "STC", "region": "West",
-        "sports": ["Athletics","Boxing","Wrestling","Hockey","Kabaddi"],
-        "gender": ["Male","Female","Mixed"],
-        "age_min": 11, "age_max": 22,
-        "performance": ["District","State"],
-        "capacity": 160,
-        "facilities": "Athletics track · Boxing rings · Hockey turf · Kabaddi courts · Hostel",
-        "coaches": 30,
-        "flagship": False,
-        "website": "https://sportsauthorityofindia.nic.in",
-        "notes": "Vidarbha region SAI centre. Feeds into Pune STC and then Patiala. Hockey from this region connects to the UP/MP hockey belt.",
-        "nearby_states": ["Maharashtra","Madhya Pradesh","Chhattisgarh","Telangana"],
-    },
-]
+# ── DYNAMIC SAI CENTRES LOADER ──
+def load_processed_sai_centres():
+    paths = ["../data/sai_centres_processed.json", "data/sai_centres_processed.json", "./data/sai_centres_processed.json"]
+    for p in paths:
+        if os.path.exists(p):
+            with open(p, "r", encoding="utf-8") as f:
+                return json.load(f)
+    return [
+        {
+            "name": "NIS Patiala (National Institute of Sports) [NCOE]",
+            "city": "Patiala", "state": "Punjab",
+            "type": "NCOE", "region": "North",
+            "sports": ["Athletics","Wrestling","Boxing","Football","Hockey","Gymnastics","Swimming","Judo","Weightlifting","Cycling","Fencing"],
+            "gender": ["Male","Female","Mixed"],
+            "age_min": 14, "age_max": 26,
+            "performance": ["National","International"],
+            "capacity": 500,
+            "facilities": "Olympic track · Wrestling halls · Olympic pool · Boxing rings · Football ground · Sports Science Lab · Hostel",
+            "coaches": 120,
+            "flagship": True,
+            "website": "https://sportsauthorityofindia.nic.in",
+            "notes": "India's premier sports institute. Best for national/international-level athletes across all Olympic disciplines. SAI's flagship NCOE.",
+            "nearby_states": ["Punjab","Haryana","Himachal Pradesh","Jammu & Kashmir","Delhi","Uttar Pradesh"],
+        },
+        {
+            "name": "SAI NCOE Bangalore",
+            "city": "Bangalore", "state": "Karnataka",
+            "type": "NCOE", "region": "South",
+            "sports": ["Athletics","Hockey","Taekwondo","Weightlifting","Badminton","Football","Swimming"],
+            "gender": ["Male","Female","Mixed"],
+            "age_min": 14, "age_max": 25,
+            "performance": ["National","International"],
+            "capacity": 400,
+            "facilities": "Athletics track · Hockey turf · Taekwondo hall · Weightlifting hall · Badminton courts · Swimming pool · Sports Science Centre",
+            "coaches": 90,
+            "flagship": True,
+            "website": "https://sportsauthorityofindia.nic.in",
+            "notes": "South India's elite centre. Highly recommended for hockey and athletics. Advanced recovery facilities.",
+            "nearby_states": ["Karnataka","Tamil Nadu","Kerala","Andhra Pradesh","Telangana","Goa"],
+        },
+        {
+            "name": "SAI NCOE Sonipat",
+            "city": "Sonipat", "state": "Haryana",
+            "type": "NCOE", "region": "North",
+            "sports": ["Wrestling","Athletics","Kabaddi"],
+            "gender": ["Male","Female","Mixed"],
+            "age_min": 12, "age_max": 24,
+            "performance": ["State","National","International"],
+            "capacity": 250,
+            "facilities": "Wrestling halls · Athletics track · Kabaddi courts · Physiotherapy rooms · Hostel",
+            "coaches": 45,
+            "flagship": True,
+            "website": "https://sportsauthorityofindia.nic.in",
+            "notes": "The primary wrestling powerhouse for men's freestyle and Greco-Roman in India. Located in the wrestling heartland of Haryana.",
+            "nearby_states": ["Haryana","Punjab","Delhi","Rajasthan","Uttar Pradesh","Himachal Pradesh"],
+        }
+    ]
+
+SAI_CENTRES = load_processed_sai_centres()
+
 
 sai_df = pd.DataFrame(SAI_CENTRES)
 
@@ -762,7 +436,8 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
 
         # Performance level match (20 pts)
         perf_map = {"Village": 0, "District": 1, "State": 2, "National": 3, "International": 4}
-        centre_perf_max = max([perf_map.get(p, 0) for p in c["performance"]])
+        c_perf = c.get("performance", ["District", "State", "National", "International"])
+        centre_perf_max = max([perf_map.get(p, 0) for p in c_perf])
         athlete_perf    = perf_map.get(performance_level, 2)
         if athlete_perf == centre_perf_max:
             s += 20
@@ -772,13 +447,16 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
             s += 4
 
         # Age fit (10 pts)
-        if c["age_min"] <= age <= c["age_max"]:
+        c_age_min = c.get("age_min", 10)
+        c_age_max = c.get("age_max", 25)
+        if c_age_min <= age <= c_age_max:
             s += 10
-        elif abs(age - c["age_min"]) <= 2 or abs(age - c["age_max"]) <= 2:
+        elif abs(age - c_age_min) <= 2 or abs(age - c_age_max) <= 2:
             s += 5
 
         # Gender (5 pts)
-        if gender in c["gender"] or "Mixed" in c["gender"]:
+        c_gender = c.get("gender", ["Male", "Female", "Mixed"])
+        if gender in c_gender or "Mixed" in c_gender:
             s += 5
 
         scores.append({"centre": c, "score": s})
@@ -788,19 +466,32 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
 
 
 def render_sai_card(centre, score, rank):
-    sport_tags = "".join([f'<span class="tag">{s}</span>' for s in centre["sports"][:6]])
+    sport_tags = "".join([f'<span class="tag">{s}</span>' for s in centre.get("sports", [])[:6]])
     badge_col  = "#81C995" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
-    type_col   = "#8AB4F8" if centre["type"] == "NCOE" else "#C58AF9"
+    type_col   = "#8AB4F8" if centre.get("type", "NCOE") == "NCOE" else "#C58AF9"
     flagship   = '<span class="tag green">★ Flagship</span>' if centre.get("flagship") else ""
+    
+    name = centre.get("name", "Unknown SAI Centre")
+    city = centre.get("city", "Unknown")
+    state = centre.get("state", "Unknown")
+    ctype = centre.get("type", "SAI Centre")
+    capacity = centre.get("capacity", 0)
+    coaches = centre.get("coaches", 0)
+    notes = centre.get("notes", "SAI regional training centre.")
+    facilities = centre.get("facilities", "Standard training infrastructure.")
+    performance = centre.get("performance", ["District", "State"])
+    age_min = centre.get("age_min", 10)
+    age_max = centre.get("age_max", 25)
+    
     return f"""
     <div class="acard" style="border-left: 3px solid {badge_col}; margin-bottom:1rem;">
       <div class="acard-top">
         <div>
-          <div class="acard-title">#{rank} {centre['name']} {flagship}</div>
+          <div class="acard-title">#{rank} {name} {flagship}</div>
           <div style="font-size:0.75rem;color:#9AA0A6;margin-top:3px;">
-            📍 {centre['city']}, {centre['state']} &nbsp;|&nbsp;
-            <span style="color:{type_col};font-weight:700;">{centre['type']}</span> &nbsp;|&nbsp;
-            Capacity: {centre['capacity']} athletes &nbsp;|&nbsp; Coaches: {centre['coaches']}
+            📍 {city}, {state} &nbsp;|&nbsp;
+            <span style="color:{type_col};font-weight:700;">{ctype}</span> &nbsp;|&nbsp;
+            Capacity: {capacity} athletes &nbsp;|&nbsp; Coaches: {coaches}
           </div>
         </div>
         <div style="text-align:right;">
@@ -808,9 +499,9 @@ def render_sai_card(centre, score, rank):
           <div style="font-size:0.62rem;color:#5F6368;letter-spacing:1px;">MATCH SCORE</div>
         </div>
       </div>
-      <div class="acard-meta" style="margin:0.6rem 0;">📋 {centre['notes']}</div>
-      <div class="acard-meta">🏟️ <b>Facilities:</b> {centre['facilities']}</div>
-      <div class="acard-meta">🎯 <b>Best for performance level:</b> {' · '.join(centre['performance'])} &nbsp;|&nbsp; Age: {centre['age_min']}–{centre['age_max']}</div>
+      <div class="acard-meta" style="margin:0.6rem 0;">📋 {notes}</div>
+      <div class="acard-meta">🏟️ <b>Facilities:</b> {facilities}</div>
+      <div class="acard-meta">🎯 <b>Best for performance level:</b> {' · '.join(performance)} &nbsp;|&nbsp; Age: {age_min}–{age_max}</div>
       <div class="acard-tags" style="margin-top:0.6rem;">{sport_tags}</div>
     </div>"""
 
@@ -824,6 +515,110 @@ st.markdown("""
   <div class="hero-rule"></div>
 </div>
 """, unsafe_allow_html=True)
+
+# ── TOP-LEVEL ATHLETE-TO-SAI MATCHING ENGINE (PRIMARY DECISION PORTAL) ──
+st.markdown('<div class="stitle" style="font-size:1.2rem;margin-top:1rem;">🎯 SAI Training Centre Proximity & Suitability Matcher</div>', unsafe_allow_html=True)
+
+# Toggle between Database search and Custom Profile Creator
+matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode")
+
+if matcher_mode == "Search Database Athletes":
+    c_tla1, c_tla2 = st.columns([3, 1])
+    with c_tla1:
+        athlete_names = [a["name"] for a in elite_athletes]
+        selected_athlete_name = st.selectbox("Select Athlete to Match", athlete_names, index=athlete_names.index("Manu Bhaker") if "Manu Bhaker" in athlete_names else 0, key="top_search_athlete_select")
+    with c_tla2:
+        st.write("")
+        st.write("")
+        run_db_match = st.button("🚀 Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
+        
+    if run_db_match:
+        ath_data = next((a for a in elite_athletes if a["name"] == selected_athlete_name), None)
+        if ath_data:
+            st.session_state["top_matched_athlete"] = ath_data
+            if "top_custom_matched_state" in st.session_state:
+                del st.session_state["top_custom_matched_state"]
+                del st.session_state["top_custom_matched_perf"]
+            st.rerun()
+
+else:
+    c_tla1, c_tla2 = st.columns(2)
+    with c_tla1:
+        c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="top_c_ath_name")
+        all_sai_disciplines = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
+        c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="top_c_ath_sport")
+        all_sai_states = sorted(list(set(c["state"] for c in SAI_CENTRES)))
+        c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="top_c_ath_state")
+    with c_tla2:
+        c_age = st.slider("Age (Years)", 8, 35, 17, key="top_c_ath_age")
+        c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender")
+        c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf")
+        
+    run_custom_match = st.button("🚀 Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
+    if run_custom_match:
+        custom_ath_mock = {
+            "name": c_name,
+            "sport": c_sport.upper(),
+            "age": str(c_age),
+            "gender": "F" if c_gender == "Female" else "M",
+            "medals": f"{c_perf} Level Competitor",
+            "records": f"Custom entered athlete from state of {c_state} competing in {c_sport}."
+        }
+        st.session_state["top_matched_athlete"] = custom_ath_mock
+        st.session_state["top_custom_matched_state"] = c_state
+        st.session_state["top_custom_matched_perf"] = c_perf
+        st.rerun()
+
+# Render top-level recommendation answers
+if "top_matched_athlete" in st.session_state:
+    t_ath = st.session_state["top_matched_athlete"]
+    t_gender = "Female" if t_ath["gender"] == "F" else "Male"
+    try: t_age = int(t_ath["age"])
+    except ValueError: t_age = 17
+    
+    if "top_custom_matched_state" in st.session_state:
+        t_state = st.session_state["top_custom_matched_state"]
+        t_perf = st.session_state["top_custom_matched_perf"]
+    else:
+        t_perf = "International" if any(x in t_ath["medals"].lower() for x in ["olympic", "world", "asian", "cwg", "issf", "international"]) else "National"
+        t_state = "Haryana"
+        state_keywords = {
+            "haryana": "Haryana", "punjab": "Punjab", "delhi": "Delhi", "manipur": "Manipur",
+            "maharashtra": "Maharashtra", "kerala": "Kerala", "tamil nadu": "Tamil Nadu",
+            "odisha": "Odisha", "uttar pradesh": "Uttar Pradesh", "madhya pradesh": "Madhya Pradesh",
+            "assam": "Assam", "telangana": "Telangana", "andhra": "Andhra Pradesh",
+            "west bengal": "West Bengal", "rajasthan": "Rajasthan", "gujarat": "Gujarat",
+            "jharkhand": "Jharkhand"
+        }
+        for kw, st_name in state_keywords.items():
+            if kw in t_ath["records"].lower() or kw in t_ath["medals"].lower():
+                t_state = st_name
+                break
+                
+    recs = recommend_sai_centres(t_ath["sport"].title(), t_state, t_perf, t_age, t_gender, top_n=3)
+    
+    st.markdown(f"""
+    <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
+      <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
+        🎯 Top 3 Recommended SAI Centres for {t_ath['name']}
+      </div>
+      <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
+        Sport Focus: {t_ath['sport'].title()} &nbsp;|&nbsp; Home State: {t_state} &nbsp;|&nbsp; Age: {t_age} &nbsp;|&nbsp; Performance Level: {t_perf}
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    for idx, rec in enumerate(recs):
+        st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
+        
+    if st.button("❌ Clear Recommendations & Close Panel", key="btn_top_close_matcher"):
+        del st.session_state["top_matched_athlete"]
+        if "top_custom_matched_state" in st.session_state:
+            del st.session_state["top_custom_matched_state"]
+            del st.session_state["top_custom_matched_perf"]
+        st.rerun()
+
+st.markdown("---")
 
 tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10 = st.tabs([
     "📍 Pathway Overview",
@@ -1419,6 +1214,125 @@ with tab4:
         co_display.columns = ["Coach Name", "Sport Focus", "State", "Licence Level", "Digital Readiness", "Specialization"]
         st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=250)
 
+    # ── Coach Reallocation & Deficit Optimizer ──
+    st.markdown('<div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;">🚨 Coach Deficit & Reallocation Optimizer</div>', unsafe_allow_html=True)
+    st.markdown(insight("🤖 Decision Engine: Dynamic Reallocation", 
+        "This tool automatically scans SAI Centres, detects athlete-to-coach imbalances for a sport, "
+        "and recommends a reallocation strategy from surplus centres to resolve the deficit based on capacities.", "purple"), unsafe_allow_html=True)
+    
+    # Select Sport
+    all_sai_sports = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
+    selected_opt_sport = st.selectbox("Select Sport to Optimize Load Ratios", all_sai_sports, index=all_sai_sports.index("Wrestling") if "Wrestling" in all_sai_sports else 0, key="opt_sport_select")
+    
+    # Gather capacity and coaches for each centre that supports this sport
+    opt_data = []
+    for c in SAI_CENTRES:
+        if selected_opt_sport in c["sports"]:
+            # Capacity for this sport
+            cap = c.get("sports_capacity", {}).get(selected_opt_sport, c.get("capacity", 0) // len(c["sports"]))
+            # Coaches for this sport
+            coaches = c.get("sports_coaches", {}).get(selected_opt_sport, c.get("coaches", 0) // len(c["sports"]))
+            if cap > 0:
+                opt_data.append({
+                    "name": c["name"],
+                    "state": c["state"],
+                    "capacity": cap,
+                    "coaches": coaches,
+                    "ratio": cap / coaches if coaches > 0 else float('inf')
+                })
+    
+    if opt_data:
+        df_opt = pd.DataFrame(opt_data)
+        
+        # Calculate Target Ratio
+        total_athletes = df_opt["capacity"].sum()
+        total_coaches = df_opt["coaches"].sum()
+        target_ratio = 15.0 # Standard SAI Athlete-to-Coach ratio target
+        
+        # Calculate Deficits & Surpluses
+        deficits = []
+        surpluses = []
+        
+        for idx, row in df_opt.iterrows():
+            # Desired coaches to meet the target ratio
+            desired = max(1, int(round(row["capacity"] / target_ratio)))
+            diff = desired - row["coaches"]
+            
+            if diff > 0:
+                deficits.append({
+                    "name": row["name"],
+                    "state": row["state"],
+                    "capacity": row["capacity"],
+                    "current_coaches": row["coaches"],
+                    "current_ratio": row["ratio"],
+                    "needed": diff
+                })
+            elif diff < 0 and row["coaches"] > 1:
+                surpluses.append({
+                    "name": row["name"],
+                    "state": row["state"],
+                    "capacity": row["capacity"],
+                    "current_coaches": row["coaches"],
+                    "current_ratio": row["ratio"],
+                    "surplus": abs(diff)
+                })
+        
+        # Render current state metrics
+        c_m1, c_m2, c_m3 = st.columns(3)
+        with c_m1:
+            st.metric("Total Sanctioned Athletes", f"{int(total_athletes)}")
+        with c_m2:
+            st.metric("Total Active Coaches", f"{int(total_coaches)}")
+        with c_m3:
+            st.metric("Global Ratio", f"{total_athletes/total_coaches:.1f} athletes/coach" if total_coaches > 0 else "N/A")
+            
+        # Display Imbalance Table
+        st.markdown("##### 📊 Current Athlete-Coach Imbalance Directory")
+        df_opt_disp = df_opt.copy()
+        df_opt_disp.columns = ["Centre Name", "State", "Athlete Capacity", "Active Coaches", "Load Ratio"]
+        df_opt_disp["Load Ratio"] = df_opt_disp["Load Ratio"].apply(lambda x: "🚨 Infinite (0 Coaches)" if x == float('inf') else f"{x:.1f}:1")
+        st.dataframe(df_opt_disp.reset_index(drop=True), use_container_width=True, height=200)
+        
+        # Transfer matching
+        transfers = []
+        surpluses_sorted = sorted(surpluses, key=lambda x: x["surplus"], reverse=True)
+        deficits_sorted = sorted(deficits, key=lambda x: x["needed"], reverse=True)
+        
+        s_idx, d_idx = 0, 0
+        while s_idx < len(surpluses_sorted) and d_idx < len(deficits_sorted):
+            s = surpluses_sorted[s_idx]
+            d = deficits_sorted[d_idx]
+            
+            transfer_qty = min(s["surplus"], d["needed"])
+            if transfer_qty > 0:
+                transfers.append({
+                    "from": s["name"],
+                    "to": d["name"],
+                    "qty": transfer_qty,
+                    "reason": f"Reduces source ratio from {s['current_ratio']:.1f} to {s['capacity']/(s['current_coaches']-transfer_qty):.1f}, and fixes target ratio from {d['current_ratio'] if d['current_ratio']!=float('inf') else '0 coaches'} to {d['capacity']/(d['current_coaches']+transfer_qty):.1f}"
+                })
+                s["surplus"] -= transfer_qty
+                d["needed"] -= transfer_qty
+                
+            if s["surplus"] == 0:
+                s_idx += 1
+            if d["needed"] == 0:
+                d_idx += 1
+                
+        # Render Recommendations
+        st.markdown("##### 🚀 Recommended Reallocation Strategy Decisions")
+        if transfers:
+            for t in transfers:
+                st.markdown(insight(
+                    f"💡 Transfer Decision: Move {int(t['qty'])} coach(es)", 
+                    f"📤 <b>From:</b> {t['from']}<br>📥 <b>To:</b> {t['to']}<br>📝 <b>Impact:</b> {t['reason']}", 
+                    "green"
+                ), unsafe_allow_html=True)
+        else:
+            st.success("✅ Coach loading ratios are balanced! No reallocation transfer is required for this sport.")
+    else:
+        st.info("No SAI Centres currently support or have capacity for the selected sport.")
+
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 5 — CENTRES & ACADEMIES
@@ -1760,6 +1674,35 @@ with tab9:
             ind_sport = st.selectbox("Sport Filter", ["All"] + sorted(list(set(a["sport"] for a in elite_athletes))), key="ind_sport_select")
         with c_sc3:
             ind_gender = st.selectbox("Gender", ["All", "M", "F"], key="ind_gender_select")
+
+        # Custom Athlete Matcher Form
+        with st.expander("🎯 Or Run Matcher for a Custom Athlete Profile (Create & Assess Athlete)", expanded=False):
+            st.markdown("##### 📝 Custom Athlete Attributes")
+            c_csa1, c_csa2 = st.columns(2)
+            with c_csa1:
+                c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="c_ath_name")
+                all_sai_disciplines = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
+                c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="c_ath_sport")
+                all_sai_states = sorted(list(set(c["state"] for c in SAI_CENTRES)))
+                c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="c_ath_state")
+            with c_csa2:
+                c_age = st.slider("Age (Years)", 8, 35, 17, key="c_ath_age")
+                c_gender = st.selectbox("Gender", ["Male", "Female"], key="c_ath_gender")
+                c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="c_ath_perf")
+            
+            if st.button("🚀 Calculate Optimal Training Centre", use_container_width=True, key="btn_run_custom_match"):
+                custom_ath_mock = {
+                    "name": c_name,
+                    "sport": c_sport.upper(),
+                    "age": str(c_age),
+                    "gender": "F" if c_gender == "Female" else "M",
+                    "medals": f"{c_perf} Level Competitor",
+                    "records": f"Custom entered athlete from state of {c_state} competing in {c_sport}."
+                }
+                st.session_state["matched_athlete"] = custom_ath_mock
+                st.session_state["custom_matched_state"] = c_state
+                st.session_state["custom_matched_perf"] = c_perf
+                st.rerun()
             
         filtered_ind = []
         for a in elite_athletes:
@@ -1819,20 +1762,26 @@ with tab9:
                 m_gender = "Female" if m_ath["gender"] == "F" else "Male"
                 try: m_age = int(m_ath["age"])
                 except ValueError: m_age = 17
-                m_perf = "International" if any(x in m_ath["medals"].lower() for x in ["olympic", "world", "asian", "cwg", "issf", "international"]) else "National"
-                m_state = "Haryana"
-                state_keywords = {
-                    "haryana": "Haryana", "punjab": "Punjab", "delhi": "Delhi", "manipur": "Manipur",
-                    "maharashtra": "Maharashtra", "kerala": "Kerala", "tamil nadu": "Tamil Nadu",
-                    "odisha": "Odisha", "uttar pradesh": "Uttar Pradesh", "madhya pradesh": "Madhya Pradesh",
-                    "assam": "Assam", "telangana": "Telangana", "andhra": "Andhra Pradesh",
-                    "west bengal": "West Bengal", "rajasthan": "Rajasthan", "gujarat": "Gujarat",
-                    "jharkhand": "Jharkhand"
-                }
-                for kw, st_name in state_keywords.items():
-                    if kw in m_ath["records"].lower() or kw in m_ath["medals"].lower():
-                        m_state = st_name
-                        break
+                
+                if "custom_matched_state" in st.session_state:
+                    m_state = st.session_state["custom_matched_state"]
+                    m_perf = st.session_state["custom_matched_perf"]
+                else:
+                    m_perf = "International" if any(x in m_ath["medals"].lower() for x in ["olympic", "world", "asian", "cwg", "issf", "international"]) else "National"
+                    m_state = "Haryana"
+                    state_keywords = {
+                        "haryana": "Haryana", "punjab": "Punjab", "delhi": "Delhi", "manipur": "Manipur",
+                        "maharashtra": "Maharashtra", "kerala": "Kerala", "tamil nadu": "Tamil Nadu",
+                        "odisha": "Odisha", "uttar pradesh": "Uttar Pradesh", "madhya pradesh": "Madhya Pradesh",
+                        "assam": "Assam", "telangana": "Telangana", "andhra": "Andhra Pradesh",
+                        "west bengal": "West Bengal", "rajasthan": "Rajasthan", "gujarat": "Gujarat",
+                        "jharkhand": "Jharkhand"
+                    }
+                    for kw, st_name in state_keywords.items():
+                        if kw in m_ath["records"].lower() or kw in m_ath["medals"].lower():
+                            m_state = st_name
+                            break
+                
                 recs = recommend_sai_centres(m_ath["sport"].title(), m_state, m_perf, m_age, m_gender, top_n=3)
                 st.markdown(f"""
                 <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1.5rem;margin-bottom:1rem;">
@@ -1840,7 +1789,7 @@ with tab9:
                     🎯 Recommended SAI Centres for {m_ath['name']}
                   </div>
                   <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
-                    Profile: {m_ath['sport']} | {m_state} | Age {m_ath['age']}
+                    Profile: {m_ath['sport']} | {m_state} | Age {m_ath['age']} | Level: {m_perf}
                   </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -1848,6 +1797,9 @@ with tab9:
                     st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
                 if st.button("❌ Close Matcher Panel", key="close_cohort_matcher"):
                     del st.session_state["matched_athlete"]
+                    if "custom_matched_state" in st.session_state:
+                        del st.session_state["custom_matched_state"]
+                        del st.session_state["custom_matched_perf"]
                     st.rerun()
 
 
