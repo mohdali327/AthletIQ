@@ -621,16 +621,16 @@ if "top_matched_athlete" in st.session_state:
 st.markdown("---")
 
 tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10 = st.tabs([
-    "📍 Pathway Overview",
-    "🔎 Discovery & Leagues",
-    "🎯 Sport Priority",
-    "🧠 Coach Capacity",
-    "🏛️ Centres & Academies",
-    "🏛️ Federation Intelligence",
-    "🤝 CSR Matchmaker",
-    "💰 Sponsor Pipeline",
-    "👥 Athlete Cohorts",
-    "🔍 Data Quality",
+    "Pathway Overview",
+    "Discovery & Leagues",
+    "Sport Priority",
+    "Coach Capacity",
+    "Centres & Academies",
+    "Federation Intelligence",
+    "CSR Matchmaker",
+    "Sponsor Pipeline",
+    "Athlete Cohorts",
+    "Data Quality",
 ])
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -996,7 +996,7 @@ with tab1:
 with tab2:
     st.markdown('<div class="stitle">🔎 Discovery & Leagues <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
-    disc_tabs = st.tabs(["🏆 Grassroots Leagues Tracker", "🏃 Emerging Athlete Prospects"])
+    disc_tabs = st.tabs(["Grassroots Leagues Tracker", "Emerging Athlete Prospects"])
     
     with disc_tabs[0]:
         st.markdown(insight("ℹ️ Decentralized Leagues Tracker", 
@@ -1382,7 +1382,7 @@ with tab5:
         "AthletIQ maps government training centres (SAI), private academies, and local wrestling akharas/boxing clubs "
         "to help sponsors invest in infrastructure name-rights, safety gear, and coaching scholarships.", ""), unsafe_allow_html=True)
         
-    sub_centre_tabs = st.tabs(["🏛️ SAI Centres & NCOEs", "🏫 Private Academies", "🤼 Akharas & Clubs", "📈 Partner Network"])
+    sub_centre_tabs = st.tabs(["SAI Centres & NCOEs", "Private Academies", "Akharas & Clubs", "Partner Network"])
     
     with sub_centre_tabs[0]:
         st.markdown('<div class="stitle" style="font-size:1rem;">🏛️ Sports Authority of India Training Network</div>', unsafe_allow_html=True)
@@ -1628,7 +1628,7 @@ with tab9:
         "Below are priority athlete cohorts ready for pathway activation. Use the filters to check individual prospects "
         "and link them directly to the SAI Centre Matcher.", "green"), unsafe_allow_html=True)
         
-    cohort_tabs = st.tabs(["👥 Combat Sports Cohort", "🏹 NE Precision Archery", "🏋️ Weightlifting Power", "🔍 Search Individual Profiles"])
+    cohort_tabs = st.tabs(["Combat Sports Cohort", "NE Precision Archery", "Weightlifting Power", "Search Individual Profiles"])
     
     with cohort_tabs[0]:
         st.markdown('<div class="stitle" style="font-size:1rem;">🥋 Combat Sports Cohort (Wrestling & Boxing - Men & Women)</div>', unsafe_allow_html=True)
