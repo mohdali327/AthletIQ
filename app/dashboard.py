@@ -68,7 +68,6 @@ css_code = """
     background-position: center 20% !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-    transition: background-position 0.2s cubic-bezier(0.25, 1, 0.5, 1);
     font-family: 'Inter', sans-serif;
     color: var(--text1);
 }
@@ -118,7 +117,7 @@ css_code = """
 /* ── Hero ── */
 .hero { text-align: center; padding: 2.5rem 1rem 1rem; position: relative; z-index: 1; }
 .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; }
-.hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.15s ease-out; }
+.hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; }
 .hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
 .hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
 
@@ -308,50 +307,6 @@ details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 6
   <div class="orb orb-3"></div>
   <div class="grid-3d"></div>
 </div>
-<script>
-try {
-    const bindScroll = () => {
-        const scrollContainer = document.querySelector('[data-testid="stAppViewContainer"]');
-        if (scrollContainer) {
-            scrollContainer.addEventListener('scroll', () => {
-                const scrollTop = scrollContainer.scrollTop;
-                
-                // Hero title scroll parallax
-                const heroTitle = document.querySelector('.hero-title');
-                if (heroTitle) {
-                    heroTitle.style.transform = `translateY(${scrollTop * 0.25}px) scale(${Math.max(0.75, 1 - scrollTop * 0.001)})`;
-                    heroTitle.style.opacity = Math.max(0.15, 1 - scrollTop * 0.0035);
-                }
-                
-                // Background image shift
-                const app = document.querySelector('.stApp');
-                if (app) {
-                    app.style.backgroundPositionY = `calc(20% + ${scrollTop * 0.06}px)`;
-                }
-                
-                // 3D perspective grid shift
-                const grid = document.querySelector('.grid-3d');
-                if (grid) {
-                    grid.style.transform = `perspective(600px) rotateX(65deg) translateY(${scrollTop * 0.12}px)`;
-                }
-            });
-            return true;
-        }
-        return false;
-    };
-
-    if (!bindScroll()) {
-        const interval = setInterval(() => {
-            if (bindScroll()) {
-                clearInterval(interval);
-            }
-        }, 200);
-        setTimeout(() => clearInterval(interval), 10000);
-    }
-} catch (e) {
-    console.error("Scroll parallax bind failed: ", e);
-}
-</script>
 """
 st.markdown(css_code.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
 
