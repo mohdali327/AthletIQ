@@ -897,13 +897,50 @@ with tab1:
     for idx, ds in enumerate(diag_stages):
         with diagnostic_cols[idx]:
             st.markdown(f"""
-            <div class="acard" style="border-top:3px solid var(--{ds['col']});height:200px;text-align:center;">
+            <div class="acard" style="border-top:3px solid var(--{ds['col']});height:165px;text-align:center;margin-bottom:0.5rem;">
                 <div style="font-weight:700;font-size:0.9rem;color:#FFF;">{ds['stage']}</div>
                 <div style="font-size:0.75rem;color:var(--text3);margin-top:0.3rem;">{ds['gap']}</div>
                 <div style="font-size:0.8rem;color:var(--pink);margin-top:0.5rem;font-weight:600;min-height:36px;">⚠️ {ds['signal']}</div>
-                <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.5rem;">👉 {ds['action']}</div>
             </div>
             """, unsafe_allow_html=True)
+            if st.button(ds['action'], key=f"btn_diag_action_{idx}", use_container_width=True):
+                st.session_state["active_diag_action"] = ds
+                st.rerun()
+
+    if "active_diag_action" in st.session_state:
+        action_ds = st.session_state["active_diag_action"]
+        st.markdown(f"""
+        <div style="background:rgba(138,180,248,0.06);border:1px solid var(--{action_ds['col']});border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
+          <div style="font-family:Outfit,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
+            🚀 Active Action Guide: {action_ds['action']} ({action_ds['stage']})
+          </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if action_ds["stage"].endswith("Discovery"):
+            st.info("1. **Locate Grassroots Talent:** Head to **Tab 2 (Discovery & Leagues)** to identify states/districts with high tournament participation numbers.\n"
+                    "2. **Export Scouting Plan:** Use the GTM Brief generator at the top of this page to export a structured **Scouting Plan** for Archery or Wrestling.\n"
+                    "3. **Plan Screening:** Check **Tab 5 (Centres & Academies)** to find the nearest SAI NCOE to host the trials.")
+        elif action_ds["stage"].endswith("Coaching"):
+            st.info("1. **Run Reallocation Optimizer:** Scroll down and use the **Coach Deficit & Reallocation Optimizer** on **Tab 4** to identify and resolve load bottlenecks.\n"
+                    "2. **Onboard Former Athletes:** Empanel elite candidates (like PR Sreejesh or Saina Nehwal) listed in the Former Athlete Registry.\n"
+                    "3. **Schedule Masterclass:** Deploy a specialized NIS coach clinic using a **Coach Capacity Note** brief.")
+        elif action_ds["stage"].endswith("Competition"):
+            st.info("1. **Track Traditional & ASMITA Leagues:** Monitor the active competitions under the *Grassroots Leagues Tracker* in **Tab 2**.\n"
+                    "2. **Map Infrastructure:** Review court and venue safety ratings in **Tab 5 (Centres & Academies)**.\n"
+                    "3. **Validate Event Calendars:** Coordinate with State Associations tracked under **Tab 6 (Federation Intelligence)**.")
+        elif action_ds["stage"].endswith("Funding"):
+            st.info("1. **Align Corporate CSR:** Use the **Tab 7 (CSR Matchmaker)** to specify target budgets and demographics.\n"
+                    "2. **Package Athlete Cohorts:** Package elite prospects in **Tab 9 (Athlete Cohorts)** into cohesive groups for corporate sponsorships.\n"
+                    "3. **Download Pitch Deck:** Export the customized **Sponsor Brief** under the *Recommended Pathway Actions* on this tab.")
+        elif action_ds["stage"].endswith("Progression"):
+            st.info("1. **Run Athlete Proximity Matcher:** Use the **SAI Proximity & Suitability Matcher** at the top of the dashboard to align prospects to centres.\n"
+                    "2. **Empanel at NCOEs:** Guide qualified national-level talent directly to residential training programs in **Tab 5**.\n"
+                    "3. **Verify Compliance:** Audit athlete credentials and age certifications in **Tab 10 (Data Quality)**.")
+            
+        if st.button("❌ Close Action Guide", key="btn_close_diag_action"):
+            del st.session_state["active_diag_action"]
+            st.rerun()
 
     st.markdown("<br>", unsafe_allow_html=True)
 
