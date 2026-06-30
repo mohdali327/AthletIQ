@@ -310,30 +310,43 @@ details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 6
 </div>
 <script>
 try {
-    const scrollContainer = document.querySelector('[data-testid="stAppViewContainer"]');
-    if (scrollContainer) {
-        scrollContainer.addEventListener('scroll', () => {
-            const scrollTop = scrollContainer.scrollTop;
-            
-            // Hero title scroll parallax
-            const heroTitle = document.querySelector('.hero-title');
-            if (heroTitle) {
-                heroTitle.style.transform = `translateY(${scrollTop * 0.25}px) scale(${Math.max(0.75, 1 - scrollTop * 0.001)})`;
-                heroTitle.style.opacity = Math.max(0.15, 1 - scrollTop * 0.0035);
+    const bindScroll = () => {
+        const scrollContainer = document.querySelector('[data-testid="stAppViewContainer"]');
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', () => {
+                const scrollTop = scrollContainer.scrollTop;
+                
+                // Hero title scroll parallax
+                const heroTitle = document.querySelector('.hero-title');
+                if (heroTitle) {
+                    heroTitle.style.transform = `translateY(${scrollTop * 0.25}px) scale(${Math.max(0.75, 1 - scrollTop * 0.001)})`;
+                    heroTitle.style.opacity = Math.max(0.15, 1 - scrollTop * 0.0035);
+                }
+                
+                // Background image shift
+                const app = document.querySelector('.stApp');
+                if (app) {
+                    app.style.backgroundPositionY = `calc(20% + ${scrollTop * 0.06}px)`;
+                }
+                
+                // 3D perspective grid shift
+                const grid = document.querySelector('.grid-3d');
+                if (grid) {
+                    grid.style.transform = `perspective(600px) rotateX(65deg) translateY(${scrollTop * 0.12}px)`;
+                }
+            });
+            return true;
+        }
+        return false;
+    };
+
+    if (!bindScroll()) {
+        const interval = setInterval(() => {
+            if (bindScroll()) {
+                clearInterval(interval);
             }
-            
-            // Background image shift
-            const app = document.querySelector('.stApp');
-            if (app) {
-                app.style.backgroundPositionY = `calc(20% + ${scrollTop * 0.06}px)`;
-            }
-            
-            // 3D perspective grid shift
-            const grid = document.querySelector('.grid-3d');
-            if (grid) {
-                grid.style.transform = `perspective(600px) rotateX(65deg) translateY(${scrollTop * 0.12}px)`;
-            }
-        });
+        }, 200);
+        setTimeout(() => clearInterval(interval), 10000);
     }
 } catch (e) {
     console.error("Scroll parallax bind failed: ", e);
