@@ -16,7 +16,7 @@ import json
 # ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="AthletIQ Intelligence",
-    page_icon="🏅",
+    page_icon="sports",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -30,42 +30,42 @@ st.markdown("""
 
 /* ── Animated Gradient Background ── */
 @keyframes gradientShift {
-    0%   { background-position: 0% 50%; }
-    25%  { background-position: 50% 0%; }
-    50%  { background-position: 100% 50%; }
-    75%  { background-position: 50% 100%; }
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
     100% { background-position: 0% 50%; }
 }
 @keyframes floatOrb {
     0%, 100% { transform: translate(0, 0) scale(1); }
-    33%       { transform: translate(40px, -30px) scale(1.05); }
-    66%       { transform: translate(-25px, 25px) scale(0.97); }
+    33% { transform: translate(40px, -30px) scale(1.05); }
+    66% { transform: translate(-25px, 25px) scale(0.97); }
 }
 @keyframes slideUp {
     from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(138,180,248,0.3); }
-    50%       { box-shadow: 0 0 0 8px rgba(138,180,248,0); }
+    50% { box-shadow: 0 0 0 8px rgba(138,180,248,0); }
 }
 
 :root {
-    --blue:    #8AB4F8;
-    --purple:  #C58AF9;
-    --pink:    #F28B82;
-    --teal:    #81C995;
-    --gold:    #FDD663;
-    --cyan:    #78D9EC;
-    --orange:  #FCAD70;
-    --glass:   rgba(22, 28, 48, 0.60);
-    --glass2:  rgba(30, 36, 60, 0.50);
-    --border:  rgba(255,255,255,0.08);
-    --text1:   #E8EAED;
-    --text2:   #9AA0A6;
-    --text3:   #5F6368;
+    --blue: #8AB4F8;
+    --purple: #C58AF9;
+    --pink: #F28B82;
+    --teal: #81C995;
+    --gold: #FDD663;
+    --cyan: #78D9EC;
+    --orange: #FCAD70;
+    --glass: rgba(22, 28, 48, 0.60);
+    --glass2: rgba(30, 36, 60, 0.50);
+    --border: rgba(255,255,255,0.08);
+    --text1: #E8EAED;
+    --text2: #9AA0A6;
+    --text3: #5F6368;
     --green-dot: #81C995;
-    --red-dot:   #F28B82;
+    --red-dot: #F28B82;
     --amber-dot: #FDD663;
 }
 
@@ -94,19 +94,19 @@ st.markdown("""
 .kpi { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 18px; padding: 1.6rem 1.2rem; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; animation: slideUp 0.6s ease both; }
 .kpi:hover { transform: translateY(-5px); border-color: rgba(138,180,248,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.45); }
 .kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
-.kpi.blue::before   { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+.kpi.blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
 .kpi.purple::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
-.kpi.teal::before   { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
-.kpi.gold::before   { background: linear-gradient(90deg, var(--gold), var(--orange)); }
-.kpi.pink::before   { background: linear-gradient(90deg, var(--pink), var(--gold)); }
+.kpi.teal::before { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
+.kpi.gold::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+.kpi.pink::before { background: linear-gradient(90deg, var(--pink), var(--gold)); }
 .kpi-em { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
 .kpi-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--text3); margin-bottom: 0.5rem; }
 .kpi-val { font-family: 'Outfit', sans-serif; font-size: 2.6rem; font-weight: 900; line-height: 1; }
-.kpi-val.blue   { color: var(--blue); }
+.kpi-val.blue { color: var(--blue); }
 .kpi-val.purple { color: var(--purple); }
-.kpi-val.teal   { color: var(--teal); }
-.kpi-val.gold   { color: var(--gold); }
-.kpi-val.pink   { color: var(--pink); }
+.kpi-val.teal { color: var(--teal); }
+.kpi-val.gold { color: var(--gold); }
+.kpi-val.pink { color: var(--pink); }
 .kpi-sub { font-size: 0.72rem; color: var(--text3); margin-top: 0.4rem; }
 
 /* ── Tabs — Gemini pill ── */
@@ -131,10 +131,10 @@ st.markdown("""
 /* ── Section titles ── */
 .stitle { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text1); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .chip { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.2rem 0.7rem; border-radius: 50px; }
-.chip-blue   { background: rgba(138,180,248,0.14); border: 1px solid rgba(138,180,248,0.28); color: var(--blue); }
-.chip-green  { background: rgba(129,201,149,0.14); border: 1px solid rgba(129,201,149,0.28); color: var(--teal); }
-.chip-amber  { background: rgba(253,214,99,0.14);  border: 1px solid rgba(253,214,99,0.28);  color: var(--gold); }
-.chip-red    { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
+.chip-blue { background: rgba(138,180,248,0.14); border: 1px solid rgba(138,180,248,0.28); color: var(--blue); }
+.chip-green { background: rgba(129,201,149,0.14); border: 1px solid rgba(129,201,149,0.28); color: var(--teal); }
+.chip-amber { background: rgba(253,214,99,0.14); border: 1px solid rgba(253,214,99,0.28); color: var(--gold); }
+.chip-red { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
 .chip-purple { background: rgba(197,138,249,0.14); border: 1px solid rgba(197,138,249,0.28); color: var(--purple); }
 
 /* ── Action cards ── */
@@ -146,29 +146,29 @@ st.markdown("""
 .acard-score { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; }
 .acard-tags { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 5px; }
 .tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.18rem 0.6rem; border-radius: 50px; background: rgba(138,180,248,0.1); color: var(--blue); border: 1px solid rgba(138,180,248,0.2); }
-.tag.green  { background: rgba(129,201,149,0.1); color: var(--teal);   border-color: rgba(129,201,149,0.2); }
-.tag.amber  { background: rgba(253,214,99,0.1);  color: var(--gold);   border-color: rgba(253,214,99,0.2); }
-.tag.red    { background: rgba(242,139,130,0.1); color: var(--pink);   border-color: rgba(242,139,130,0.2); }
+.tag.green { background: rgba(129,201,149,0.1); color: var(--teal); border-color: rgba(129,201,149,0.2); }
+.tag.amber { background: rgba(253,214,99,0.1); color: var(--gold); border-color: rgba(253,214,99,0.2); }
+.tag.red { background: rgba(242,139,130,0.1); color: var(--pink); border-color: rgba(242,139,130,0.2); }
 .tag.purple { background: rgba(197,138,249,0.1); color: var(--purple); border-color: rgba(197,138,249,0.2); }
 
 /* ── Insight box ── */
 .insight { background: linear-gradient(135deg, rgba(138,180,248,0.07), rgba(197,138,249,0.07)); border: 1px solid rgba(138,180,248,0.15); border-left: 3px solid var(--blue); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
 .insight.green { background: linear-gradient(135deg, rgba(129,201,149,0.07), rgba(120,217,236,0.07)); border-color: rgba(129,201,149,0.15); border-left-color: var(--teal); }
 .insight.amber { background: linear-gradient(135deg, rgba(253,214,99,0.07), rgba(252,173,112,0.07)); border-color: rgba(253,214,99,0.15); border-left-color: var(--gold); }
-.insight.red   { background: linear-gradient(135deg, rgba(242,139,130,0.07), rgba(253,214,99,0.05)); border-color: rgba(242,139,130,0.15); border-left-color: var(--pink); }
+.insight.red { background: linear-gradient(135deg, rgba(242,139,130,0.07), rgba(253,214,99,0.05)); border-color: rgba(242,139,130,0.15); border-left-color: var(--pink); }
 .insight.purple{ background: linear-gradient(135deg, rgba(197,138,249,0.07), rgba(138,180,248,0.07)); border-color: rgba(197,138,249,0.15); border-left-color: var(--purple); }
 .insight-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--blue); margin-bottom: 0.35rem; }
-.insight.green  .insight-title  { color: var(--teal); }
-.insight.amber  .insight-title  { color: var(--gold); }
-.insight.red    .insight-title  { color: var(--pink); }
-.insight.purple .insight-title  { color: var(--purple); }
+.insight.green .insight-title { color: var(--teal); }
+.insight.amber .insight-title { color: var(--gold); }
+.insight.red .insight-title { color: var(--pink); }
+.insight.purple .insight-title { color: var(--purple); }
 .insight-body { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
 
 /* ── Status dots ── */
 .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-.dot-green  { background: var(--teal); animation: pulse 2s infinite; }
-.dot-amber  { background: var(--gold); }
-.dot-red    { background: var(--pink); }
+.dot-green { background: var(--teal); animation: pulse 2s infinite; }
+.dot-amber { background: var(--gold); }
+.dot-red { background: var(--pink); }
 
 /* ── Data quality bars ── */
 .dq-bar-wrap { background: rgba(255,255,255,0.05); border-radius: 50px; height: 8px; overflow: hidden; margin-top: 4px; }
@@ -228,11 +228,11 @@ def playout(fig, title="", h=400):
     return fig
 
 COLOR_SCALES = {
-    "blue":   ["#0d1a30","#8AB4F8"],
+    "blue": ["#0d1a30","#8AB4F8"],
     "purple": ["#1a0d30","#C58AF9"],
-    "teal":   ["#0d2018","#81C995"],
-    "gold":   ["#2a1d00","#FDD663"],
-    "pink":   ["#2a0d0d","#F28B82"],
+    "teal": ["#0d2018","#81C995"],
+    "gold": ["#2a1d00","#FDD663"],
+    "pink": ["#2a0d0d","#F28B82"],
 }
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -251,17 +251,17 @@ def load_master():
                       "athletiq_opportunity_score","participants_or_capacity","age"]:
                 if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
             # Derived helper columns
-            df["has_source"]   = df["source_link"].apply(lambda x: x not in ["","Unknown","N/A"])
-            df["has_notes"]    = df["notes"].apply(lambda x: x not in ["","Unknown","N/A"])
-            df["is_rural"]     = df["tier"].isin(["Rural","Tier3"])
-            df["is_women"]     = df["gender"].isin(["Female"])
-            df["is_youth"]     = df["age"].between(10, 21)
-            df["is_unfunded"]  = df["funding_status"].str.lower() == "unfunded"
-            df["tag_list"]     = df["tags"].apply(lambda x: [t.strip() for t in x.split(",") if t.strip()])
-            df["cwg_flag"]     = df["tag_list"].apply(lambda t: "CWG2036" in t)
-            df["oly_flag"]     = df["tag_list"].apply(lambda t: "Olympic2032" in t)
-            df["rural_flag"]   = df["tag_list"].apply(lambda t: "rural-talent" in t)
-            df["tribal_flag"]  = df["tag_list"].apply(lambda t: "tribal-talent" in t)
+            df["has_source"] = df["source_link"].apply(lambda x: x not in ["","Unknown","N/A"])
+            df["has_notes"] = df["notes"].apply(lambda x: x not in ["","Unknown","N/A"])
+            df["is_rural"] = df["tier"].isin(["Rural","Tier3"])
+            df["is_women"] = df["gender"].isin(["Female"])
+            df["is_youth"] = df["age"].between(10, 21)
+            df["is_unfunded"] = df["funding_status"].str.lower() == "unfunded"
+            df["tag_list"] = df["tags"].apply(lambda x: [t.strip() for t in x.split(",") if t.strip()])
+            df["cwg_flag"] = df["tag_list"].apply(lambda t: "CWG2036" in t)
+            df["oly_flag"] = df["tag_list"].apply(lambda t: "Olympic2032" in t)
+            df["rural_flag"] = df["tag_list"].apply(lambda t: "rural-talent" in t)
+            df["tribal_flag"] = df["tag_list"].apply(lambda t: "tribal-talent" in t)
             return df
     return None
 
@@ -336,22 +336,22 @@ df_csr = load_csr()
 elite_athletes = load_elite_athletes()
 
 if df_all is None:
-    st.error("⚠️ Master database not found. Place `athletiq_master_database.csv` in the `data/` folder.")
+    st.error(" Master database not found. Place `athletiq_master_database.csv` in the `data/` folder.")
     st.stop()
 
 # ─────────────────────────────────────────────────────────────────────────────
 # SIDEBAR FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("<h2 style='color:#8AB4F8;font-family:Outfit;font-weight:700;'>🎯 Filters</h2>", unsafe_allow_html=True)
-    sel_entity   = st.multiselect("Entity Type", sorted(df_all["entity_type"].unique()), default=sorted(df_all["entity_type"].unique()))
-    sel_sport    = st.multiselect("Sport",        sorted(df_all["sport"].unique()),       default=sorted(df_all["sport"].unique()))
-    sel_state    = st.multiselect("State",        sorted(df_all["state"].unique()),       default=sorted(df_all["state"].unique()))
-    sel_tier     = st.multiselect("Tier",         sorted(df_all["tier"].unique()),        default=sorted(df_all["tier"].unique()))
-    sel_pipeline = st.multiselect("Pipeline",     sorted(df_all["pipeline_stage"].unique()), default=sorted(df_all["pipeline_stage"].unique()))
+    st.markdown("<h2 style='color:#8AB4F8;font-family:Outfit;font-weight:700;'> Filters</h2>", unsafe_allow_html=True)
+    sel_entity = st.multiselect("Entity Type", sorted(df_all["entity_type"].unique()), default=sorted(df_all["entity_type"].unique()))
+    sel_sport = st.multiselect("Sport", sorted(df_all["sport"].unique()), default=sorted(df_all["sport"].unique()))
+    sel_state = st.multiselect("State", sorted(df_all["state"].unique()), default=sorted(df_all["state"].unique()))
+    sel_tier = st.multiselect("Tier", sorted(df_all["tier"].unique()), default=sorted(df_all["tier"].unique()))
+    sel_pipeline = st.multiselect("Pipeline", sorted(df_all["pipeline_stage"].unique()), default=sorted(df_all["pipeline_stage"].unique()))
     st.markdown("---")
     omin, omax = float(df_all["athletiq_opportunity_score"].min()), float(df_all["athletiq_opportunity_score"].max())
-    sel_score  = st.slider("Opportunity Score", omin, max(omax,10.0), (omin, max(omax,10.0)), 0.5)
+    sel_score = st.slider("Opportunity Score", omin, max(omax,10.0), (omin, max(omax,10.0)), 0.5)
     cmin, cmax = float(df_all["cwg_2036_relevance"].min()), float(df_all["cwg_2036_relevance"].max())
 
 # ── DYNAMIC SAI CENTRES LOADER ──
@@ -438,7 +438,7 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
         perf_map = {"Village": 0, "District": 1, "State": 2, "National": 3, "International": 4}
         c_perf = c.get("performance", ["District", "State", "National", "International"])
         centre_perf_max = max([perf_map.get(p, 0) for p in c_perf])
-        athlete_perf    = perf_map.get(performance_level, 2)
+        athlete_perf = perf_map.get(performance_level, 2)
         if athlete_perf == centre_perf_max:
             s += 20
         elif abs(athlete_perf - centre_perf_max) == 1:
@@ -467,9 +467,9 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
 
 def render_sai_card(centre, score, rank):
     sport_tags = "".join([f'<span class="tag">{s}</span>' for s in centre.get("sports", [])[:6]])
-    badge_col  = "#81C995" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
-    type_col   = "#8AB4F8" if centre.get("type", "NCOE") == "NCOE" else "#C58AF9"
-    flagship   = '<span class="tag green">★ Flagship</span>' if centre.get("flagship") else ""
+    badge_col = "#81C995" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
+    type_col = "#8AB4F8" if centre.get("type", "NCOE") == "NCOE" else "#C58AF9"
+    flagship = '<span class="tag green"> Flagship</span>' if centre.get("flagship") else ""
     
     name = centre.get("name", "Unknown SAI Centre")
     city = centre.get("city", "Unknown")
@@ -489,7 +489,7 @@ def render_sai_card(centre, score, rank):
         <div>
           <div class="acard-title">#{rank} {name} {flagship}</div>
           <div style="font-size:0.75rem;color:#9AA0A6;margin-top:3px;">
-            📍 {city}, {state} &nbsp;|&nbsp;
+             {city}, {state} &nbsp;|&nbsp;
             <span style="color:{type_col};font-weight:700;">{ctype}</span> &nbsp;|&nbsp;
             Capacity: {capacity} athletes &nbsp;|&nbsp; Coaches: {coaches}
           </div>
@@ -499,9 +499,9 @@ def render_sai_card(centre, score, rank):
           <div style="font-size:0.62rem;color:#5F6368;letter-spacing:1px;">MATCH SCORE</div>
         </div>
       </div>
-      <div class="acard-meta" style="margin:0.6rem 0;">📋 {notes}</div>
-      <div class="acard-meta">🏟️ <b>Facilities:</b> {facilities}</div>
-      <div class="acard-meta">🎯 <b>Best for performance level:</b> {' · '.join(performance)} &nbsp;|&nbsp; Age: {age_min}–{age_max}</div>
+      <div class="acard-meta" style="margin:0.6rem 0;"> {notes}</div>
+      <div class="acard-meta"> <b>Facilities:</b> {facilities}</div>
+      <div class="acard-meta"> <b>Best for performance level:</b> {' · '.join(performance)} &nbsp;|&nbsp; Age: {age_min}–{age_max}</div>
       <div class="acard-tags" style="margin-top:0.6rem;">{sport_tags}</div>
     </div>"""
 
@@ -517,7 +517,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── TOP-LEVEL ATHLETE-TO-SAI MATCHING ENGINE (PRIMARY DECISION PORTAL) ──
-st.markdown('<div class="stitle" style="font-size:1.2rem;margin-top:1rem;">🎯 SAI Training Centre Proximity & Suitability Matcher</div>', unsafe_allow_html=True)
+st.markdown('<div class="stitle" style="font-size:1.2rem;margin-top:1rem;"> SAI Training Centre Proximity & Suitability Matcher</div>', unsafe_allow_html=True)
 
 # Toggle between Database search and Custom Profile Creator
 matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode")
@@ -530,7 +530,7 @@ if matcher_mode == "Search Database Athletes":
     with c_tla2:
         st.write("")
         st.write("")
-        run_db_match = st.button("🚀 Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
+        run_db_match = st.button(" Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
         
     if run_db_match:
         ath_data = next((a for a in elite_athletes if a["name"] == selected_athlete_name), None)
@@ -554,7 +554,7 @@ else:
         c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender")
         c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf")
         
-    run_custom_match = st.button("🚀 Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
+    run_custom_match = st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
     if run_custom_match:
         custom_ath_mock = {
             "name": c_name,
@@ -600,7 +600,7 @@ if "top_matched_athlete" in st.session_state:
     st.markdown(f"""
     <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
       <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
-        🎯 Top 3 Recommended SAI Centres for {t_ath['name']}
+         Top 3 Recommended SAI Centres for {t_ath['name']}
       </div>
       <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
         Sport Focus: {t_ath['sport'].title()} &nbsp;|&nbsp; Home State: {t_state} &nbsp;|&nbsp; Age: {t_age} &nbsp;|&nbsp; Performance Level: {t_perf}
@@ -611,7 +611,7 @@ if "top_matched_athlete" in st.session_state:
     for idx, rec in enumerate(recs):
         st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
         
-    if st.button("❌ Clear Recommendations & Close Panel", key="btn_top_close_matcher"):
+    if st.button(" Clear Recommendations & Close Panel", key="btn_top_close_matcher"):
         del st.session_state["top_matched_athlete"]
         if "top_custom_matched_state" in st.session_state:
             del st.session_state["top_custom_matched_state"]
@@ -669,7 +669,7 @@ def generate_gtm_document(doc_type, name, sport, state, details=""):
 * **Curriculum**: Masterclasses led by elite mentors
 """
     elif doc_type == "Social Media Post":
-        return f"""🚀 Pathway Break Detected & Solved! 🇮🇳
+        return f""" Pathway Break Detected & Solved! 
 AthletIQ Pathway Intelligence mapped a critical coaching gap in {sport} ({state}). 
 We are launching a new pilot cohort of former athletes transitioning to coaches to keep the grassroots-to-podium pipeline active!
 #AthletIQ #IndianSports #GrassrootsToPodium #CSR
@@ -688,18 +688,18 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
     sel = st.selectbox("Select GTM Asset to Export", options, key=f"sel_gtm_{key_prefix}")
     doc_content = generate_gtm_document(sel, name, sport, state, details)
     file_name_clean = f"{name.lower().replace(' ', '_')}_{sel.lower().replace(' ', '_')}.md"
-    st.download_button(f"📥 Download {sel}", data=doc_content, file_name=file_name_clean, mime="text/markdown", key=f"btn_gtm_{key_prefix}", use_container_width=True)
+    st.download_button(f" Download {sel}", data=doc_content, file_name=file_name_clean, mime="text/markdown", key=f"btn_gtm_{key_prefix}", use_container_width=True)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 1 — PATHWAY OVERVIEW (HOMEPAGE)
 # Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab1:
-    st.markdown('<div class="stitle">📍 Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
     # 1. Dynamic Grassroots-to-Podium Conversion Funnel
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;">🏆 Grassroots-to-Podium Conversion Funnel</div>', unsafe_allow_html=True)
-    st.markdown(insight("💡 Dynamic Conversion Pipeline", 
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Funnel</div>', unsafe_allow_html=True)
+    st.markdown(insight(" Dynamic Conversion Pipeline", 
         "Track athlete progression across India's decentralized sports framework (ASMITA & Khelo India models). Filter by sport and gender to analyze pipeline drop-offs.", "blue"), unsafe_allow_html=True)
     
     col_f1, col_f2 = st.columns([1, 1])
@@ -711,33 +711,33 @@ with tab1:
     # Data dictionary for dynamic funnel
     funnel_data = {
         "All Sports": {
-            "All":    [300000, 22400, 3100, 580, 78],
-            "Male":   [165000, 12100, 1650, 310, 42],
+            "All": [300000, 22400, 3100, 580, 78],
+            "Male": [165000, 12100, 1650, 310, 42],
             "Female": [135000, 10300, 1450, 270, 36],
         },
         "Wrestling": {
-            "All":    [60000, 4800, 680, 140, 22],
-            "Male":   [35000, 2800, 400, 80, 12],
+            "All": [60000, 4800, 680, 140, 22],
+            "Male": [35000, 2800, 400, 80, 12],
             "Female": [25000, 2000, 280, 60, 10],
         },
         "Boxing": {
-            "All":    [45000, 3200, 480, 95, 14],
-            "Male":   [24000, 1800, 280, 55, 8],
+            "All": [45000, 3200, 480, 95, 14],
+            "Male": [24000, 1800, 280, 55, 8],
             "Female": [21000, 1400, 200, 40, 6],
         },
         "Archery": {
-            "All":    [25000, 1900, 310, 65, 8],
-            "Male":   [13000, 1000, 160, 35, 4],
+            "All": [25000, 1900, 310, 65, 8],
+            "Male": [13000, 1000, 160, 35, 4],
             "Female": [12000, 900, 150, 30, 4],
         },
         "Hockey": {
-            "All":    [85000, 6100, 820, 160, 24],
-            "Male":   [48000, 3400, 460, 90, 13],
+            "All": [85000, 6100, 820, 160, 24],
+            "Male": [48000, 3400, 460, 90, 13],
             "Female": [37000, 2700, 360, 70, 11],
         },
         "Athletics": {
-            "All":    [85000, 6400, 810, 120, 10],
-            "Male":   [45000, 3100, 350, 50, 5],
+            "All": [85000, 6400, 810, 120, 10],
+            "Male": [45000, 3100, 350, 50, 5],
             "Female": [40000, 3300, 460, 70, 5],
         }
     }
@@ -765,7 +765,7 @@ with tab1:
         st.plotly_chart(fig_funnel, use_container_width=True)
         
     with col_funnel_diag:
-        st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0;">🛡️ Pipeline Blocker & Leakage Analysis</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0;"> Pipeline Blocker & Leakage Analysis</div>', unsafe_allow_html=True)
         
         # Calculate transition rates
         t1_rate = (funnel_vals[1] / funnel_vals[0]) * 100
@@ -775,28 +775,28 @@ with tab1:
         
         st.markdown(f"""
         <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">District ➔ State Transition: {t1_rate:.1f}%</div>
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">District State Transition: {t1_rate:.1f}%</div>
             <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
                 <b>Leakage Blocker:</b> Lack of standardized equipment kits & travel funding in Tier-3 districts.<br>
                 <b>Recommended CSR Intervention:</b> Support village-level league travel grants.
             </div>
         </div>
         <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">State ➔ Zonal Transition: {t2_rate:.1f}%</div>
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">State Zonal Transition: {t2_rate:.1f}%</div>
             <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
                 <b>Leakage Blocker:</b> Insufficient NIS certified coaches and sports science clinics at state levels.<br>
                 <b>Recommended Intervention:</b> Train former state athletes as district coaches.
             </div>
         </div>
         <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">Zonal ➔ National Transition: {t3_rate:.1f}%</div>
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">Zonal National Transition: {t3_rate:.1f}%</div>
             <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
                 <b>Leakage Blocker:</b> Lack of specialized residential sports academy placements and advanced nutrition.<br>
                 <b>Recommended Intervention:</b> Partner with private/SAI NCOE centres.
             </div>
         </div>
         <div class="acard" style="border-left:3px solid var(--pink);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">National ➔ Elite Transition: {t4_rate:.1f}%</div>
+            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">National Elite Transition: {t4_rate:.1f}%</div>
             <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
                 <b>Leakage Blocker:</b> Insufficient corporate sponsorship for international exposure tournaments.<br>
                 <b>Recommended Intervention:</b> Align private sponsor contracts to elite athletes.
@@ -805,13 +805,13 @@ with tab1:
         """, unsafe_allow_html=True)
 
     # 2. Recommended Pathway Actions
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;">🎯 Recommended Pathway Actions</div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Recommended Pathway Actions</div>', unsafe_allow_html=True)
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown("""
         <div class="acard" style="border-top:3px solid var(--purple);height:290px;display:flex;flex-direction:column;justify-content:between;">
             <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🥋 Women’s Combat Sports</div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Women’s Combat Sports</div>
                 <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
                     <b>Action:</b> Build scouting + coaching cohort<br>
                     <b>Where:</b> Haryana / UP / Rajasthan<br>
@@ -819,7 +819,7 @@ with tab1:
                 </div>
             </div>
             <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                👉 Next step: Identify 25 coaches & 5 pilot districts
+                 Next step: Identify 25 coaches & 5 pilot districts
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -829,7 +829,7 @@ with tab1:
         st.markdown("""
         <div class="acard" style="border-top:3px solid var(--teal);height:290px;display:flex;flex-direction:column;justify-content:between;">
             <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🏹 Archery Precision Pathway</div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Archery Precision Pathway</div>
                 <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
                     <b>Action:</b> Run assessment talent pilot<br>
                     <b>Where:</b> North East / tribal belts / rural districts<br>
@@ -837,7 +837,7 @@ with tab1:
                 </div>
             </div>
             <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                👉 Next step: Shortlist academies and coaches
+                 Next step: Shortlist academies and coaches
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -847,7 +847,7 @@ with tab1:
         st.markdown("""
         <div class="acard" style="border-top:3px solid var(--gold);height:290px;display:flex;flex-direction:column;justify-content:between;">
             <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🧠 Coach Capacity Programme</div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Coach Capacity Programme</div>
                 <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
                     <b>Action:</b> Build athlete-to-coach registry<br>
                     <b>Where:</b> Priority sport clusters<br>
@@ -855,7 +855,7 @@ with tab1:
                 </div>
             </div>
             <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                👉 Next step: Onboard 50 coaches/former athletes
+                 Next step: Onboard 50 coaches/former athletes
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -865,7 +865,7 @@ with tab1:
         st.markdown("""
         <div class="acard" style="border-top:3px solid var(--pink);height:290px;display:flex;flex-direction:column;justify-content:between;">
             <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;">🏛️ Federation Visibility Layer</div>
+                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Federation Visibility Layer</div>
                 <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
                     <b>Action:</b> Build NSF credibility profiles<br>
                     <b>Where:</b> Priority Olympic & niche sports<br>
@@ -873,7 +873,7 @@ with tab1:
                 </div>
             </div>
             <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                👉 Next step: Complete 30 federation profiles
+                 Next step: Complete 30 federation profiles
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -882,17 +882,17 @@ with tab1:
     st.markdown("<br>", unsafe_allow_html=True)
 
     # 3. Medal Pathway Diagnostic Widget
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">🚨 Why Medals Are Lost: Pathway Breaks Detected</div>', unsafe_allow_html=True)
-    st.markdown(insight("💡 Pathway Diagnostics", 
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;"> Why Medals Are Lost: Pathway Breaks Detected</div>', unsafe_allow_html=True)
+    st.markdown(insight(" Pathway Diagnostics", 
         "By identifying gaps in the 5 critical stages of athlete development, we can target CSR and coaching investments precisely.", "red"), unsafe_allow_html=True)
     
     diagnostic_cols = st.columns(5)
     diag_stages = [
-        {"stage": "🔍 1. Discovery", "signal": "Talent clusters unmapped", "action": "Run scouting camps", "gap": "9 clusters unmapped", "col": "blue"},
-        {"stage": "🧠 2. Coaching", "signal": "High load, low availability", "action": "Coach registry + clinics", "gap": "24 capacity gaps", "col": "purple"},
-        {"stage": "⚔️ 3. Competition", "signal": "Weak exposure calendar", "action": "Build competition access", "gap": "14 states lack events", "col": "teal"},
-        {"stage": "💰 4. Funding", "signal": "CSR not tied to progression", "action": "Package cohorts for sponsors", "gap": "82% unfunded", "col": "gold"},
-        {"stage": "📈 5. Progression", "signal": "No next-step visibility", "action": "Recommend academy route", "gap": "40% exit sports early", "col": "pink"}
+        {"stage": " 1. Discovery", "signal": "Talent clusters unmapped", "action": "Run scouting camps", "gap": "9 clusters unmapped", "col": "blue"},
+        {"stage": " 2. Coaching", "signal": "High load, low availability", "action": "Coach registry + clinics", "gap": "24 capacity gaps", "col": "purple"},
+        {"stage": " 3. Competition", "signal": "Weak exposure calendar", "action": "Build competition access", "gap": "14 states lack events", "col": "teal"},
+        {"stage": " 4. Funding", "signal": "CSR not tied to progression", "action": "Package cohorts for sponsors", "gap": "82% unfunded", "col": "gold"},
+        {"stage": " 5. Progression", "signal": "No next-step visibility", "action": "Recommend academy route", "gap": "40% exit sports early", "col": "pink"}
     ]
     for idx, ds in enumerate(diag_stages):
         with diagnostic_cols[idx]:
@@ -900,7 +900,7 @@ with tab1:
             <div class="acard" style="border-top:3px solid var(--{ds['col']});height:165px;text-align:center;margin-bottom:0.5rem;">
                 <div style="font-weight:700;font-size:0.9rem;color:#FFF;">{ds['stage']}</div>
                 <div style="font-size:0.75rem;color:var(--text3);margin-top:0.3rem;">{ds['gap']}</div>
-                <div style="font-size:0.8rem;color:var(--pink);margin-top:0.5rem;font-weight:600;min-height:36px;">⚠️ {ds['signal']}</div>
+                <div style="font-size:0.8rem;color:var(--pink);margin-top:0.5rem;font-weight:600;min-height:36px;"> {ds['signal']}</div>
             </div>
             """, unsafe_allow_html=True)
             if st.button(ds['action'], key=f"btn_diag_action_{idx}", use_container_width=True):
@@ -912,7 +912,7 @@ with tab1:
         st.markdown(f"""
         <div style="background:rgba(138,180,248,0.06);border:1px solid var(--{action_ds['col']});border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
           <div style="font-family:Outfit,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
-            🚀 Active Action Guide: {action_ds['action']} ({action_ds['stage']})
+             Active Action Guide: {action_ds['action']} ({action_ds['stage']})
           </div>
         </div>
         """, unsafe_allow_html=True)
@@ -938,14 +938,14 @@ with tab1:
                     "2. **Empanel at NCOEs:** Guide qualified national-level talent directly to residential training programs in **Tab 5**.\n"
                     "3. **Verify Compliance:** Audit athlete credentials and age certifications in **Tab 10 (Data Quality)**.")
             
-        if st.button("❌ Close Action Guide", key="btn_close_diag_action"):
+        if st.button(" Close Action Guide", key="btn_close_diag_action"):
             del st.session_state["active_diag_action"]
             st.rerun()
 
     st.markdown("<br>", unsafe_allow_html=True)
 
     # 4. AthletIQ Opportunity Score Explainer
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">📊 Medal Pathway Scoring Model</div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;"> Medal Pathway Scoring Model</div>', unsafe_allow_html=True)
     o1, o2 = st.columns([1, 2])
     with o1:
         st.markdown("""
@@ -954,7 +954,7 @@ with tab1:
             <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Outfit,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
             <div style="font-size:0.75rem;color:var(--text2);margin-bottom:0.6rem;">Confidence: <span class="tag green">Medium-High</span></div>
             <div style="font-size:0.82rem;color:var(--blue);font-weight:700;border-top:1px solid rgba(255,255,255,0.06);padding-top:0.6rem;">
-                🎯 Action: Build Pilot Cohort
+                 Action: Build Pilot Cohort
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -979,14 +979,14 @@ with tab1:
     st.markdown("<br>", unsafe_allow_html=True)
 
     # 5. Top Talent Clusters Preview
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;">🗺️ Top Regional Talent Clusters</div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;"> Top Regional Talent Clusters</div>', unsafe_allow_html=True)
     tc1, tc2, tc3 = st.columns(3)
     with tc1:
-        st.markdown(insight("🤼 Haryana Wrestling Cluster", "<b>12 Elite Prospects | 4 NCOEs | High CSR Appeal</b><br>State-level powerhouse with consistent podium results. High digital readiness. Best sponsor fit: BFSI / Mobility.", "green"), unsafe_allow_html=True)
+        st.markdown(insight(" Haryana Wrestling Cluster", "<b>12 Elite Prospects | 4 NCOEs | High CSR Appeal</b><br>State-level powerhouse with consistent podium results. High digital readiness. Best sponsor fit: BFSI / Mobility.", "green"), unsafe_allow_html=True)
     with tc2:
-        st.markdown(insight("🏹 Manipur & Assam Archery Precision", "<b>8 Elite Prospects | 2 Academy Partners | Tribal focus</b><br>Precision sports focus with natural grassroots talent depth. High CSR alignment for tribal development.", "purple"), unsafe_allow_html=True)
+        st.markdown(insight(" Manipur & Assam Archery Precision", "<b>8 Elite Prospects | 2 Academy Partners | Tribal focus</b><br>Precision sports focus with natural grassroots talent depth. High CSR alignment for tribal development.", "purple"), unsafe_allow_html=True)
     with tc3:
-        st.markdown(insight("🏃 Punjab & Haryana Javelin Throw", "<b>6 Rising Talents | 2 NIS mentors | Coach gap identified</b><br>High medal appeal (Neeraj Chopra pipeline). Urgently needs certified coaching registry.", "amber"), unsafe_allow_html=True)
+        st.markdown(insight(" Punjab & Haryana Javelin Throw", "<b>6 Rising Talents | 2 NIS mentors | Coach gap identified</b><br>High medal appeal (Neeraj Chopra pipeline). Urgently needs certified coaching registry.", "amber"), unsafe_allow_html=True)
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -994,23 +994,23 @@ with tab1:
 # Purpose: Where talent is likely to emerge; who should be scouted.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab2:
-    st.markdown('<div class="stitle">🔎 Discovery & Leagues <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Discovery & Leagues <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
     disc_tabs = st.tabs(["Grassroots Leagues Tracker", "Emerging Athlete Prospects"])
     
     with disc_tabs[0]:
-        st.markdown(insight("ℹ️ Decentralized Leagues Tracker", 
+        st.markdown(insight("ℹ Decentralized Leagues Tracker", 
             "Track local, district, state, and zonal tournaments mapping both Male & Female athletes. Inspired by the Khelo India and ASMITA frameworks.", "purple"), unsafe_allow_html=True)
         
         # League Stats KPIs
         l1, l2, l3, l4 = st.columns(4)
-        with l1: st.markdown(mkpi("🏆", "Total Leagues", "2,840+", "#8AB4F8"), unsafe_allow_html=True)
-        with l2: st.markdown(mkpi("📍", "Districts Mapped", "582", "#C58AF9"), unsafe_allow_html=True)
-        with l3: st.markdown(mkpi("👦", "Male Participants", "176,400+", "#81C995"), unsafe_allow_html=True)
-        with l4: st.markdown(mkpi("👧", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
+        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#8AB4F8"), unsafe_allow_html=True)
+        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#C58AF9"), unsafe_allow_html=True)
+        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#81C995"), unsafe_allow_html=True)
+        with l4: st.markdown(mkpi("", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
         
         # Participation Chart (Male vs Female)
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">📊 Gender-Inclusive Participation across Core Sports</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;"> Gender-Inclusive Participation across Core Sports</div>', unsafe_allow_html=True)
         participation_data = pd.DataFrame([
             {"Sport": "Wrestling", "Gender": "Male", "Participants": 35000},
             {"Sport": "Wrestling", "Gender": "Female", "Participants": 25000},
@@ -1030,7 +1030,7 @@ with tab2:
         st.plotly_chart(fig_participation, use_container_width=True)
         
         # Directory of Leagues
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">📋 Active Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;"> Active Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
         leagues_df = df_all[df_all["entity_type"]=="Event"].copy()
         if not leagues_df.empty:
             leagues_disp = leagues_df[["name", "sport", "performance_level", "gender", "state", "participants_or_capacity", "funding_status"]].copy()
@@ -1039,25 +1039,25 @@ with tab2:
             
             # Export button
             dl_leagues = leagues_disp.to_csv(index=False).encode("utf-8")
-            st.download_button("📥 Download Leagues Directory (CSV)", dl_leagues, "grassroots_leagues.csv", "text/csv", use_container_width=True, key="btn_dl_leagues")
+            st.download_button(" Download Leagues Directory (CSV)", dl_leagues, "grassroots_leagues.csv", "text/csv", use_container_width=True, key="btn_dl_leagues")
             
     with disc_tabs[1]:
-        st.markdown(insight("ℹ️ Scouting Pipeline", 
+        st.markdown(insight("ℹ Scouting Pipeline", 
             "Explore rising prospects mapped across India. Unlike 'Future Champions', we classify them as prospects "
             "by their current verified status and assign coach readiness indicators.", ""), unsafe_allow_html=True)
         
         # KPIs
         athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
         a1, a2, a3, a4 = st.columns(4)
-        with a1: st.markdown(mkpi("🏃", "Total Prospects", str(len(athletes_data)), "#8AB4F8"), unsafe_allow_html=True)
-        with a2: st.markdown(mkpi("👩", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#C58AF9"), unsafe_allow_html=True)
-        with a3: st.markdown(mkpi("✅", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#81C995"), unsafe_allow_html=True)
-        with a4: st.markdown(mkpi("⚠️", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
+        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#8AB4F8"), unsafe_allow_html=True)
+        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#C58AF9"), unsafe_allow_html=True)
+        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#81C995"), unsafe_allow_html=True)
+        with a4: st.markdown(mkpi("", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
         
         # Table of prospects
-        st.markdown('<div class="stitle" style="font-size:1rem;">📋 Active Prospects Directory</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Active Prospects Directory</div>', unsafe_allow_html=True)
         
         # Format a cleaner display dataframe
         prospects_display = athletes_data.copy()
@@ -1071,7 +1071,7 @@ with tab2:
         
         # Export button
         dl_prospects = pd_table.to_csv(index=False).encode("utf-8")
-        st.download_button("📥 Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True, key="btn_dl_prospects")
+        st.download_button(" Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True, key="btn_dl_prospects")
 
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1079,25 +1079,25 @@ with tab2:
 # Purpose: Which sports AthletIQ should focus on and why.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab3:
-    st.markdown('<div class="stitle">🎯 Sport Priority Matrix <span class="chip chip-amber">Strategic Classification of Sports</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Sport Priority Matrix <span class="chip chip-amber">Strategic Classification of Sports</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Classification Matrix", 
+    st.markdown(insight("ℹ Classification Matrix", 
         "AthletIQ maps sports into strategic classifications to guide sponsorships, CSR investments, and data tracking.", "green"), unsafe_allow_html=True)
         
     sport_category = st.radio("Choose Sport Category", 
-                              ["🔥 Powerhouse Sports", "👩 Women's Pathway Sports", "🎯 Precision / Data-Ready Sports", "🏃 Emerging Youth Sports", "🌾 Indigenous Sports"],
+                              [" Powerhouse Sports", " Women's Pathway Sports", " Precision / Data-Ready Sports", " Emerging Youth Sports", " Indigenous Sports"],
                               horizontal=True, key="sport_priority_radio")
                               
     st.markdown("<br>", unsafe_allow_html=True)
     
-    if sport_category == "🔥 Powerhouse Sports":
+    if sport_category == " Powerhouse Sports":
         st.markdown(insight("Powerhouse Sports (Wrestling, Hockey, Athletics, Boxing)", 
             "<b>Strategic Intent:</b> Mass appeal, established depth, and historically high podium conversions. Focus on scale.", "green"), unsafe_allow_html=True)
         
         # Details
         st.markdown("""
         <div class="acard">
-            <div class="acard-title">🤼 Wrestling</div>
+            <div class="acard-title"> Wrestling</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> Highest individual medal yield for India in recent Olympics.<br>
                 <b>Where it is strong:</b> Haryana, Punjab, Delhi, Maharashtra (Kolhapur).<br>
@@ -1106,7 +1106,7 @@ with tab3:
             </div>
         </div>
         <div class="acard">
-            <div class="acard-title">🏑 Hockey</div>
+            <div class="acard-title"> Hockey</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> National sport with premium sponsor appeal (Tata, Odisha Govt).<br>
                 <b>Where it is strong:</b> Odisha (Sundargarh), Punjab, Jharkhand, Haryana.<br>
@@ -1116,13 +1116,13 @@ with tab3:
         </div>
         """, unsafe_allow_html=True)
         
-    elif sport_category == "👩 Women's Pathway Sports":
+    elif sport_category == " Women's Pathway Sports":
         st.markdown(insight("Women's Pathway Sports (Wrestling, Boxing, Judo, Taekwondo, Athletics, Weightlifting)", 
             "<b>Strategic Intent:</b> High capability CSR brand connection + high medal yield per athlete capital.", "purple"), unsafe_allow_html=True)
             
         st.markdown("""
         <div class="acard">
-            <div class="acard-title">🏋️ Weightlifting</div>
+            <div class="acard-title"> Weightlifting</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> Mirabai Chanu pipeline. High medals/participants ratio.<br>
                 <b>Where it is strong:</b> Manipur, Odisha, Andhra Pradesh.<br>
@@ -1131,7 +1131,7 @@ with tab3:
             </div>
         </div>
         <div class="acard">
-            <div class="acard-title">🥊 Boxing</div>
+            <div class="acard-title"> Boxing</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> High international results (Nikhat Zareen, Lovlina Borgohain).<br>
                 <b>Where it is strong:</b> Haryana, Assam, Manipur.<br>
@@ -1141,13 +1141,13 @@ with tab3:
         </div>
         """, unsafe_allow_html=True)
         
-    elif sport_category == "🎯 Precision / Data-Ready Sports":
+    elif sport_category == " Precision / Data-Ready Sports":
         st.markdown(insight("Precision & Data-Ready Sports (Archery, Shooting, Chess, Swimming)", 
             "<b>Strategic Intent:</b> Ideal for AI-assisted performance tracking, sensor integrations, and tech sponsorships.", "blue"), unsafe_allow_html=True)
             
         st.markdown("""
         <div class="acard">
-            <div class="acard-title">🏹 Archery</div>
+            <div class="acard-title"> Archery</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> Strong junior pipeline. Measurable draw weight and release speed.<br>
                 <b>Where it is strong:</b> Jharkhand, Manipur, Assam, Meghalaya.<br>
@@ -1156,7 +1156,7 @@ with tab3:
             </div>
         </div>
         <div class="acard">
-            <div class="acard-title">🎯 Shooting</div>
+            <div class="acard-title"> Shooting</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> Manu Bhaker's double podium. Digital scoring makes it highly data-compatible.<br>
                 <b>Where it is strong:</b> Haryana, Uttar Pradesh, Maharashtra.<br>
@@ -1166,13 +1166,13 @@ with tab3:
         </div>
         """, unsafe_allow_html=True)
         
-    elif sport_category == "🏃 Emerging Youth Sports":
+    elif sport_category == " Emerging Youth Sports":
         st.markdown(insight("Emerging Youth Sports (Taekwondo, Wushu, Fencing, Judo)", 
             "<b>Strategic Intent:</b> Next-generation Olympic sports with massive growth potential and youth appeal.", "teal"), unsafe_allow_html=True)
             
         st.markdown("""
         <div class="acard">
-            <div class="acard-title">🤺 Fencing</div>
+            <div class="acard-title"> Fencing</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> Rapidly growing interest. High agility, perfect for early-age physical screening.<br>
                 <b>Where it is strong:</b> Tamil Nadu, Manipur, Punjab.<br>
@@ -1182,13 +1182,13 @@ with tab3:
         </div>
         """, unsafe_allow_html=True)
         
-    elif sport_category == "🌾 Indigenous Sports":
+    elif sport_category == " Indigenous Sports":
         st.markdown(insight("Indigenous & Mass Participation Sports (Kho-Kho, Mallakhamb, Yogasana, Kabaddi)", 
             "<b>Strategic Intent:</b> Community activation, mass rural reach, and high-impact local storytelling for regional brands.", "gold"), unsafe_allow_html=True)
             
         st.markdown("""
         <div class="acard">
-            <div class="acard-title">🤸 Mallakhamb</div>
+            <div class="acard-title"> Mallakhamb</div>
             <div class="acard-meta">
                 <b>Why it matters:</b> Gymnastic foundation, extremely high physical literacy and coordination.<br>
                 <b>Where it is strong:</b> Madhya Pradesh, Maharashtra, Gujarat.<br>
@@ -1223,28 +1223,28 @@ with tab3:
 # Purpose: Where coaching is the bottleneck; former athlete-to-coach opportunities; masterclass needs.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab4:
-    st.markdown('<div class="stitle">🧠 Coach Capacity <span class="chip chip-purple">Empowerment & Capacity Gaps</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Coach Capacity <span class="chip chip-purple">Empowerment & Capacity Gaps</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ The Bottleneck in Indian Sports", 
+    st.markdown(insight("ℹ The Bottleneck in Indian Sports", 
         "Athlete discovery fails without coaching depth. India lacks certified trainers in Tier-2/3 regions. "
         "AthletIQ maps coach availability and transitions former players into coaching roles.", "red"), unsafe_allow_html=True)
         
     c_coach_1, c_coach_2 = st.columns(2)
     
     with c_coach_1:
-        st.markdown('<div class="stitle" style="font-size:1rem;">👨‍🏫 Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
-        st.markdown(insight("🔥 Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment. Next step: Secure corporate CSR sponsor for her masterclasses.", "purple"), unsafe_allow_html=True)
-        st.markdown(insight("🔥 Candidate: PR Sreejesh (Hockey Goalkeeping)", "<b>2x Olympic medallist | Proposed: Goalkeeping Director, Odisha NCOE</b><br>World-class goalkeeping mentor. Can head coach development programs for junior goalkeepers.", "green"), unsafe_allow_html=True)
-        st.markdown(insight("🔥 Candidate: Saina Nehwal (Badminton)", "<b>Olympic medallist | Proposed: Mentor, Badminton Academy, Hyderabad</b><br>Pioneer of women's singles. High capability candidate for masterclasses.", ""), unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment. Next step: Secure corporate CSR sponsor for her masterclasses.", "purple"), unsafe_allow_html=True)
+        st.markdown(insight(" Candidate: PR Sreejesh (Hockey Goalkeeping)", "<b>2x Olympic medallist | Proposed: Goalkeeping Director, Odisha NCOE</b><br>World-class goalkeeping mentor. Can head coach development programs for junior goalkeepers.", "green"), unsafe_allow_html=True)
+        st.markdown(insight(" Candidate: Saina Nehwal (Badminton)", "<b>Olympic medallist | Proposed: Mentor, Badminton Academy, Hyderabad</b><br>Pioneer of women's singles. High capability candidate for masterclasses.", ""), unsafe_allow_html=True)
         
     with c_coach_2:
-        st.markdown('<div class="stitle" style="font-size:1rem;">⚠️ Identified Capacity Bottlenecks</div>', unsafe_allow_html=True)
-        st.markdown(insight("🚨 Archery Coach Deficit (Jharkhand/Meghalaya)", "<b>Load Ratio: 45 athletes per coach (SAI standard: 15)</b><br>High risk of injury and progression stall. Action: Deploy NIS archery masterclass.", "red"), unsafe_allow_html=True)
-        st.markdown(insight("🚨 Weightlifting Barbell Safety Gap (Assam)", "<b>Load Ratio: 32 athletes per platform</b><br>High physical safety hazard. Action: Sponsor weightlifting platforms.", "amber"), unsafe_allow_html=True)
-        st.markdown(insight("🚨 Shooting Range Ammo Licensing (UP)", "<b>Lead time: 180 days for licensing trials</b><br>Limits high-frequency firing practice. Action: Connect federation lead.", ""), unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Identified Capacity Bottlenecks</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Archery Coach Deficit (Jharkhand/Meghalaya)", "<b>Load Ratio: 45 athletes per coach (SAI standard: 15)</b><br>High risk of injury and progression stall. Action: Deploy NIS archery masterclass.", "red"), unsafe_allow_html=True)
+        st.markdown(insight(" Weightlifting Barbell Safety Gap (Assam)", "<b>Load Ratio: 32 athletes per platform</b><br>High physical safety hazard. Action: Sponsor weightlifting platforms.", "amber"), unsafe_allow_html=True)
+        st.markdown(insight(" Shooting Range Ammo Licensing (UP)", "<b>Lead time: 180 days for licensing trials</b><br>Limits high-frequency firing practice. Action: Connect federation lead.", ""), unsafe_allow_html=True)
         
     # Coaches Table
-    st.markdown('<div class="stitle" style="font-size:1rem;">📂 Active Coaches Directory</div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" style="font-size:1rem;"> Active Coaches Directory</div>', unsafe_allow_html=True)
     coaches_list = df_all[df_all["entity_type"]=="Coach"].copy()
     if not coaches_list.empty:
         co_display = coaches_list[["name", "sport", "state", "performance_level", "digital_readiness", "notes"]].copy()
@@ -1252,8 +1252,8 @@ with tab4:
         st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=250)
 
     # ── Coach Reallocation & Deficit Optimizer ──
-    st.markdown('<div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;">🚨 Coach Deficit & Reallocation Optimizer</div>', unsafe_allow_html=True)
-    st.markdown(insight("🤖 Decision Engine: Dynamic Reallocation", 
+    st.markdown('<div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;"> Coach Deficit & Reallocation Optimizer</div>', unsafe_allow_html=True)
+    st.markdown(insight(" Decision Engine: Dynamic Reallocation", 
         "This tool automatically scans SAI Centres, detects athlete-to-coach imbalances for a sport, "
         "and recommends a reallocation strategy from surplus centres to resolve the deficit based on capacities.", "purple"), unsafe_allow_html=True)
     
@@ -1324,10 +1324,10 @@ with tab4:
             st.metric("Global Ratio", f"{total_athletes/total_coaches:.1f} athletes/coach" if total_coaches > 0 else "N/A")
             
         # Display Imbalance Table
-        st.markdown("##### 📊 Current Athlete-Coach Imbalance Directory")
+        st.markdown("##### Current Athlete-Coach Imbalance Directory")
         df_opt_disp = df_opt.copy()
         df_opt_disp.columns = ["Centre Name", "State", "Athlete Capacity", "Active Coaches", "Load Ratio"]
-        df_opt_disp["Load Ratio"] = df_opt_disp["Load Ratio"].apply(lambda x: "🚨 Infinite (0 Coaches)" if x == float('inf') else f"{x:.1f}:1")
+        df_opt_disp["Load Ratio"] = df_opt_disp["Load Ratio"].apply(lambda x: " Infinite (0 Coaches)" if x == float('inf') else f"{x:.1f}:1")
         st.dataframe(df_opt_disp.reset_index(drop=True), use_container_width=True, height=200)
         
         # Transfer matching
@@ -1357,16 +1357,16 @@ with tab4:
                 d_idx += 1
                 
         # Render Recommendations
-        st.markdown("##### 🚀 Recommended Reallocation Strategy Decisions")
+        st.markdown("##### Recommended Reallocation Strategy Decisions")
         if transfers:
             for t in transfers:
                 st.markdown(insight(
-                    f"💡 Transfer Decision: Move {int(t['qty'])} coach(es)", 
-                    f"📤 <b>From:</b> {t['from']}<br>📥 <b>To:</b> {t['to']}<br>📝 <b>Impact:</b> {t['reason']}", 
+                    f" Transfer Decision: Move {int(t['qty'])} coach(es)", 
+                    f" <b>From:</b> {t['from']}<br> <b>To:</b> {t['to']}<br> <b>Impact:</b> {t['reason']}", 
                     "green"
                 ), unsafe_allow_html=True)
         else:
-            st.success("✅ Coach loading ratios are balanced! No reallocation transfer is required for this sport.")
+            st.success(" Coach loading ratios are balanced! No reallocation transfer is required for this sport.")
     else:
         st.info("No SAI Centres currently support or have capacity for the selected sport.")
 
@@ -1376,21 +1376,21 @@ with tab4:
 # Purpose: SAI, private academies, schools, akharas, clubs, venues.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab5:
-    st.markdown('<div class="stitle">🏛️ Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ What is this?", 
+    st.markdown(insight("ℹ What is this?", 
         "AthletIQ maps government training centres (SAI), private academies, and local wrestling akharas/boxing clubs "
         "to help sponsors invest in infrastructure name-rights, safety gear, and coaching scholarships.", ""), unsafe_allow_html=True)
         
     sub_centre_tabs = st.tabs(["SAI Centres & NCOEs", "Private Academies", "Akharas & Clubs", "Partner Network"])
     
     with sub_centre_tabs[0]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🏛️ Sports Authority of India Training Network</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Sports Authority of India Training Network</div>', unsafe_allow_html=True)
         
         # Interactive Matcher Linkage
         st.markdown("""
         <div style="background:rgba(138,180,248,0.06);border:1px solid rgba(138,180,248,0.18);border-radius:15px;padding:1.2rem;margin-bottom:1rem;">
-          <b>🎯 Smart SAI Matcher Ready:</b> Head over to the <b>Athlete Cohorts</b> tab, 
+          <b> Smart SAI Matcher Ready:</b> Head over to the <b>Athlete Cohorts</b> tab, 
           select any athlete, and click "Match SAI Centre" to instantly score the recommended NCOEs here.
         </div>
         """, unsafe_allow_html=True)
@@ -1401,7 +1401,7 @@ with tab5:
         st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=280)
         
     with sub_centre_tabs[1]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🏫 Top Private Sports Academies</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Top Private Sports Academies</div>', unsafe_allow_html=True)
         private_acads = [
             {"name": "JSW Inspire Institute of Sport (IIS)", "location": "Vijayanagar, Karnataka", "sports": "Boxing · Wrestling · Athletics", "capacity": "150 athletes", "focus": "Elite performance training"},
             {"name": "Tata Archery Academy", "location": "Jamshedpur, Jharkhand", "sports": "Archery", "capacity": "40 athletes", "focus": "Precision archery pipelines"},
@@ -1414,14 +1414,14 @@ with tab5:
             <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;">
                 <div class="acard-title">{pa['name']}</div>
                 <div class="acard-meta">
-                    📍 {pa['location']} &nbsp;|&nbsp; 🏟️ <b>Sports:</b> {pa['sports']} &nbsp;|&nbsp; 👥 <b>Capacity:</b> {pa['capacity']}<br>
-                    💡 <b>Strategic Focus:</b> {pa['focus']}
+                     {pa['location']} &nbsp;|&nbsp; <b>Sports:</b> {pa['sports']} &nbsp;|&nbsp; <b>Capacity:</b> {pa['capacity']}<br>
+                     <b>Strategic Focus:</b> {pa['focus']}
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
     with sub_centre_tabs[2]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🤼 Akharas & Regional Boxing Clubs</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Akharas & Regional Boxing Clubs</div>', unsafe_allow_html=True)
         akharas = [
             {"name": "Chhatrasal Akhara", "location": "Delhi", "sport": "Wrestling", "mentors": "Sushil Kumar, Ravi Dahiya, Aman Sehrawat", "status": "Podium breeding ground"},
             {"name": "Guru Hanuman Akhara", "location": "Delhi", "sport": "Wrestling", "mentors": "Legendary historic coaching foundation", "status": "Grassroots wrestling"},
@@ -1430,17 +1430,17 @@ with tab5:
         for ak in akharas:
             st.markdown(f"""
             <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;">
-                <div class="acard-title">🏆 {ak['name']} ({ak['sport']})</div>
+                <div class="acard-title"> {ak['name']} ({ak['sport']})</div>
                 <div class="acard-meta">
-                    📍 {ak['location']} &nbsp;|&nbsp; 👨‍🏫 <b>Mentors:</b> {ak['mentors']}<br>
-                    💡 <b>Ecosystem Role:</b> {ak['status']}
+                     {ak['location']} &nbsp;|&nbsp; <b>Mentors:</b> {ak['mentors']}<br>
+                     <b>Ecosystem Role:</b> {ak['status']}
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
     with sub_centre_tabs[3]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">📈 Partner Network (Schools & Venues)</div>', unsafe_allow_html=True)
-        st.markdown(insight("🤝 Schools & Clubs Integration", 
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Partner Network (Schools & Venues)</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Schools & Clubs Integration", 
             "AthletIQ partners with 50+ regional schools and state venues to host scouting trials. "
             "Sponsors can brand these venues or sponsor inter-school tournaments directly on FitEvents OS.", "green"), unsafe_allow_html=True)
 
@@ -1450,9 +1450,9 @@ with tab5:
 # Purpose: NSF governance, office bearers, status, credibility, engagement opportunity.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab6:
-    st.markdown('<div class="stitle">🏛️ Federation Intelligence <span class="chip chip-purple">NSF Governance & Engagement Opportunities</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Federation Intelligence <span class="chip chip-purple">NSF Governance & Engagement Opportunities</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Why Federations Matter", 
+    st.markdown(insight("ℹ Why Federations Matter", 
         "Athletes, sponsors, and policymakers need absolute clarity on who governs what. "
         "We track NSF governance status, credibility scores, and joint trial empanelment opportunities.", ""), unsafe_allow_html=True)
         
@@ -1473,14 +1473,14 @@ with tab6:
                 <div class="acard-score" style="color:var(--{fed['col']});">{fed['score']}/10</div>
             </div>
             <div class="acard-meta">
-                👤 <b>President:</b> {fed['president']} &nbsp;|&nbsp; 🚦 <b>Status:</b> {fed['status']}<br>
-                💡 <b>AthletIQ Opportunity:</b> {fed['opp']}
+                 <b>President:</b> {fed['president']} &nbsp;|&nbsp; <b>Status:</b> {fed['status']}<br>
+                 <b>AthletIQ Opportunity:</b> {fed['opp']}
             </div>
         </div>
         """, unsafe_allow_html=True)
         
         # Export button for federation brief
-        st.download_button(f"📥 Export Federation Credibility Brief ({fed['sport']})", 
+        st.download_button(f" Export Federation Credibility Brief ({fed['sport']})", 
                            data=generate_gtm_document("Validation Checklist", fed['nsf'], fed['sport'], "Delhi", fed['opp']),
                            file_name=f"{fed['sport'].lower()}_federation_brief.md",
                            key=f"btn_fed_{fed['sport']}")
@@ -1491,17 +1491,17 @@ with tab6:
 # Purpose: Match brand/CSR mandate to sport/geography/demographic pathway.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab7:
-    st.markdown('<div class="stitle">🤝 CSR Matchmaker <span class="chip chip-green">Corporate CSR Mandate Alignment</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> CSR Matchmaker <span class="chip chip-green">Corporate CSR Mandate Alignment</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Match Corporate Mandate to Sport Geographies", 
+    st.markdown(insight("ℹ Match Corporate Mandate to Sport Geographies", 
         "Corporates seek direct storytelling and compliance. AthletIQ aligns corporate CSR sport spends "
         "with demographics, target sports, and regional talent pipelines.", "green"), unsafe_allow_html=True)
         
     m1, m2 = st.columns([1, 2])
     with m1:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🎯 Matcher Controls</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Matcher Controls</div>', unsafe_allow_html=True)
         csr_budget = st.slider("Target CSR Budget (₹ Lakhs)", 10, 500, 50, step=10, key="csr_budget_slider")
-        csr_demo   = st.selectbox("Demographic Focus", ["Women Empowerment", "Rural Youth", "Tribal Development", "All"], key="csr_demo_select")
+        csr_demo = st.selectbox("Demographic Focus", ["Women Empowerment", "Rural Youth", "Tribal Development", "All"], key="csr_demo_select")
         
     with m2:
         st.markdown('<div class="stitle" style="font-size:1rem;">Recommended CSR Fits</div>', unsafe_allow_html=True)
@@ -1540,20 +1540,20 @@ with tab7:
             st.markdown(f"""
             <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.7rem;">
                 <div class="acard-top">
-                    <div class="acard-title">🏢 {f['company']}</div>
+                    <div class="acard-title"> {f['company']}</div>
                     <div class="acard-score" style="color:var(--teal);">{f['fit']} Match</div>
                 </div>
                 <div class="acard-meta">
-                    🏃 <b>Sport Pathway:</b> {f['sport']}<br>
-                    📍 <b>Geography:</b> {f['state']}<br>
-                    📝 <b>CSR Focus:</b> {f['desc']}<br>
-                    📖 <b>Storytelling Theme:</b> <i>"{f['story']}"</i>
+                     <b>Sport Pathway:</b> {f['sport']}<br>
+                     <b>Geography:</b> {f['state']}<br>
+                     <b>CSR Focus:</b> {f['desc']}<br>
+                     <b>Storytelling Theme:</b> <i>"{f['story']}"</i>
                 </div>
             </div>
             """, unsafe_allow_html=True)
             
             # Export CSR brief
-            st.download_button(f"📥 Download CSR Pitch Package ({f['company']})", 
+            st.download_button(f" Download CSR Pitch Package ({f['company']})", 
                                data=generate_gtm_document("CSR One-Pager", f['company'], f['sport'], f['state'], f['story']),
                                file_name=f"{f['company'].lower().replace(' ', '_')}_pitch_pack.md",
                                key=f"btn_csr_{f['company'].replace(' ', '')}")
@@ -1564,9 +1564,9 @@ with tab7:
 # Purpose: Commercial prospects.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab8:
-    st.markdown('<div class="stitle">💰 Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Commercial Opportunities Pipeline", 
+    st.markdown(insight("ℹ Commercial Opportunities Pipeline", 
         "View active corporate sponsor leads, budgets, and priority fits in the database. "
         "Each opportunity has ready-to-use GTM sales collateral downloads.", ""), unsafe_allow_html=True)
         
@@ -1574,43 +1574,43 @@ with tab8:
     if not leads_list.empty:
         sc1, sc2, sc3 = st.columns(3)
         with sc1:
-            st.markdown('<div class="stitle" style="font-size:0.95rem;color:var(--pink);">🔥 Hot Leads (Active Pitch)</div>', unsafe_allow_html=True)
+            st.markdown('<div class="stitle" style="font-size:0.95rem;color:var(--pink);"> Hot Leads (Active Pitch)</div>', unsafe_allow_html=True)
             hot_list = leads_list[leads_list["contact_potential"].str.lower()=="hot"].head(4)
             for _, row in hot_list.iterrows():
                 st.markdown(f"""
                 <div class="acard" style="border-top:3px solid var(--pink);margin-bottom:0.6rem;">
                     <div class="acard-title">{row['company_name']}</div>
                     <div class="acard-meta" style="font-size:0.8rem;">
-                        💰 Budget: ₹{row['annual_csr_budget_cr']:.1f} Cr &nbsp;|&nbsp; 🎯 {row['sport_focus']}<br>
-                        🎯 Strategy: {row['engagement_strategy']}
+                         Budget: ₹{row['annual_csr_budget_cr']:.1f} Cr &nbsp;|&nbsp; {row['sport_focus']}<br>
+                         Strategy: {row['engagement_strategy']}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
                 
         with sc2:
-            st.markdown('<div class="stitle" style="font-size:0.95rem;color:var(--gold);">⚡ Warm Leads (Prospecting)</div>', unsafe_allow_html=True)
+            st.markdown('<div class="stitle" style="font-size:0.95rem;color:var(--gold);"> Warm Leads (Prospecting)</div>', unsafe_allow_html=True)
             warm_list = leads_list[leads_list["contact_potential"].str.lower()=="warm"].head(4)
             for _, row in warm_list.iterrows():
                 st.markdown(f"""
                 <div class="acard" style="border-top:3px solid var(--gold);margin-bottom:0.6rem;">
                     <div class="acard-title">{row['company_name']}</div>
                     <div class="acard-meta" style="font-size:0.8rem;">
-                        💰 Budget: ₹{row['annual_csr_budget_cr']:.1f} Cr &nbsp;|&nbsp; 🎯 {row['sport_focus']}<br>
-                        🎯 Strategy: {row['engagement_strategy']}
+                         Budget: ₹{row['annual_csr_budget_cr']:.1f} Cr &nbsp;|&nbsp; {row['sport_focus']}<br>
+                         Strategy: {row['engagement_strategy']}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
                 
         with sc3:
-            st.markdown('<div class="stitle" style="font-size:0.95rem;color:var(--blue);">❄️ Cold / Future Opportunities</div>', unsafe_allow_html=True)
+            st.markdown('<div class="stitle" style="font-size:0.95rem;color:var(--blue);"> Cold / Future Opportunities</div>', unsafe_allow_html=True)
             cold_list = leads_list[leads_list["contact_potential"].str.lower()=="cold"].head(4)
             for _, row in cold_list.iterrows():
                 st.markdown(f"""
                 <div class="acard" style="border-top:3px solid var(--blue);margin-bottom:0.6rem;">
                     <div class="acard-title">{row['company_name']}</div>
                     <div class="acard-meta" style="font-size:0.8rem;">
-                        💰 Budget: ₹{row['annual_csr_budget_cr']:.1f} Cr &nbsp;|&nbsp; 🎯 {row['sport_focus']}<br>
-                        🎯 Strategy: {row['engagement_strategy']}
+                         Budget: ₹{row['annual_csr_budget_cr']:.1f} Cr &nbsp;|&nbsp; {row['sport_focus']}<br>
+                         Strategy: {row['engagement_strategy']}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
@@ -1621,9 +1621,9 @@ with tab8:
 # Purpose: Not just elite athletes; package groups for funding and development.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab9:
-    st.markdown('<div class="stitle">👥 Athlete Cohorts <span class="chip chip-blue">Packaged Groups for Funding</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Athlete Cohorts <span class="chip chip-blue">Packaged Groups for Funding</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Pathway Cohorts Packaging", 
+    st.markdown(insight("ℹ Pathway Cohorts Packaging", 
         "Corporates and sponsors prefer funding cohesive groups/cohorts with measurable impact. "
         "Below are priority athlete cohorts ready for pathway activation. Use the filters to check individual prospects "
         "and link them directly to the SAI Centre Matcher.", "green"), unsafe_allow_html=True)
@@ -1631,8 +1631,8 @@ with tab9:
     cohort_tabs = st.tabs(["Combat Sports Cohort", "NE Precision Archery", "Weightlifting Power", "Search Individual Profiles"])
     
     with cohort_tabs[0]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🥋 Combat Sports Cohort (Wrestling & Boxing - Men & Women)</div>', unsafe_allow_html=True)
-        st.markdown(insight("🎯 Target Sponsor Fit: NBFC / BFSI / FMCG / Mobility", 
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Combat Sports Cohort (Wrestling & Boxing - Men & Women)</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Target Sponsor Fit: NBFC / BFSI / FMCG / Mobility", 
             "<b>Impact Metrics:</b> 8 wrestlers & boxers (Male & Female) assessed · 2 regional akharas supported · 3 travel sponsorships.<br>"
             "<b>Annual Funding Target:</b> ₹24 Lakhs total package", "purple"), unsafe_allow_html=True)
             
@@ -1640,23 +1640,23 @@ with tab9:
         cols = st.columns(3)
         for idx, ca in enumerate(combat_athletes):
             with cols[idx % 3]:
-                g_tag = "👩" if ca["gender"] == "F" else "👦"
+                g_tag = "" if ca["gender"] == "F" else ""
                 st.markdown(f"""
                 <div class="acard" style="border-top:3px solid var(--purple);height:170px;">
                     <div class="acard-title">{g_tag} {ca['name']} ({ca['sport']})</div>
                     <div class="acard-meta" style="margin-top:0.4rem;">
                         <b>Category:</b> {ca['category']} &nbsp;|&nbsp; Age {ca['age']}<br>
-                        🏆 Medals: {ca['medals'][:50]}...
+                         Medals: {ca['medals'][:50]}...
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
-        st.download_button("📥 Download Combat Sports Sponsor Pitch Brief", 
+        st.download_button(" Download Combat Sports Sponsor Pitch Brief", 
                            data=generate_gtm_document("Sponsor Brief", "Combat Sports Cohort", "Wrestling & Boxing", "Haryana/Assam", "Empower 8 athletes (Male & Female)"),
                            file_name="combat_cohort_pitch.md", key="btn_gtm_combat_cohort")
                            
     with cohort_tabs[1]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🏹 Northeast Precision Archery Cohort</div>', unsafe_allow_html=True)
-        st.markdown(insight("🎯 Target Sponsor Fit: Heavy Industry / Public Sector / Tech", 
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Northeast Precision Archery Cohort</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Target Sponsor Fit: Heavy Industry / Public Sector / Tech", 
             "<b>Impact Metrics:</b> 6 tribal archers provided modern bows · digital draw-weight logs on FitEvents OS.<br>"
             "<b>Annual Funding Target:</b> ₹18 Lakhs total package", "blue"), unsafe_allow_html=True)
             
@@ -1669,17 +1669,17 @@ with tab9:
                     <div class="acard-title">{aa['name']}</div>
                     <div class="acard-meta" style="margin-top:0.4rem;">
                         <b>Event:</b> {aa['category']} &nbsp;|&nbsp; Age {aa['age']}<br>
-                        🏆 Medals: {aa['medals'][:50]}...
+                         Medals: {aa['medals'][:50]}...
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
-        st.download_button("📥 Download NE Archery Sponsor Pitch Brief", 
+        st.download_button(" Download NE Archery Sponsor Pitch Brief", 
                            data=generate_gtm_document("Sponsor Brief", "NE Archery Cohort", "Archery", "Manipur/Assam", "Modern bows for 6 tribal archers"),
                            file_name="archery_cohort_pitch.md", key="btn_gtm_archery_cohort")
                            
     with cohort_tabs[2]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🏋️ Weightlifting Power Cohort</div>', unsafe_allow_html=True)
-        st.markdown(insight("🎯 Target Sponsor Fit: Infrastructure / Logistics / Power", 
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Weightlifting Power Cohort</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Target Sponsor Fit: Infrastructure / Logistics / Power", 
             "<b>Impact Metrics:</b> 5 female lifters provided standard barbell kits · 1 NIS coach clinic supported.<br>"
             "<b>Annual Funding Target:</b> ₹15 Lakhs total package", "gold"), unsafe_allow_html=True)
             
@@ -1692,29 +1692,29 @@ with tab9:
                     <div class="acard-title">{la['name']}</div>
                     <div class="acard-meta" style="margin-top:0.4rem;">
                         <b>Weight:</b> {la['category']} &nbsp;|&nbsp; Age {la['age']}<br>
-                        🏆 Medals: {la['medals'][:50]}...
+                         Medals: {la['medals'][:50]}...
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
-        st.download_button("📥 Download Weightlifting Sponsor Pitch Brief", 
+        st.download_button(" Download Weightlifting Sponsor Pitch Brief", 
                            data=generate_gtm_document("Sponsor Brief", "Weightlifting Power Cohort", "Weightlifting", "Manipur/Odisha", "Standard barbells for 5 female lifters"),
                            file_name="lifting_cohort_pitch.md", key="btn_gtm_lifting_cohort")
                            
     with cohort_tabs[3]:
-        st.markdown('<div class="stitle" style="font-size:1rem;">🔍 Search Individual Athlete & Coach Profiles</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Search Individual Athlete & Coach Profiles</div>', unsafe_allow_html=True)
         
         # Search controls
         c_sc1, c_sc2, c_sc3 = st.columns([2, 1, 1])
         with c_sc1:
-            ind_search = st.text_input("🔍 Search Profile Name", placeholder="e.g. Manu Bhaker, Neeraj Chopra", key="ind_profile_search")
+            ind_search = st.text_input(" Search Profile Name", placeholder="e.g. Manu Bhaker, Neeraj Chopra", key="ind_profile_search")
         with c_sc2:
             ind_sport = st.selectbox("Sport Filter", ["All"] + sorted(list(set(a["sport"] for a in elite_athletes))), key="ind_sport_select")
         with c_sc3:
             ind_gender = st.selectbox("Gender", ["All", "M", "F"], key="ind_gender_select")
 
         # Custom Athlete Matcher Form
-        with st.expander("🎯 Or Run Matcher for a Custom Athlete Profile (Create & Assess Athlete)", expanded=False):
-            st.markdown("##### 📝 Custom Athlete Attributes")
+        with st.expander(" Or Run Matcher for a Custom Athlete Profile (Create & Assess Athlete)", expanded=False):
+            st.markdown("##### Custom Athlete Attributes")
             c_csa1, c_csa2 = st.columns(2)
             with c_csa1:
                 c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="c_ath_name")
@@ -1727,7 +1727,7 @@ with tab9:
                 c_gender = st.selectbox("Gender", ["Male", "Female"], key="c_ath_gender")
                 c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="c_ath_perf")
             
-            if st.button("🚀 Calculate Optimal Training Centre", use_container_width=True, key="btn_run_custom_match"):
+            if st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_run_custom_match"):
                 custom_ath_mock = {
                     "name": c_name,
                     "sport": c_sport.upper(),
@@ -1758,7 +1758,7 @@ with tab9:
             for idx, a in enumerate(filtered_ind[:30]):
                 col = cols[idx % 3]
                 with col:
-                    medals_clean = a["medals"].replace("🥇", "🥇 ").replace("🥈", "🥈 ").replace("🥉", "🥉 ")
+                    medals_clean = a["medals"].replace("", " ").replace("", " ").replace("", " ")
                     tags_list = [tag(a["sport"], "purple"), tag(a["gender"], "")]
                     if a["age"].isdigit():
                         tags_list.append(tag(f"Age {a['age']}", "blue"))
@@ -1776,10 +1776,10 @@ with tab9:
                           <b>Gender:</b> {a['gender']} &nbsp;|&nbsp; <b>Age:</b> {a['age']}
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: #E8EAED; min-height:50px;">
-                          🏆 <b>Key Medals:</b> {medals_clean}
+                           <b>Key Medals:</b> {medals_clean}
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: var(--text2); background:rgba(255,255,255,0.02); padding:0.5rem; border-radius:8px; border:1px solid rgba(255,255,255,0.04); min-height:70px; max-height:100px; overflow-y:auto;">
-                          📝 <b>Records & Tally:</b> {a['records']}
+                           <b>Records & Tally:</b> {a['records']}
                         </div>
                       </div>
                       <div>
@@ -1790,7 +1790,7 @@ with tab9:
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    if st.button("🎯 Match SAI Centre", key=f"btn_cohort_match_{a['sport']}_{a['id']}_{a['name']}", use_container_width=True):
+                    if st.button(" Match SAI Centre", key=f"btn_cohort_match_{a['sport']}_{a['id']}_{a['name']}", use_container_width=True):
                         st.session_state["matched_athlete"] = a
                         st.rerun()
                         
@@ -1823,7 +1823,7 @@ with tab9:
                 st.markdown(f"""
                 <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1.5rem;margin-bottom:1rem;">
                   <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
-                    🎯 Recommended SAI Centres for {m_ath['name']}
+                     Recommended SAI Centres for {m_ath['name']}
                   </div>
                   <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
                     Profile: {m_ath['sport']} | {m_state} | Age {m_ath['age']} | Level: {m_perf}
@@ -1832,7 +1832,7 @@ with tab9:
                 """, unsafe_allow_html=True)
                 for idx, rec in enumerate(recs):
                     st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
-                if st.button("❌ Close Matcher Panel", key="close_cohort_matcher"):
+                if st.button(" Close Matcher Panel", key="close_cohort_matcher"):
                     del st.session_state["matched_athlete"]
                     if "custom_matched_state" in st.session_state:
                         del st.session_state["custom_matched_state"]
@@ -1845,15 +1845,15 @@ with tab9:
 # Purpose: Data Quality & Confidence internal validation layer.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 with tab10:
-    st.markdown('<div class="stitle">🔍 Data Quality & Confidence <span class="chip chip-red">Internal Validation Layer</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle"> Data Quality & Confidence <span class="chip chip-red">Internal Validation Layer</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ️ Internal Data Verification", 
+    st.markdown(insight("ℹ Internal Data Verification", 
         "This tab serves as AthletIQ's internal validation layer to track data completeness, "
         "verify official records, and list validation checklists before pitching to sponsors.", "red"), unsafe_allow_html=True)
         
     c_dq1, c_dq2 = st.columns(2)
     with c_dq1:
-        st.markdown('<div class="stitle" style="font-size:1rem;">📊 Data Completeness Index</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Data Completeness Index</div>', unsafe_allow_html=True)
         total = len(df_all)
         has_src = df_all["has_source"].sum()
         has_notes_ = df_all["has_notes"].sum()
@@ -1869,7 +1869,7 @@ with tab10:
         """, unsafe_allow_html=True)
         
     with c_dq2:
-        st.markdown('<div class="stitle" style="font-size:1rem;">✅ Internal GTM Validation Checklist</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Internal GTM Validation Checklist</div>', unsafe_allow_html=True)
         st.markdown("""
         - [x] <b>Verify NIS coach certifications</b>: completed for all 30 coaches.
         - [x] <b>Cross-check NRAI trial records</b>: verified for Shooting profiles.
@@ -1878,7 +1878,7 @@ with tab10:
         - [ ] <b>Coordinate state selection trial calendars</b>: pending for 2026 Federation Cup events.
         """, unsafe_allow_html=True)
         
-    st.markdown('<div class="stitle" style="font-size:1rem;">📂 Unverified Records Logs</div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" style="font-size:1rem;"> Unverified Records Logs</div>', unsafe_allow_html=True)
     unverified = df_all[~df_all["has_source"]].head(10)[["name", "sport", "state", "entity_type", "notes"]]
     unverified.columns = ["Entity Name", "Sport", "State", "Type", "Notes"]
     st.dataframe(unverified.reset_index(drop=True), use_container_width=True, height=220)
