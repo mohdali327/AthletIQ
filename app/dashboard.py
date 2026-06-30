@@ -51,52 +51,51 @@ st.markdown("""
 }
 
 :root {
-    --blue: #8AB4F8;
-    --purple: #C58AF9;
+    --blue: #00ffd1;
+    --purple: #683DE4;
     --pink: #F28B82;
-    --teal: #81C995;
+    --teal: #10E5B3;
     --gold: #FDD663;
     --cyan: #78D9EC;
     --orange: #FCAD70;
-    --glass: rgba(22, 28, 48, 0.60);
-    --glass2: rgba(30, 36, 60, 0.50);
-    --border: rgba(255,255,255,0.08);
-    --text1: #E8EAED;
-    --text2: #9AA0A6;
-    --text3: #5F6368;
-    --green-dot: #81C995;
+    --glass: #0b0819;
+    --glass2: #0d081c;
+    --border: rgba(16, 229, 179, 0.12);
+    --text1: #FFFFFF;
+    --text2: #abb8c3;
+    --text3: #6c7b88;
+    --green-dot: #10E5B3;
     --red-dot: #F28B82;
     --amber-dot: #FDD663;
 }
 
 .stApp {
-    background: linear-gradient(-45deg, #080818, #0b142a, #130b28, #08181a, #0b0828, #180b0a, #08142a, #080818);
-    background-size: 600% 600%;
-    animation: gradientShift 20s ease infinite;
+    background-color: #030012;
+    background-image: linear-gradient(135deg, #030012 0%, #0d081c 100%);
     font-family: 'Inter', sans-serif;
     color: var(--text1);
 }
 
 /* ── Floating orbs ── */
-.orb { position: fixed; border-radius: 50%; filter: blur(90px); pointer-events: none; z-index: 0; animation: floatOrb 22s ease-in-out infinite; }
-.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(138,180,248,0.10) 0%, transparent 70%); top: -150px; left: -150px; }
-.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(197,138,249,0.10) 0%, transparent 70%); top: 30%; right: -80px; animation-delay: -8s; }
-.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(129,201,149,0.07) 0%, transparent 70%); bottom: 5%; left: 25%; animation-delay: -15s; }
+.orb { position: fixed; border-radius: 50%; filter: blur(95px); pointer-events: none; z-index: 0; animation: floatOrb 22s ease-in-out infinite; }
+.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 229, 179, 0.08) 0%, transparent 70%); top: -150px; left: -150px; }
+.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(104, 61, 228, 0.08) 0%, transparent 70%); top: 30%; right: -80px; animation-delay: -8s; }
+.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(16, 229, 179, 0.05) 0%, transparent 70%); bottom: 5%; left: 25%; animation-delay: -15s; }
 
 /* ── Hero ── */
-.hero { text-align: center; padding: 3.5rem 2rem 2.5rem; animation: slideUp 0.7s ease both; }
-.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(138,180,248,0.1); border: 1px solid rgba(138,180,248,0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--blue); margin-bottom: 1.2rem; }
-.hero-title { font-family: 'Outfit', sans-serif; font-size: 4rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #8AB4F8 0%, #C58AF9 40%, #F28B82 70%, #FDD663 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0; }
+.hero { text-align: center; padding: 2.5rem 1rem 1rem; animation: slideUp 0.7s ease both; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; }
+.hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; }
 .hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
-.hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, var(--blue), var(--purple), var(--pink)); border-radius: 2px; margin: 1.4rem auto; }
+.hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
 
 /* ── KPI Cards ── */
 .kpi { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 18px; padding: 1.6rem 1.2rem; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; animation: slideUp 0.6s ease both; }
-.kpi:hover { transform: translateY(-5px); border-color: rgba(138,180,248,0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.45); }
+.kpi:hover { transform: translateY(-5px); border-color: rgba(16, 229, 179, 0.3); box-shadow: 0 15px 40px rgba(16, 229, 179, 0.12); }
 .kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
 .kpi.blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
 .kpi.purple::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
-.kpi.teal::before { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
+.kpi.teal::before { background: linear-gradient(90deg, var(--teal), var(--blue)); }
 .kpi.gold::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
 .kpi.pink::before { background: linear-gradient(90deg, var(--pink), var(--gold)); }
 .kpi-em { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
@@ -109,55 +108,55 @@ st.markdown("""
 .kpi-val.pink { color: var(--pink); }
 .kpi-sub { font-size: 0.72rem; color: var(--text3); margin-top: 0.4rem; }
 
-/* ── Tabs — Gemini pill ── */
+/* ── Tabs — Playmotech pill selector ── */
 .stTabs [data-baseweb="tab-list"] {
-    background: rgba(22,28,48,0.70); backdrop-filter: blur(20px);
-    border: 1px solid var(--border); border-radius: 50px;
-    padding: 5px; gap: 3px; display: flex; flex-wrap: wrap;
-    width: fit-content; margin: 0 auto 2rem;
+    background: #0b0819; border: 1px solid rgba(16, 229, 179, 0.15);
+    border-radius: 50px; padding: 6px; gap: 4px; display: flex;
+    flex-wrap: wrap; width: fit-content; margin: 0 auto 2.5rem;
 }
 .stTabs [data-baseweb="tab"] {
     background: transparent; border: none; border-radius: 50px;
     color: var(--text2); font-family: 'Outfit', sans-serif;
-    font-weight: 600; font-size: 0.85rem;
-    padding: 0.5rem 1.2rem; transition: all 0.22s ease; white-space: nowrap;
+    font-weight: 600; font-size: 0.85rem; padding: 0.5rem 1.4rem;
+    transition: all 0.22s ease; white-space: nowrap;
 }
-.stTabs [data-baseweb="tab"]:hover { background: rgba(138,180,248,0.08); color: var(--blue); }
+.stTabs [data-baseweb="tab"]:hover { background: rgba(16, 229, 179, 0.08); color: var(--teal); }
 .stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, rgba(138,180,248,0.22), rgba(197,138,249,0.22)) !important;
-    color: #fff !important; border: 1px solid rgba(138,180,248,0.28) !important;
+    background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
+    color: #ffffff !important; border: none !important;
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.2);
 }
 
 /* ── Section titles ── */
 .stitle { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text1); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .chip { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.2rem 0.7rem; border-radius: 50px; }
-.chip-blue { background: rgba(138,180,248,0.14); border: 1px solid rgba(138,180,248,0.28); color: var(--blue); }
-.chip-green { background: rgba(129,201,149,0.14); border: 1px solid rgba(129,201,149,0.28); color: var(--teal); }
+.chip-blue { background: rgba(0, 255, 209, 0.1); border: 1px solid rgba(0, 255, 209, 0.25); color: var(--blue); }
+.chip-green { background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); color: var(--teal); }
 .chip-amber { background: rgba(253,214,99,0.14); border: 1px solid rgba(253,214,99,0.28); color: var(--gold); }
 .chip-red { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
-.chip-purple { background: rgba(197,138,249,0.14); border: 1px solid rgba(197,138,249,0.28); color: var(--purple); }
+.chip-purple { background: rgba(104, 61, 228, 0.1); border: 1px solid rgba(104, 61, 228, 0.25); color: var(--purple); }
 
 /* ── Action cards ── */
-.acard { background: var(--glass2); border: 1px solid var(--border); border-radius: 16px; padding: 1.4rem 1.6rem; margin-bottom: 0.75rem; transition: all 0.25s ease; position: relative; overflow: hidden; }
-.acard:hover { background: rgba(30,40,70,0.65); border-color: rgba(138,180,248,0.18); transform: translateX(3px); }
+.acard { background: var(--glass); border: 1px solid rgba(104, 61, 228, 0.15); border-radius: 16px; padding: 1.4rem 1.6rem; margin-bottom: 0.75rem; transition: all 0.25s ease; position: relative; overflow: hidden; }
+.acard:hover { background: rgba(13, 8, 28, 0.85); border-color: rgba(16, 229, 179, 0.25); transform: translateX(3px); box-shadow: 0 10px 30px rgba(3, 0, 18, 0.6); }
 .acard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .acard-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text1); }
 .acard-meta { font-size: 0.75rem; color: var(--text2); line-height: 1.6; }
 .acard-score { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; }
 .acard-tags { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 5px; }
-.tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.18rem 0.6rem; border-radius: 50px; background: rgba(138,180,248,0.1); color: var(--blue); border: 1px solid rgba(138,180,248,0.2); }
-.tag.green { background: rgba(129,201,149,0.1); color: var(--teal); border-color: rgba(129,201,149,0.2); }
+.tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.18rem 0.6rem; border-radius: 50px; background: rgba(0, 255, 209, 0.1); color: var(--blue); border: 1px solid rgba(0, 255, 209, 0.2); }
+.tag.green { background: rgba(16, 229, 179, 0.1); color: var(--teal); border-color: rgba(16, 229, 179, 0.2); }
 .tag.amber { background: rgba(253,214,99,0.1); color: var(--gold); border-color: rgba(253,214,99,0.2); }
 .tag.red { background: rgba(242,139,130,0.1); color: var(--pink); border-color: rgba(242,139,130,0.2); }
-.tag.purple { background: rgba(197,138,249,0.1); color: var(--purple); border-color: rgba(197,138,249,0.2); }
+.tag.purple { background: rgba(104, 61, 228, 0.1); color: var(--purple); border-color: rgba(104, 61, 228, 0.2); }
 
 /* ── Insight box ── */
-.insight { background: linear-gradient(135deg, rgba(138,180,248,0.07), rgba(197,138,249,0.07)); border: 1px solid rgba(138,180,248,0.15); border-left: 3px solid var(--blue); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
-.insight.green { background: linear-gradient(135deg, rgba(129,201,149,0.07), rgba(120,217,236,0.07)); border-color: rgba(129,201,149,0.15); border-left-color: var(--teal); }
+.insight { background: linear-gradient(135deg, rgba(16, 229, 179, 0.05), rgba(104, 61, 228, 0.05)); border: 1px solid rgba(16, 229, 179, 0.15); border-left: 3px solid var(--teal); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
+.insight.green { background: linear-gradient(135deg, rgba(16, 229, 179, 0.05), rgba(104, 61, 228, 0.03)); border-color: rgba(16, 229, 179, 0.15); border-left-color: var(--teal); }
 .insight.amber { background: linear-gradient(135deg, rgba(253,214,99,0.07), rgba(252,173,112,0.07)); border-color: rgba(253,214,99,0.15); border-left-color: var(--gold); }
 .insight.red { background: linear-gradient(135deg, rgba(242,139,130,0.07), rgba(253,214,99,0.05)); border-color: rgba(242,139,130,0.15); border-left-color: var(--pink); }
-.insight.purple{ background: linear-gradient(135deg, rgba(197,138,249,0.07), rgba(138,180,248,0.07)); border-color: rgba(197,138,249,0.15); border-left-color: var(--purple); }
-.insight-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--blue); margin-bottom: 0.35rem; }
+.insight.purple{ background: linear-gradient(135deg, rgba(104, 61, 228, 0.05), rgba(16, 229, 179, 0.03)); border-color: rgba(104, 61, 228, 0.15); border-left-color: var(--purple); }
+.insight-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--teal); margin-bottom: 0.35rem; }
 .insight.green .insight-title { color: var(--teal); }
 .insight.amber .insight-title { color: var(--gold); }
 .insight.red .insight-title { color: var(--pink); }
@@ -216,7 +215,7 @@ PL = dict(
     plot_bgcolor="rgba(0,0,0,0)",
     font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6", size=12),
     margin=dict(l=30, r=20, t=45, b=35),
-    colorway=["#8AB4F8","#C58AF9","#81C995","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"],
+    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"],
     legend=dict(bgcolor="rgba(22,28,48,0.7)", bordercolor="rgba(255,255,255,0.07)", borderwidth=1, font=dict(size=11)),
     xaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
     yaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
@@ -228,9 +227,9 @@ def playout(fig, title="", h=400):
     return fig
 
 COLOR_SCALES = {
-    "blue": ["#0d1a30","#8AB4F8"],
-    "purple": ["#1a0d30","#C58AF9"],
-    "teal": ["#0d2018","#81C995"],
+    "blue": ["#0d1a30","#10E5B3"],
+    "purple": ["#1a0d30","#683DE4"],
+    "teal": ["#0d2018","#10E5B3"],
     "gold": ["#2a1d00","#FDD663"],
     "pink": ["#2a0d0d","#F28B82"],
 }
@@ -297,7 +296,7 @@ def kpi(em, label, val, color="blue", sub=""):
     <div class="kpi-val {color}">{val}</div>
     {"<div class='kpi-sub'>"+sub+"</div>" if sub else ""}</div>"""
 
-def mkpi(em, label, val, color="#8AB4F8"):
+def mkpi(em, label, val, color="#10E5B3"):
     return f"""<div class="mkpi"><div class="mkpi-label">{em} {label}</div>
     <div class="mkpi-val" style="color:{color};">{val}</div></div>"""
 
@@ -308,7 +307,7 @@ def acard(title, meta, score, score_color, tags_html, action=""):
       <div class="acard-score" style="color:{score_color};">{score}</div>
     </div>
     <div class="acard-meta">{meta}</div>
-    {"<div style='font-size:0.78rem;color:#8AB4F8;margin-top:0.5rem;font-weight:600;'>→ "+action+"</div>" if action else ""}
+    {"<div style='font-size:0.78rem;color:#10E5B3;margin-top:0.5rem;font-weight:600;'>→ "+action+"</div>" if action else ""}
     <div class="acard-tags">{tags_html}</div></div>"""
 
 def insight(title, body, color=""):
@@ -324,7 +323,7 @@ def tag(text, color=""):
     return f'<span class="{cls}">{text}</span>'
 
 def score_color(s):
-    if s >= 8: return "#81C995"
+    if s >= 8: return "#10E5B3"
     if s >= 6: return "#FDD663"
     return "#F28B82"
 
@@ -343,7 +342,7 @@ if df_all is None:
 # SIDEBAR FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("<h2 style='color:#8AB4F8;font-family:Outfit;font-weight:700;'> Filters</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#10E5B3;font-family:Outfit;font-weight:700;'> Filters</h2>", unsafe_allow_html=True)
     sel_entity = st.multiselect("Entity Type", sorted(df_all["entity_type"].unique()), default=sorted(df_all["entity_type"].unique()))
     sel_sport = st.multiselect("Sport", sorted(df_all["sport"].unique()), default=sorted(df_all["sport"].unique()))
     sel_state = st.multiselect("State", sorted(df_all["state"].unique()), default=sorted(df_all["state"].unique()))
@@ -467,8 +466,8 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
 
 def render_sai_card(centre, score, rank):
     sport_tags = "".join([f'<span class="tag">{s}</span>' for s in centre.get("sports", [])[:6]])
-    badge_col = "#81C995" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
-    type_col = "#8AB4F8" if centre.get("type", "NCOE") == "NCOE" else "#C58AF9"
+    badge_col = "#10E5B3" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
+    type_col = "#10E5B3" if centre.get("type", "NCOE") == "NCOE" else "#683DE4"
     flagship = '<span class="tag green"> Flagship</span>' if centre.get("flagship") else ""
     
     name = centre.get("name", "Unknown SAI Centre")
@@ -513,7 +512,7 @@ st.markdown("""
   <h2 class="notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #E8EAED; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
     Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.
   </h2>
-  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #8AB4F8; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
+  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #10E5B3; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
     Built to decide where to scout, coach, fund and activate.
   </div>
   <div class="hero-rule" style="margin: 1rem auto 1.5rem;"></div>
@@ -784,7 +783,7 @@ with tab1:
             y = stages,
             x = funnel_vals,
             textinfo = "value+percent initial",
-            marker = {"color": ["#8AB4F8", "#C58AF9", "#81C995", "#FCAD70", "#F28B82"]},
+            marker = {"color": ["#10E5B3", "#683DE4", "#10E5B3", "#FCAD70", "#F28B82"]},
             connector = {"fillcolor": "rgba(255,255,255,0.03)"}
         ))
         playout(fig_funnel, f"Grassroots-to-Podium Funnel — {f_sport} ({f_gender})", h=450)
@@ -1030,9 +1029,9 @@ with tab2:
         
         # League Stats KPIs
         l1, l2, l3, l4 = st.columns(4)
-        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#8AB4F8"), unsafe_allow_html=True)
-        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#C58AF9"), unsafe_allow_html=True)
-        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#81C995"), unsafe_allow_html=True)
+        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#10E5B3"), unsafe_allow_html=True)
+        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#683DE4"), unsafe_allow_html=True)
+        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#10E5B3"), unsafe_allow_html=True)
         with l4: st.markdown(mkpi("", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
         
         # Participation Chart (Male vs Female)
@@ -1050,7 +1049,7 @@ with tab2:
             {"Sport": "Athletics", "Gender": "Female", "Participants": 40000},
         ])
         fig_participation = px.bar(participation_data, x="Sport", y="Participants", color="Gender",
-                                     barmode="group", color_discrete_map={"Male": "#8AB4F8", "Female": "#C58AF9"},
+                                     barmode="group", color_discrete_map={"Male": "#10E5B3", "Female": "#683DE4"},
                                      labels={"Participants": "Total Mapped Participants", "Sport": ""})
         playout(fig_participation, "Decentralized Leagues Participation", h=350)
         st.plotly_chart(fig_participation, use_container_width=True)
@@ -1075,9 +1074,9 @@ with tab2:
         # KPIs
         athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
         a1, a2, a3, a4 = st.columns(4)
-        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#8AB4F8"), unsafe_allow_html=True)
-        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#C58AF9"), unsafe_allow_html=True)
-        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#81C995"), unsafe_allow_html=True)
+        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#10E5B3"), unsafe_allow_html=True)
+        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#683DE4"), unsafe_allow_html=True)
+        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#10E5B3"), unsafe_allow_html=True)
         with a4: st.markdown(mkpi("", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
