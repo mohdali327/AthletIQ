@@ -529,20 +529,42 @@ matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athle
 if matcher_mode == "Search Database Athletes":
     c_tla1, c_tla2 = st.columns([3, 1])
     with c_tla1:
-        athlete_names = [a["name"] for a in elite_athletes]
-        selected_athlete_name = st.selectbox("Select Athlete to Match", athlete_names, index=athlete_names.index("Manu Bhaker") if "Manu Bhaker" in athlete_names else 0, key="top_search_athlete_select")
+        db_athletes = sorted(list(set(df_all[df_all["entity_type"] == "Athlete"]["name"].dropna().tolist() + [a["name"] for a in elite_athletes])))
+        selected_athlete_name = st.selectbox("Select Athlete to Match", db_athletes, index=db_athletes.index("Manu Bhaker") if "Manu Bhaker" in db_athletes else 0, key="top_search_athlete_select")
     with c_tla2:
         st.write("")
         st.write("")
         run_db_match = st.button(" Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
         
     if run_db_match:
+        # First check elite_athletes json list
         ath_data = next((a for a in elite_athletes if a["name"] == selected_athlete_name), None)
+        if not ath_data:
+            # Fallback to master CSV database
+            match_rows = df_all[(df_all["entity_type"] == "Athlete") & (df_all["name"] == selected_athlete_name)]
+            if not match_rows.empty:
+                row = match_rows.iloc[0]
+                gender_val = "F" if str(row["gender"]).strip().lower().startswith("f") else "M"
+                perf_val = str(row["performance_level"]).strip()
+                ath_data = {
+                    "name": row["name"],
+                    "sport": str(row["sport"]).upper(),
+                    "age": str(row["age"]) if pd.notna(row["age"]) else "17",
+                    "gender": gender_val,
+                    "medals": perf_val,
+                    "records": str(row["notes"]) if pd.notna(row["notes"]) else f"Registered athlete in {row['sport']} representing {row['state']}."
+                }
+                # Set custom state and performance parameters for recommender mapping
+                st.session_state["top_custom_matched_state"] = str(row["state"])
+                st.session_state["top_custom_matched_perf"] = perf_val
+                
         if ath_data:
             st.session_state["top_matched_athlete"] = ath_data
-            if "top_custom_matched_state" in st.session_state:
-                del st.session_state["top_custom_matched_state"]
-                del st.session_state["top_custom_matched_perf"]
+            # Only delete previous custom session parameters if the selected athlete is indeed in elite_athletes (which defaults to Haryana/International)
+            if any(a["name"] == selected_athlete_name for a in elite_athletes):
+                if "top_custom_matched_state" in st.session_state:
+                    del st.session_state["top_custom_matched_state"]
+                    del st.session_state["top_custom_matched_perf"]
             st.rerun()
 
 else:
