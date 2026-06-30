@@ -76,11 +76,24 @@ st.markdown("""
     color: var(--text1);
 }
 
-/* ── Floating orbs ── */
-.orb { position: fixed; border-radius: 50%; filter: blur(95px); pointer-events: none; z-index: 0; animation: floatOrb 22s ease-in-out infinite; }
-.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 229, 179, 0.08) 0%, transparent 70%); top: -150px; left: -150px; }
-.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(104, 61, 228, 0.08) 0%, transparent 70%); top: 30%; right: -80px; animation-delay: -8s; }
-.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(16, 229, 179, 0.05) 0%, transparent 70%); bottom: 5%; left: 25%; animation-delay: -15s; }
+/* ── 3D Floating Orbs ── */
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(70px, -60px) scale(1.1); }
+}
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(-60px, 50px) scale(0.93); }
+}
+@keyframes orbFloat3 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(50px, 40px) scale(1.05); }
+}
+
+.orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 229, 179, 0.08) 0%, transparent 70%); top: -150px; left: -150px; animation: orbFloat1 22s ease-in-out infinite; }
+.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(104, 61, 228, 0.08) 0%, transparent 70%); top: 35%; right: -80px; animation: orbFloat2 26s ease-in-out infinite; }
+.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(16, 229, 179, 0.05) 0%, transparent 70%); bottom: 5%; left: 25%; animation: orbFloat3 18s ease-in-out infinite; }
 
 /* ── Hero ── */
 .hero { text-align: center; padding: 2.5rem 1rem 1rem; animation: slideUp 0.7s ease both; }
@@ -89,9 +102,26 @@ st.markdown("""
 .hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
 .hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
 
-/* ── KPI Cards ── */
-.kpi { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 18px; padding: 1.6rem 1.2rem; text-align: center; transition: all 0.3s ease; position: relative; overflow: hidden; animation: slideUp 0.6s ease both; }
-.kpi:hover { transform: translateY(-5px); border-color: rgba(16, 229, 179, 0.3); box-shadow: 0 15px 40px rgba(16, 229, 179, 0.12); }
+/* ── 3D Glassmorphic KPI Cards ── */
+.kpi {
+    background: rgba(11, 8, 25, 0.70);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.6s ease both;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.kpi:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(16, 229, 179, 0.35);
+    box-shadow: 0 20px 45px rgba(16, 229, 179, 0.15), 0 30px 60px rgba(0, 0, 0, 0.6);
+}
 .kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
 .kpi.blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
 .kpi.purple::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
@@ -113,6 +143,7 @@ st.markdown("""
     background: #0b0819; border: 1px solid rgba(16, 229, 179, 0.15);
     border-radius: 50px; padding: 6px; gap: 4px; display: flex;
     flex-wrap: wrap; width: fit-content; margin: 0 auto 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 .stTabs [data-baseweb="tab"] {
     background: transparent; border: none; border-radius: 50px;
@@ -124,7 +155,23 @@ st.markdown("""
 .stTabs [aria-selected="true"] {
     background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
     color: #ffffff !important; border: none !important;
-    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.2);
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.25);
+}
+
+/* ── 3D Inset Selectboxes & Inputs ── */
+div[data-baseweb="select"] > div {
+    background-color: rgba(11, 8, 25, 0.75) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 10px !important;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+div[data-baseweb="select"] > div:hover {
+    border-color: rgba(16, 229, 179, 0.35) !important;
+}
+div[data-baseweb="select"][aria-expanded="true"] > div {
+    border-color: rgba(16, 229, 179, 0.6) !important;
+    box-shadow: 0 0 12px rgba(16, 229, 179, 0.2) !important;
 }
 
 /* ── Section titles ── */
@@ -136,9 +183,25 @@ st.markdown("""
 .chip-red { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
 .chip-purple { background: rgba(104, 61, 228, 0.1); border: 1px solid rgba(104, 61, 228, 0.25); color: var(--purple); }
 
-/* ── Action cards ── */
-.acard { background: var(--glass); border: 1px solid rgba(104, 61, 228, 0.15); border-radius: 16px; padding: 1.4rem 1.6rem; margin-bottom: 0.75rem; transition: all 0.25s ease; position: relative; overflow: hidden; }
-.acard:hover { background: rgba(13, 8, 28, 0.85); border-color: rgba(16, 229, 179, 0.25); transform: translateX(3px); box-shadow: 0 10px 30px rgba(3, 0, 18, 0.6); }
+/* ── 3D Glassmorphic Action Cards ── */
+.acard {
+    background: rgba(11, 8, 25, 0.70);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(104, 61, 228, 0.15);
+    border-radius: 16px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.acard:hover {
+    background: rgba(13, 8, 28, 0.85);
+    border-color: rgba(16, 229, 179, 0.28);
+    transform: translateY(-5px) translateX(2px);
+    box-shadow: 0 15px 35px rgba(16, 229, 179, 0.12), 0 25px 50px rgba(0, 0, 0, 0.6);
+}
 .acard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .acard-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text1); }
 .acard-meta { font-size: 0.75rem; color: var(--text2); line-height: 1.6; }
