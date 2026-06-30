@@ -24,7 +24,18 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────────────────────
 # CSS — Gemini Neural Expressive + Decision-First Design
 # ─────────────────────────────────────────────────────────────────────────────
-st.markdown("""
+import base64
+
+def load_bg_base64():
+    bg_path = os.path.join(os.path.dirname(__file__), "cyber_sports_bg.jpg")
+    if os.path.exists(bg_path):
+        with open(bg_path, "rb") as f:
+            return base64.b64encode(f.read()).decode("utf-8")
+    return ""
+
+bg_base64 = load_bg_base64()
+
+css_code = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -50,7 +61,13 @@ st.markdown("""
 
 .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
     background-color: #030012 !important;
-    background-image: linear-gradient(135deg, #030012 0%, #0d081c 100%) !important;
+    background-image: 
+        linear-gradient(135deg, rgba(3, 0, 18, 0.95) 0%, rgba(13, 8, 28, 0.95) 100%),
+        url("data:image/jpeg;base64,PLACEHOLDER_BG") !important;
+    background-size: cover !important;
+    background-position: center 20% !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
     font-family: 'Inter', sans-serif;
     color: var(--text1);
 }
@@ -288,8 +305,10 @@ details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 6
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
+  <div class="grid-3d"></div>
 </div>
-""", unsafe_allow_html=True)
+"""
+st.markdown(css_code.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
