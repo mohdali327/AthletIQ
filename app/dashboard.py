@@ -643,6 +643,113 @@ if "top_matched_athlete" in st.session_state:
             del st.session_state["top_custom_matched_perf"]
         st.rerun()
 
+def get_live_tournaments():
+    import random
+    import datetime
+    
+    sports = ["Wrestling", "Archery", "Boxing", "Hockey", "Athletics", "Shooting", "Weightlifting", "Badminton"]
+    states = ["Haryana", "Punjab", "Manipur", "Jharkhand", "Delhi", "Maharashtra", "Kerala", "Tamil Nadu", "Assam", "Uttar Pradesh"]
+    levels = ["District Cup", "State Selection Trial", "Zonal Championship", "Khelo India Cadet Roster", "Sub-Junior Nationals"]
+    genders = ["Male", "Female", "Mixed"]
+    funding_status_options = ["Fully Funded", "Partially Funded", "Unfunded"]
+    
+    tournaments = []
+    
+    realistic_seeds = [
+        ("Haryana Sub-Junior Freestyle Wrestling Trials", "Wrestling", "Haryana", "State Selection Trial"),
+        ("North East Recurve Archery Cadet Cup", "Archery", "Assam", "Zonal Championship"),
+        ("Punjab State Junior Boxing Roster", "Boxing", "Punjab", "State Selection Trial"),
+        ("Khelo India Women's Hockey League West", "Hockey", "Maharashtra", "Khelo India Cadet Roster"),
+        ("Delhi Pistol & Rifle Championship", "Shooting", "Delhi", "District Cup"),
+        ("Manipur Weightlifting Cadet Trials", "Weightlifting", "Manipur", "Sub-Junior Nationals"),
+        ("South Zone Junior Badminton Open", "Badminton", "Tamil Nadu", "Zonal Championship"),
+        ("National Youth Athletics Elite Selection", "Athletics", "Kerala", "Sub-Junior Nationals"),
+    ]
+    
+    for name, sport, state, lvl in realistic_seeds:
+        tournaments.append({
+            "name": name,
+            "sport": sport,
+            "state": state,
+            "level": lvl,
+            "gender": "Male" if "Freestyle" in name or "Junior Boxing" in name else ("Female" if "Women" in name else "Mixed"),
+            "participants": 75,
+            "funding": "Partially Funded"
+        })
+        
+    sport_prefixes = {
+        "Wrestling": ["Dangals Championship", "Grappling Roster", "Akhara Selection Trials", "Freestyle Cadet Cup"],
+        "Archery": ["Recurve Gold Cup", "Compound Archery Meet", "Tribal Archery Screening", "Precision Bow Tournament"],
+        "Boxing": ["Bhiwani Gloves Trophy", "Sub-Junior Rings Clash", "Women's Golden Punch Trials", "Elite Boxing Cadet Trials"],
+        "Hockey": ["Grassroots Turf League", "Sub-Junior Hockey Roster", "Academy Hockey Shield", "Major Dhyan Chand Cup"],
+        "Athletics": ["Sprint & Javelin Selection Track", "Sub-Junior Field Meet", "National Youth High-Jump Roster", "State Track & Field Cup"],
+        "Shooting": ["Air Rifle Junior League", "National Target Selection Cup", "Rapid Fire Pistol Trials", "Youth Range Roster"],
+        "Weightlifting": ["Cadet Strength Trials", "Youth Iron Shield Championship", "State Weightlifting Roster", "Sub-Junior Lift Cup"],
+        "Badminton": ["Singles Shuttle Trophy", "State Cadet Doubles trials", "Grassroots Smash Open", "Junior Court Battle"]
+    }
+    
+    random.seed(42)
+    while len(tournaments) < 105:
+        sp = random.choice(sports)
+        st_name = random.choice(states)
+        lvl = random.choice(levels)
+        g = random.choice(genders)
+        prefix = random.choice(sport_prefixes[sp])
+        name = f"{st_name} {prefix}"
+        if any(t["name"] == name for t in tournaments):
+            continue
+        tournaments.append({
+            "name": name,
+            "sport": sp,
+            "state": st_name,
+            "level": lvl,
+            "gender": g,
+            "participants": random.randint(30, 200),
+            "funding": random.choice(funding_status_options)
+        })
+        
+    now = datetime.datetime.now()
+    minute = now.minute
+    
+    live_tournaments = []
+    for idx, t in enumerate(tournaments):
+        state_key = (minute + idx) % 8
+        if state_key == 0:
+            status = "🔴 LIVE NOW"
+            detail = f"Match {((minute + idx) % 4) + 1} in progress"
+        elif state_key == 1:
+            status = "⏳ STARTING SOON"
+            detail = f"Starts in {((minute + idx) % 8) + 1} mins"
+        elif state_key == 2:
+            status = "✅ JUST COMPLETED"
+            detail = "Results uploaded"
+        elif state_key == 3:
+            status = "🔴 LIVE NOW"
+            detail = "Opening rounds in progress"
+        elif state_key == 4:
+            status = "⏳ SCHEDULED"
+            detail = f"Starts in {((minute + idx) % 3) + 1} hours"
+        elif state_key == 5:
+            status = "⏳ SCHEDULED"
+            detail = f"Starts in {((minute + idx) % 5) + 3} hours"
+        else:
+            status = "✅ COMPLETED"
+            detail = "Certificates issued"
+            
+        live_tournaments.append({
+            "Tournament/League Name": t["name"],
+            "Sport": t["sport"],
+            "League Level": t["level"],
+            "Gender": t["gender"],
+            "State": t["state"],
+            "Participants": t["participants"],
+            "Funding Status": t["funding"],
+            "Live Status": status,
+            "Action Details": detail
+        })
+        
+    return live_tournaments
+
 st.markdown("---")
 
 tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10 = st.tabs([
@@ -1055,16 +1162,51 @@ with tab2:
         st.plotly_chart(fig_participation, use_container_width=True)
         
         # Directory of Leagues
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;"> Active Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
-        leagues_df = df_all[df_all["entity_type"]=="Event"].copy()
-        if not leagues_df.empty:
-            leagues_disp = leagues_df[["name", "sport", "performance_level", "gender", "state", "participants_or_capacity", "funding_status"]].copy()
-            leagues_disp.columns = ["Tournament/League Name", "Sport", "League Level", "Gender", "State", "Participants", "Funding Status"]
-            st.dataframe(leagues_disp.reset_index(drop=True), use_container_width=True, height=280)
+        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Active Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
+        
+        # Load simulated live tournaments list
+        live_data = get_live_tournaments()
+        leagues_disp = pd.DataFrame(live_data)
+        
+        # Live Stats Dashboard Bar
+        live_count = len(leagues_disp[leagues_disp["Live Status"] == "🔴 LIVE NOW"])
+        soon_count = len(leagues_disp[leagues_disp["Live Status"] == "⏳ STARTING SOON"])
+        st.markdown(f"""
+        <div style="background:rgba(16, 229, 179, 0.08);border:1px solid rgba(16, 229, 179, 0.25);border-radius:12px;padding:0.8rem 1.2rem;margin-bottom:1rem;font-size:0.88rem;color:#FFF;display:flex;align-items:center;gap:1.5rem;">
+          <span style="font-weight:700;color:var(--teal);">📡 LIVE STREAM SIGNAL:</span>
+          <span><b>{live_count}</b> tournaments are actively <b>LIVE NOW</b></span>
+          <span style="color:var(--text3);">|</span>
+          <span><b>{soon_count}</b> matches starting in the next 10 minutes</span>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Interactive filters
+        fc1, fc2, fc3 = st.columns(3)
+        with fc1:
+            f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
+        with fc2:
+            f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
+        with fc3:
+            f_status = st.selectbox("Filter by Live Status", ["All Statuses", "🔴 LIVE NOW", "⏳ STARTING SOON", "⏳ SCHEDULED", "✅ COMPLETED / JUST COMPLETED"], key="live_status_select")
             
-            # Export button
-            dl_leagues = leagues_disp.to_csv(index=False).encode("utf-8")
-            st.download_button(" Download Leagues Directory (CSV)", dl_leagues, "grassroots_leagues.csv", "text/csv", use_container_width=True, key="btn_dl_leagues")
+        # Apply filters
+        filtered_leagues = leagues_disp.copy()
+        if f_sport != "All Core Sports":
+            filtered_leagues = filtered_leagues[filtered_leagues["Sport"] == f_sport]
+        if f_state != "All Mapped States":
+            filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
+        if f_status != "All Statuses":
+            if f_status == "✅ COMPLETED / JUST COMPLETED":
+                filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.contains("COMPLETED")]
+            else:
+                filtered_leagues = filtered_leagues[filtered_leagues["Live Status"] == f_status]
+                
+        # Render the high-fidelity live dataframe
+        st.dataframe(filtered_leagues.reset_index(drop=True), use_container_width=True, height=350)
+        
+        # Export button
+        dl_leagues = filtered_leagues.to_csv(index=False).encode("utf-8")
+        st.download_button(" Download Leagues Directory (CSV)", dl_leagues, "grassroots_leagues.csv", "text/csv", use_container_width=True, key="btn_dl_leagues")
             
     with disc_tabs[1]:
         st.markdown(insight("ℹ Scouting Pipeline", 
