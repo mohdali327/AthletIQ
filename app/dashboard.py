@@ -509,8 +509,8 @@ def render_sai_card(centre, score, rank):
 st.markdown("""
 <div class="hero">
   <div class="hero-badge"><span class="dot dot-green"></span> Live Pathway Tracking</div>
-  <h1 class="hero-title">ATHLETIQ</h1>
-  <p class="hero-sub">Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.<br>
+  <h1 class="hero-title notranslate" translate="no">ATHLETIQ</h1>
+  <p class="hero-sub notranslate" translate="no">Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.<br>
   <span style="color:var(--blue);font-weight:700;">Built to decide where to scout, coach, fund and activate.</span></p>
   <div class="hero-rule"></div>
 </div>
