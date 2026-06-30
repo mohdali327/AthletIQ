@@ -310,27 +310,26 @@ details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 6
 </div>
 <script>
 try {
-    const parentDoc = window.parent.document;
-    const scrollContainer = parentDoc.querySelector('[data-testid="stAppViewContainer"]');
+    const scrollContainer = document.querySelector('[data-testid="stAppViewContainer"]');
     if (scrollContainer) {
         scrollContainer.addEventListener('scroll', () => {
             const scrollTop = scrollContainer.scrollTop;
             
             // Hero title scroll parallax
-            const heroTitle = parentDoc.querySelector('.hero-title');
+            const heroTitle = document.querySelector('.hero-title');
             if (heroTitle) {
                 heroTitle.style.transform = `translateY(${scrollTop * 0.25}px) scale(${Math.max(0.75, 1 - scrollTop * 0.001)})`;
                 heroTitle.style.opacity = Math.max(0.15, 1 - scrollTop * 0.0035);
             }
             
             // Background image shift
-            const app = parentDoc.querySelector('.stApp');
+            const app = document.querySelector('.stApp');
             if (app) {
                 app.style.backgroundPositionY = `calc(20% + ${scrollTop * 0.06}px)`;
             }
             
             // 3D perspective grid shift
-            const grid = parentDoc.querySelector('.grid-3d');
+            const grid = document.querySelector('.grid-3d');
             if (grid) {
                 grid.style.transform = `perspective(600px) rotateX(65deg) translateY(${scrollTop * 0.12}px)`;
             }
