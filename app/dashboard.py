@@ -28,28 +28,7 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* ── Animated Gradient Background ── */
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 50% 0%; }
-    50% { background-position: 100% 50%; }
-    75% { background-position: 50% 100%; }
-    100% { background-position: 0% 50%; }
-}
-@keyframes floatOrb {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(40px, -30px) scale(1.05); }
-    66% { transform: translate(-25px, 25px) scale(0.97); }
-}
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(138,180,248,0.3); }
-    50% { box-shadow: 0 0 0 8px rgba(138,180,248,0); }
-}
-
+/* ── root theme tokens (Playmotech Space Style) ── */
 :root {
     --blue: #00ffd1;
     --purple: #683DE4;
@@ -79,15 +58,15 @@ st.markdown("""
 /* ── 3D Floating Orbs ── */
 @keyframes orbFloat1 {
     0%, 100% { transform: translate(0px, 0px) scale(1); }
-    50% { transform: translate(70px, -60px) scale(1.1); }
+    50% { transform: translate(80px, -70px) scale(1.1); }
 }
 @keyframes orbFloat2 {
     0%, 100% { transform: translate(0px, 0px) scale(1); }
-    50% { transform: translate(-60px, 50px) scale(0.93); }
+    50% { transform: translate(-70px, 60px) scale(0.92); }
 }
 @keyframes orbFloat3 {
     0%, 100% { transform: translate(0px, 0px) scale(1); }
-    50% { transform: translate(50px, 40px) scale(1.05); }
+    50% { transform: translate(60px, 50px) scale(1.06); }
 }
 
 .orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
@@ -95,32 +74,57 @@ st.markdown("""
 .orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(104, 61, 228, 0.08) 0%, transparent 70%); top: 35%; right: -80px; animation: orbFloat2 26s ease-in-out infinite; }
 .orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(16, 229, 179, 0.05) 0%, transparent 70%); bottom: 5%; left: 25%; animation: orbFloat3 18s ease-in-out infinite; }
 
+/* ── 3D Perspective Grid Background ── */
+@keyframes gridScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 50px; }
+}
+.grid-3d {
+    position: fixed;
+    bottom: -10%;
+    left: -10%;
+    width: 120%;
+    height: 60%;
+    background-image: 
+        linear-gradient(rgba(16, 229, 179, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 229, 179, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: perspective(600px) rotateX(65deg) translateZ(0);
+    transform-origin: bottom center;
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: 0;
+    animation: gridScroll 15s linear infinite;
+}
+
 /* ── Hero ── */
-.hero { text-align: center; padding: 2.5rem 1rem 1rem; animation: slideUp 0.7s ease both; }
+.hero { text-align: center; padding: 2.5rem 1rem 1rem; position: relative; z-index: 1; }
 .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; }
 .hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; }
 .hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
 .hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
 
-/* ── 3D Glassmorphic KPI Cards ── */
+/* ── 3D Glassmorphic KPI Cards (With Bevel Highlights & Perspective Tilts) ── */
 .kpi {
-    background: rgba(11, 8, 25, 0.70);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: rgba(11, 8, 25, 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 1.6rem 1.2rem;
     text-align: center;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05);
     animation: slideUp 0.6s ease both;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 .kpi:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: rgba(16, 229, 179, 0.35);
-    box-shadow: 0 20px 45px rgba(16, 229, 179, 0.15), 0 30px 60px rgba(0, 0, 0, 0.6);
+    transform: translateY(-10px) rotateX(-3deg) rotateY(3deg) scale(1.02);
+    border-color: rgba(16, 229, 179, 0.40);
+    box-shadow: 0 20px 45px rgba(16, 229, 179, 0.18), 0 30px 60px rgba(0, 0, 0, 0.7);
 }
 .kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
 .kpi.blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
@@ -138,7 +142,7 @@ st.markdown("""
 .kpi-val.pink { color: var(--pink); }
 .kpi-sub { font-size: 0.72rem; color: var(--text3); margin-top: 0.4rem; }
 
-/* ── Tabs — Playmotech pill selector ── */
+/* ── 3D Pill Tab Selector ── */
 .stTabs [data-baseweb="tab-list"] {
     background: #0b0819; border: 1px solid rgba(16, 229, 179, 0.15);
     border-radius: 50px; padding: 6px; gap: 4px; display: flex;
@@ -155,23 +159,44 @@ st.markdown("""
 .stTabs [aria-selected="true"] {
     background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
     color: #ffffff !important; border: none !important;
-    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.25);
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.3);
 }
 
-/* ── 3D Inset Selectboxes & Inputs ── */
+/* ── 3D Tactile Buttons ── */
+.stButton > button, .stDownloadButton > button {
+    background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 0.45rem 1.4rem !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.25), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
+    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    position: relative;
+}
+.stButton > button:hover, .stDownloadButton > button:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 22px rgba(16, 229, 179, 0.38), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
+}
+.stButton > button:active, .stDownloadButton > button:active {
+    transform: translateY(1px) !important;
+    box-shadow: 0 2px 8px rgba(16, 229, 179, 0.15), inset 0 -1px 0 rgba(0,0,0,0.3) !important;
+}
+
+/* ── 3D Inset Selectboxes & Dropdowns ── */
 div[data-baseweb="select"] > div {
-    background-color: rgba(11, 8, 25, 0.75) !important;
+    background-color: rgba(11, 8, 25, 0.80) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 10px !important;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5) !important;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
 }
 div[data-baseweb="select"] > div:hover {
     border-color: rgba(16, 229, 179, 0.35) !important;
-}
-div[data-baseweb="select"][aria-expanded="true"] > div {
-    border-color: rgba(16, 229, 179, 0.6) !important;
-    box-shadow: 0 0 12px rgba(16, 229, 179, 0.2) !important;
 }
 
 /* ── Section titles ── */
@@ -183,24 +208,26 @@ div[data-baseweb="select"][aria-expanded="true"] > div {
 .chip-red { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
 .chip-purple { background: rgba(104, 61, 228, 0.1); border: 1px solid rgba(104, 61, 228, 0.25); color: var(--purple); }
 
-/* ── 3D Glassmorphic Action Cards ── */
+/* ── 3D Glassmorphic Action Cards (With Hover Perspective Tilt) ── */
 .acard {
-    background: rgba(11, 8, 25, 0.70);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: rgba(11, 8, 25, 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border: 1px solid rgba(104, 61, 228, 0.15);
     border-radius: 16px;
     padding: 1.4rem 1.6rem;
     margin-bottom: 0.75rem;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 .acard:hover {
-    background: rgba(13, 8, 28, 0.85);
-    border-color: rgba(16, 229, 179, 0.28);
-    transform: translateY(-5px) translateX(2px);
-    box-shadow: 0 15px 35px rgba(16, 229, 179, 0.12), 0 25px 50px rgba(0, 0, 0, 0.6);
+    background: rgba(13, 8, 28, 0.90);
+    border-color: rgba(16, 229, 179, 0.32);
+    transform: translateY(-8px) rotateX(3deg) rotateY(-2deg) scale(1.01);
+    box-shadow: 0 18px 40px rgba(16, 229, 179, 0.15), 0 30px 60px rgba(0, 0, 0, 0.7);
 }
 .acard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
 .acard-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text1); }
@@ -244,16 +271,12 @@ div[data-baseweb="select"][aria-expanded="true"] > div {
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] { background: rgba(8,10,24,0.92); border-right: 1px solid var(--border); }
 
-/* ── Download button ── */
-.stDownloadButton > button { background: linear-gradient(135deg, rgba(138,180,248,0.12), rgba(197,138,249,0.12)) !important; border: 1px solid rgba(138,180,248,0.25) !important; color: var(--blue) !important; border-radius: 50px !important; font-family: 'Outfit', sans-serif !important; font-weight: 600 !important; }
-.stDownloadButton > button:hover { background: linear-gradient(135deg, rgba(138,180,248,0.22), rgba(197,138,249,0.22)) !important; transform: translateY(-2px) !important; }
-
 /* ── Table ── */
 .stDataFrame { border-radius: 14px; overflow: hidden; border: 1px solid var(--border) !important; }
 
 /* ── Expander ── */
 details { background: var(--glass) !important; border: 1px solid var(--border) !important; border-radius: 14px !important; margin-bottom: 0.5rem !important; }
-details:hover { border-color: rgba(138,180,248,0.18) !important; }
+details:hover { border-color: rgba(16, 229, 179, 0.25) !important; }
 details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 600 !important; color: var(--text1) !important; }
 
 /* ── Scrollbar ── */
