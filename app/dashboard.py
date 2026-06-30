@@ -507,12 +507,16 @@ def render_sai_card(centre, score, rank):
 
 # Render the Hero Branding Banner at the top
 st.markdown("""
-<div class="hero">
+<div class="hero" style="padding: 2rem 1rem 1rem; text-align: center;">
   <div class="hero-badge"><span class="dot dot-green"></span> Live Pathway Tracking</div>
-  <h1 class="hero-title notranslate" translate="no">ATHLETIQ</h1>
-  <p class="hero-sub notranslate" translate="no">Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.<br>
-  <span style="color:var(--blue);font-weight:700;">Built to decide where to scout, coach, fund and activate.</span></p>
-  <div class="hero-rule"></div>
+  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
+  <h2 class="notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #E8EAED; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
+    Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.
+  </h2>
+  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #8AB4F8; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
+    Built to decide where to scout, coach, fund and activate.
+  </div>
+  <div class="hero-rule" style="margin: 1rem auto 1.5rem;"></div>
 </div>
 """, unsafe_allow_html=True)
 
