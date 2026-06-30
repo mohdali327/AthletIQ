@@ -69,9 +69,9 @@ st.markdown("""
     --amber-dot: #FDD663;
 }
 
-.stApp {
-    background-color: #030012;
-    background-image: linear-gradient(135deg, #030012 0%, #0d081c 100%);
+.stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+    background-color: #030012 !important;
+    background-image: linear-gradient(135deg, #030012 0%, #0d081c 100%) !important;
     font-family: 'Inter', sans-serif;
     color: var(--text1);
 }
