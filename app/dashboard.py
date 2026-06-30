@@ -59,15 +59,23 @@ css_code = """
     --amber-dot: #FDD663;
 }
 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
     background-color: #030012 !important;
     background-image: 
-        linear-gradient(135deg, rgba(3, 0, 18, 0.95) 0%, rgba(13, 8, 28, 0.95) 100%),
-        url("data:image/jpeg;base64,PLACEHOLDER_BG") !important;
-    background-size: cover !important;
-    background-position: center 20% !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+        linear-gradient(135deg, rgba(3, 0, 18, 0.94) 0%, rgba(3, 0, 18, 0.94) 100%),
+        url("data:image/jpeg;base64,PLACEHOLDER_BG"),
+        linear-gradient(-45deg, #030012, #0a081c, #05141c, #0e071c, #030012) !important;
+    background-size: cover, cover, 600% 600% !important;
+    background-position: center center, center 20%, 0% 50% !important;
+    background-repeat: no-repeat, no-repeat, repeat !important;
+    background-attachment: fixed, fixed, fixed !important;
+    animation: gradientShift 22s ease infinite !important;
     font-family: 'Inter', sans-serif;
     color: var(--text1);
 }
