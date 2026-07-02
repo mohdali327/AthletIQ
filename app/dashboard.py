@@ -1525,11 +1525,25 @@ with tab4:
         
     # Coaches Table
     st.markdown('<div class="stitle" style="font-size:1rem;"> Active Coaches Directory</div>', unsafe_allow_html=True)
+    
+    fco1, fco2 = st.columns(2)
+    with fco1:
+        f_coach_sport = st.selectbox("Filter Coaches by Sport", ["All Sports"] + sorted(list(df_all[df_all["entity_type"]=="Coach"]["sport"].unique())), key="coach_sport_filter")
+    with fco2:
+        f_coach_state = st.selectbox("Filter Coaches by State Registry", ["All States"] + sorted(list(df_all[df_all["entity_type"]=="Coach"]["state"].unique())), key="coach_state_filter")
+        
     coaches_list = df_all[df_all["entity_type"]=="Coach"].copy()
+    if f_coach_sport != "All Sports":
+        coaches_list = coaches_list[coaches_list["sport"] == f_coach_sport]
+    if f_coach_state != "All States":
+        coaches_list = coaches_list[coaches_list["state"] == f_coach_state]
+        
     if not coaches_list.empty:
         co_display = coaches_list[["name", "sport", "state", "performance_level", "digital_readiness", "notes"]].copy()
         co_display.columns = ["Coach Name", "Sport Focus", "State", "Licence Level", "Digital Readiness", "Specialization"]
         st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=250)
+    else:
+        st.info("No coaches match the selected sport/state filters.")
 
     # ── Coach Reallocation & Deficit Optimizer ──
     st.markdown('<div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;"> Coach Deficit & Reallocation Optimizer</div>', unsafe_allow_html=True)
@@ -1662,7 +1676,7 @@ with tab5:
         "AthletIQ maps government training centres (SAI), private academies, and local wrestling akharas/boxing clubs "
         "to help sponsors invest in infrastructure name-rights, safety gear, and coaching scholarships.", ""), unsafe_allow_html=True)
         
-    sub_centre_tabs = st.tabs(["SAI Centres & NCOEs", "Private Academies", "Akharas & Clubs", "Partner Network"])
+    sub_centre_tabs = st.tabs(["SAI Centres & NCOEs", "Football Academies Directory", "Private Academies", "Akharas & Clubs", "Partner Network"])
     
     with sub_centre_tabs[0]:
         st.markdown('<div class="stitle" style="font-size:1rem;"> Sports Authority of India Training Network</div>', unsafe_allow_html=True)
@@ -1681,6 +1695,33 @@ with tab5:
         st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=280)
         
     with sub_centre_tabs[1]:
+        st.markdown('<div class="stitle" style="font-size:1rem;"> AIFF Accredited Football Academies</div>', unsafe_allow_html=True)
+        fb_acads = df_all[(df_all["entity_type"] == "Academy") & (df_all["sport"] == "Football")].copy()
+        if not fb_acads.empty:
+            def parse_acad_note(note_str, key):
+                if not isinstance(note_str, str):
+                    return ""
+                parts = [p.strip() for p in note_str.split("|")]
+                for p in parts:
+                    if p.startswith(key + ":"):
+                        return p.split(":", 1)[1].strip()
+                return ""
+            
+            fb_acads["Age Groups Mapped"] = fb_acads["notes"].apply(lambda n: parse_acad_note(n, "Age Groups"))
+            fb_acads["Leagues / Competitions"] = fb_acads["notes"].apply(lambda n: parse_acad_note(n, "Competitions"))
+            fb_acads["Medical Facilities"] = fb_acads["notes"].apply(lambda n: parse_acad_note(n, "Medical"))
+            
+            fb_acads_disp = fb_acads[["name", "city", "state", "Age Groups Mapped", "Leagues / Competitions", "Medical Facilities"]].copy()
+            fb_acads_disp.columns = ["Academy Name", "City", "State", "Age Groups Mapped", "Leagues & Tournaments", "Medical & Safety Provisions"]
+            st.dataframe(fb_acads_disp.reset_index(drop=True), use_container_width=True, height=320)
+            
+            # Download button
+            dl_fb_acads = fb_acads_disp.to_csv(index=False).encode("utf-8")
+            st.download_button(" Download Football Academies Directory (CSV)", dl_fb_acads, "football_academies.csv", "text/csv", use_container_width=True, key="btn_dl_fb_acads")
+        else:
+            st.warning("No Football Academies found in the database.")
+            
+    with sub_centre_tabs[2]:
         st.markdown('<div class="stitle" style="font-size:1rem;"> Top Private Sports Academies</div>', unsafe_allow_html=True)
         private_acads = [
             {"name": "JSW Inspire Institute of Sport (IIS)", "location": "Vijayanagar, Karnataka", "sports": "Boxing · Wrestling · Athletics", "capacity": "150 athletes", "focus": "Elite performance training"},
@@ -1700,7 +1741,7 @@ with tab5:
             </div>
             """, unsafe_allow_html=True)
             
-    with sub_centre_tabs[2]:
+    with sub_centre_tabs[3]:
         st.markdown('<div class="stitle" style="font-size:1rem;"> Akharas & Regional Boxing Clubs</div>', unsafe_allow_html=True)
         akharas = [
             {"name": "Chhatrasal Akhara", "location": "Delhi", "sport": "Wrestling", "mentors": "Sushil Kumar, Ravi Dahiya, Aman Sehrawat", "status": "Podium breeding ground"},
@@ -1718,7 +1759,7 @@ with tab5:
             </div>
             """, unsafe_allow_html=True)
             
-    with sub_centre_tabs[3]:
+    with sub_centre_tabs[4]:
         st.markdown('<div class="stitle" style="font-size:1rem;"> Partner Network (Schools & Venues)</div>', unsafe_allow_html=True)
         st.markdown(insight(" Schools & Clubs Integration", 
             "AthletIQ partners with 50+ regional schools and state venues to host scouting trials. "
