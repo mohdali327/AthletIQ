@@ -1347,10 +1347,26 @@ with tab2:
         # Rename columns for clarity
         pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "next_recommended_step"]].copy()
         pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Next Recommended Step"]
-        st.dataframe(pd_table.reset_index(drop=True), use_container_width=True, height=350)
+        
+        # Simple filters for Prospects
+        st.markdown('<div style="margin-top:-0.5rem;margin-bottom:1rem;"></div>', unsafe_allow_html=True)
+        fp1, fp2 = st.columns(2)
+        with fp1:
+            f_prospect_sport = st.selectbox("Filter Prospects by Sport", ["All Sports"] + sorted(list(pd_table["Sport"].unique())), key="prospect_sport_filter")
+        with fp2:
+            f_prospect_state = st.selectbox("Filter Prospects by Home State", ["All States"] + sorted(list(pd_table["Home State"].unique())), key="prospect_state_filter")
+            
+        filtered_prospects = pd_table.copy()
+        if f_prospect_sport != "All Sports":
+            filtered_prospects = filtered_prospects[filtered_prospects["Sport"] == f_prospect_sport]
+        if f_prospect_state != "All States":
+            filtered_prospects = filtered_prospects[filtered_prospects["Home State"] == f_prospect_state]
+            
+        st.write(f"Showing top 100 prospects out of {len(filtered_prospects)} matches:")
+        st.dataframe(filtered_prospects.head(100).reset_index(drop=True), use_container_width=True, height=350)
         
         # Export button
-        dl_prospects = pd_table.to_csv(index=False).encode("utf-8")
+        dl_prospects = filtered_prospects.to_csv(index=False).encode("utf-8")
         st.download_button(" Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True, key="btn_dl_prospects")
 
 
@@ -1541,7 +1557,13 @@ with tab4:
     if not coaches_list.empty:
         co_display = coaches_list[["name", "sport", "state", "performance_level", "digital_readiness", "notes"]].copy()
         co_display.columns = ["Coach Name", "Sport Focus", "State", "Licence Level", "Digital Readiness", "Specialization"]
-        st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=250)
+        
+        st.write(f"Showing top 100 coaches out of {len(co_display)} matches:")
+        st.dataframe(co_display.head(100).reset_index(drop=True), use_container_width=True, height=250)
+        
+        # Download button
+        dl_coaches = co_display.to_csv(index=False).encode("utf-8")
+        st.download_button(" Download Full Coaches Directory (CSV)", dl_coaches, "coaches_directory.csv", "text/csv", use_container_width=True, key="btn_dl_coaches")
     else:
         st.info("No coaches match the selected sport/state filters.")
 
