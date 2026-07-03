@@ -351,54 +351,45 @@ COLOR_SCALES = {
 # DATA LOADING
 # ─────────────────────────────────────────────────────────────────────────────
 @st.cache_data
-def load_master():
-    for p in ["../data/athletiq_master_database.csv","data/athletiq_master_database.csv","./data/athletiq_master_database.csv"]:
-        if os.path.exists(p):
-            df = pd.read_csv(p)
-            df.columns = df.columns.str.strip().str.lower()
-            for c in ["entity_type","name","sport","city","state","tier","pipeline_stage",
-                      "funding_status","gender","performance_level","tags","notes","source_link","frequency"]:
-                if c in df.columns: df[c] = df[c].fillna("Unknown").astype(str).str.strip()
-            for c in ["cwg_2036_relevance","olympic_2032_relevance","digital_readiness",
-                      "athletiq_opportunity_score","participants_or_capacity","age"]:
-                if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
-            # Derived helper columns
-            df["has_source"] = df["source_link"].apply(lambda x: x not in ["","Unknown","N/A"])
-            df["has_notes"] = df["notes"].apply(lambda x: x not in ["","Unknown","N/A"])
-            df["is_rural"] = df["tier"].isin(["Rural","Tier3"])
-            df["is_women"] = df["gender"].isin(["Female"])
-            df["is_youth"] = df["age"].between(10, 21)
-            df["is_unfunded"] = df["funding_status"].str.lower() == "unfunded"
-            df["tag_list"] = df["tags"].apply(lambda x: [t.strip() for t in x.split(",") if t.strip()])
-            df["cwg_flag"] = df["tag_list"].apply(lambda t: "CWG2036" in t)
-            df["oly_flag"] = df["tag_list"].apply(lambda t: "Olympic2032" in t)
-            df["rural_flag"] = df["tag_list"].apply(lambda t: "rural-talent" in t)
-            df["tribal_flag"] = df["tag_list"].apply(lambda t: "tribal-talent" in t)
-            return df
-    return None
+def load_master(filepath, mtime):
+    df = pd.read_csv(filepath)
+    df.columns = df.columns.str.strip().str.lower()
+    for c in ["entity_type","name","sport","city","state","tier","pipeline_stage",
+              "funding_status","gender","performance_level","tags","notes","source_link","frequency"]:
+        if c in df.columns: df[c] = df[c].fillna("Unknown").astype(str).str.strip()
+    for c in ["cwg_2036_relevance","olympic_2032_relevance","digital_readiness",
+              "athletiq_opportunity_score","participants_or_capacity","age"]:
+        if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
+    # Derived helper columns
+    df["has_source"] = df["source_link"].apply(lambda x: x not in ["","Unknown","N/A"])
+    df["has_notes"] = df["notes"].apply(lambda x: x not in ["","Unknown","N/A"])
+    df["is_rural"] = df["tier"].isin(["Rural","Tier3"])
+    df["is_women"] = df["gender"].isin(["Female"])
+    df["is_youth"] = df["age"].between(10, 21)
+    df["is_unfunded"] = df["funding_status"].str.lower() == "unfunded"
+    df["tag_list"] = df["tags"].apply(lambda x: [t.strip() for t in x.split(",") if t.strip()])
+    df["cwg_flag"] = df["tag_list"].apply(lambda t: "CWG2036" in t)
+    df["oly_flag"] = df["tag_list"].apply(lambda t: "Olympic2032" in t)
+    df["rural_flag"] = df["tag_list"].apply(lambda t: "rural-talent" in t)
+    df["tribal_flag"] = df["tag_list"].apply(lambda t: "tribal-talent" in t)
+    return df
 
 @st.cache_data
-def load_csr():
-    for p in ["../data/csr_sponsor_signals.csv","data/csr_sponsor_signals.csv","./data/csr_sponsor_signals.csv"]:
-        if os.path.exists(p):
-            df = pd.read_csv(p)
-            df.columns = df.columns.str.strip().str.lower()
-            for c in ["company_name","sector","sport_focus","geographic_focus","existing_sport_initiatives",
-                      "contact_potential","engagement_strategy","notes","source_link"]:
-                if c in df.columns: df[c] = df[c].fillna("Unknown").astype(str).str.strip()
-            for c in ["annual_revenue_cr","annual_csr_budget_cr","current_sport_allocation_pct",
-                      "csr_alignment_score","athletiq_fit_score"]:
-                if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
-            return df
-    return None
+def load_csr(filepath, mtime):
+    df = pd.read_csv(filepath)
+    df.columns = df.columns.str.strip().str.lower()
+    for c in ["company_name","sector","sport_focus","geographic_focus","existing_sport_initiatives",
+              "contact_potential","engagement_strategy","notes","source_link"]:
+        if c in df.columns: df[c] = df[c].fillna("Unknown").astype(str).str.strip()
+    for c in ["annual_revenue_cr","annual_csr_budget_cr","current_sport_allocation_pct",
+              "csr_alignment_score","athletiq_fit_score"]:
+        if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
+    return df
 
 @st.cache_data
-def load_elite_athletes():
-    for p in ["../data/elite_athletes.json","data/elite_athletes.json","./data/elite_athletes.json"]:
-        if os.path.exists(p):
-            with open(p, "r", encoding="utf-8") as f:
-                return json.load(f)
-    return []
+def load_elite_athletes(filepath, mtime):
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 # ─────────────────────────────────────────────────────────────────────────────
 # HTML HELPERS
@@ -443,13 +434,23 @@ def score_color(s):
 # ─────────────────────────────────────────────────────────────────────────────
 # LOAD
 # ─────────────────────────────────────────────────────────────────────────────
-df_all = load_master()
-df_csr = load_csr()
-elite_athletes = load_elite_athletes()
+def find_file(options):
+    for p in options:
+        if os.path.exists(p):
+            return p, os.path.getmtime(p)
+    return None, None
 
-if df_all is None:
+master_path, master_mtime = find_file(["../data/athletiq_master_database.csv", "data/athletiq_master_database.csv", "./data/athletiq_master_database.csv"])
+csr_path, csr_mtime = find_file(["../data/csr_sponsor_signals.csv", "data/csr_sponsor_signals.csv", "./data/csr_sponsor_signals.csv"])
+elite_path, elite_mtime = find_file(["../data/elite_athletes.json", "data/elite_athletes.json", "./data/elite_athletes.json"])
+
+if not master_path:
     st.error(" Master database not found. Place `athletiq_master_database.csv` in the `data/` folder.")
     st.stop()
+
+df_all = load_master(master_path, master_mtime)
+df_csr = load_csr(csr_path, csr_mtime) if csr_path else None
+elite_athletes = load_elite_athletes(elite_path, elite_mtime) if elite_path else []
 
 # ─────────────────────────────────────────────────────────────────────────────
 # SIDEBAR FILTERS
