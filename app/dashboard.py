@@ -347,6 +347,27 @@ details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 6
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(138,180,248,0.25); border-radius: 3px; }
+
+/* Replace Streamlit chevron arrow with a 3-line hamburger menu when collapsed */
+[data-testid="collapsedSidebar"] svg,
+button[aria-label="Expand sidebar"] svg,
+div[class*="collapsedSidebar"] svg {
+    display: none !important;
+}
+
+[data-testid="collapsedSidebar"]::before,
+button[aria-label="Expand sidebar"]::before,
+div[class*="collapsedSidebar"]::before {
+    content: "☰" !important;
+    font-size: 1.6rem !important;
+    color: #10E5B3 !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    font-family: Arial, sans-serif !important;
+}
 </style>
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
   <div class="orb orb-1"></div>
