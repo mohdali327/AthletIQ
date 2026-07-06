@@ -296,6 +296,45 @@ div[data-baseweb="select"] > div:hover {
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] { background: rgba(8,10,24,0.92); border-right: 1px solid var(--border); }
 
+/* Hide check circular indicators from sidebar radio navigation */
+[data-testid="stSidebar"] div[role="radiogroup"] label [data-baseweb="radio"] > div:first-child,
+[data-testid="stSidebar"] div[role="radiogroup"] label [data-testid="stWidgetLabel"] div:first-child,
+[data-testid="stSidebar"] div[role="radiogroup"] label div:first-child:not(:last-child) {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Premium Sidebar Menu Button Links */
+[data-testid="stSidebar"] div[role="radiogroup"] label {
+    font-size: 1.22rem !important;
+    font-family: 'Outfit', sans-serif !important;
+    color: var(--text2) !important;
+    cursor: pointer !important;
+    margin-bottom: 0.6rem !important;
+    padding: 8px 14px !important;
+    border-radius: 8px !important;
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    width: 100% !important;
+}
+[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+    background-color: rgba(16, 229, 179, 0.08) !important;
+    border-color: rgba(16, 229, 179, 0.3) !important;
+    color: #10E5B3 !important;
+    transform: translateX(4px) !important;
+}
+[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"],
+[data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
+    background-color: rgba(16, 229, 179, 0.15) !important;
+    border-color: #10E5B3 !important;
+    color: #10E5B3 !important;
+    font-weight: 700 !important;
+}
+
 /* ── Table ── */
 .stDataFrame { border-radius: 14px; overflow: hidden; border: 1px solid var(--border) !important; }
 
@@ -474,18 +513,7 @@ with st.sidebar:
         label_visibility="collapsed",
         key="main_navigation"
     )
-    st.markdown("---")
-    
-    st.markdown("<h2 style='color:#10E5B3;font-family:Outfit;font-weight:700;'> Filters</h2>", unsafe_allow_html=True)
-    sel_entity = st.multiselect("Entity Type", sorted(df_all["entity_type"].unique()), default=sorted(df_all["entity_type"].unique()))
-    sel_sport = st.multiselect("Sport", sorted(df_all["sport"].unique()), default=sorted(df_all["sport"].unique()))
-    sel_state = st.multiselect("State", sorted(df_all["state"].unique()), default=sorted(df_all["state"].unique()))
-    sel_tier = st.multiselect("Tier", sorted(df_all["tier"].unique()), default=sorted(df_all["tier"].unique()))
-    sel_pipeline = st.multiselect("Pipeline", sorted(df_all["pipeline_stage"].unique()), default=sorted(df_all["pipeline_stage"].unique()))
-    st.markdown("---")
-    omin, omax = float(df_all["athletiq_opportunity_score"].min()), float(df_all["athletiq_opportunity_score"].max())
-    sel_score = st.slider("Opportunity Score", omin, max(omax,10.0), (omin, max(omax,10.0)), 0.5)
-    cmin, cmax = float(df_all["cwg_2036_relevance"].min()), float(df_all["cwg_2036_relevance"].max())
+    # Sidebar contains exclusively the navigation options now
 
 # ── DYNAMIC SAI CENTRES LOADER ──
 def load_processed_sai_centres():
