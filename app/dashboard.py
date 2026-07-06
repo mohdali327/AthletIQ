@@ -453,9 +453,29 @@ df_csr = load_csr(csr_path, csr_mtime) if csr_path else None
 elite_athletes = load_elite_athletes(elite_path, elite_mtime) if elite_path else []
 
 # ─────────────────────────────────────────────────────────────────────────────
-# SIDEBAR FILTERS
+# SIDEBAR NAVIGATION & FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
+    st.markdown("<h2 style='color:#10E5B3;font-family:Outfit;font-weight:700;margin-top:0.5rem;'> Navigation</h2>", unsafe_allow_html=True)
+    selected_tab = st.radio(
+        label="Go to section:",
+        options=[
+            "Pathway Overview",
+            "Discovery & Leagues",
+            "Sport Priority",
+            "Coach Capacity",
+            "Centres & Academies",
+            "Federation Intelligence",
+            "CSR Matchmaker",
+            "Sponsor Pipeline",
+            "Athlete Cohorts",
+            "Data Quality"
+        ],
+        label_visibility="collapsed",
+        key="main_navigation"
+    )
+    st.markdown("---")
+    
     st.markdown("<h2 style='color:#10E5B3;font-family:Outfit;font-weight:700;'> Filters</h2>", unsafe_allow_html=True)
     sel_entity = st.multiselect("Entity Type", sorted(df_all["entity_type"].unique()), default=sorted(df_all["entity_type"].unique()))
     sel_sport = st.multiselect("Sport", sorted(df_all["sport"].unique()), default=sorted(df_all["sport"].unique()))
@@ -866,18 +886,7 @@ def get_live_tournaments():
 
 st.markdown("---")
 
-tab1,tab2,tab3,tab4,tab5,tab6,tab7,tab8,tab9,tab10 = st.tabs([
-    "Pathway Overview",
-    "Discovery & Leagues",
-    "Sport Priority",
-    "Coach Capacity",
-    "Centres & Academies",
-    "Federation Intelligence",
-    "CSR Matchmaker",
-    "Sponsor Pipeline",
-    "Athlete Cohorts",
-    "Data Quality",
-])
+# Navigation choices are fetched from st.sidebar radio button selected_tab
 
 # ─────────────────────────────────────────────────────────────────────────────
 # GTM DOCUMENT GENERATOR HELPER
@@ -940,7 +949,7 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 # TAB 1 — PATHWAY OVERVIEW (HOMEPAGE)
 # Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab1:
+if selected_tab == "Pathway Overview":
     st.markdown('<div class="stitle"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
     # 1. Dynamic Grassroots-to-Podium Conversion Funnel
@@ -1239,7 +1248,7 @@ with tab1:
 # TAB 2 — TALENT DISCOVERY
 # Purpose: Where talent is likely to emerge; who should be scouted.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab2:
+elif selected_tab == "Discovery & Leagues":
     st.markdown('<div class="stitle"> Discovery & Leagues <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
     disc_tabs = st.tabs(["Grassroots Leagues Tracker", "Emerging Athlete Prospects"])
@@ -1375,7 +1384,7 @@ with tab2:
 # TAB 3 — SPORT PRIORITY
 # Purpose: Which sports AthletIQ should focus on and why.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab3:
+elif selected_tab == "Sport Priority":
     st.markdown('<div class="stitle"> Sport Priority Matrix <span class="chip chip-amber">Strategic Classification of Sports</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Classification Matrix", 
@@ -1519,7 +1528,7 @@ with tab3:
 # TAB 4 — COACH CAPACITY
 # Purpose: Where coaching is the bottleneck; former athlete-to-coach opportunities; masterclass needs.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab4:
+elif selected_tab == "Coach Capacity":
     st.markdown('<div class="stitle"> Coach Capacity <span class="chip chip-purple">Empowerment & Capacity Gaps</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ The Bottleneck in Indian Sports", 
@@ -1692,7 +1701,7 @@ with tab4:
 # TAB 5 — CENTRES & ACADEMIES
 # Purpose: SAI, private academies, schools, akharas, clubs, venues.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab5:
+elif selected_tab == "Centres & Academies":
     st.markdown('<div class="stitle"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ What is this?", 
@@ -1793,7 +1802,7 @@ with tab5:
 # TAB 6 — FEDERATION INTELLIGENCE
 # Purpose: NSF governance, office bearers, status, credibility, engagement opportunity.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab6:
+elif selected_tab == "Federation Intelligence":
     st.markdown('<div class="stitle"> Federation Intelligence <span class="chip chip-purple">NSF Governance & Engagement Opportunities</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Why Federations Matter", 
@@ -1834,7 +1843,7 @@ with tab6:
 # TAB 7 — CSR MATCHMAKER
 # Purpose: Match brand/CSR mandate to sport/geography/demographic pathway.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab7:
+elif selected_tab == "CSR Matchmaker":
     st.markdown('<div class="stitle"> CSR Matchmaker <span class="chip chip-green">Corporate CSR Mandate Alignment</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Match Corporate Mandate to Sport Geographies", 
@@ -1907,7 +1916,7 @@ with tab7:
 # TAB 8 — SPONSOR PIPELINE
 # Purpose: Commercial prospects.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab8:
+elif selected_tab == "Sponsor Pipeline":
     st.markdown('<div class="stitle"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Commercial Opportunities Pipeline", 
@@ -1964,7 +1973,7 @@ with tab8:
 # TAB 9 — ATHLETE COHORTS
 # Purpose: Not just elite athletes; package groups for funding and development.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab9:
+elif selected_tab == "Athlete Cohorts":
     st.markdown('<div class="stitle"> Athlete Cohorts <span class="chip chip-blue">Packaged Groups for Funding</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Pathway Cohorts Packaging", 
@@ -2188,7 +2197,7 @@ with tab9:
 # TAB 10 — DATA QUALITY
 # Purpose: Data Quality & Confidence internal validation layer.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-with tab10:
+elif selected_tab == "Data Quality":
     st.markdown('<div class="stitle"> Data Quality & Confidence <span class="chip chip-red">Internal Validation Layer</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Internal Data Verification", 
