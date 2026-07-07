@@ -368,6 +368,32 @@ div[class*="collapsedSidebar"]::before {
     line-height: 1 !important;
     font-family: Arial, sans-serif !important;
 }
+/* ── Tab Transition Overlay ── */
+.redirect-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(10, 14, 23, 0.92); z-index: 999999;
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    animation: overlayFade 1.2s ease forwards; pointer-events: none;
+}
+@keyframes overlayFade {
+    0%   { opacity: 1; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; visibility: hidden; }
+}
+.redirect-spinner {
+    width: 40px; height: 40px;
+    border: 3px solid rgba(16, 229, 179, 0.15);
+    border-top-color: #10E5B3;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.redirect-text {
+    font-family: 'Outfit', sans-serif; color: #E8EAED;
+    font-size: 1rem; font-weight: 600; letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
 </style>
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
   <div class="orb orb-1"></div>
@@ -586,7 +612,14 @@ with st.sidebar:
         label_visibility="collapsed",
         key="main_navigation"
     )
-    # Sidebar contains exclusively the navigation options now
+    # ── Tab transition animation & auto-close sidebar ──
+    if "_last_tab" not in st.session_state:
+        st.session_state._last_tab = selected_tab
+    if st.session_state._last_tab != selected_tab:
+        st.session_state._last_tab = selected_tab
+        st.markdown(f'<div class="redirect-overlay"><div class="redirect-spinner"></div><div class="redirect-text">Loading {selected_tab}...</div></div>', unsafe_allow_html=True)
+        import streamlit.components.v1 as components
+        components.html('<script>try{window.parent.document.querySelector("button[aria-label=\'Close sidebar\']").click()}catch(e){}</script>', height=0, width=0)
 
 # ── DYNAMIC SAI CENTRES LOADER ──
 def load_processed_sai_centres():
