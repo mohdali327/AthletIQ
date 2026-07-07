@@ -21,6 +21,9 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+# ─────────────────────────────────────────────────────────────────────────────
+# CSS — Gemini Neural Expressive + Decision-First Design
+# ─────────────────────────────────────────────────────────────────────────────
 import base64
 
 def load_bg_base64():
@@ -34,43 +37,26 @@ bg_base64 = load_bg_base64()
 
 css_code = """
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;700;800&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* ── root theme tokens (Prototype Archivo / Saffron theme) ── */
+/* ── root theme tokens (Playmotech Space Style) ── */
 :root {
-    --navy: #0B1220;
-    --navy-2: #101a2e;
-    --panel: #141f36;
-    --panel-2: #182545;
-    --line: rgba(255,255,255,0.09);
-    --saffron: #E8871E;
-    --saffron-dim: rgba(232,135,30,0.14);
-    --cream: #F5F3EE;
-    --slate: #8792a3;
-    --slate-dim: #5c6577;
-    --green: #2E9E6C;
-    --green-dim: rgba(46,158,108,0.14);
-    --amber: #D9A441;
-    --amber-dim: rgba(217,164,65,0.14);
-    --red: #C6604F;
-
-    /* Backward compatibility links */
-    --blue: #E8871E;
-    --purple: #182545;
-    --pink: #C6604F;
-    --teal: #E8871E;
-    --gold: #D9A441;
-    --cyan: #8792a3;
-    --orange: #E8871E;
-    --glass: #141f36;
-    --glass2: #101a2e;
-    --border: rgba(255,255,255,0.09);
-    --text1: #F5F3EE;
-    --text2: #8792a3;
-    --text3: #5c6577;
-    --green-dot: #2E9E6C;
-    --red-dot: #C6604F;
-    --amber-dot: #D9A441;
+    --blue: #00ffd1;
+    --purple: #683DE4;
+    --pink: #F28B82;
+    --teal: #10E5B3;
+    --gold: #FDD663;
+    --cyan: #78D9EC;
+    --orange: #FCAD70;
+    --glass: #0b0819;
+    --glass2: #0d081c;
+    --border: rgba(16, 229, 179, 0.12);
+    --text1: #FFFFFF;
+    --text2: #abb8c3;
+    --text3: #6c7b88;
+    --green-dot: #10E5B3;
+    --red-dot: #F28B82;
+    --amber-dot: #FDD663;
 }
 
 @keyframes gradientShift {
@@ -80,18 +66,18 @@ css_code = """
 }
 
 .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-    background-color: var(--navy) !important;
+    background-color: #030012 !important;
     background-image: 
-        linear-gradient(135deg, rgba(11, 18, 32, 0.97) 0%, rgba(11, 18, 32, 0.97) 100%),
+        linear-gradient(135deg, rgba(3, 0, 18, 0.94) 0%, rgba(3, 0, 18, 0.94) 100%),
         url("data:image/jpeg;base64,PLACEHOLDER_BG"),
-        linear-gradient(-45deg, var(--navy), var(--navy-2), var(--panel), var(--panel-2), var(--navy)) !important;
+        linear-gradient(-45deg, #030012, #0a081c, #05141c, #0e071c, #030012) !important;
     background-size: cover, cover, 600% 600% !important;
     background-position: center center, center 20%, 0% 50% !important;
     background-repeat: no-repeat, no-repeat, repeat !important;
     background-attachment: fixed, fixed, fixed !important;
     animation: gradientShift 22s ease infinite !important;
-    font-family: 'Archivo', sans-serif;
-    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    color: var(--text1);
 }
 
 /* ── 3D Floating Orbs ── */
@@ -109,9 +95,9 @@ css_code = """
 }
 
 .orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
-.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(232, 135, 30, 0.07) 0%, transparent 70%); top: -150px; left: -150px; animation: orbFloat1 22s ease-in-out infinite; }
-.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(24, 37, 69, 0.08) 0%, transparent 70%); top: 35%; right: -80px; animation: orbFloat2 26s ease-in-out infinite; }
-.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(46, 158, 108, 0.04) 0%, transparent 70%); bottom: 5%; left: 25%; animation: orbFloat3 18s ease-in-out infinite; }
+.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 229, 179, 0.08) 0%, transparent 70%); top: -150px; left: -150px; animation: orbFloat1 22s ease-in-out infinite; }
+.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(104, 61, 228, 0.08) 0%, transparent 70%); top: 35%; right: -80px; animation: orbFloat2 26s ease-in-out infinite; }
+.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(16, 229, 179, 0.05) 0%, transparent 70%); bottom: 5%; left: 25%; animation: orbFloat3 18s ease-in-out infinite; }
 
 /* ── 3D Perspective Grid Background ── */
 @keyframes gridScroll {
@@ -125,8 +111,8 @@ css_code = """
     width: 120%;
     height: 60%;
     background-image: 
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+        linear-gradient(rgba(16, 229, 179, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 229, 179, 0.04) 1px, transparent 1px);
     background-size: 50px 50px;
     transform: perspective(600px) rotateX(65deg) translateZ(0);
     transform-origin: bottom center;
@@ -138,241 +124,229 @@ css_code = """
 
 /* ── Hero ── */
 .hero { text-align: center; padding: 2.5rem 1rem 1rem; position: relative; z-index: 1; }
-.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--saffron-dim); border: 1px solid rgba(232, 135, 30, 0.35); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--saffron); margin-bottom: 1.2rem; }
-.hero-title { font-family: 'Archivo Expanded', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, var(--cream) 0%, var(--saffron) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; }
-.hero-sub { color: var(--slate); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
-.hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, var(--saffron), var(--navy-2)); border-radius: 2px; margin: 1.4rem auto; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; }
+.hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; }
+.hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
+.hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
 
-/* ── KPI Cards ── */
+/* ── 3D Glassmorphic KPI Cards (With Bevel Highlights & Perspective Tilts) ── */
 .kpi {
-    background: var(--panel) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 12px !important;
-    padding: 1.6rem 1.2rem !important;
-    text-align: center !important;
-    transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    position: relative !important;
-    overflow: hidden !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+    background: rgba(11, 8, 25, 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    animation: slideUp 0.6s ease both;
 }
 .kpi:hover {
-    transform: translateY(-5px) scale(1.01) !important;
-    border-color: rgba(232, 135, 30, 0.35) !important;
-    box-shadow: 0 20px 45px rgba(232, 135, 30, 0.1), 0 30px 60px rgba(0, 0, 0, 0.7) !important;
+    transform: translateY(-10px) rotateX(-3deg) rotateY(3deg) scale(1.02);
+    border-color: rgba(16, 229, 179, 0.40);
+    box-shadow: 0 20px 45px rgba(16, 229, 179, 0.18), 0 30px 60px rgba(0, 0, 0, 0.7);
 }
-.kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2.5px; }
-.kpi.blue::before { background: linear-gradient(90deg, var(--saffron), var(--navy-2)); }
-.kpi.purple::before { background: linear-gradient(90deg, var(--panel-2), var(--saffron)); }
-.kpi.teal::before { background: linear-gradient(90deg, var(--saffron), var(--green)); }
-.kpi.gold::before { background: linear-gradient(90deg, var(--amber), var(--saffron)); }
-.kpi.pink::before { background: linear-gradient(90deg, var(--red), var(--saffron)); }
+.kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.kpi.blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+.kpi.purple::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+.kpi.teal::before { background: linear-gradient(90deg, var(--teal), var(--blue)); }
+.kpi.gold::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+.kpi.pink::before { background: linear-gradient(90deg, var(--pink), var(--gold)); }
 .kpi-em { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
-.kpi-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--slate); margin-bottom: 0.5rem; }
-.kpi-val { font-family: 'Archivo Expanded', sans-serif; font-size: 2.6rem; font-weight: 900; line-height: 1; }
-.kpi-val.blue { color: var(--saffron); }
-.kpi-val.purple { color: var(--cream); }
-.kpi-val.teal { color: var(--green); }
-.kpi-val.gold { color: var(--amber); }
-.kpi-val.pink { color: var(--red); }
-.kpi-sub { font-size: 0.72rem; color: var(--slate-dim); margin-top: 0.4rem; }
+.kpi-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--text3); margin-bottom: 0.5rem; }
+.kpi-val { font-family: 'Outfit', sans-serif; font-size: 2.6rem; font-weight: 900; line-height: 1; }
+.kpi-val.blue { color: var(--blue); }
+.kpi-val.purple { color: var(--purple); }
+.kpi-val.teal { color: var(--teal); }
+.kpi-val.gold { color: var(--gold); }
+.kpi-val.pink { color: var(--pink); }
+.kpi-sub { font-size: 0.72rem; color: var(--text3); margin-top: 0.4rem; }
 
-/* ── Pill Tab Selector ── */
+/* ── 3D Pill Tab Selector ── */
 .stTabs [data-baseweb="tab-list"] {
-    background: var(--navy-2) !important; border: 1px solid var(--line) !important;
-    border-radius: 50px !important; padding: 6px !important; gap: 4px !important; display: flex !important;
-    flex-wrap: wrap !important; width: fit-content !important; margin: 0 auto 2.5rem !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+    background: #0b0819; border: 1px solid rgba(16, 229, 179, 0.15);
+    border-radius: 50px; padding: 6px; gap: 4px; display: flex;
+    flex-wrap: wrap; width: fit-content; margin: 0 auto 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 .stTabs [data-baseweb="tab"] {
-    background: transparent !important; border: none !important; border-radius: 50px !important;
-    color: var(--slate) !important; font-family: 'Archivo', sans-serif !important;
-    font-weight: 600 !important; font-size: 0.85rem !important; padding: 0.5rem 1.4rem !important;
-    transition: all 0.22s ease !important; white-space: nowrap !important;
+    background: transparent; border: none; border-radius: 50px;
+    color: var(--text2); font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 0.85rem; padding: 0.5rem 1.4rem;
+    transition: all 0.22s ease; white-space: nowrap;
 }
-.stTabs [data-baseweb="tab"]:hover { background: var(--saffron-dim) !important; color: var(--saffron) !important; }
+.stTabs [data-baseweb="tab"]:hover { background: rgba(16, 229, 179, 0.08); color: var(--teal); }
 .stTabs [aria-selected="true"] {
-    background: var(--saffron) !important;
-    color: var(--navy) !important; border: none !important;
-    box-shadow: 0 4px 15px rgba(232, 135, 30, 0.3) !important;
+    background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
+    color: #ffffff !important; border: none !important;
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.3);
 }
 
-/* ── Tactile Buttons ── */
+/* ── 3D Tactile Buttons ── */
 .stButton > button, .stDownloadButton > button {
-    background: var(--saffron) !important;
-    color: var(--navy) !important;
+    background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
+    color: #FFFFFF !important;
     border: none !important;
     border-radius: 8px !important;
     padding: 0.45rem 1.4rem !important;
-    font-family: 'Archivo', sans-serif !important;
+    font-family: 'Outfit', sans-serif !important;
     font-weight: 700 !important;
     font-size: 0.85rem !important;
     letter-spacing: 1px !important;
     text-transform: uppercase !important;
-    box-shadow: 0 4px 15px rgba(232, 135, 30, 0.25), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.25), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
     transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    position: relative !important;
+    position: relative;
 }
 .stButton > button:hover, .stDownloadButton > button:hover {
     transform: translateY(-3px) !important;
-    box-shadow: 0 8px 22px rgba(232, 135, 30, 0.38), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
+    box-shadow: 0 8px 22px rgba(16, 229, 179, 0.38), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
 }
 .stButton > button:active, .stDownloadButton > button:active {
     transform: translateY(1px) !important;
-    box-shadow: 0 2px 8px rgba(232, 135, 30, 0.15), inset 0 -1px 0 rgba(0,0,0,0.3) !important;
+    box-shadow: 0 2px 8px rgba(16, 229, 179, 0.15), inset 0 -1px 0 rgba(0,0,0,0.3) !important;
 }
 
-/* ── Inset Selectboxes & Dropdowns ── */
+/* ── 3D Inset Selectboxes & Dropdowns ── */
 div[data-baseweb="select"] > div {
-    background-color: var(--panel) !important;
-    border: 1px solid var(--line) !important;
+    background-color: rgba(11, 8, 25, 0.80) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
     border-radius: 10px !important;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5) !important;
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
 }
 div[data-baseweb="select"] > div:hover {
-    border-color: rgba(232, 135, 30, 0.35) !important;
+    border-color: rgba(16, 229, 179, 0.35) !important;
 }
 
 /* ── Section titles ── */
-.stitle { font-family: 'Archivo Expanded', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--cream); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.stitle { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text1); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .chip { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.2rem 0.7rem; border-radius: 50px; }
-.chip-blue { background: var(--saffron-dim); border: 1px solid rgba(232, 135, 30, 0.35); color: var(--saffron); }
-.chip-green { background: var(--green-dim); border: 1px solid rgba(46, 158, 108, 0.25); color: var(--green); }
-.chip-amber { background: var(--amber-dim); border: 1px solid rgba(217, 164, 65, 0.28); color: var(--amber); }
-.chip-red { background: rgba(198, 96, 79, 0.14); border: 1px solid rgba(198, 96, 79, 0.28); color: var(--red); }
-.chip-purple { background: var(--panel-2); border: 1px solid var(--line); color: var(--cream); }
+.chip-blue { background: rgba(0, 255, 209, 0.1); border: 1px solid rgba(0, 255, 209, 0.25); color: var(--blue); }
+.chip-green { background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); color: var(--teal); }
+.chip-amber { background: rgba(253,214,99,0.14); border: 1px solid rgba(253,214,99,0.28); color: var(--gold); }
+.chip-red { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
+.chip-purple { background: rgba(104, 61, 228, 0.1); border: 1px solid rgba(104, 61, 228, 0.25); color: var(--purple); }
 
-/* ── Glassmorphic Action Cards ── */
+/* ── 3D Glassmorphic Action Cards (With Hover Perspective Tilt) ── */
 .acard {
-    background: var(--panel) !important;
-    border: 1px solid var(--line) !important;
-    border-radius: 12px !important;
-    padding: 1.4rem 1.6rem !important;
-    margin-bottom: 0.75rem !important;
-    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
-    position: relative !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+    background: rgba(11, 8, 25, 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(104, 61, 228, 0.15);
+    border-radius: 16px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
 }
 .acard:hover {
-    background: var(--navy-2) !important;
-    border-color: rgba(232, 135, 30, 0.35) !important;
-    transform: translateY(-5px) scale(1.01) !important;
-    box-shadow: 0 18px 40px rgba(232, 135, 30, 0.15), 0 30px 60px rgba(0, 0, 0, 0.7) !important;
+    background: rgba(13, 8, 28, 0.90);
+    border-color: rgba(16, 229, 179, 0.32);
+    transform: translateY(-8px) rotateX(3deg) rotateY(-2deg) scale(1.01);
+    box-shadow: 0 18px 40px rgba(16, 229, 179, 0.15), 0 30px 60px rgba(0, 0, 0, 0.7);
 }
 .acard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
-.acard-title { font-family: 'Archivo Expanded', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--cream); }
-.acard-meta { font-size: 0.75rem; color: var(--slate); line-height: 1.6; }
-.acard-score { font-family: 'IBM Plex Mono', sans-serif; font-size: 1.6rem; font-weight: 800; }
+.acard-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text1); }
+.acard-meta { font-size: 0.75rem; color: var(--text2); line-height: 1.6; }
+.acard-score { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; }
 .acard-tags { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 5px; }
-.tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.18rem 0.6rem; border-radius: 50px; background: var(--saffron-dim); color: var(--saffron); border: 1px solid rgba(232, 135, 30, 0.25); }
-.tag.green { background: var(--green-dim); color: var(--green); border-color: rgba(46, 158, 108, 0.25); }
-.tag.amber { background: var(--amber-dim); color: var(--amber); border-color: rgba(217, 164, 65, 0.25); }
-.tag.red { background: rgba(198, 96, 79, 0.1); color: var(--red); border-color: rgba(198, 96, 79, 0.2); }
-.tag.purple { background: var(--panel-2); color: var(--cream); border-color: var(--line); }
+.tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.18rem 0.6rem; border-radius: 50px; background: rgba(0, 255, 209, 0.1); color: var(--blue); border: 1px solid rgba(0, 255, 209, 0.2); }
+.tag.green { background: rgba(16, 229, 179, 0.1); color: var(--teal); border-color: rgba(16, 229, 179, 0.2); }
+.tag.amber { background: rgba(253,214,99,0.1); color: var(--gold); border-color: rgba(253,214,99,0.2); }
+.tag.red { background: rgba(242,139,130,0.1); color: var(--pink); border-color: rgba(242,139,130,0.2); }
+.tag.purple { background: rgba(104, 61, 228, 0.1); color: var(--purple); border-color: rgba(104, 61, 228, 0.2); }
 
 /* ── Insight box ── */
-.insight { background: linear-gradient(135deg, var(--saffron-dim), var(--panel)); border: 1px solid var(--line); border-left: 3px solid var(--saffron); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
-.insight.green { background: linear-gradient(135deg, var(--green-dim), var(--panel)); border-color: var(--line); border-left-color: var(--green); }
-.insight.amber { background: linear-gradient(135deg, var(--amber-dim), var(--panel)); border-color: var(--line); border-left-color: var(--amber); }
-.insight.red { background: linear-gradient(135deg, rgba(198, 96, 79, 0.1), var(--panel)); border-color: var(--line); border-left-color: var(--red); }
-.insight.purple { background: linear-gradient(135deg, var(--panel-2), var(--panel)); border-color: var(--line); border-left-color: var(--cream); }
-.insight-title { font-family: 'Archivo Expanded', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--saffron); margin-bottom: 0.35rem; }
-.insight.green .insight-title { color: var(--green); }
-.insight.amber .insight-title { color: var(--amber); }
-.insight.red .insight-title { color: var(--red); }
-.insight.purple .insight-title { color: var(--cream); }
-.insight-body { font-size: 0.85rem; color: var(--slate); line-height: 1.7; }
+.insight { background: linear-gradient(135deg, rgba(16, 229, 179, 0.05), rgba(104, 61, 228, 0.05)); border: 1px solid rgba(16, 229, 179, 0.15); border-left: 3px solid var(--teal); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
+.insight.green { background: linear-gradient(135deg, rgba(16, 229, 179, 0.05), rgba(104, 61, 228, 0.03)); border-color: rgba(16, 229, 179, 0.15); border-left-color: var(--teal); }
+.insight.amber { background: linear-gradient(135deg, rgba(253,214,99,0.07), rgba(252,173,112,0.07)); border-color: rgba(253,214,99,0.15); border-left-color: var(--gold); }
+.insight.red { background: linear-gradient(135deg, rgba(242,139,130,0.07), rgba(253,214,99,0.05)); border-color: rgba(242,139,130,0.15); border-left-color: var(--pink); }
+.insight.purple{ background: linear-gradient(135deg, rgba(104, 61, 228, 0.05), rgba(16, 229, 179, 0.03)); border-color: rgba(104, 61, 228, 0.15); border-left-color: var(--purple); }
+.insight-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--teal); margin-bottom: 0.35rem; }
+.insight.green .insight-title { color: var(--teal); }
+.insight.amber .insight-title { color: var(--gold); }
+.insight.red .insight-title { color: var(--pink); }
+.insight.purple .insight-title { color: var(--purple); }
+.insight-body { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
 
 /* ── Status dots ── */
 .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-.dot-green { background: var(--green); animation: pulse 2s infinite; }
-.dot-amber { background: var(--amber); }
-.dot-red { background: var(--red); }
+.dot-green { background: var(--teal); animation: pulse 2s infinite; }
+.dot-amber { background: var(--gold); }
+.dot-red { background: var(--pink); }
 
 /* ── Data quality bars ── */
 .dq-bar-wrap { background: rgba(255,255,255,0.05); border-radius: 50px; height: 8px; overflow: hidden; margin-top: 4px; }
 .dq-bar { height: 100%; border-radius: 50px; transition: width 1s ease; }
 
 /* ── Mini KPI ── */
-.mkpi { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 1.2rem; text-align: center; }
-.mkpi-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate); margin-bottom: 0.4rem; }
-.mkpi-val { font-family: 'Archivo Expanded', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; }
+.mkpi { background: var(--glass); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; text-align: center; }
+.mkpi-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); margin-bottom: 0.4rem; }
+.mkpi-val { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; }
 
 /* ── Sidebar ── */
-section[data-testid="stSidebar"] { background: rgba(11, 18, 32, 0.95) !important; border-right: 1px solid var(--line) !important; }
+section[data-testid="stSidebar"] { background: rgba(8,10,24,0.92); border-right: 1px solid var(--border); }
 
-/* Hide ALL radio indicators / checkboxes / circles from sidebar navigation */
-[data-testid="stSidebar"] [data-baseweb="radio"] {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-}
-[data-testid="stSidebar"] div[role="radiogroup"] label > div:first-child {
+/* Hide check circular indicators from sidebar radio navigation */
+[data-testid="stSidebar"] div[role="radiogroup"] label [data-baseweb="radio"] > div:first-child,
+[data-testid="stSidebar"] div[role="radiogroup"] label [data-testid="stWidgetLabel"] div:first-child,
+[data-testid="stSidebar"] div[role="radiogroup"] label div:first-child:not(:last-child) {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
-    overflow: hidden !important;
-}
-[data-testid="stSidebar"] div[role="radiogroup"] label span[data-baseweb],
-[data-testid="stSidebar"] div[role="radiogroup"] label svg,
-[data-testid="stSidebar"] div[role="radiogroup"] label input {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    position: absolute !important;
-    opacity: 0 !important;
-}
-/* Hide the radio label container that holds the dot */
-[data-testid="stSidebar"] .stRadio > div > label > div:first-child {
-    display: none !important;
 }
 
-/* Premium Sidebar Menu Button Links without circular check dots/checkboxes */
+/* Premium Sidebar Menu Button Links */
 [data-testid="stSidebar"] div[role="radiogroup"] label {
     font-size: 1.22rem !important;
-    font-family: 'Archivo Expanded', sans-serif !important;
-    color: var(--slate) !important;
+    font-family: 'Outfit', sans-serif !important;
+    color: var(--text2) !important;
     cursor: pointer !important;
     margin-bottom: 0.6rem !important;
-    padding: 10px 18px !important;
+    padding: 8px 14px !important;
     border-radius: 8px !important;
     background-color: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid var(--line) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
 }
 [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
-    background-color: var(--saffron-dim) !important;
-    border-color: var(--saffron) !important;
-    color: var(--saffron) !important;
+    background-color: rgba(16, 229, 179, 0.08) !important;
+    border-color: rgba(16, 229, 179, 0.3) !important;
+    color: #10E5B3 !important;
     transform: translateX(4px) !important;
 }
 [data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"],
 [data-testid="stSidebar"] div[role="radiogroup"] label:has(input:checked) {
-    background-color: var(--saffron-dim) !important;
-    border-color: var(--saffron) !important;
-    color: var(--saffron) !important;
+    background-color: rgba(16, 229, 179, 0.15) !important;
+    border-color: #10E5B3 !important;
+    color: #10E5B3 !important;
     font-weight: 700 !important;
 }
 
 /* ── Table ── */
-.stDataFrame { border-radius: 14px; overflow: hidden; border: 1px solid var(--line) !important; }
+.stDataFrame { border-radius: 14px; overflow: hidden; border: 1px solid var(--border) !important; }
 
 /* ── Expander ── */
-details { background: var(--panel) !important; border: 1px solid var(--line) !important; border-radius: 14px !important; margin-bottom: 0.5rem !important; }
-details:hover { border-color: var(--saffron) !important; }
-details > summary { font-family: 'Archivo Expanded', sans-serif !important; font-weight: 600 !important; color: var(--cream) !important; }
+details { background: var(--glass) !important; border: 1px solid var(--border) !important; border-radius: 14px !important; margin-bottom: 0.5rem !important; }
+details:hover { border-color: rgba(16, 229, 179, 0.25) !important; }
+details > summary { font-family: 'Outfit', sans-serif !important; font-weight: 600 !important; color: var(--text1) !important; }
 
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(232,135,30,0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: rgba(138,180,248,0.25); border-radius: 3px; }
 
 /* Replace Streamlit chevron arrow with a 3-line hamburger menu when collapsed */
 [data-testid="collapsedSidebar"] svg,
@@ -386,56 +360,13 @@ button[aria-label="Expand sidebar"]::before,
 div[class*="collapsedSidebar"]::before {
     content: "☰" !important;
     font-size: 1.6rem !important;
-    color: var(--saffron) !important;
+    color: #10E5B3 !important;
     font-weight: bold !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     line-height: 1 !important;
     font-family: Arial, sans-serif !important;
-}
-
-/* ── Redirect Transition Overlay ── */
-.redirect-overlay {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background-color: var(--navy) !important;
-    z-index: 999999 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    opacity: 1 !important;
-    animation: fadeOut 0.8s forwards !important;
-    pointer-events: none !important;
-}
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; display: none !important; visibility: hidden !important; }
-}
-.redirect-spinner {
-    width: 44px !important;
-    height: 44px !important;
-    border: 3.5px solid rgba(232, 135, 30, 0.1) !important;
-    border-top-color: var(--saffron) !important;
-    border-radius: 50% !important;
-    animation: spin 0.9s linear infinite !important;
-    margin: 0 auto 18px !important;
-}
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-.redirect-text {
-    font-family: 'Archivo Expanded', sans-serif !important;
-    color: var(--cream) !important;
-    font-size: 1.15rem !important;
-    font-weight: 700 !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase !important;
-    text-align: center !important;
 }
 </style>
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
@@ -444,9 +375,8 @@ div[class*="collapsedSidebar"]::before {
   <div class="orb orb-3"></div>
   <div class="grid-3d"></div>
 </div>
-
 """
-
+st.markdown(css_code.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -456,9 +386,9 @@ PL = dict(
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Archivo, Inter, sans-serif", color="#8792a3", size=12),
+    font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6", size=12),
     margin=dict(l=30, r=20, t=45, b=35),
-    colorway=["#E8871E","#2E9E6C","#D9A441","#C6604F","#F5F3EE","#8792a3","#182545","#5c6577"],
+    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"],
     legend=dict(bgcolor="rgba(22,28,48,0.7)", bordercolor="rgba(255,255,255,0.07)", borderwidth=1, font=dict(size=11)),
     xaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
     yaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
@@ -466,13 +396,13 @@ PL = dict(
 
 def playout(fig, title="", h=400):
     fig.update_layout(**PL,
-        title=dict(text=title, font=dict(size=15, family="Archivo, sans-serif", color="#F5F3EE")), height=h)
+        title=dict(text=title, font=dict(size=15, family="Outfit, sans-serif", color="#E8EAED")), height=h)
     return fig
 
 COLOR_SCALES = {
-    "blue": ["#0d1a30","#E8871E"],
-    "purple": ["#1a0d30","#182545"],
-    "teal": ["#0d2018","#2E9E6C"],
+    "blue": ["#0d1a30","#10E5B3"],
+    "purple": ["#1a0d30","#683DE4"],
+    "teal": ["#0d2018","#10E5B3"],
     "gold": ["#2a1d00","#FDD663"],
     "pink": ["#2a0d0d","#F28B82"],
 }
@@ -530,7 +460,7 @@ def kpi(em, label, val, color="blue", sub=""):
     <div class="kpi-val {color}">{val}</div>
     {"<div class='kpi-sub'>"+sub+"</div>" if sub else ""}</div>"""
 
-def mkpi(em, label, val, color="#E8871E"):
+def mkpi(em, label, val, color="#10E5B3"):
     return f"""<div class="mkpi"><div class="mkpi-label">{em} {label}</div>
     <div class="mkpi-val" style="color:{color};">{val}</div></div>"""
 
@@ -541,7 +471,7 @@ def acard(title, meta, score, score_color, tags_html, action=""):
       <div class="acard-score" style="color:{score_color};">{score}</div>
     </div>
     <div class="acard-meta">{meta}</div>
-    {"<div style='font-size:0.78rem;color:#E8871E;margin-top:0.5rem;font-weight:600;'>→ "+action+"</div>" if action else ""}
+    {"<div style='font-size:0.78rem;color:#10E5B3;margin-top:0.5rem;font-weight:600;'>→ "+action+"</div>" if action else ""}
     <div class="acard-tags">{tags_html}</div></div>"""
 
 def insight(title, body, color=""):
@@ -557,7 +487,7 @@ def tag(text, color=""):
     return f'<span class="{cls}">{text}</span>'
 
 def score_color(s):
-    if s >= 8: return "#E8871E"
+    if s >= 8: return "#10E5B3"
     if s >= 6: return "#FDD663"
     return "#F28B82"
 
@@ -637,7 +567,7 @@ if elite_athletes and df_all is not None:
 # SIDEBAR NAVIGATION & FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("<h2 style='color:#E8871E;font-family:Archivo Expanded,sans-serif;font-weight:700;margin-top:0.5rem;letter-spacing:1px;'> Navigation</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#10E5B3;font-family:Outfit;font-weight:700;margin-top:0.5rem;'> Navigation</h2>", unsafe_allow_html=True)
     selected_tab = st.radio(
         label="Go to section:",
         options=[
@@ -656,43 +586,6 @@ with st.sidebar:
         label_visibility="collapsed",
         key="main_navigation"
     )
-    
-    # ── Redirection Animation & Sidebar Auto-Close Handler ──
-    if "last_selected_tab" not in st.session_state:
-        st.session_state.last_selected_tab = selected_tab
-        show_animation = False
-    else:
-        if st.session_state.last_selected_tab != selected_tab:
-            show_animation = True
-            st.session_state.last_selected_tab = selected_tab
-        else:
-            show_animation = False
-
-    if show_animation:
-        st.markdown(f"""
-        <div class="redirect-overlay">
-            <div class="redirect-content">
-                <div class="redirect-spinner"></div>
-                <div class="redirect-text">Navigating to {selected_tab}...</div>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        import streamlit.components.v1 as components
-        components.html(f"""
-        <script>
-        try {{
-            const parentDoc = window.parent.document;
-            const closeBtn = parentDoc.querySelector('button[aria-label="Close sidebar"]') 
-                          || parentDoc.querySelector('[data-testid="sidebar-close-button"]')
-                          || parentDoc.querySelector('section[data-testid="stSidebar"] button');
-            if (closeBtn) {{
-                closeBtn.click();
-            }}
-        }} catch (e) {{
-            console.log("Sidebar auto-close failed:", e);
-        }}
-        </script>
-        """, height=0, width=0)
     # Sidebar contains exclusively the navigation options now
 
 # ── DYNAMIC SAI CENTRES LOADER ──
@@ -808,8 +701,8 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
 
 def render_sai_card(centre, score, rank):
     sport_tags = "".join([f'<span class="tag">{s}</span>' for s in centre.get("sports", [])[:6]])
-    badge_col = "#E8871E" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
-    type_col = "#E8871E" if centre.get("type", "NCOE") == "NCOE" else "#182545"
+    badge_col = "#10E5B3" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
+    type_col = "#10E5B3" if centre.get("type", "NCOE") == "NCOE" else "#683DE4"
     flagship = '<span class="tag green"> Flagship</span>' if centre.get("flagship") else ""
     
     name = centre.get("name", "Unknown SAI Centre")
@@ -850,11 +743,11 @@ def render_sai_card(centre, score, rank):
 st.markdown("""
 <div class="hero" style="padding: 2rem 1rem 1rem; text-align: center;">
   <div class="hero-badge"><span class="dot dot-green"></span> Live Pathway Tracking</div>
-  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Archivo Expanded', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
-  <h2 class="notranslate" translate="no" style="font-family: 'Archivo Expanded', sans-serif; font-size: 1.35rem; color: #F5F3EE; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
+  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
+  <h2 class="notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #E8EAED; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
     Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.
   </h2>
-  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #E8871E; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
+  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #10E5B3; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
     Built to decide where to scout, coach, fund and activate.
   </div>
   <div class="hero-rule" style="margin: 1rem auto 1.5rem;"></div>
@@ -966,7 +859,7 @@ if "top_matched_athlete" in st.session_state:
     
     st.markdown(f"""
     <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
-      <div style="font-family:Archivo Expanded,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
+      <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
          Top 3 Recommended SAI Centres for {t_ath['name']}
       </div>
       <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
@@ -1221,7 +1114,7 @@ if selected_tab == "Pathway Overview":
             y = stages,
             x = funnel_vals,
             textinfo = "value+percent initial",
-            marker = {"color": ["#E8871E", "#182545", "#E8871E", "#F28B82", "#F28B82"]},
+            marker = {"color": ["#10E5B3", "#683DE4", "#10E5B3", "#FCAD70", "#F28B82"]},
             connector = {"fillcolor": "rgba(255,255,255,0.03)"}
         ))
         playout(fig_funnel, f"Grassroots-to-Podium Funnel — {f_sport} ({f_gender})", h=450)
@@ -1374,7 +1267,7 @@ if selected_tab == "Pathway Overview":
         action_ds = st.session_state["active_diag_action"]
         st.markdown(f"""
         <div style="background:rgba(138,180,248,0.06);border:1px solid var(--{action_ds['col']});border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
-          <div style="font-family:Archivo Expanded,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
+          <div style="font-family:Outfit,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
              Active Action Guide: {action_ds['action']} ({action_ds['stage']})
           </div>
         </div>
@@ -1414,7 +1307,7 @@ if selected_tab == "Pathway Overview":
         st.markdown("""
         <div class="acard" style="text-align:center;border-left:3px solid var(--teal);height:100%;">
             <div style="font-size:0.75rem;color:var(--text3);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">OPPORTUNITY SCORE</div>
-            <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Archivo Expanded,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
+            <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Outfit,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
             <div style="font-size:0.75rem;color:var(--text2);margin-bottom:0.6rem;">Confidence: <span class="tag green">Medium-High</span></div>
             <div style="font-size:0.82rem;color:var(--blue);font-weight:700;border-top:1px solid rgba(255,255,255,0.06);padding-top:0.6rem;">
                  Action: Build Pilot Cohort
@@ -1467,9 +1360,9 @@ elif selected_tab == "Discovery & Leagues":
         
         # League Stats KPIs
         l1, l2, l3, l4 = st.columns(4)
-        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#E8871E"), unsafe_allow_html=True)
-        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#182545"), unsafe_allow_html=True)
-        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#E8871E"), unsafe_allow_html=True)
+        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#10E5B3"), unsafe_allow_html=True)
+        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#683DE4"), unsafe_allow_html=True)
+        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#10E5B3"), unsafe_allow_html=True)
         with l4: st.markdown(mkpi("", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
         
         # Participation Chart (Male vs Female)
@@ -1487,7 +1380,7 @@ elif selected_tab == "Discovery & Leagues":
             {"Sport": "Athletics", "Gender": "Female", "Participants": 40000},
         ])
         fig_participation = px.bar(participation_data, x="Sport", y="Participants", color="Gender",
-                                     barmode="group", color_discrete_map={"Male": "#E8871E", "Female": "#182545"},
+                                     barmode="group", color_discrete_map={"Male": "#10E5B3", "Female": "#683DE4"},
                                      labels={"Participants": "Total Mapped Participants", "Sport": ""})
         playout(fig_participation, "Decentralized Leagues Participation", h=350)
         st.plotly_chart(fig_participation, use_container_width=True)
@@ -1547,9 +1440,9 @@ elif selected_tab == "Discovery & Leagues":
         # KPIs
         athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
         a1, a2, a3, a4 = st.columns(4)
-        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#E8871E"), unsafe_allow_html=True)
-        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#182545"), unsafe_allow_html=True)
-        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#E8871E"), unsafe_allow_html=True)
+        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#10E5B3"), unsafe_allow_html=True)
+        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#683DE4"), unsafe_allow_html=True)
+        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#10E5B3"), unsafe_allow_html=True)
         with a4: st.markdown(mkpi("", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -2329,14 +2222,14 @@ elif selected_tab == "Athlete Cohorts":
                     <div class="acard" style="border-top:3px solid var(--blue);height:360px;display:flex;flex-direction:column;justify-content:between;margin-bottom:1rem;">
                       <div>
                         <div class="acard-top">
-                          <div class="acard-title" style="font-size:1.1rem;color:#FFF;font-family:Archivo Expanded,sans-serif;">{a['name']}</div>
+                          <div class="acard-title" style="font-size:1.1rem;color:#FFF;font-family:Outfit,sans-serif;">{a['name']}</div>
                           <div style="font-size:0.75rem;color:var(--text2);font-weight:700;">#{a['id']}</div>
                         </div>
                         <div class="acard-meta" style="margin-top: 0.2rem; min-height:40px;">
                           <b>Event/Category:</b> {a['category']}<br>
                           <b>Gender:</b> {a['gender']} &nbsp;|&nbsp; <b>Age:</b> {a['age']}
                         </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: #F5F3EE; min-height:50px;">
+                        <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: #E8EAED; min-height:50px;">
                            <b>Key Medals:</b> {medals_clean}
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: var(--text2); background:rgba(255,255,255,0.02); padding:0.5rem; border-radius:8px; border:1px solid rgba(255,255,255,0.04); min-height:70px; max-height:100px; overflow-y:auto;">
@@ -2383,7 +2276,7 @@ elif selected_tab == "Athlete Cohorts":
                 recs = recommend_sai_centres(m_ath["sport"].title(), m_state, m_perf, m_age, m_gender, top_n=3)
                 st.markdown(f"""
                 <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1.5rem;margin-bottom:1rem;">
-                  <div style="font-family:Archivo Expanded,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
+                  <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
                      Recommended SAI Centres for {m_ath['name']}
                   </div>
                   <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
