@@ -512,6 +512,57 @@ df_all = load_master(master_path, master_mtime)
 df_csr = load_csr(csr_path, csr_mtime) if csr_path else None
 elite_athletes = load_elite_athletes(elite_path, elite_mtime) if elite_path else []
 
+# Dynamically inject elite athletes into df_all if they aren't already present
+if elite_athletes and df_all is not None:
+    existing_athlete_names = set(df_all[df_all["entity_type"] == "Athlete"]["name"].str.lower())
+    new_rows = []
+    for e in elite_athletes:
+        name_lower = e["name"].lower().strip()
+        if name_lower not in existing_athlete_names:
+            state = "National"
+            records_text = str(e.get("records", "")).lower()
+            # Resolve state registry from text snippet
+            for st_name in ["haryana", "punjab", "manipur", "kerala", "goa", "delhi", "maharashtra", "karnataka", "tamil nadu", "uttar pradesh", "jharkhand", "assam", "rajasthan"]:
+                if st_name in records_text:
+                    state = st_name.title()
+                    break
+            
+            # Specific override for Neeraj Chopra
+            if "neeraj chopra" in name_lower:
+                state = "Haryana"
+                
+            new_rows.append({
+                "entity_type": "Athlete",
+                "name": e["name"],
+                "sport": e["sport"].title(),
+                "city": "Unknown",
+                "state": state,
+                "tier": "Tier1",
+                "cwg_2036_relevance": 9.0,
+                "olympic_2032_relevance": 9.0,
+                "digital_readiness": 8.0,
+                "pipeline_stage": "Elite",
+                "participants_or_capacity": 1.0,
+                "frequency": "Unknown",
+                "age": float(e["age"]) if e.get("age") and str(e["age"]).isdigit() else 24.0,
+                "gender": "Female" if e.get("gender") == "F" else "Male",
+                "performance_level": "International Medalist" if "🥇" in e.get("medals", "") or "🥈" in e.get("medals", "") else "National",
+                "funding_status": "Fully_Funded" if "🥇" in e.get("medals", "") else "Partially_Funded",
+                "athletiq_opportunity_score": 9.5,
+                "tags": f"elite,medalist,{e['sport'].lower()}",
+                "notes": f"Medals: {e.get('medals', 'None')} | Achievements: {e.get('records', 'None')}",
+                "source_link": "https://sportsauthorityofindia.nic.in",
+                "has_source": True,
+                "has_notes": True
+            })
+    if new_rows:
+        df_new_elites = pd.DataFrame(new_rows)
+        for col in df_all.columns:
+            if col not in df_new_elites.columns:
+                df_new_elites[col] = None
+        df_new_elites = df_new_elites[df_all.columns]
+        df_all = pd.concat([df_all, df_new_elites], ignore_index=True)
+
 # ─────────────────────────────────────────────────────────────────────────────
 # SIDEBAR NAVIGATION & FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
