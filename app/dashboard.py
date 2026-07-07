@@ -2295,42 +2295,55 @@ elif selected_tab == "Profile":
     # 1. Title
     st.markdown('<div class="stitle"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
     
-    # 2. Filters
-    col_ent, col_spt, col_st = st.columns(3)
-    with col_ent:
-        entity_type = st.selectbox("Choose Entity Type:", ["Sportsperson", "Coach"], key="profile_entity")
-    with col_spt:
-        # Get sports list from master database
-        sports_list = sorted(df_all["sport"].unique())
-        sport_choice = st.selectbox("Choose Sport:", sports_list, key="profile_sport")
-    with col_st:
-        # Get states list from master database
-        states_list = sorted(df_all["state"].unique())
-        state_choice = st.selectbox("Choose State:", states_list, key="profile_state")
-        
-    # Map entity type selection
-    mapped_entity = "Athlete" if entity_type == "Sportsperson" else "Coach"
+    # 2. Search Mode Selector
+    search_mode = st.radio("Choose Search Method:", ["Search by Name Globally", "Browse by Sport & State"], horizontal=True, key="profile_search_mode")
     
-    # Filter dataset
-    filtered_df = df_all[
-        (df_all["entity_type"] == mapped_entity) &
-        (df_all["sport"].str.lower() == sport_choice.lower()) &
-        (df_all["state"].str.lower() == state_choice.lower())
-    ]
+    filtered_df = pd.DataFrame()
+    entity_type = "Sportsperson"
+    
+    if search_mode == "Search by Name Globally":
+        search_query = st.text_input("Enter Name to Search (e.g., Manu, Mahavir, Qaiser, Priya, Ramesh):", key="profile_search_query")
+        if not search_query.strip():
+            st.info("Type a name above to search for athletes or coaches globally.")
+            st.stop()
+        
+        # Filter globally
+        filtered_df = df_all[df_all["name"].str.contains(search_query, case=False, na=False)]
+    else:
+        col_ent, col_spt, col_st = st.columns(3)
+        with col_ent:
+            entity_type_choice = st.selectbox("Choose Entity Type:", ["Sportsperson", "Coach"], key="profile_entity")
+        with col_spt:
+            sports_list = sorted(df_all["sport"].unique())
+            sport_choice = st.selectbox("Choose Sport:", sports_list, key="profile_sport")
+        with col_st:
+            states_list = sorted(df_all["state"].unique())
+            state_choice = st.selectbox("Choose State:", states_list, key="profile_state")
+            
+        mapped_entity = "Athlete" if entity_type_choice == "Sportsperson" else "Coach"
+        filtered_df = df_all[
+            (df_all["entity_type"] == mapped_entity) &
+            (df_all["sport"].str.lower() == sport_choice.lower()) &
+            (df_all["state"].str.lower() == state_choice.lower())
+        ]
+        entity_type = entity_type_choice
     
     # 3. Check for Empty State
     if filtered_df.empty:
         st.warning("No result found")
     else:
         # Render selector for specific person
+        label_text = "Select Person Name:" if search_mode == "Search by Name Globally" else f"Select {entity_type} Name:"
         selected_name = st.selectbox(
-            f"Select {entity_type} Name:",
+            label_text,
             options=sorted(filtered_df["name"].unique()),
             key="profile_selected_name"
         )
         
         # Get selected person details
         person_row = filtered_df[filtered_df["name"] == selected_name].iloc[0]
+        if search_mode == "Search by Name Globally":
+            entity_type = "Coach" if person_row["entity_type"] == "Coach" else "Sportsperson"
         
         # Wrestling TOPS details dict
         wrestling_tops = {
