@@ -529,7 +529,8 @@ with st.sidebar:
             "CSR Matchmaker",
             "Sponsor Pipeline",
             "Athlete Cohorts",
-            "Data Quality"
+            "Data Quality",
+            "Profile"
         ],
         label_visibility="collapsed",
         key="main_navigation"
@@ -2284,3 +2285,229 @@ elif selected_tab == "Data Quality":
     unverified = df_all[~df_all["has_source"]].head(10)[["name", "sport", "state", "entity_type", "notes"]]
     unverified.columns = ["Entity Name", "Sport", "State", "Type", "Notes"]
     st.dataframe(unverified.reset_index(drop=True), use_container_width=True, height=220)
+
+
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# TAB 11 — PROFILE DIRECTORY
+# Purpose: Direct search and biodata lookup for sportspeople and coaches.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+elif selected_tab == "Profile":
+    # 1. Title
+    st.markdown('<div class="stitle"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
+    
+    # 2. Filters
+    col_ent, col_spt, col_st = st.columns(3)
+    with col_ent:
+        entity_type = st.selectbox("Choose Entity Type:", ["Sportsperson", "Coach"], key="profile_entity")
+    with col_spt:
+        # Get sports list from master database
+        sports_list = sorted(df_all["sport"].unique())
+        sport_choice = st.selectbox("Choose Sport:", sports_list, key="profile_sport")
+    with col_st:
+        # Get states list from master database
+        states_list = sorted(df_all["state"].unique())
+        state_choice = st.selectbox("Choose State:", states_list, key="profile_state")
+        
+    # Map entity type selection
+    mapped_entity = "Athlete" if entity_type == "Sportsperson" else "Coach"
+    
+    # Filter dataset
+    filtered_df = df_all[
+        (df_all["entity_type"] == mapped_entity) &
+        (df_all["sport"].str.lower() == sport_choice.lower()) &
+        (df_all["state"].str.lower() == state_choice.lower())
+    ]
+    
+    # 3. Check for Empty State
+    if filtered_df.empty:
+        st.warning("No result found")
+    else:
+        # Render selector for specific person
+        selected_name = st.selectbox(
+            f"Select {entity_type} Name:",
+            options=sorted(filtered_df["name"].unique()),
+            key="profile_selected_name"
+        )
+        
+        # Get selected person details
+        person_row = filtered_df[filtered_df["name"] == selected_name].iloc[0]
+        
+        # Wrestling TOPS details dict
+        wrestling_tops = {
+            "sunil kumar": {
+                "category": "87 Kg GR",
+                "dob_age": "29/09/1999 (22 Years)",
+                "base": "SAI Sonipat / Guru Mehar Akhara Rohtak",
+                "best": "2020 Asian Championship Gold",
+                "latest": "3rd at 2022 Asian Championship",
+                "outlook": "Participant for 2028 LA Olympic Games",
+                "national_pos": "1st at Senior Nationals (2021)"
+            },
+            "ravinder": {
+                "category": "61/65 Kg FS",
+                "dob_age": "03/08/1997 (24 Years)",
+                "base": "SAI Sonipat / Naresh Akhara Delhi",
+                "best": "2019 U-23 World Championship Silver",
+                "latest": "5th at 2021 World Championship",
+                "outlook": "Participant for 2028 LA Olympic Games",
+                "national_pos": "2019 & 2020 Senior National Gold"
+            },
+            "aman": {
+                "category": "57 Kg FS",
+                "dob_age": "25/07/2005 (17 Years)",
+                "base": "Air Force Centre Jalahalli, Bangalore",
+                "best": "3rd at 2022 Cadet Nationals",
+                "latest": "2021 Cadet World Championship Gold",
+                "outlook": "Need time to assess for 2028 LA Olympic Games",
+                "national_pos": "3rd at Cadet Nationals"
+            },
+            "antim panghal": {
+                "category": "53 Kg WW",
+                "dob_age": "31/08/2004 (18 Years)",
+                "base": "SAI Lucknow",
+                "best": "U-20 World Championship Gold",
+                "latest": "Gold at 2022 Junior World Championship",
+                "outlook": "Need time to assess (Lost to Vinesh Phogat in Sr WCH trials final 7-0)",
+                "national_pos": "2022 Junior Nationals Gold"
+            },
+            "priya malik": {
+                "category": "76 Kg WW",
+                "dob_age": "16/02/2005 (17 Years)",
+                "base": "CBS Akhara Rohtak (Haryana)",
+                "best": "U-20 World Championship Silver",
+                "latest": "Silver at 2022 Junior World Championship",
+                "outlook": "Need time to assess for 2028 LA Olympic Games",
+                "national_pos": "2022 Junior Nationals Gold"
+            },
+            "sujeet": {
+                "category": "65 Kg FS",
+                "dob_age": "05/11/2002 (19 Years)",
+                "base": "Sonipat (Haryana)",
+                "best": "2022 4th Ranking Series Gold",
+                "latest": "Bronze at 2022 Junior World Championship",
+                "outlook": "Need time to assess (Lost by criteria in 70kg WCH trials to Ravinder, score 6-6)",
+                "national_pos": "2022 Junior Nationals Gold"
+            },
+            "suraj vasisth": {
+                "category": "55 Kg GR",
+                "dob_age": "16 Years",
+                "base": "Haryana",
+                "best": "2022 U-17 World Championship Gold",
+                "latest": "2022 U-17 World Championship Gold",
+                "outlook": "Need time to assess for 2028 LA Olympic Games",
+                "national_pos": "2022 Cadet Nationals Gold"
+            },
+            "ronit sharma": {
+                "category": "48 Kg GR",
+                "dob_age": "16 Years",
+                "base": "Haryana",
+                "best": "2022 U-17 World Championship Silver",
+                "latest": "2022 U-17 World Championship Silver",
+                "outlook": "Need time to assess for 2028 LA Olympic Games",
+                "national_pos": "2021 Cadet Nationals Gold"
+            }
+        }
+        
+        # Display Bio Card
+        st.markdown("---")
+        st.markdown(f'<div class="stitle" style="font-size:1.15rem;margin-top:0rem;">Bio-Data: {selected_name}</div>', unsafe_allow_html=True)
+        
+        # Main details columns
+        c_bio1, c_bio2 = st.columns([1, 1])
+        
+        with c_bio1:
+            st.markdown(f"""
+            <div class="acard" style="min-height:220px;">
+                <span class="tag green" style="float:right;">{entity_type}</span>
+                <b style="font-size:1.1rem;color:var(--teal);">{person_row['name']}</b><br>
+                <span style="font-size:0.75rem;color:var(--text2);">{person_row['sport']} · {person_row['state']} · {person_row.get('city', 'Unknown')}</span>
+                <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                    <b>Age:</b> {int(person_row['age']) if pd.notna(person_row['age']) else 'Unknown'}<br>
+                    <b>Gender:</b> {person_row['gender']}<br>
+                    <b>Tier:</b> {person_row['tier']}<br>
+                    <b>Registry Base:</b> {person_row.get('city', 'Unknown')}, {person_row['state']}<br>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        with c_bio2:
+            if entity_type == "Coach":
+                st.markdown(f"""
+                <div class="acard" style="min-height:220px;">
+                    <span class="tag blue" style="float:right;">Certification</span>
+                    <b style="font-size:1.05rem;color:var(--blue);">Licence & Certificate Status</b>
+                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                        <b>Active Licence:</b> <span class="tag green">{person_row['performance_level']}</span><br>
+                        <b>Licencing Body:</b> {person_row.get('source_link', 'Official Registry')}<br>
+                        <b>Empanelled Stage:</b> {person_row.get('pipeline_stage', 'Empanelled')}<br>
+                        <b>Notes:</b> {person_row.get('notes', 'No additional certificate notes recorded.')}<br>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown(f"""
+                <div class="acard" style="min-height:220px;">
+                    <span class="tag blue" style="float:right;">Performance</span>
+                    <b style="font-size:1.05rem;color:var(--blue);">AthletIQ Pathway Metrics</b>
+                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                        <b>Opportunity Score:</b> <span class="tag amber">{person_row['athletiq_opportunity_score']} / 10.0</span><br>
+                        <b>Performance Level:</b> {person_row['performance_level']}<br>
+                        <b>Funding Status:</b> {person_row['funding_status']}<br>
+                        <b>Pipeline Stage:</b> {person_row['pipeline_stage']}<br>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                
+        # 4. Check for Elite Medals & Records (from JSON)
+        matching_elites = [e for e in elite_athletes if e["name"].lower() == selected_name.lower()]
+        if matching_elites:
+            elite_profile = matching_elites[0]
+            st.markdown(f"""
+            <div class="acard">
+                <span class="tag amber" style="float:right;">Elite Registry</span>
+                <b style="font-size:1rem;color:var(--gold);">Major Achievements & Olympic Medals</b>
+                <hr style="margin:0.8rem 0;border-color:rgba(253,214,99,0.2);">
+                <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
+                    <b>Medals / Placement:</b> {elite_profile.get('medals', 'None')}<br>
+                    <b>National Records & Historical Profile:</b> {elite_profile.get('records', 'None')}<br>
+                    <b>Category Event:</b> {elite_profile.get('category', 'None')}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        # 5. Check for Wrestling TOPS Slide Bios (from PPTX)
+        selected_name_lower = selected_name.lower().strip()
+        if selected_name_lower in wrestling_tops:
+            w_bio = wrestling_tops[selected_name_lower]
+            st.markdown(f"""
+            <div class="acard">
+                <span class="tag purple" style="float:right;">Wrestling TOPS Profile</span>
+                <b style="font-size:1rem;color:var(--purple);">Detailed Slide Bio (parsed from Wrestling TOPS profile.pptx)</b>
+                <hr style="margin:0.8rem 0;border-color:rgba(104,61,228,0.25);">
+                <div style="font-size:0.88rem;line-height:1.7;color:var(--text2);">
+                    <b>Weight Category / Event:</b> {w_bio['category']}<br>
+                    <b>Date of Birth / Age:</b> {w_bio['dob_age']}<br>
+                    <b>Training Base:</b> {w_bio['base']}<br>
+                    <b>Best Career Performance:</b> {w_bio['best']}<br>
+                    <b>Latest International Performance:</b> {w_bio['latest']}<br>
+                    <b>Position at Senior/Cadet Nationals:</b> {w_bio['national_pos']}<br>
+                    <b>2028 LA Olympic Games Outlook:</b> {w_bio['outlook']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        # 6. Fallback Display Notes
+        if person_row.get("notes") and pd.notna(person_row["notes"]) and selected_name_lower not in wrestling_tops:
+            st.markdown(f"""
+            <div class="acard">
+                <b style="font-size:1rem;color:var(--teal);">Performance Records & History Notes</b>
+                <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
+                    {person_row['notes']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+
