@@ -301,15 +301,33 @@ div[data-baseweb="select"] > div:hover {
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] { background: rgba(11, 18, 32, 0.95) !important; border-right: 1px solid var(--line) !important; }
 
-/* Hide check circular indicators and checkboxes from sidebar radio navigation */
-[data-testid="stSidebar"] div[role="radiogroup"] label [data-baseweb="radio"],
-[data-testid="stSidebar"] div[role="radiogroup"] label span,
-[data-testid="stSidebar"] div[role="radiogroup"] label div:first-child:not(:last-child) {
+/* Hide ALL radio indicators / checkboxes / circles from sidebar navigation */
+[data-testid="stSidebar"] [data-baseweb="radio"] {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+}
+[data-testid="stSidebar"] div[role="radiogroup"] label > div:first-child {
     display: none !important;
     width: 0 !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
+    overflow: hidden !important;
+}
+[data-testid="stSidebar"] div[role="radiogroup"] label span[data-baseweb],
+[data-testid="stSidebar"] div[role="radiogroup"] label svg,
+[data-testid="stSidebar"] div[role="radiogroup"] label input {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    position: absolute !important;
+    opacity: 0 !important;
+}
+/* Hide the radio label container that holds the dot */
+[data-testid="stSidebar"] .stRadio > div > label > div:first-child {
+    display: none !important;
 }
 
 /* Premium Sidebar Menu Button Links without circular check dots/checkboxes */
@@ -426,12 +444,7 @@ div[class*="collapsedSidebar"]::before {
   <div class="orb orb-3"></div>
   <div class="grid-3d"></div>
 </div>
-<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
-  <div class="grid-3d"></div>
-</div>
+
 """
 
 
@@ -443,9 +456,9 @@ PL = dict(
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6", size=12),
+    font=dict(family="Archivo, Inter, sans-serif", color="#8792a3", size=12),
     margin=dict(l=30, r=20, t=45, b=35),
-    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"],
+    colorway=["#E8871E","#2E9E6C","#D9A441","#C6604F","#F5F3EE","#8792a3","#182545","#5c6577"],
     legend=dict(bgcolor="rgba(22,28,48,0.7)", bordercolor="rgba(255,255,255,0.07)", borderwidth=1, font=dict(size=11)),
     xaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
     yaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
@@ -453,13 +466,13 @@ PL = dict(
 
 def playout(fig, title="", h=400):
     fig.update_layout(**PL,
-        title=dict(text=title, font=dict(size=15, family="Outfit, sans-serif", color="#E8EAED")), height=h)
+        title=dict(text=title, font=dict(size=15, family="Archivo, sans-serif", color="#F5F3EE")), height=h)
     return fig
 
 COLOR_SCALES = {
-    "blue": ["#0d1a30","#10E5B3"],
-    "purple": ["#1a0d30","#683DE4"],
-    "teal": ["#0d2018","#10E5B3"],
+    "blue": ["#0d1a30","#E8871E"],
+    "purple": ["#1a0d30","#182545"],
+    "teal": ["#0d2018","#2E9E6C"],
     "gold": ["#2a1d00","#FDD663"],
     "pink": ["#2a0d0d","#F28B82"],
 }
@@ -517,7 +530,7 @@ def kpi(em, label, val, color="blue", sub=""):
     <div class="kpi-val {color}">{val}</div>
     {"<div class='kpi-sub'>"+sub+"</div>" if sub else ""}</div>"""
 
-def mkpi(em, label, val, color="#10E5B3"):
+def mkpi(em, label, val, color="#E8871E"):
     return f"""<div class="mkpi"><div class="mkpi-label">{em} {label}</div>
     <div class="mkpi-val" style="color:{color};">{val}</div></div>"""
 
@@ -528,7 +541,7 @@ def acard(title, meta, score, score_color, tags_html, action=""):
       <div class="acard-score" style="color:{score_color};">{score}</div>
     </div>
     <div class="acard-meta">{meta}</div>
-    {"<div style='font-size:0.78rem;color:#10E5B3;margin-top:0.5rem;font-weight:600;'>→ "+action+"</div>" if action else ""}
+    {"<div style='font-size:0.78rem;color:#E8871E;margin-top:0.5rem;font-weight:600;'>→ "+action+"</div>" if action else ""}
     <div class="acard-tags">{tags_html}</div></div>"""
 
 def insight(title, body, color=""):
@@ -544,7 +557,7 @@ def tag(text, color=""):
     return f'<span class="{cls}">{text}</span>'
 
 def score_color(s):
-    if s >= 8: return "#10E5B3"
+    if s >= 8: return "#E8871E"
     if s >= 6: return "#FDD663"
     return "#F28B82"
 
@@ -624,7 +637,7 @@ if elite_athletes and df_all is not None:
 # SIDEBAR NAVIGATION & FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("<h2 style='color:#10E5B3;font-family:Outfit;font-weight:700;margin-top:0.5rem;'> Navigation</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#E8871E;font-family:Archivo Expanded,sans-serif;font-weight:700;margin-top:0.5rem;letter-spacing:1px;'> Navigation</h2>", unsafe_allow_html=True)
     selected_tab = st.radio(
         label="Go to section:",
         options=[
@@ -795,8 +808,8 @@ def recommend_sai_centres(sport, state, performance_level, age, gender, top_n=3)
 
 def render_sai_card(centre, score, rank):
     sport_tags = "".join([f'<span class="tag">{s}</span>' for s in centre.get("sports", [])[:6]])
-    badge_col = "#10E5B3" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
-    type_col = "#10E5B3" if centre.get("type", "NCOE") == "NCOE" else "#683DE4"
+    badge_col = "#E8871E" if score >= 70 else ("#FDD663" if score >= 50 else "#F28B82")
+    type_col = "#E8871E" if centre.get("type", "NCOE") == "NCOE" else "#182545"
     flagship = '<span class="tag green"> Flagship</span>' if centre.get("flagship") else ""
     
     name = centre.get("name", "Unknown SAI Centre")
@@ -837,11 +850,11 @@ def render_sai_card(centre, score, rank):
 st.markdown("""
 <div class="hero" style="padding: 2rem 1rem 1rem; text-align: center;">
   <div class="hero-badge"><span class="dot dot-green"></span> Live Pathway Tracking</div>
-  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
-  <h2 class="notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #E8EAED; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
+  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Archivo Expanded', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
+  <h2 class="notranslate" translate="no" style="font-family: 'Archivo Expanded', sans-serif; font-size: 1.35rem; color: #F5F3EE; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
     Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.
   </h2>
-  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #10E5B3; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
+  <div class="notranslate" translate="no" style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #E8871E; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-top: 0.8rem; margin-bottom: 1.2rem;">
     Built to decide where to scout, coach, fund and activate.
   </div>
   <div class="hero-rule" style="margin: 1rem auto 1.5rem;"></div>
@@ -953,7 +966,7 @@ if "top_matched_athlete" in st.session_state:
     
     st.markdown(f"""
     <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
-      <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
+      <div style="font-family:Archivo Expanded,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
          Top 3 Recommended SAI Centres for {t_ath['name']}
       </div>
       <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
@@ -1208,7 +1221,7 @@ if selected_tab == "Pathway Overview":
             y = stages,
             x = funnel_vals,
             textinfo = "value+percent initial",
-            marker = {"color": ["#10E5B3", "#683DE4", "#10E5B3", "#FCAD70", "#F28B82"]},
+            marker = {"color": ["#E8871E", "#182545", "#E8871E", "#F28B82", "#F28B82"]},
             connector = {"fillcolor": "rgba(255,255,255,0.03)"}
         ))
         playout(fig_funnel, f"Grassroots-to-Podium Funnel — {f_sport} ({f_gender})", h=450)
@@ -1361,7 +1374,7 @@ if selected_tab == "Pathway Overview":
         action_ds = st.session_state["active_diag_action"]
         st.markdown(f"""
         <div style="background:rgba(138,180,248,0.06);border:1px solid var(--{action_ds['col']});border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
-          <div style="font-family:Outfit,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
+          <div style="font-family:Archivo Expanded,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
              Active Action Guide: {action_ds['action']} ({action_ds['stage']})
           </div>
         </div>
@@ -1401,7 +1414,7 @@ if selected_tab == "Pathway Overview":
         st.markdown("""
         <div class="acard" style="text-align:center;border-left:3px solid var(--teal);height:100%;">
             <div style="font-size:0.75rem;color:var(--text3);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">OPPORTUNITY SCORE</div>
-            <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Outfit,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
+            <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Archivo Expanded,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
             <div style="font-size:0.75rem;color:var(--text2);margin-bottom:0.6rem;">Confidence: <span class="tag green">Medium-High</span></div>
             <div style="font-size:0.82rem;color:var(--blue);font-weight:700;border-top:1px solid rgba(255,255,255,0.06);padding-top:0.6rem;">
                  Action: Build Pilot Cohort
@@ -1454,9 +1467,9 @@ elif selected_tab == "Discovery & Leagues":
         
         # League Stats KPIs
         l1, l2, l3, l4 = st.columns(4)
-        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#10E5B3"), unsafe_allow_html=True)
-        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#683DE4"), unsafe_allow_html=True)
-        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#10E5B3"), unsafe_allow_html=True)
+        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#E8871E"), unsafe_allow_html=True)
+        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#182545"), unsafe_allow_html=True)
+        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#E8871E"), unsafe_allow_html=True)
         with l4: st.markdown(mkpi("", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
         
         # Participation Chart (Male vs Female)
@@ -1474,7 +1487,7 @@ elif selected_tab == "Discovery & Leagues":
             {"Sport": "Athletics", "Gender": "Female", "Participants": 40000},
         ])
         fig_participation = px.bar(participation_data, x="Sport", y="Participants", color="Gender",
-                                     barmode="group", color_discrete_map={"Male": "#10E5B3", "Female": "#683DE4"},
+                                     barmode="group", color_discrete_map={"Male": "#E8871E", "Female": "#182545"},
                                      labels={"Participants": "Total Mapped Participants", "Sport": ""})
         playout(fig_participation, "Decentralized Leagues Participation", h=350)
         st.plotly_chart(fig_participation, use_container_width=True)
@@ -1534,9 +1547,9 @@ elif selected_tab == "Discovery & Leagues":
         # KPIs
         athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
         a1, a2, a3, a4 = st.columns(4)
-        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#10E5B3"), unsafe_allow_html=True)
-        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#683DE4"), unsafe_allow_html=True)
-        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#10E5B3"), unsafe_allow_html=True)
+        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#E8871E"), unsafe_allow_html=True)
+        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#182545"), unsafe_allow_html=True)
+        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#E8871E"), unsafe_allow_html=True)
         with a4: st.markdown(mkpi("", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
@@ -2316,14 +2329,14 @@ elif selected_tab == "Athlete Cohorts":
                     <div class="acard" style="border-top:3px solid var(--blue);height:360px;display:flex;flex-direction:column;justify-content:between;margin-bottom:1rem;">
                       <div>
                         <div class="acard-top">
-                          <div class="acard-title" style="font-size:1.1rem;color:#FFF;font-family:Outfit,sans-serif;">{a['name']}</div>
+                          <div class="acard-title" style="font-size:1.1rem;color:#FFF;font-family:Archivo Expanded,sans-serif;">{a['name']}</div>
                           <div style="font-size:0.75rem;color:var(--text2);font-weight:700;">#{a['id']}</div>
                         </div>
                         <div class="acard-meta" style="margin-top: 0.2rem; min-height:40px;">
                           <b>Event/Category:</b> {a['category']}<br>
                           <b>Gender:</b> {a['gender']} &nbsp;|&nbsp; <b>Age:</b> {a['age']}
                         </div>
-                        <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: #E8EAED; min-height:50px;">
+                        <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: #F5F3EE; min-height:50px;">
                            <b>Key Medals:</b> {medals_clean}
                         </div>
                         <div style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4; color: var(--text2); background:rgba(255,255,255,0.02); padding:0.5rem; border-radius:8px; border:1px solid rgba(255,255,255,0.04); min-height:70px; max-height:100px; overflow-y:auto;">
@@ -2370,7 +2383,7 @@ elif selected_tab == "Athlete Cohorts":
                 recs = recommend_sai_centres(m_ath["sport"].title(), m_state, m_perf, m_age, m_gender, top_n=3)
                 st.markdown(f"""
                 <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1.5rem;margin-bottom:1rem;">
-                  <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
+                  <div style="font-family:Archivo Expanded,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
                      Recommended SAI Centres for {m_ath['name']}
                   </div>
                   <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
