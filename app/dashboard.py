@@ -2346,10 +2346,8 @@ elif selected_tab == "Profile":
     # 1. Title
     st.markdown('<div class="stitle"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
     
-    # 2. Category & Location Filters (with All Sports / All States)
-    col_ent, col_spt, col_st = st.columns(3)
-    with col_ent:
-        entity_type = st.selectbox("Choose Entity Type:", ["Sportsperson", "Coach"], key="profile_entity")
+    # 2. Category & Location Filters (Sport & State)
+    col_spt, col_st = st.columns(2)
     with col_spt:
         sports_list = ["All Sports"] + sorted(list(df_all["sport"].unique()))
         sport_choice = st.selectbox("Choose Sport:", sports_list, key="profile_sport")
@@ -2357,43 +2355,58 @@ elif selected_tab == "Profile":
         states_list = ["All States"] + sorted(list(df_all["state"].unique()))
         state_choice = st.selectbox("Choose State:", states_list, key="profile_state")
         
-    # Map entity type selection
-    mapped_entity = "Athlete" if entity_type == "Sportsperson" else "Coach"
+    # Filter datasets for both Athletes and Coaches
+    filtered_athletes = df_all[df_all["entity_type"] == "Athlete"].copy()
+    filtered_coaches = df_all[df_all["entity_type"] == "Coach"].copy()
     
-    # Filter dataset
-    filtered_df = df_all[df_all["entity_type"] == mapped_entity].copy()
     if sport_choice != "All Sports":
-        filtered_df = filtered_df[filtered_df["sport"].str.lower() == sport_choice.lower()]
+        filtered_athletes = filtered_athletes[filtered_athletes["sport"].str.lower() == sport_choice.lower()]
+        filtered_coaches = filtered_coaches[filtered_coaches["sport"].str.lower() == sport_choice.lower()]
     if state_choice != "All States":
-        filtered_df = filtered_df[filtered_df["state"].str.lower() == state_choice.lower()]
+        filtered_athletes = filtered_athletes[filtered_athletes["state"].str.lower() == state_choice.lower()]
+        filtered_coaches = filtered_coaches[filtered_coaches["state"].str.lower() == state_choice.lower()]
         
     # 3. Check for Empty State
-    if filtered_df.empty:
+    if filtered_athletes.empty and filtered_coaches.empty:
         st.warning("No result found")
     else:
+        # Combined names list
+        combined_names = sorted(list(set(filtered_athletes["name"].unique().tolist() + filtered_coaches["name"].unique().tolist())))
+        
         # Render selector for specific person
         selected_name = st.selectbox(
-            f"Select {entity_type} to View Bio-Data:",
-            options=["-- Select Name to View Bio --"] + sorted(filtered_df["name"].unique()),
+            "Select Athlete or Coach to View Bio-Data:",
+            options=["-- Select Name to View Bio --"] + combined_names,
             key="profile_selected_name"
         )
         
         if selected_name == "-- Select Name to View Bio --":
-            # Display matching names table (like Coaches tab)
-            st.markdown(f'<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching {entity_type} List</div>', unsafe_allow_html=True)
-            if entity_type == "Coach":
-                co_display = filtered_df[["name", "sport", "state", "performance_level", "notes"]].copy()
-                co_display.columns = ["Coach Name", "Sport Focus", "State Registry", "Licence / Certificate", "Specialization Details"]
-                st.write(f"Showing matching coaches (total: {len(co_display)}):")
-                st.dataframe(co_display.head(100).reset_index(drop=True), use_container_width=True, height=280)
-            else:
-                ath_display = filtered_df[["name", "sport", "state", "performance_level", "notes"]].copy()
+            # Display matching lists (both Athletes and Coaches)
+            if not filtered_athletes.empty:
+                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
+                ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "notes"]].copy()
                 ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Achievements Notes"]
-                st.write(f"Showing matching sportspeople (total: {len(ath_display)}):")
-                st.dataframe(ath_display.head(100).reset_index(drop=True), use_container_width=True, height=280)
+                st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
+                st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280)
+                
+            if not filtered_coaches.empty:
+                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
+                co_display = filtered_coaches[["name", "sport", "state", "performance_level", "notes"]].copy()
+                co_display.columns = ["Coach Name", "Sport Focus", "State Registry", "Licence / Certificate", "Specialization Details"]
+                st.write(f"Showing all matching coaches (total: {len(co_display)}):")
+                st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=280)
         else:
-            # Get selected person details
-            person_row = filtered_df[filtered_df["name"] == selected_name].iloc[0]
+            # Find the person row and entity type
+            is_coach = selected_name in filtered_coaches["name"].values
+            person_row = None
+            entity_type = "Sportsperson"
+            
+            if is_coach:
+                person_row = filtered_coaches[filtered_coaches["name"] == selected_name].iloc[0]
+                entity_type = "Coach"
+            else:
+                person_row = filtered_athletes[filtered_athletes["name"] == selected_name].iloc[0]
+                entity_type = "Sportsperson"
             
             # Wrestling TOPS details dict
             wrestling_tops = {
