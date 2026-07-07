@@ -301,9 +301,9 @@ div[data-baseweb="select"] > div:hover {
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] { background: rgba(11, 18, 32, 0.95) !important; border-right: 1px solid var(--line) !important; }
 
-/* Hide check circular indicators from sidebar radio navigation */
-[data-testid="stSidebar"] div[role="radiogroup"] label [data-baseweb="radio"] > div:first-child,
-[data-testid="stSidebar"] div[role="radiogroup"] label [data-testid="stWidgetLabel"] div:first-child,
+/* Hide check circular indicators and checkboxes from sidebar radio navigation */
+[data-testid="stSidebar"] div[role="radiogroup"] label [data-baseweb="radio"],
+[data-testid="stSidebar"] div[role="radiogroup"] label span,
 [data-testid="stSidebar"] div[role="radiogroup"] label div:first-child:not(:last-child) {
     display: none !important;
     width: 0 !important;
@@ -312,19 +312,22 @@ section[data-testid="stSidebar"] { background: rgba(11, 18, 32, 0.95) !important
     padding: 0 !important;
 }
 
-/* Premium Sidebar Menu Button Links */
+/* Premium Sidebar Menu Button Links without circular check dots/checkboxes */
 [data-testid="stSidebar"] div[role="radiogroup"] label {
     font-size: 1.22rem !important;
     font-family: 'Archivo Expanded', sans-serif !important;
     color: var(--slate) !important;
     cursor: pointer !important;
     margin-bottom: 0.6rem !important;
-    padding: 8px 14px !important;
+    padding: 10px 18px !important;
     border-radius: 8px !important;
     background-color: rgba(255, 255, 255, 0.02) !important;
     border: 1px solid var(--line) !important;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
     width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
 }
 [data-testid="stSidebar"] div[role="radiogroup"] label:hover {
     background-color: var(--saffron-dim) !important;
@@ -373,7 +376,56 @@ div[class*="collapsedSidebar"]::before {
     line-height: 1 !important;
     font-family: Arial, sans-serif !important;
 }
+
+/* ── Redirect Transition Overlay ── */
+.redirect-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: var(--navy) !important;
+    z-index: 999999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    opacity: 1 !important;
+    animation: fadeOut 0.8s forwards !important;
+    pointer-events: none !important;
+}
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; display: none !important; visibility: hidden !important; }
+}
+.redirect-spinner {
+    width: 44px !important;
+    height: 44px !important;
+    border: 3.5px solid rgba(232, 135, 30, 0.1) !important;
+    border-top-color: var(--saffron) !important;
+    border-radius: 50% !important;
+    animation: spin 0.9s linear infinite !important;
+    margin: 0 auto 18px !important;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.redirect-text {
+    font-family: 'Archivo Expanded', sans-serif !important;
+    color: var(--cream) !important;
+    font-size: 1.15rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    text-align: center !important;
+}
 </style>
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grid-3d"></div>
+</div>
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
@@ -591,6 +643,43 @@ with st.sidebar:
         label_visibility="collapsed",
         key="main_navigation"
     )
+    
+    # ── Redirection Animation & Sidebar Auto-Close Handler ──
+    if "last_selected_tab" not in st.session_state:
+        st.session_state.last_selected_tab = selected_tab
+        show_animation = False
+    else:
+        if st.session_state.last_selected_tab != selected_tab:
+            show_animation = True
+            st.session_state.last_selected_tab = selected_tab
+        else:
+            show_animation = False
+
+    if show_animation:
+        st.markdown(f"""
+        <div class="redirect-overlay">
+            <div class="redirect-content">
+                <div class="redirect-spinner"></div>
+                <div class="redirect-text">Navigating to {selected_tab}...</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        import streamlit.components.v1 as components
+        components.html(f"""
+        <script>
+        try {{
+            const parentDoc = window.parent.document;
+            const closeBtn = parentDoc.querySelector('button[aria-label="Close sidebar"]') 
+                          || parentDoc.querySelector('[data-testid="sidebar-close-button"]')
+                          || parentDoc.querySelector('section[data-testid="stSidebar"] button');
+            if (closeBtn) {{
+                closeBtn.click();
+            }}
+        }} catch (e) {{
+            console.log("Sidebar auto-close failed:", e);
+        }}
+        </script>
+        """, height=0, width=0)
     # Sidebar contains exclusively the navigation options now
 
 # ── DYNAMIC SAI CENTRES LOADER ──
