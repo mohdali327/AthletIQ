@@ -1701,7 +1701,7 @@ elif selected_tab == "Coach Capacity":
     if not coaches_list.empty:
         co_display = coaches_list[["name", "sport", "state", "performance_level", "digital_readiness", "notes"]].copy()
         
-        notes_split = co_display["notes"].str.split(";", expand=True)
+        notes_split = co_display["notes"].str.split("|", expand=True)
         co_display["Credentials"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
         co_display["Experience/Trained"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
         co_display["Specialization/Legacy"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
@@ -2427,7 +2427,7 @@ elif selected_tab == "Profile":
                 st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
                 ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "notes"]].copy()
                 
-                notes_split = ath_display["notes"].str.split(";", expand=True)
+                notes_split = ath_display["notes"].str.split("|", expand=True)
                 ath_display["Category/Weight"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
                 ath_display["Achievements"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
                 ath_display["Profile/Style"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
@@ -2442,7 +2442,7 @@ elif selected_tab == "Profile":
                 st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
                 co_display = filtered_coaches[["name", "sport", "state", "performance_level", "notes"]].copy()
                 
-                notes_split = co_display["notes"].str.split(";", expand=True)
+                notes_split = co_display["notes"].str.split("|", expand=True)
                 co_display["Credentials"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
                 co_display["Experience/Trained"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
                 co_display["Specialization/Legacy"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
