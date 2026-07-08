@@ -2418,7 +2418,15 @@ elif selected_tab == "Profile":
             if not filtered_athletes.empty:
                 st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
                 ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "notes"]].copy()
-                ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Achievements Notes"]
+                
+                notes_split = ath_display["notes"].str.split(";", expand=True)
+                ath_display["Category/Weight"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
+                ath_display["Achievements"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
+                ath_display["Profile/Style"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
+                ath_display["Needs/Outlook"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
+                ath_display.drop(columns=["notes"], inplace=True)
+                
+                ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Category/Weight", "Achievements", "Profile/Style", "Needs/Outlook"]
                 st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
                 st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280)
                 
