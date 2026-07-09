@@ -225,6 +225,21 @@ div[data-baseweb="select"] > div:hover {
 }
 
 /* ── Section titles ── */
+
+.sticky-header {
+    position: sticky !important;
+    top: 2.5rem !important; /* Adjust for Streamlit top bar */
+    z-index: 999 !important;
+    background: rgba(11, 8, 25, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 1rem 0.5rem !important;
+    margin-top: 0 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-radius: 8px;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+}
+
 .stitle { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text1); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .chip { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.2rem 0.7rem; border-radius: 50px; }
 .chip-blue { background: rgba(0, 255, 209, 0.1); border: 1px solid rgba(0, 255, 209, 0.25); color: var(--blue); }
@@ -1019,7 +1034,7 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 # Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 if selected_tab == "Pathway Overview":
-    st.markdown('<div class="stitle" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle sticky-header" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
     # 1. Pipeline Description
     st.markdown('<div class="stitle" title="Overview of athlete progression from grassroots to elite levels" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Pipeline</div>', unsafe_allow_html=True)
@@ -1091,7 +1106,7 @@ if selected_tab == "Pathway Overview":
 # Purpose: Where talent is likely to emerge; who should be scouted.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Discovery & Leagues":
-    st.markdown('<div class="stitle" title="Track rising talent from local and state leagues"> Discovery & Leagues <span class="chip chip-purple">Live Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle sticky-header" title="Track rising talent from local and state leagues"> Discovery & Leagues <span class="chip chip-purple">Live Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
     st.caption("Data Availability Period: January 2026 - Present (Live Updates)")
     
@@ -1148,7 +1163,7 @@ elif selected_tab == "Discovery & Leagues":
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 3 — REGIONAL TALENT
 elif selected_tab == "Regional Talent":
-    st.markdown('<div class="stitle" title="Analyze top states, sports, and regional talent clusters"> Regional Talent <span class="chip chip-gold">Top Regional Clusters</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle sticky-header" title="Analyze top states, sports, and regional talent clusters"> Regional Talent <span class="chip chip-gold">Top Regional Clusters</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight(" Regional Talent Clusters", 
         "Explore India's top performing states, dominant sports, and high-potential athletes grouped by regions and demographics.", "gold"), unsafe_allow_html=True)
@@ -1200,7 +1215,7 @@ elif selected_tab == "Regional Talent":
 # Purpose: Where coaching is the bottleneck; former athlete-to-coach opportunities; masterclass needs.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Centres & Academies":
-    st.markdown('<div class="stitle" title="Monitor infrastructure, coaching capacity, and academies"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle sticky-header" title="Monitor infrastructure, coaching capacity, and academies"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
         "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
@@ -1291,7 +1306,7 @@ elif selected_tab == "Centres & Academies":
                     st.error("Please enter the athlete's name.")
 
 elif selected_tab == "Sponsor Pipeline":
-    st.markdown('<div class="stitle" title="Discover and match commercial sponsors with academies and sports." style="font-size:1.8rem;"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle sticky-header" title="Discover and match commercial sponsors with academies and sports." style="font-size:1.8rem;"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Commercial Opportunities Pipeline", 
         "View active corporate sponsor leads, budgets, and priority fits in the database. "
@@ -1473,7 +1488,7 @@ elif selected_tab == "Profile":
             st.rerun()
 
     # 1. Title
-    st.markdown('<div class="stitle"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle sticky-header"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
     
     # 2. Category & Location Filters (Sport & State)
     col_spt, col_st = st.columns(2)
