@@ -1205,36 +1205,31 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 # Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 if selected_tab == "Pathway Overview":
-    st.markdown('''
-    <div class="editions-hero">
-        <div class="editions-orb-1"></div>
-        <div class="editions-orb-2"></div>
-        
-        <div class="editions-badge">✦ Spring 2026 Edition ✦</div>
-        <div class="editions-title">ATHLETIQ<br>INTELLIGENCE</div>
-        <div class="editions-subtitle">
-            Scouting, coaching and funding intelligence for India's grassroots-to-medal pathways. 
-            Experience our most immersive data pipeline yet.
-        </div>
-        
-        <div style="display:flex; justify-content:center; gap:1rem; margin-top:2rem; position:relative; z-index:1;">
-            <div style="background:rgba(255,255,255,0.05); padding:1rem 2rem; border-radius:12px; border:1px solid rgba(16,229,179,0.3); backdrop-filter:blur(10px); animation: editionsFadeUp 1s 0.6s forwards; opacity:0;">
-                <div style="font-size:2rem; font-weight:900; color:#10E5B3;">34K+</div>
-                <div style="font-size:0.8rem; color:#aaa; text-transform:uppercase; letter-spacing:1px;">Active Profiles</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.05); padding:1rem 2rem; border-radius:12px; border:1px solid rgba(104,61,228,0.3); backdrop-filter:blur(10px); animation: editionsFadeUp 1s 0.7s forwards; opacity:0;">
-                <div style="font-size:2rem; font-weight:900; color:#683DE4;">9</div>
-                <div style="font-size:0.8rem; color:#aaa; text-transform:uppercase; letter-spacing:1px;">Talent Clusters</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.05); padding:1rem 2rem; border-radius:12px; border:1px solid rgba(253,214,99,0.3); backdrop-filter:blur(10px); animation: editionsFadeUp 1s 0.8s forwards; opacity:0;">
-                <div style="font-size:2rem; font-weight:900; color:#FDD663;">Live</div>
-                <div style="font-size:0.8rem; color:#aaa; text-transform:uppercase; letter-spacing:1px;">Pipeline Sync</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="stitle sticky-header" title="Strategic Dashboard Homepage" style="margin-top:0;"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>
-    ''', unsafe_allow_html=True)
+    st.markdown("""<div class="editions-hero">
+<div class="editions-orb-1"></div>
+<div class="editions-orb-2"></div>
+<div class="editions-badge">✦ Spring 2026 Edition ✦</div>
+<div class="editions-title">ATHLETIQ<br>INTELLIGENCE</div>
+<div class="editions-subtitle">
+Scouting, coaching and funding intelligence for India's grassroots-to-medal pathways. 
+Experience our most immersive data pipeline yet.
+</div>
+<div style="display:flex; justify-content:center; gap:1rem; margin-top:2rem; position:relative; z-index:1;">
+<div style="background:rgba(255,255,255,0.05); padding:1rem 2rem; border-radius:12px; border:1px solid rgba(16,229,179,0.3); backdrop-filter:blur(10px); animation: editionsFadeUp 1s 0.6s forwards; opacity:0;">
+<div style="font-size:2rem; font-weight:900; color:#10E5B3;">34K+</div>
+<div style="font-size:0.8rem; color:#aaa; text-transform:uppercase; letter-spacing:1px;">Active Profiles</div>
+</div>
+<div style="background:rgba(255,255,255,0.05); padding:1rem 2rem; border-radius:12px; border:1px solid rgba(104,61,228,0.3); backdrop-filter:blur(10px); animation: editionsFadeUp 1s 0.7s forwards; opacity:0;">
+<div style="font-size:2rem; font-weight:900; color:#683DE4;">9</div>
+<div style="font-size:0.8rem; color:#aaa; text-transform:uppercase; letter-spacing:1px;">Talent Clusters</div>
+</div>
+<div style="background:rgba(255,255,255,0.05); padding:1rem 2rem; border-radius:12px; border:1px solid rgba(253,214,99,0.3); backdrop-filter:blur(10px); animation: editionsFadeUp 1s 0.8s forwards; opacity:0;">
+<div style="font-size:2rem; font-weight:900; color:#FDD663;">Live</div>
+<div style="font-size:0.8rem; color:#aaa; text-transform:uppercase; letter-spacing:1px;">Pipeline Sync</div>
+</div>
+</div>
+</div>
+<div class="stitle sticky-header" title="Strategic Dashboard Homepage" style="margin-top:0;"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>""", unsafe_allow_html=True)
 
     # 1. Pipeline Description
     st.markdown('<div class="stitle" title="Overview of athlete progression from grassroots to elite levels" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Pipeline</div>', unsafe_allow_html=True)
