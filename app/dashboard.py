@@ -900,7 +900,7 @@ def render_sai_card(centre, score, rank):
 st.markdown("""
 <div class="hero" style="padding: 2rem 1rem 1rem; text-align: center;">
   <div class="hero-badge"><span class="dot dot-green"></span> Live Pathway Tracking</div>
-  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
+  <h1 class="hero-title notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: 4px; line-height: 1.1; margin: 0.5rem 0 0.8rem;">ATHLETIQ</h1>
   <h2 class="notranslate" translate="no" style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; color: #E8EAED; font-weight: 500; max-width: 800px; margin: 0 auto; line-height: 1.5;">
     Scouting, coaching and funding intelligence for India’s grassroots-to-medal pathways.
   </h2>
