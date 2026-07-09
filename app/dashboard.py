@@ -646,6 +646,7 @@ selected_tab = st.radio(
         "Sport Priority",
         "Coach Capacity",
         "Centres & Academies",
+        "Sponsor Pipeline",
         "Profile"
     ],
     label_visibility="collapsed",
@@ -1861,7 +1862,7 @@ elif selected_tab == "Centres & Academies":
 # Purpose: NSF governance, office bearers, status, credibility, engagement opportunity.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Sponsor Pipeline":
-    st.markdown('<div class="stitle"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" title="Discover and match commercial sponsors with academies and sports." style="font-size:1.8rem;"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Commercial Opportunities Pipeline", 
         "View active corporate sponsor leads, budgets, and priority fits in the database. "
