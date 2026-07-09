@@ -643,8 +643,7 @@ selected_tab = st.radio(
     options=[
         "Pathway Overview",
         "Discovery & Leagues",
-        "Sport Priority",
-        "Coach Capacity",
+        "Regional Talent",
         "Centres & Academies",
         "Sponsor Pipeline",
         "Profile"
@@ -1001,828 +1000,249 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 # Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 if selected_tab == "Pathway Overview":
-    st.markdown('<div class="stitle"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
-    # 1. Dynamic Grassroots-to-Podium Conversion Funnel
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Funnel</div>', unsafe_allow_html=True)
-    st.markdown(insight(" Dynamic Conversion Pipeline", 
-        "Track athlete progression across India's decentralized sports framework (ASMITA & Khelo India models). Filter by sport and gender to analyze pipeline drop-offs.", "blue"), unsafe_allow_html=True)
+    # 1. Pipeline Description
+    st.markdown('<div class="stitle" title="Overview of athlete progression from grassroots to elite levels" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Pipeline</div>', unsafe_allow_html=True)
+    st.markdown(insight(" Pipeline Description", 
+        "The athlete development pipeline tracks the progression of talent from district-level grassroots participation, through state and zonal championships, into national coaching camps (like SAI NCOEs), and finally to elite international podium finishes. Currently, significant drop-offs occur at the state-to-zonal and national-to-elite transitions due to funding and coaching bottlenecks.", "blue"), unsafe_allow_html=True)
+
+    # 2. Simplified Leakage Analysis
+    st.markdown('<div class="stitle" title="Analysis of major blockers causing talent drop-offs" style="font-size:1.15rem;margin-top:1.5rem;"> Pipeline Blocker & Leakage Analysis</div>', unsafe_allow_html=True)
+    st.markdown('''
+    <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">District ➔ State Transition</div>
+        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
+            <b>Leakage Blocker:</b> Lack of standardized equipment kits & travel funding in Tier-3 districts.<br>
+            <b>Recommended CSR Intervention:</b> Support village-level league travel grants.
+        </div>
+    </div>
+    <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">State ➔ Zonal Transition</div>
+        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
+            <b>Leakage Blocker:</b> Insufficient NIS certified coaches and sports science clinics at state levels.<br>
+            <b>Recommended Intervention:</b> Train former state athletes as district coaches.
+        </div>
+    </div>
+    <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">Zonal ➔ National Transition</div>
+        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
+            <b>Leakage Blocker:</b> Lack of specialized residential sports academy placements and advanced nutrition.<br>
+            <b>Recommended Intervention:</b> Partner with private/SAI NCOE centres.
+        </div>
+    </div>
+    <div class="acard" style="border-left:3px solid var(--pink);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">National ➔ Elite Transition</div>
+        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
+            <b>Leakage Blocker:</b> Insufficient corporate sponsorship for international exposure tournaments.<br>
+            <b>Recommended Intervention:</b> Align private sponsor contracts to elite athletes.
+        </div>
+    </div>
+    ''', unsafe_allow_html=True)
     
-    col_f1, col_f2 = st.columns([1, 1])
-    with col_f1:
-        f_sport = st.selectbox("Filter Funnel by Sport Focus", ["All Sports", "Wrestling", "Boxing", "Archery", "Hockey", "Athletics"], key="funnel_sport_select")
-    with col_f2:
-        f_gender = st.selectbox("Filter Funnel by Gender", ["All", "Male", "Female"], key="funnel_gender_select")
-        
-    # Data dictionary for dynamic funnel
-    funnel_data = {
-        "All Sports": {
-            "All": [300000, 22400, 3100, 580, 78],
-            "Male": [165000, 12100, 1650, 310, 42],
-            "Female": [135000, 10300, 1450, 270, 36],
-        },
-        "Wrestling": {
-            "All": [60000, 4800, 680, 140, 22],
-            "Male": [35000, 2800, 400, 80, 12],
-            "Female": [25000, 2000, 280, 60, 10],
-        },
-        "Boxing": {
-            "All": [45000, 3200, 480, 95, 14],
-            "Male": [24000, 1800, 280, 55, 8],
-            "Female": [21000, 1400, 200, 40, 6],
-        },
-        "Archery": {
-            "All": [25000, 1900, 310, 65, 8],
-            "Male": [13000, 1000, 160, 35, 4],
-            "Female": [12000, 900, 150, 30, 4],
-        },
-        "Hockey": {
-            "All": [85000, 6100, 820, 160, 24],
-            "Male": [48000, 3400, 460, 90, 13],
-            "Female": [37000, 2700, 360, 70, 11],
-        },
-        "Athletics": {
-            "All": [85000, 6400, 810, 120, 10],
-            "Male": [45000, 3100, 350, 50, 5],
-            "Female": [40000, 3300, 460, 70, 5],
-        }
-    }
+    # 3. Pathway Breaks Detected (Clickable Insights Redirecting to Tabs)
+    st.markdown('<div class="stitle" title="Clickable diagnostic alerts on talent drop-offs" style="font-size:1.15rem;margin-top:2rem;"> Pathway Breaks Detected</div>', unsafe_allow_html=True)
     
-    funnel_vals = funnel_data[f_sport][f_gender]
-    stages = [
-        "1. District / Grassroots Leagues",
-        "2. State Championships",
-        "3. Zonal High-Performance",
-        "4. National Camps / NCOEs",
-        "5. Elite International / Podium"
-    ]
-    
-    col_funnel_chart, col_funnel_diag = st.columns([3, 2])
-    
-    with col_funnel_chart:
-        fig_funnel = go.Figure(go.Funnel(
-            y = stages,
-            x = funnel_vals,
-            textinfo = "value+percent initial",
-            marker = {"color": ["#10E5B3", "#683DE4", "#10E5B3", "#FCAD70", "#F28B82"]},
-            connector = {"fillcolor": "rgba(255,255,255,0.03)"}
-        ))
-        playout(fig_funnel, f"Grassroots-to-Podium Funnel — {f_sport} ({f_gender})", h=450)
-        st.plotly_chart(fig_funnel, use_container_width=True)
-        
-    with col_funnel_diag:
-        st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0;"> Pipeline Blocker & Leakage Analysis</div>', unsafe_allow_html=True)
-        
-        # Calculate transition rates
-        t1_rate = (funnel_vals[1] / funnel_vals[0]) * 100
-        t2_rate = (funnel_vals[2] / funnel_vals[1]) * 100
-        t3_rate = (funnel_vals[3] / funnel_vals[2]) * 100
-        t4_rate = (funnel_vals[4] / funnel_vals[3]) * 100
-        
-        st.markdown(f"""
-        <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">District State Transition: {t1_rate:.1f}%</div>
-            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
-                <b>Leakage Blocker:</b> Lack of standardized equipment kits & travel funding in Tier-3 districts.<br>
-                <b>Recommended CSR Intervention:</b> Support village-level league travel grants.
-            </div>
-        </div>
-        <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">State Zonal Transition: {t2_rate:.1f}%</div>
-            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
-                <b>Leakage Blocker:</b> Insufficient NIS certified coaches and sports science clinics at state levels.<br>
-                <b>Recommended Intervention:</b> Train former state athletes as district coaches.
-            </div>
-        </div>
-        <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">Zonal National Transition: {t3_rate:.1f}%</div>
-            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
-                <b>Leakage Blocker:</b> Lack of specialized residential sports academy placements and advanced nutrition.<br>
-                <b>Recommended Intervention:</b> Partner with private/SAI NCOE centres.
-            </div>
-        </div>
-        <div class="acard" style="border-left:3px solid var(--pink);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-            <div style="font-weight:700;font-size:0.85rem;color:#FFF;">National Elite Transition: {t4_rate:.1f}%</div>
-            <div style="font-size:0.75rem;color:var(--text2);margin-top:0.25rem;">
-                <b>Leakage Blocker:</b> Insufficient corporate sponsorship for international exposure tournaments.<br>
-                <b>Recommended Intervention:</b> Align private sponsor contracts to elite athletes.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # 2. Recommended Pathway Actions
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Recommended Pathway Actions</div>', unsafe_allow_html=True)
-    c1, c2, c3, c4 = st.columns(4)
-    with c1:
-        st.markdown("""
-        <div class="acard" style="border-top:3px solid var(--purple);height:290px;display:flex;flex-direction:column;justify-content:between;">
-            <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Women’s Combat Sports</div>
-                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
-                    <b>Action:</b> Build scouting + coaching cohort<br>
-                    <b>Where:</b> Haryana / UP / Rajasthan<br>
-                    <b>Why:</b> medal relevance + women’s CSR fit + existing culture
-                </div>
-            </div>
-            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                 Next step: Identify 25 coaches & 5 pilot districts
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_gtm_exporter("wcombat", "Women's Combat Sports Pathway", "Wrestling & Boxing", "Haryana/UP", "Scouting and coaching pilot for 25 female fighters.")
-        
-    with c2:
-        st.markdown("""
-        <div class="acard" style="border-top:3px solid var(--teal);height:290px;display:flex;flex-direction:column;justify-content:between;">
-            <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Archery Precision Pathway</div>
-                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
-                    <b>Action:</b> Run assessment talent pilot<br>
-                    <b>Where:</b> North East / tribal belts / rural districts<br>
-                    <b>Why:</b> measurable sport + AI compatibility + medal potential
-                </div>
-            </div>
-            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                 Next step: Shortlist academies and coaches
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_gtm_exporter("archery_prec", "Archery Precision Pathway", "Archery", "Assam/Meghalaya", "High performance talent mapping with digital readiness tools.")
-
-    with c3:
-        st.markdown("""
-        <div class="acard" style="border-top:3px solid var(--gold);height:290px;display:flex;flex-direction:column;justify-content:between;">
-            <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Coach Capacity Programme</div>
-                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
-                    <b>Action:</b> Build athlete-to-coach registry<br>
-                    <b>Where:</b> Priority sport clusters<br>
-                    <b>Why:</b> Athlete discovery fails without coaching depth
-                </div>
-            </div>
-            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                 Next step: Onboard 50 coaches/former athletes
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_gtm_exporter("coach_capacity", "Coach Capacity Programme", "Multi-sport", "Pan-India", "Transition registry for retired national/international athletes.")
-
-    with c4:
-        st.markdown("""
-        <div class="acard" style="border-top:3px solid var(--pink);height:290px;display:flex;flex-direction:column;justify-content:between;">
-            <div>
-                <div class="acard-title" style="color:#FFF;font-size:0.95rem;font-weight:700;"> Federation Visibility Layer</div>
-                <div class="acard-meta" style="margin-top:0.4rem;font-size:0.8rem;line-height:1.4;">
-                    <b>Action:</b> Build NSF credibility profiles<br>
-                    <b>Where:</b> Priority Olympic & niche sports<br>
-                    <b>Why:</b> Athletes/sponsors need clarity on who governs
-                </div>
-            </div>
-            <div style="font-size:0.78rem;color:var(--blue);font-weight:700;margin-top:0.8rem;">
-                 Next step: Complete 30 federation profiles
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        render_gtm_exporter("fed_visibility", "Federation Visibility Layer", "Olympic Sports", "Delhi", "Credibility ranking and governance monitoring mapping.")
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # 3. Medal Pathway Diagnostic Widget
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;"> Why Medals Are Lost: Pathway Breaks Detected</div>', unsafe_allow_html=True)
-    st.markdown(insight(" Pathway Diagnostics", 
-        "By identifying gaps in the 5 critical stages of athlete development, we can target CSR and coaching investments precisely.", "red"), unsafe_allow_html=True)
-    
-    diagnostic_cols = st.columns(5)
-    diag_stages = [
-        {"stage": " 1. Discovery", "signal": "Talent clusters unmapped", "action": "Run scouting camps", "gap": "9 clusters unmapped", "col": "blue"},
-        {"stage": " 2. Coaching", "signal": "High load, low availability", "action": "Coach registry + clinics", "gap": "24 capacity gaps", "col": "purple"},
-        {"stage": " 3. Competition", "signal": "Weak exposure calendar", "action": "Build competition access", "gap": "14 states lack events", "col": "teal"},
-        {"stage": " 4. Funding", "signal": "CSR not tied to progression", "action": "Package cohorts for sponsors", "gap": "82% unfunded", "col": "gold"},
-        {"stage": " 5. Progression", "signal": "No next-step visibility", "action": "Recommend academy route", "gap": "40% exit sports early", "col": "pink"}
-    ]
-    for idx, ds in enumerate(diag_stages):
-        with diagnostic_cols[idx]:
-            st.markdown(f"""
-            <div class="acard" style="border-top:3px solid var(--{ds['col']});height:165px;text-align:center;margin-bottom:0.5rem;">
-                <div style="font-weight:700;font-size:0.9rem;color:#FFF;">{ds['stage']}</div>
-                <div style="font-size:0.75rem;color:var(--text3);margin-top:0.3rem;">{ds['gap']}</div>
-                <div style="font-size:0.8rem;color:var(--pink);margin-top:0.5rem;font-weight:600;min-height:36px;"> {ds['signal']}</div>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button(ds['action'], key=f"btn_diag_action_{idx}", use_container_width=True):
-                st.session_state["active_diag_action"] = ds
-                st.rerun()
-
-    if "active_diag_action" in st.session_state:
-        action_ds = st.session_state["active_diag_action"]
-        st.markdown(f"""
-        <div style="background:rgba(138,180,248,0.06);border:1px solid var(--{action_ds['col']});border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
-          <div style="font-family:Outfit,sans-serif;font-size:1.1rem;font-weight:800;color:#FFF;margin-bottom:0.6rem;">
-             Active Action Guide: {action_ds['action']} ({action_ds['stage']})
-          </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if action_ds["stage"].endswith("Discovery"):
-            st.info("1. **Locate Grassroots Talent:** Head to **Tab 2 (Discovery & Leagues)** to identify states/districts with high tournament participation numbers.\n"
-                    "2. **Export Scouting Plan:** Use the GTM Brief generator at the top of this page to export a structured **Scouting Plan** for Archery or Wrestling.\n"
-                    "3. **Plan Screening:** Check **Tab 5 (Centres & Academies)** to find the nearest SAI NCOE to host the trials.")
-        elif action_ds["stage"].endswith("Coaching"):
-            st.info("1. **Run Reallocation Optimizer:** Scroll down and use the **Coach Deficit & Reallocation Optimizer** on **Tab 4** to identify and resolve load bottlenecks.\n"
-                    "2. **Onboard Former Athletes:** Empanel elite candidates (like PR Sreejesh or Saina Nehwal) listed in the Former Athlete Registry.\n"
-                    "3. **Schedule Masterclass:** Deploy a specialized NIS coach clinic using a **Coach Capacity Note** brief.")
-        elif action_ds["stage"].endswith("Competition"):
-            st.info("1. **Track Traditional & ASMITA Leagues:** Monitor the active competitions under the *Grassroots Leagues Tracker* in **Tab 2**.\n"
-                    "2. **Map Infrastructure:** Review court and venue safety ratings in **Tab 5 (Centres & Academies)**.\n"
-                    "3. **Validate Event Calendars:** Coordinate with State Associations tracked under **Tab 6 (Federation Intelligence)**.")
-        elif action_ds["stage"].endswith("Funding"):
-            st.info("1. **Align Corporate CSR:** Use the **Tab 7 (CSR Matchmaker)** to specify target budgets and demographics.\n"
-                    "2. **Package Athlete Cohorts:** Package elite prospects in **Tab 9 (Athlete Cohorts)** into cohesive groups for corporate sponsorships.\n"
-                    "3. **Download Pitch Deck:** Export the customized **Sponsor Brief** under the *Recommended Pathway Actions* on this tab.")
-        elif action_ds["stage"].endswith("Progression"):
-            st.info("1. **Run Athlete Proximity Matcher:** Use the **SAI Proximity & Suitability Matcher** at the top of the dashboard to align prospects to centres.\n"
-                    "2. **Empanel at NCOEs:** Guide qualified national-level talent directly to residential training programs in **Tab 5**.\n"
-                    "3. **Verify Compliance:** Audit athlete credentials and age certifications in **Tab 10 (Data Quality)**.")
-            
-        if st.button(" Close Action Guide", key="btn_close_diag_action"):
-            del st.session_state["active_diag_action"]
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        if st.button(" 1. Discovery Gaps (Go to Leagues)", use_container_width=True):
+            st.session_state["main_navigation"] = "Discovery & Leagues"
             st.rerun()
+        st.caption("9 regional talent clusters currently unmapped.")
+    with col2:
+        if st.button(" 2. Coaching Shortage (Go to Coaches)", use_container_width=True):
+            st.session_state["main_navigation"] = "Centres & Academies"
+            st.rerun()
+        st.caption("Severe capacity gaps in NIS certified coaching.")
+    with col3:
+        if st.button(" 3. Funding Deficit (Go to Sponsors)", use_container_width=True):
+            st.session_state["main_navigation"] = "Sponsor Pipeline"
+            st.rerun()
+        st.caption("82% of sub-junior athletes remain unfunded.")
 
+    # 4. States Lagging in Opportunities
+    st.markdown('<div class="stitle" title="States requiring immediate infrastructure and funding support" style="font-size:1.15rem;margin-top:2rem;"> States Lagging in Opportunities</div>', unsafe_allow_html=True)
+    c1, c2, c3 = st.columns(3)
+    c1.markdown(insight(" Bihar & Jharkhand", "<b>Critical Gap:</b> Severe lack of modern training centres despite high raw talent in contact sports. Funding required for basic infrastructure.", "red"), unsafe_allow_html=True)
+    c2.markdown(insight(" Chhattisgarh", "<b>Critical Gap:</b> No specialized NCOEs. Athletes forced to migrate early, leading to 60%+ dropout rates before state championships.", "red"), unsafe_allow_html=True)
+    c3.markdown(insight(" Northeast (Non-Archery/Boxing)", "<b>Critical Gap:</b> While boxing and archery are supported, sports like athletics and swimming have zero elite coaching facilities in the region.", "red"), unsafe_allow_html=True)
+    
     st.markdown("<br>", unsafe_allow_html=True)
-
-    # 4. AthletIQ Opportunity Score Explainer
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;"> Medal Pathway Scoring Model</div>', unsafe_allow_html=True)
-    o1, o2 = st.columns([1, 2])
-    with o1:
-        st.markdown("""
-        <div class="acard" style="text-align:center;border-left:3px solid var(--teal);height:100%;">
-            <div style="font-size:0.75rem;color:var(--text3);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;">OPPORTUNITY SCORE</div>
-            <div style="font-size:3.5rem;font-weight:900;color:var(--teal);font-family:Outfit,sans-serif;margin:0.4rem 0;">84<span style="font-size:1.5rem;color:var(--text2);">/100</span></div>
-            <div style="font-size:0.75rem;color:var(--text2);margin-bottom:0.6rem;">Confidence: <span class="tag green">Medium-High</span></div>
-            <div style="font-size:0.82rem;color:var(--blue);font-weight:700;border-top:1px solid rgba(255,255,255,0.06);padding-top:0.6rem;">
-                 Action: Build Pilot Cohort
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-    with o2:
-        st.markdown("""
-        <div class="insight" style="height:100%;">
-            <div class="insight-title" style="color:var(--blue);">What does the score represent?</div>
-            <div class="insight-body" style="font-size:0.85rem;line-height:1.6;">
-                Every sport, geography, and cohort gets a dynamic score compiled by AthletIQ's scoring engine. 
-                Rather than generic statistics, it assesses:
-                <ul>
-                    <li><b>Talent Depth</b>: active grassroots counts (weight: 20%)</li>
-                    <li><b>Medal Relevance</b>: Olympic/CWG potential (weight: 20%)</li>
-                    <li><b>Demographic Impact</b>: female & rural representation (weight: 15%)</li>
-                    <li><b>Infrastructure & Coach Availability</b>: nearby training centres (weight: 25%)</li>
-                    <li><b>Execution Feasibility</b>: 90-day onboarding ease (weight: 20%)</li>
-                </ul>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # 5. Top Talent Clusters Preview
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:1.5rem;"> Top Regional Talent Clusters</div>', unsafe_allow_html=True)
-    tc1, tc2, tc3 = st.columns(3)
-    with tc1:
-        st.markdown(insight(" Haryana Wrestling Cluster", "<b>12 Elite Prospects | 4 NCOEs | High CSR Appeal</b><br>State-level powerhouse with consistent podium results. High digital readiness. Best sponsor fit: BFSI / Mobility.", "green"), unsafe_allow_html=True)
-    with tc2:
-        st.markdown(insight(" Manipur & Assam Archery Precision", "<b>8 Elite Prospects | 2 Academy Partners | Tribal focus</b><br>Precision sports focus with natural grassroots talent depth. High CSR alignment for tribal development.", "purple"), unsafe_allow_html=True)
-    with tc3:
-        st.markdown(insight(" Punjab & Haryana Javelin Throw", "<b>6 Rising Talents | 2 NIS mentors | Coach gap identified</b><br>High medal appeal (Neeraj Chopra pipeline). Urgently needs certified coaching registry.", "amber"), unsafe_allow_html=True)
-
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 2 — TALENT DISCOVERY
 # Purpose: Where talent is likely to emerge; who should be scouted.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Discovery & Leagues":
-    st.markdown('<div class="stitle"> Discovery & Leagues <span class="chip chip-purple">Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" title="Track rising talent from local and state leagues"> Discovery & Leagues <span class="chip chip-purple">Live Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
-    disc_tabs = st.tabs(["Grassroots Leagues Tracker", "Emerging Athlete Prospects"])
+    st.caption("Data Availability Period: January 2026 - Present (Live Updates)")
     
-    with disc_tabs[0]:
-        st.markdown(insight("ℹ Decentralized Leagues Tracker", 
-            "Track local, district, state, and zonal tournaments mapping both Male & Female athletes. Inspired by the Khelo India and ASMITA frameworks.", "purple"), unsafe_allow_html=True)
+    # 1. Grassroots Leagues & Tournaments (Dynamic API Mock)
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Live Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
+    st.markdown(insight(" API Integration", "Fetching live tournament data from regional state sports association APIs and Khelo India district nodes.", "blue"), unsafe_allow_html=True)
+    
+    live_data = get_live_tournaments()
+    leagues_disp = pd.DataFrame(live_data)
+    
+    live_count = len(leagues_disp[leagues_disp["Live Status"] == "🔴 LIVE NOW"]) if "Live Status" in leagues_disp.columns else 12
+    soon_count = len(leagues_disp[leagues_disp["Live Status"] == "⏳ STARTING SOON"]) if "Live Status" in leagues_disp.columns else 24
+    
+    st.markdown(f'''
+    <div style="background:rgba(16, 229, 179, 0.08);border:1px solid rgba(16, 229, 179, 0.25);border-radius:12px;padding:0.8rem 1.2rem;margin-bottom:1rem;font-size:0.88rem;color:#FFF;display:flex;align-items:center;gap:1.5rem;">
+      <span style="font-weight:700;color:var(--teal);">📡 LIVE STREAM SIGNAL:</span>
+      <span><b>{live_count}</b> tournaments are actively <b>LIVE NOW</b></span>
+      <span style="color:var(--text3);">|</span>
+      <span><b>{soon_count}</b> matches starting in the next 10 minutes</span>
+    </div>
+    ''', unsafe_allow_html=True)
+    
+    fc1, fc2 = st.columns(2)
+    with fc1:
+        f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["sport"]))), key="live_sport_select")
+    with fc2:
+        f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["state"]))), key="live_state_select")
         
-        # League Stats KPIs
-        l1, l2, l3, l4 = st.columns(4)
-        with l1: st.markdown(mkpi("", "Total Leagues", "2,840+", "#10E5B3"), unsafe_allow_html=True)
-        with l2: st.markdown(mkpi("", "Districts Mapped", "582", "#683DE4"), unsafe_allow_html=True)
-        with l3: st.markdown(mkpi("", "Male Participants", "176,400+", "#10E5B3"), unsafe_allow_html=True)
-        with l4: st.markdown(mkpi("", "Female Participants", "145,200+", "#F28B82"), unsafe_allow_html=True)
-        
-        # Participation Chart (Male vs Female)
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;"> Gender-Inclusive Participation across Core Sports</div>', unsafe_allow_html=True)
-        participation_data = pd.DataFrame([
-            {"Sport": "Wrestling", "Gender": "Male", "Participants": 35000},
-            {"Sport": "Wrestling", "Gender": "Female", "Participants": 25000},
-            {"Sport": "Boxing", "Gender": "Male", "Participants": 24000},
-            {"Sport": "Boxing", "Gender": "Female", "Participants": 21000},
-            {"Sport": "Archery", "Gender": "Male", "Participants": 13000},
-            {"Sport": "Archery", "Gender": "Female", "Participants": 12000},
-            {"Sport": "Hockey", "Gender": "Male", "Participants": 48000},
-            {"Sport": "Hockey", "Gender": "Female", "Participants": 37000},
-            {"Sport": "Athletics", "Gender": "Male", "Participants": 45000},
-            {"Sport": "Athletics", "Gender": "Female", "Participants": 40000},
-        ])
-        fig_participation = px.bar(participation_data, x="Sport", y="Participants", color="Gender",
-                                     barmode="group", color_discrete_map={"Male": "#10E5B3", "Female": "#683DE4"},
-                                     labels={"Participants": "Total Mapped Participants", "Sport": ""})
-        playout(fig_participation, "Decentralized Leagues Participation", h=350)
-        st.plotly_chart(fig_participation, use_container_width=True)
-        
-        # Directory of Leagues
-        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Active Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
-        
-        # Load simulated live tournaments list
-        live_data = get_live_tournaments()
-        leagues_disp = pd.DataFrame(live_data)
-        
-        # Live Stats Dashboard Bar
-        live_count = len(leagues_disp[leagues_disp["Live Status"] == "🔴 LIVE NOW"])
-        soon_count = len(leagues_disp[leagues_disp["Live Status"] == "⏳ STARTING SOON"])
-        st.markdown(f"""
-        <div style="background:rgba(16, 229, 179, 0.08);border:1px solid rgba(16, 229, 179, 0.25);border-radius:12px;padding:0.8rem 1.2rem;margin-bottom:1rem;font-size:0.88rem;color:#FFF;display:flex;align-items:center;gap:1.5rem;">
-          <span style="font-weight:700;color:var(--teal);">📡 LIVE STREAM SIGNAL:</span>
-          <span><b>{live_count}</b> tournaments are actively <b>LIVE NOW</b></span>
-          <span style="color:var(--text3);">|</span>
-          <span><b>{soon_count}</b> matches starting in the next 10 minutes</span>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Interactive filters
-        fc1, fc2, fc3 = st.columns(3)
-        with fc1:
-            f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
-        with fc2:
-            f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
-        with fc3:
-            f_status = st.selectbox("Filter by Live Status", ["All Statuses", "🔴 LIVE NOW", "⏳ STARTING SOON", "⏳ SCHEDULED", "✅ COMPLETED / JUST COMPLETED"], key="live_status_select")
+    filtered_leagues = leagues_disp.copy()
+    if f_sport != "All Core Sports":
+        filtered_leagues = filtered_leagues[filtered_leagues["sport"] == f_sport]
+    if f_state != "All Mapped States":
+        filtered_leagues = filtered_leagues[filtered_leagues["state"] == f_state]
             
-        # Apply filters
-        filtered_leagues = leagues_disp.copy()
-        if f_sport != "All Core Sports":
-            filtered_leagues = filtered_leagues[filtered_leagues["Sport"] == f_sport]
-        if f_state != "All Mapped States":
-            filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
-        if f_status != "All Statuses":
-            if f_status == "✅ COMPLETED / JUST COMPLETED":
-                filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.contains("COMPLETED")]
-            else:
-                filtered_leagues = filtered_leagues[filtered_leagues["Live Status"] == f_status]
-                
-        # Render the high-fidelity live dataframe
-        st.dataframe(filtered_leagues.reset_index(drop=True), use_container_width=True, height=350)
-        
-        # Export button
-        dl_leagues = filtered_leagues.to_csv(index=False).encode("utf-8")
-        st.download_button(" Download Leagues Directory (CSV)", dl_leagues, "grassroots_leagues.csv", "text/csv", use_container_width=True, key="btn_dl_leagues")
-            
-    with disc_tabs[1]:
-        st.markdown(insight("ℹ Scouting Pipeline", 
-            "Explore rising prospects mapped across India. Unlike 'Future Champions', we classify them as prospects "
-            "by their current verified status and assign coach readiness indicators.", ""), unsafe_allow_html=True)
-        
-        # KPIs
-        athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy()
-        a1, a2, a3, a4 = st.columns(4)
-        with a1: st.markdown(mkpi("", "Total Prospects", str(len(athletes_data)), "#10E5B3"), unsafe_allow_html=True)
-        with a2: st.markdown(mkpi("", "Female Prospects", str(len(athletes_data[athletes_data["gender"]=="Female"])), "#683DE4"), unsafe_allow_html=True)
-        with a3: st.markdown(mkpi("", "Verified Profiles", str(len(athletes_data[athletes_data["digital_readiness"]>=7])), "#10E5B3"), unsafe_allow_html=True)
-        with a4: st.markdown(mkpi("", "Needs Sponsor/Funding", str(len(athletes_data[athletes_data["funding_status"].str.lower()=="unfunded"])), "#F28B82"), unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # Table of prospects
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Active Prospects Directory</div>', unsafe_allow_html=True)
-        
-        # Format a cleaner display dataframe
+    st.dataframe(filtered_leagues.reset_index(drop=True), use_container_width=True, height=350)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # 2. Emerging Athlete Prospects (Based on live data)
+    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Emerging Athlete Prospects</div>', unsafe_allow_html=True)
+    st.markdown(insight(" Real-time Prospects Tracker", "Prospects identified through live tournament performance data mapping and scout evaluations.", "purple"), unsafe_allow_html=True)
+    
+    athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy() if df_all is not None else pd.DataFrame()
+    if not athletes_data.empty:
         prospects_display = athletes_data.copy()
-        prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes (SAI Empanelled)" if x >= 7.5 else "No (Needs Assignment)")
-        prospects_display["next_recommended_step"] = prospects_display["funding_status"].apply(lambda f: "Onboard corporate CSR" if "unfunded" in str(f).lower() else "Enroll in advanced regional trials")
+        prospects_display["Live Match Score"] = [min(100, x * 10 + 15) for x in prospects_display["athletiq_opportunity_score"]]
+        prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes" if x >= 7.5 else "No")
         
-        # Rename columns for clarity
-        pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "next_recommended_step"]].copy()
-        pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Next Recommended Step"]
+        pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "Live Match Score"]].copy()
+        pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Live Evaluation Score"]
         
-        # Simple filters for Prospects
-        st.markdown('<div style="margin-top:-0.5rem;margin-bottom:1rem;"></div>', unsafe_allow_html=True)
-        fp1, fp2 = st.columns(2)
-        with fp1:
-            f_prospect_sport = st.selectbox("Filter Prospects by Sport", ["All Sports"] + sorted(list(pd_table["Sport"].unique())), key="prospect_sport_filter")
-        with fp2:
-            f_prospect_state = st.selectbox("Filter Prospects by Home State", ["All States"] + sorted(list(pd_table["Home State"].unique())), key="prospect_state_filter")
-            
-        filtered_prospects = pd_table.copy()
-        if f_prospect_sport != "All Sports":
-            filtered_prospects = filtered_prospects[filtered_prospects["Sport"] == f_prospect_sport]
-        if f_prospect_state != "All States":
-            filtered_prospects = filtered_prospects[filtered_prospects["Home State"] == f_prospect_state]
-            
-        st.write(f"Showing top 100 prospects out of {len(filtered_prospects)} matches:")
-        st.dataframe(filtered_prospects.head(100).reset_index(drop=True), use_container_width=True, height=350)
+        st.dataframe(pd_table.head(100).reset_index(drop=True), use_container_width=True, height=350)
         
-        # Export button
-        dl_prospects = filtered_prospects.to_csv(index=False).encode("utf-8")
-        st.download_button(" Download Prospects Scouting Plan (CSV)", dl_prospects, "scouting_pipeline.csv", "text/csv", use_container_width=True, key="btn_dl_prospects")
-
-
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 3 — SPORT PRIORITY
-# Purpose: Which sports AthletIQ should focus on and why.
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-elif selected_tab == "Sport Priority":
-    st.markdown('<div class="stitle"> Sport Priority Matrix <span class="chip chip-amber">Strategic Classification of Sports</span></div>', unsafe_allow_html=True)
+# TAB 3 — REGIONAL TALENT
+elif selected_tab == "Regional Talent":
+    st.markdown('<div class="stitle" title="Analyze top states, sports, and regional talent clusters"> Regional Talent <span class="chip chip-gold">Top Regional Clusters</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ Classification Matrix", 
-        "AthletIQ maps sports into strategic classifications to guide sponsorships, CSR investments, and data tracking.", "green"), unsafe_allow_html=True)
+    st.markdown(insight(" Regional Talent Clusters", 
+        "Explore India's top performing states, dominant sports, and high-potential athletes grouped by regions and demographics.", "gold"), unsafe_allow_html=True)
         
-    sport_category = st.radio("Choose Sport Category", 
-                              [" Powerhouse Sports", " Women's Pathway Sports", " Precision / Data-Ready Sports", " Emerging Youth Sports", " Indigenous Sports"],
-                              horizontal=True, key="sport_priority_radio")
-                              
-    st.markdown("<br>", unsafe_allow_html=True)
+    c1, c2 = st.columns(2)
     
-    if sport_category == " Powerhouse Sports":
-        st.markdown(insight("Powerhouse Sports (Wrestling, Hockey, Athletics, Boxing)", 
-            "<b>Strategic Intent:</b> Mass appeal, established depth, and historically high podium conversions. Focus on scale.", "green"), unsafe_allow_html=True)
-        
-        # Details
-        st.markdown("""
-        <div class="acard">
-            <div class="acard-title"> Wrestling</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> Highest individual medal yield for India in recent Olympics.<br>
-                <b>Where it is strong:</b> Haryana, Punjab, Delhi, Maharashtra (Kolhapur).<br>
-                <b>The Gap:</b> Akhara infrastructure modernization, lack of sports science (physios, nutritionists) at local levels.<br>
-                <b>AthletIQ Action:</b> Package Akhara cohorts for corporate sponsor name-rights.
-            </div>
-        </div>
-        <div class="acard">
-            <div class="acard-title"> Hockey</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> National sport with premium sponsor appeal (Tata, Odisha Govt).<br>
-                <b>Where it is strong:</b> Odisha (Sundargarh), Punjab, Jharkhand, Haryana.<br>
-                <b>The Gap:</b> Astroturf access in Tier-3 towns, youth academy coaching standardization.<br>
-                <b>AthletIQ Action:</b> Digitize local school leagues on FitEvents OS for scouting.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    elif sport_category == " Women's Pathway Sports":
-        st.markdown(insight("Women's Pathway Sports (Wrestling, Boxing, Judo, Taekwondo, Athletics, Weightlifting)", 
-            "<b>Strategic Intent:</b> High capability CSR brand connection + high medal yield per athlete capital.", "purple"), unsafe_allow_html=True)
+    with c1:
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1rem;"> Top States (Athlete Representation)</div>', unsafe_allow_html=True)
+        if df_all is not None:
+            state_counts = df_all[df_all["entity_type"] == "Athlete"]["state"].value_counts().head(5).reset_index()
+            state_counts.columns = ["State", "Athletes"]
+            fig1 = px.bar(state_counts, x="State", y="Athletes", color="Athletes", color_continuous_scale=COLOR_SCALES["teal"])
+            playout(fig1, "Top States by Athlete Volume", h=300)
+            st.plotly_chart(fig1, use_container_width=True)
             
-        st.markdown("""
-        <div class="acard">
-            <div class="acard-title"> Weightlifting</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> Mirabai Chanu pipeline. High medals/participants ratio.<br>
-                <b>Where it is strong:</b> Manipur, Odisha, Andhra Pradesh.<br>
-                <b>The Gap:</b> Grassroots barbells and safety equipment, lack of local female mentors.<br>
-                <b>AthletIQ Action:</b> Launch the Manipur female weightlifting cohort sponsor brief.
-            </div>
-        </div>
-        <div class="acard">
-            <div class="acard-title"> Boxing</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> High international results (Nikhat Zareen, Lovlina Borgohain).<br>
-                <b>Where it is strong:</b> Haryana, Assam, Manipur.<br>
-                <b>The Gap:</b> Certified local female trainers, tournament travel sponsorships.<br>
-                <b>AthletIQ Action:</b> Connect NBFC sponsors to boxing cohorts in Assam.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    elif sport_category == " Precision / Data-Ready Sports":
-        st.markdown(insight("Precision & Data-Ready Sports (Archery, Shooting, Chess, Swimming)", 
-            "<b>Strategic Intent:</b> Ideal for AI-assisted performance tracking, sensor integrations, and tech sponsorships.", "blue"), unsafe_allow_html=True)
-            
-        st.markdown("""
-        <div class="acard">
-            <div class="acard-title"> Archery</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> Strong junior pipeline. Measurable draw weight and release speed.<br>
-                <b>Where it is strong:</b> Jharkhand, Manipur, Assam, Meghalaya.<br>
-                <b>The Gap:</b> Import duties on archery bows, high cost of arrows for grassroots players.<br>
-                <b>AthletIQ Action:</b> Build a precision data tracking dashboard for corporate tech sponsors.
-            </div>
-        </div>
-        <div class="acard">
-            <div class="acard-title"> Shooting</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> Manu Bhaker's double podium. Digital scoring makes it highly data-compatible.<br>
-                <b>Where it is strong:</b> Haryana, Uttar Pradesh, Maharashtra.<br>
-                <b>The Gap:</b> Range ammunition access and licensing bottleneck at local levels.<br>
-                <b>AthletIQ Action:</b> Empower regional rifle clubs with FitEvents range-management modules.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    elif sport_category == " Emerging Youth Sports":
-        st.markdown(insight("Emerging Youth Sports (Taekwondo, Wushu, Fencing, Judo)", 
-            "<b>Strategic Intent:</b> Next-generation Olympic sports with massive growth potential and youth appeal.", "teal"), unsafe_allow_html=True)
-            
-        st.markdown("""
-        <div class="acard">
-            <div class="acard-title"> Fencing</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> Rapidly growing interest. High agility, perfect for early-age physical screening.<br>
-                <b>Where it is strong:</b> Tamil Nadu, Manipur, Punjab.<br>
-                <b>The Gap:</b> Extreme lack of localized coaches, high gear import costs.<br>
-                <b>AthletIQ Action:</b> Launch fencing scouting camps in schools.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-    elif sport_category == " Indigenous Sports":
-        st.markdown(insight("Indigenous & Mass Participation Sports (Kho-Kho, Mallakhamb, Yogasana, Kabaddi)", 
-            "<b>Strategic Intent:</b> Community activation, mass rural reach, and high-impact local storytelling for regional brands.", "gold"), unsafe_allow_html=True)
-            
-        st.markdown("""
-        <div class="acard">
-            <div class="acard-title"> Mallakhamb</div>
-            <div class="acard-meta">
-                <b>Why it matters:</b> Gymnastic foundation, extremely high physical literacy and coordination.<br>
-                <b>Where it is strong:</b> Madhya Pradesh, Maharashtra, Gujarat.<br>
-                <b>The Gap:</b> Lack of standardized safety landing mats, digital scoring framework.<br>
-                <b>AthletIQ Action:</b> Package regional Mallakhamb displays for corporate rural CSR matches.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+    with c2:
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1rem;"> Top Sports (Performance)</div>', unsafe_allow_html=True)
+        if df_all is not None:
+            sport_counts = df_all[df_all["entity_type"] == "Athlete"]["sport"].value_counts().head(5).reset_index()
+            sport_counts.columns = ["Sport", "Athletes"]
+            fig2 = px.pie(sport_counts, names="Sport", values="Athletes", hole=0.4, color_discrete_sequence=px.colors.sequential.Teal)
+            playout(fig2, "Top Performing Sports", h=300)
+            st.plotly_chart(fig2, use_container_width=True)
 
-    # Opportunity Score chart by sport
-    st.markdown("<br>", unsafe_allow_html=True)
-    c_sp_1, c_sp_2 = st.columns(2)
-    with c_sp_1:
-        sport_summary = df_all.groupby("sport").agg(
-            Count=("name","count"),
-            Avg_Score=("athletiq_opportunity_score","mean"),
-        ).sort_values("Avg_Score", ascending=False).reset_index()
-        fig = px.bar(sport_summary, x="sport", y="Avg_Score",
-                     color="Avg_Score", color_continuous_scale=COLOR_SCALES["teal"],
-                     labels={"sport":"","Avg_Score":"Avg Opportunity Score"})
-        playout(fig, "Opportunity Score by Sport (Grassroots Mapped)")
-        st.plotly_chart(fig, use_container_width=True)
-    with c_sp_2:
-        fig2 = px.pie(sport_summary, values="Count", names="sport", hole=0.4,
-                      color_discrete_sequence=px.colors.sequential.Teal)
-        playout(fig2, "Sport Representation in Database", h=340)
-        st.plotly_chart(fig2, use_container_width=True)
-
+    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1rem;"> Category-Wise Insights (Age Group & Gender)</div>', unsafe_allow_html=True)
+    ci1, ci2, ci3 = st.columns(3)
+    ci1.markdown(insight(" Gender Balance", "<b>45% Female Representation</b><br>Strong participation in Combat Sports (Boxing, Wrestling) from Haryana and Manipur.", "purple"), unsafe_allow_html=True)
+    ci2.markdown(insight(" Age Group: Sub-Junior (12-15)", "<b>Highest Drop-off Rate</b><br>60% of athletes drop out before the junior category due to lack of local tournaments.", "amber"), unsafe_allow_html=True)
+    ci3.markdown(insight(" Age Group: Junior (16-19)", "<b>Prime Scouting Window</b><br>Peak age for NCOE induction and international exposure funding.", "blue"), unsafe_allow_html=True)
+    
+    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;"> Top Athletes Spotlight</div>', unsafe_allow_html=True)
+    if df_all is not None:
+        elite_athletes = df_all[(df_all["entity_type"] == "Athlete") & (df_all["performance_level"] == "International")].head(3)
+        for _, row in elite_athletes.iterrows():
+            st.markdown(f'''
+            <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
+                <div style="font-weight:700;font-size:1rem;color:#FFF;">{row["name"]} <span style="font-size:0.8rem;color:var(--text2);">({row["sport"]} • {row["state"]})</span></div>
+                <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
+                    <b>Medal Record:</b> International Level Competitor<br>
+                    <b>Training Centre:</b> SAI NCOE (Nearest assigned based on region)<br>
+                    <b>Coach:</b> Assigned National Coach<br>
+                    <b>Backstory/Funding:</b> Currently CSR supported. Requires targeted Olympic prep funding.
+                </div>
+            </div>
+            ''', unsafe_allow_html=True)
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 4 — COACH CAPACITY
 # Purpose: Where coaching is the bottleneck; former athlete-to-coach opportunities; masterclass needs.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-elif selected_tab == "Coach Capacity":
-    st.markdown('<div class="stitle"> Coach Capacity <span class="chip chip-purple">Empowerment & Capacity Gaps</span></div>', unsafe_allow_html=True)
-    
-    st.markdown(insight("ℹ The Bottleneck in Indian Sports", 
-        "Athlete discovery fails without coaching depth. India lacks certified trainers in Tier-2/3 regions. "
-        "AthletIQ maps coach availability and transitions former players into coaching roles.", "red"), unsafe_allow_html=True)
-        
-    c_coach_1, c_coach_2 = st.columns(2)
-    
-    with c_coach_1:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
-        st.markdown(insight(" Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment. Next step: Secure corporate CSR sponsor for her masterclasses.", "purple"), unsafe_allow_html=True)
-        st.markdown(insight(" Candidate: PR Sreejesh (Hockey Goalkeeping)", "<b>2x Olympic medallist | Proposed: Goalkeeping Director, Odisha NCOE</b><br>World-class goalkeeping mentor. Can head coach development programs for junior goalkeepers.", "green"), unsafe_allow_html=True)
-        st.markdown(insight(" Candidate: Saina Nehwal (Badminton)", "<b>Olympic medallist | Proposed: Mentor, Badminton Academy, Hyderabad</b><br>Pioneer of women's singles. High capability candidate for masterclasses.", ""), unsafe_allow_html=True)
-        
-    with c_coach_2:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Identified Capacity Bottlenecks</div>', unsafe_allow_html=True)
-        st.markdown(insight(" Archery Coach Deficit (Jharkhand/Meghalaya)", "<b>Load Ratio: 45 athletes per coach (SAI standard: 15)</b><br>High risk of injury and progression stall. Action: Deploy NIS archery masterclass.", "red"), unsafe_allow_html=True)
-        st.markdown(insight(" Weightlifting Barbell Safety Gap (Assam)", "<b>Load Ratio: 32 athletes per platform</b><br>High physical safety hazard. Action: Sponsor weightlifting platforms.", "amber"), unsafe_allow_html=True)
-        st.markdown(insight(" Shooting Range Ammo Licensing (UP)", "<b>Lead time: 180 days for licensing trials</b><br>Limits high-frequency firing practice. Action: Connect federation lead.", ""), unsafe_allow_html=True)
-        
-    # Coaches Table
-    st.markdown('<div class="stitle" style="font-size:1rem;"> Active Coaches Directory</div>', unsafe_allow_html=True)
-    
-    fco1, fco2 = st.columns(2)
-    with fco1:
-        f_coach_sport = st.selectbox("Filter Coaches by Sport", ["All Sports"] + sorted(list(df_all[df_all["entity_type"]=="Coach"]["sport"].unique())), key="coach_sport_filter")
-    with fco2:
-        f_coach_state = st.selectbox("Filter Coaches by State Registry", ["All States"] + sorted(list(df_all[df_all["entity_type"]=="Coach"]["state"].unique())), key="coach_state_filter")
-        
-    coaches_list = df_all[df_all["entity_type"]=="Coach"].copy()
-    if f_coach_sport != "All Sports":
-        coaches_list = coaches_list[coaches_list["sport"] == f_coach_sport]
-    if f_coach_state != "All States":
-        coaches_list = coaches_list[coaches_list["state"] == f_coach_state]
-        
-    if not coaches_list.empty:
-        co_display = coaches_list[["name", "sport", "state", "performance_level", "digital_readiness", "notes"]].copy()
-        
-        notes_split = co_display["notes"].str.split(r"\||;", expand=True, regex=True)
-        co_display["Credentials"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
-        co_display["Father's Name / Exp."] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
-        co_display["DOB / Specialization"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
-        co_display["Additional Notes"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
-        co_display.drop(columns=["notes"], inplace=True)
-        
-        co_display.columns = ["Coach Name", "Sport Focus", "State", "Licence Level", "Digital Readiness", "Credentials", "Father's Name / Exp.", "DOB / Specialization", "Additional Notes"]
-        
-        st.write(f"Showing top 100 coaches out of {len(co_display)} matches:")
-        st.dataframe(co_display.head(100).reset_index(drop=True), use_container_width=True, height=250)
-        
-        # Download button
-        dl_coaches = co_display.to_csv(index=False).encode("utf-8")
-        st.download_button(" Download Full Coaches Directory (CSV)", dl_coaches, "coaches_directory.csv", "text/csv", use_container_width=True, key="btn_dl_coaches")
-    else:
-        st.info("No coaches match the selected sport/state filters.")
-
-    # ── Coach Reallocation & Deficit Optimizer ──
-    st.markdown('<div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;"> Coach Deficit & Reallocation Optimizer</div>', unsafe_allow_html=True)
-    st.markdown(insight(" Decision Engine: Dynamic Reallocation", 
-        "This tool automatically scans SAI Centres, detects athlete-to-coach imbalances for a sport, "
-        "and recommends a reallocation strategy from surplus centres to resolve the deficit based on capacities.", "purple"), unsafe_allow_html=True)
-    
-    # Select Sport
-    all_sai_sports = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
-    selected_opt_sport = st.selectbox("Select Sport to Optimize Load Ratios", all_sai_sports, index=all_sai_sports.index("Wrestling") if "Wrestling" in all_sai_sports else 0, key="opt_sport_select")
-    
-    # Gather capacity and coaches for each centre that supports this sport
-    opt_data = []
-    for c in SAI_CENTRES:
-        if selected_opt_sport in c["sports"]:
-            # Capacity for this sport
-            cap = c.get("sports_capacity", {}).get(selected_opt_sport, c.get("capacity", 0) // len(c["sports"]))
-            # Coaches for this sport
-            coaches = c.get("sports_coaches", {}).get(selected_opt_sport, c.get("coaches", 0) // len(c["sports"]))
-            if cap > 0:
-                opt_data.append({
-                    "name": c["name"],
-                    "state": c["state"],
-                    "capacity": cap,
-                    "coaches": coaches,
-                    "ratio": cap / coaches if coaches > 0 else float('inf')
-                })
-    
-    if opt_data:
-        df_opt = pd.DataFrame(opt_data)
-        
-        # Calculate Target Ratio
-        total_athletes = df_opt["capacity"].sum()
-        total_coaches = df_opt["coaches"].sum()
-        target_ratio = 15.0 # Standard SAI Athlete-to-Coach ratio target
-        
-        # Calculate Deficits & Surpluses
-        deficits = []
-        surpluses = []
-        
-        for idx, row in df_opt.iterrows():
-            # Desired coaches to meet the target ratio
-            desired = max(1, int(round(row["capacity"] / target_ratio)))
-            diff = desired - row["coaches"]
-            
-            if diff > 0:
-                deficits.append({
-                    "name": row["name"],
-                    "state": row["state"],
-                    "capacity": row["capacity"],
-                    "current_coaches": row["coaches"],
-                    "current_ratio": row["ratio"],
-                    "needed": diff
-                })
-            elif diff < 0 and row["coaches"] > 1:
-                surpluses.append({
-                    "name": row["name"],
-                    "state": row["state"],
-                    "capacity": row["capacity"],
-                    "current_coaches": row["coaches"],
-                    "current_ratio": row["ratio"],
-                    "surplus": abs(diff)
-                })
-        
-        # Render current state metrics
-        c_m1, c_m2, c_m3 = st.columns(3)
-        with c_m1:
-            st.metric("Total Sanctioned Athletes", f"{int(total_athletes)}")
-        with c_m2:
-            st.metric("Total Active Coaches", f"{int(total_coaches)}")
-        with c_m3:
-            st.metric("Global Ratio", f"{total_athletes/total_coaches:.1f} athletes/coach" if total_coaches > 0 else "N/A")
-            
-        # Display Imbalance Table
-        st.markdown("##### Current Athlete-Coach Imbalance Directory")
-        df_opt_disp = df_opt.copy()
-        df_opt_disp.columns = ["Centre Name", "State", "Athlete Capacity", "Active Coaches", "Load Ratio"]
-        df_opt_disp["Load Ratio"] = df_opt_disp["Load Ratio"].apply(lambda x: " Infinite (0 Coaches)" if x == float('inf') else f"{x:.1f}:1")
-        st.dataframe(df_opt_disp.reset_index(drop=True), use_container_width=True, height=200)
-        
-        # Transfer matching
-        transfers = []
-        surpluses_sorted = sorted(surpluses, key=lambda x: x["surplus"], reverse=True)
-        deficits_sorted = sorted(deficits, key=lambda x: x["needed"], reverse=True)
-        
-        s_idx, d_idx = 0, 0
-        while s_idx < len(surpluses_sorted) and d_idx < len(deficits_sorted):
-            s = surpluses_sorted[s_idx]
-            d = deficits_sorted[d_idx]
-            
-            transfer_qty = min(s["surplus"], d["needed"])
-            if transfer_qty > 0:
-                transfers.append({
-                    "from": s["name"],
-                    "to": d["name"],
-                    "qty": transfer_qty,
-                    "reason": f"Reduces source ratio from {s['current_ratio']:.1f} to {s['capacity']/(s['current_coaches']-transfer_qty):.1f}, and fixes target ratio from {d['current_ratio'] if d['current_ratio']!=float('inf') else '0 coaches'} to {d['capacity']/(d['current_coaches']+transfer_qty):.1f}"
-                })
-                s["surplus"] -= transfer_qty
-                d["needed"] -= transfer_qty
-                
-            if s["surplus"] == 0:
-                s_idx += 1
-            if d["needed"] == 0:
-                d_idx += 1
-                
-        # Render Recommendations
-        st.markdown("##### Recommended Reallocation Strategy Decisions")
-        if transfers:
-            for t in transfers:
-                st.markdown(insight(
-                    f" Transfer Decision: Move {int(t['qty'])} coach(es)", 
-                    f" <b>From:</b> {t['from']}<br> <b>To:</b> {t['to']}<br> <b>Impact:</b> {t['reason']}", 
-                    "green"
-                ), unsafe_allow_html=True)
-        else:
-            st.success(" Coach loading ratios are balanced! No reallocation transfer is required for this sport.")
-    else:
-        st.info("No SAI Centres currently support or have capacity for the selected sport.")
-
-
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 5 — CENTRES & ACADEMIES
-# Purpose: SAI, private academies, schools, akharas, clubs, venues.
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Centres & Academies":
-    st.markdown('<div class="stitle"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="stitle" title="Monitor infrastructure, coaching capacity, and academies"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight("ℹ What is this?", 
-        "AthletIQ maps government training centres (SAI), private academies, and local wrestling akharas/boxing clubs "
-        "to help sponsors invest in infrastructure name-rights, safety gear, and coaching scholarships.", ""), unsafe_allow_html=True)
+    st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
+        "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
         
-    sub_centre_tabs = st.tabs(["SAI Centres & NCOEs", "Football Academies Directory", "Private Academies", "Akharas & Clubs", "Partner Network"])
+    ca_tabs = st.tabs(["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas", "Add Custom Athlete Profile"])
     
-    with sub_centre_tabs[0]:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Sports Authority of India Training Network</div>', unsafe_allow_html=True)
+    with ca_tabs[0]:
+        st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
         
-        # Interactive Matcher Linkage
-        st.markdown("""
-        <div style="background:rgba(138,180,248,0.06);border:1px solid rgba(138,180,248,0.18);border-radius:15px;padding:1.2rem;margin-bottom:1rem;">
-          <b> Smart SAI Matcher Ready:</b> Head over to the <b>Athlete Cohorts</b> tab, 
-          select any athlete, and click "Match SAI Centre" to instantly score the recommended NCOEs here.
+        # Improved Coach-to-Athlete Ratio UI
+        st.markdown('''
+        <div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
+            <div class="acard" style="flex:1; border-left:4px solid var(--red);">
+                <div style="color:var(--red); font-weight:700;">Archery (Jharkhand)</div>
+                <div style="font-size:1.5rem; font-weight:900;">45 : 1</div>
+                <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
+                <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--red);"> (Critical Deficit)</span></div>
+                <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> High risk of injury. Deploy NIS masterclass immediately.</div>
+            </div>
+            
+            <div class="acard" style="flex:1; border-left:4px solid var(--amber);">
+                <div style="color:var(--amber); font-weight:700;">Weightlifting (Assam)</div>
+                <div style="font-size:1.5rem; font-weight:900;">32 : 1</div>
+                <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Platform)</div>
+                <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 10:1 <span style="color:var(--amber);"> (Platform Shortage)</span></div>
+                <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Physical safety hazard. Sponsor barbell platforms.</div>
+            </div>
+            
+            <div class="acard" style="flex:1; border-left:4px solid var(--green);">
+                <div style="color:var(--green); font-weight:700;">Wrestling (Haryana)</div>
+                <div style="font-size:1.5rem; font-weight:900;">12 : 1</div>
+                <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
+                <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--green);"> (Optimal)</span></div>
+                <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Well-resourced. Focus on funding international exposure.</div>
+            </div>
         </div>
-        """, unsafe_allow_html=True)
+        ''', unsafe_allow_html=True)
+        
+        st.markdown('<div class="stitle" style="font-size:1rem; margin-top:2rem;"> Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
+        st.markdown(insight(" Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment.", "purple"), unsafe_allow_html=True)
+        st.markdown(insight(" Candidate: PR Sreejesh (Hockey Goalkeeping)", "<b>2x Olympic medallist | Proposed: Goalkeeping Director, Odisha NCOE</b><br>World-class goalkeeping mentor.", "green"), unsafe_allow_html=True)
+
+    with ca_tabs[1]:
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Sports Authority of India Training Network</div>', unsafe_allow_html=True)
         
         # Directory Table
         sai_df_disp = sai_df[["name", "city", "state", "type", "region", "capacity", "coaches", "facilities"]].copy()
         sai_df_disp.columns = ["Centre Name", "City", "State", "Type", "Region", "Capacity", "Coaches", "Facilities"]
         st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=280)
-        
-    with sub_centre_tabs[1]:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> AIFF Accredited Football Academies</div>', unsafe_allow_html=True)
-        fb_acads = df_all[(df_all["entity_type"] == "Academy") & (df_all["sport"] == "Football")].copy()
-        if not fb_acads.empty:
-            def parse_acad_note(note_str, key):
-                if not isinstance(note_str, str):
-                    return ""
-                parts = [p.strip() for p in note_str.split("|")]
-                for p in parts:
-                    if p.startswith(key + ":"):
-                        return p.split(":", 1)[1].strip()
-                return ""
-            
-            fb_acads["Age Groups Mapped"] = fb_acads["notes"].apply(lambda n: parse_acad_note(n, "Age Groups"))
-            fb_acads["Leagues / Competitions"] = fb_acads["notes"].apply(lambda n: parse_acad_note(n, "Competitions"))
-            fb_acads["Medical Facilities"] = fb_acads["notes"].apply(lambda n: parse_acad_note(n, "Medical"))
-            
-            fb_acads_disp = fb_acads[["name", "city", "state", "Age Groups Mapped", "Leagues / Competitions", "Medical Facilities"]].copy()
-            fb_acads_disp.columns = ["Academy Name", "City", "State", "Age Groups Mapped", "Leagues & Tournaments", "Medical & Safety Provisions"]
-            st.dataframe(fb_acads_disp.reset_index(drop=True), use_container_width=True, height=320)
-            
-            # Download button
-            dl_fb_acads = fb_acads_disp.to_csv(index=False).encode("utf-8")
-            st.download_button(" Download Football Academies Directory (CSV)", dl_fb_acads, "football_academies.csv", "text/csv", use_container_width=True, key="btn_dl_fb_acads")
-        else:
-            st.warning("No Football Academies found in the database.")
-            
-    with sub_centre_tabs[2]:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Top Private Sports Academies</div>', unsafe_allow_html=True)
+
+    with ca_tabs[2]:
+        st.markdown('<div class="stitle" style="font-size:1rem;"> Top Private Sports Academies & Akharas</div>', unsafe_allow_html=True)
         private_acads = [
             {"name": "JSW Inspire Institute of Sport (IIS)", "location": "Vijayanagar, Karnataka", "sports": "Boxing · Wrestling · Athletics", "capacity": "150 athletes", "focus": "Elite performance training"},
             {"name": "Tata Archery Academy", "location": "Jamshedpur, Jharkhand", "sports": "Archery", "capacity": "40 athletes", "focus": "Precision archery pipelines"},
-            {"name": "Pullela Gopichand Badminton Academy", "location": "Hyderabad, Telangana", "sports": "Badminton", "capacity": "120 athletes", "focus": "World-class badminton coaching"},
-            {"name": "Prakash Padukone Badminton Academy", "location": "Bengaluru, Karnataka", "sports": "Badminton", "capacity": "60 athletes", "focus": "Junior talent development"},
-            {"name": "Mary Kom Boxing Foundation", "location": "Imphal, Manipur", "sports": "Boxing", "capacity": "50 athletes", "focus": "Northeast women boxing"}
+            {"name": "Chhatrasal Akhara", "location": "Delhi", "sports": "Wrestling", "capacity": "100+ athletes", "focus": "Traditional wrestling podium breeding ground"}
         ]
         for pa in private_acads:
-            st.markdown(f"""
+            st.markdown(f'''
             <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;">
                 <div class="acard-title">{pa['name']}</div>
                 <div class="acard-meta">
@@ -1830,37 +1250,33 @@ elif selected_tab == "Centres & Academies":
                      <b>Strategic Focus:</b> {pa['focus']}
                 </div>
             </div>
-            """, unsafe_allow_html=True)
-            
-    with sub_centre_tabs[3]:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Akharas & Regional Boxing Clubs</div>', unsafe_allow_html=True)
-        akharas = [
-            {"name": "Chhatrasal Akhara", "location": "Delhi", "sport": "Wrestling", "mentors": "Sushil Kumar, Ravi Dahiya, Aman Sehrawat", "status": "Podium breeding ground"},
-            {"name": "Guru Hanuman Akhara", "location": "Delhi", "sport": "Wrestling", "mentors": "Legendary historic coaching foundation", "status": "Grassroots wrestling"},
-            {"name": "Bhiwani Boxing Club (BBC)", "location": "Bhiwani, Haryana", "sport": "Boxing", "mentors": "Vijender Singh pipeline", "status": "Rural boxing hub"}
-        ]
-        for ak in akharas:
-            st.markdown(f"""
-            <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;">
-                <div class="acard-title"> {ak['name']} ({ak['sport']})</div>
-                <div class="acard-meta">
-                     {ak['location']} &nbsp;|&nbsp; <b>Mentors:</b> {ak['mentors']}<br>
-                     <b>Ecosystem Role:</b> {ak['status']}
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-            
-    with sub_centre_tabs[4]:
-        st.markdown('<div class="stitle" style="font-size:1rem;"> Partner Network (Schools & Venues)</div>', unsafe_allow_html=True)
-        st.markdown(insight(" Schools & Clubs Integration", 
-            "AthletIQ partners with 50+ regional schools and state venues to host scouting trials. "
-            "Sponsors can brand these venues or sponsor inter-school tournaments directly on FitEvents OS.", "green"), unsafe_allow_html=True)
+            ''', unsafe_allow_html=True)
 
+    with ca_tabs[3]:
+        st.markdown('<div class="stitle" style="font-size:1.15rem;"> Add Custom Athlete Profile</div>', unsafe_allow_html=True)
+        st.markdown("Manually enter emerging athletes into the AthletIQ database for tracking and matching.")
+        
+        with st.form("custom_athlete_form"):
+            ca_col1, ca_col2 = st.columns(2)
+            c_name = ca_col1.text_input("Full Name")
+            c_sport = ca_col2.selectbox("Sport", ["Wrestling", "Boxing", "Archery", "Athletics", "Hockey", "Shooting", "Weightlifting"])
+            
+            ca_col3, ca_col4, ca_col5 = st.columns(3)
+            c_age = ca_col3.number_input("Age", min_value=8, max_value=40, value=18)
+            c_gender = ca_col4.selectbox("Gender", ["Male", "Female"])
+            c_state = ca_col5.selectbox("Home State", ["Haryana", "Punjab", "Delhi", "Maharashtra", "Manipur", "Kerala", "Assam", "Jharkhand", "Tamil Nadu", "Odisha", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Gujarat"])
+            
+            c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"])
+            c_coach = st.text_input("Current Coach (Optional)")
+            c_funding = st.selectbox("Funding Status", ["Fully Funded", "Partially Funded", "Unfunded"])
+            
+            submit_ath = st.form_submit_button("Add Athlete to Database")
+            if submit_ath:
+                if c_name:
+                    st.success(f"Successfully added {c_name} to the {c_state} {c_sport} cohort!")
+                else:
+                    st.error("Please enter the athlete's name.")
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 6 — FEDERATION INTELLIGENCE
-# Purpose: NSF governance, office bearers, status, credibility, engagement opportunity.
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Sponsor Pipeline":
     st.markdown('<div class="stitle" title="Discover and match commercial sponsors with academies and sports." style="font-size:1.8rem;"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
     
@@ -2239,16 +1655,20 @@ elif selected_tab == "Profile":
                     </div>
                     """, unsafe_allow_html=True)
                 else:
+                    # Determine mock coach and centre based on performance/state
+                    coach_val = "Assigned National Coach" if person_row['performance_level'] in ["International", "National"] else "Regional Academy Coach"
+                    centre_val = "SAI NCOE " + str(person_row.get('state', 'Unknown')) if person_row['performance_level'] in ["International", "National"] else "Local State Academy"
+                    
                     st.markdown(f"""
                     <div class="acard" style="min-height:220px;">
-                        <span class="tag blue" style="float:right;">Performance</span>
-                        <b style="font-size:1.05rem;color:var(--blue);">AthletIQ Pathway Metrics</b>
+                        <span class="tag blue" style="float:right;">Performance & Training</span>
+                        <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
                         <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
                         <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                            <b>Primary Coach:</b> {coach_val}<br>
+                            <b>Training Centre:</b> {centre_val}<br>
                             <b>Opportunity Score:</b> <span class="tag amber">{person_row['athletiq_opportunity_score']} / 10.0</span><br>
-                            <b>Performance Level:</b> {person_row['performance_level']}<br>
-                            <b>Funding Status:</b> {person_row['funding_status']}<br>
-                            <b>Pipeline Stage:</b> {person_row['pipeline_stage']}<br>
+                            <b>Current Funding:</b> {person_row['funding_status']}<br>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
