@@ -1192,33 +1192,29 @@ elif selected_tab == "Centres & Academies":
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
         
         # Improved Coach-to-Athlete Ratio UI
-        st.markdown('''
-        <div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
-            <div class="acard" style="flex:1; border-left:4px solid var(--red);">
-                <div style="color:var(--red); font-weight:700;">Archery (Jharkhand)</div>
-                <div style="font-size:1.5rem; font-weight:900;">45 : 1</div>
-                <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
-                <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--red);"> (Critical Deficit)</span></div>
-                <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> High risk of injury. Deploy NIS masterclass immediately.</div>
-            </div>
-            
-            <div class="acard" style="flex:1; border-left:4px solid var(--amber);">
-                <div style="color:var(--amber); font-weight:700;">Weightlifting (Assam)</div>
-                <div style="font-size:1.5rem; font-weight:900;">32 : 1</div>
-                <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Platform)</div>
-                <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 10:1 <span style="color:var(--amber);"> (Platform Shortage)</span></div>
-                <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Physical safety hazard. Sponsor barbell platforms.</div>
-            </div>
-            
-            <div class="acard" style="flex:1; border-left:4px solid var(--green);">
-                <div style="color:var(--green); font-weight:700;">Wrestling (Haryana)</div>
-                <div style="font-size:1.5rem; font-weight:900;">12 : 1</div>
-                <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
-                <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--green);"> (Optimal)</span></div>
-                <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Well-resourced. Focus on funding international exposure.</div>
-            </div>
-        </div>
-        ''', unsafe_allow_html=True)
+        st.markdown("""<div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
+<div class="acard" style="flex:1; border-left:4px solid var(--red);">
+<div style="color:var(--red); font-weight:700;">Archery (Jharkhand)</div>
+<div style="font-size:1.5rem; font-weight:900;">45 : 1</div>
+<div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
+<div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--red);"> (Critical Deficit)</span></div>
+<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> High risk of injury. Deploy NIS masterclass immediately.</div>
+</div>
+<div class="acard" style="flex:1; border-left:4px solid var(--amber);">
+<div style="color:var(--amber); font-weight:700;">Weightlifting (Assam)</div>
+<div style="font-size:1.5rem; font-weight:900;">32 : 1</div>
+<div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Platform)</div>
+<div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 10:1 <span style="color:var(--amber);"> (Platform Shortage)</span></div>
+<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Physical safety hazard. Sponsor barbell platforms.</div>
+</div>
+<div class="acard" style="flex:1; border-left:4px solid var(--green);">
+<div style="color:var(--green); font-weight:700;">Wrestling (Haryana)</div>
+<div style="font-size:1.5rem; font-weight:900;">12 : 1</div>
+<div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
+<div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--green);"> (Optimal)</span></div>
+<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Well-resourced. Focus on funding international exposure.</div>
+</div>
+</div>""", unsafe_allow_html=True)
         
         st.markdown('<div class="stitle" style="font-size:1rem; margin-top:2rem;"> Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
         st.markdown(insight(" Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment.", "purple"), unsafe_allow_html=True)
