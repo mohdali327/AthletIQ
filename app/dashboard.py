@@ -594,11 +594,11 @@ if elite_athletes and df_all is not None:
 # ─────────────────────────────────────────────────────────────────────────────
 # ── TOP HORIZONTAL NAVIGATION ──
 st.markdown('''<style>
-    /* Remove default streamlit top padding to push nav to top */
+    /* Remove default streamlit top padding to push nav up, but not too far */
     .block-container {
-        padding-top: 1.5rem !important;
+        padding-top: 3rem !important;
     }
-    /* Position the radio buttons at the very top */
+    /* Position the radio buttons */
     div[data-testid="stRadio"] {
         margin-top: -1rem;
         margin-bottom: 2rem;
@@ -610,12 +610,13 @@ st.markdown('''<style>
         background: transparent !important;
         border: none !important;
     }
-    /* Hide the radio button circles completely */
-    div[data-testid="stRadio"] div[data-baseweb="radio"] > div:first-child {
+    /* Hide the radio button circles completely (data-baseweb="radio" is on a label) */
+    div[data-testid="stRadio"] label[data-baseweb="radio"] > div:first-child {
         display: none !important;
     }
-    div[data-testid="stRadio"] div[data-baseweb="radio"] {
+    div[data-testid="stRadio"] label[data-baseweb="radio"] {
         margin: 0 !important;
+        cursor: pointer;
     }
     /* Style the labels as tab text */
     div[data-testid="stRadio"] label p {
