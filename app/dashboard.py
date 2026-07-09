@@ -10,6 +10,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import os
 import json
+from st_aggrid import AgGrid, GridOptionsBuilder, ColumnsAutoSizeMode
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PAGE CONFIG
@@ -1192,7 +1193,9 @@ elif selected_tab == "Discovery & Leagues":
     if f_state != "All Mapped States":
         filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
             
-    st.dataframe(filtered_leagues.reset_index(drop=True), use_container_width=True, height=350)
+    gb = GridOptionsBuilder.from_dataframe(filtered_leagues.reset_index(drop=True))
+    gb.configure_default_column(editable=False, filter=True, sortable=True)
+    AgGrid(filtered_leagues.reset_index(drop=True), gridOptions=gb.build(), columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS, theme="streamlit", height=350)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -1209,7 +1212,9 @@ elif selected_tab == "Discovery & Leagues":
         pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "Live Match Score"]].copy()
         pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Live Evaluation Score"]
         
-        st.dataframe(pd_table.head(100).reset_index(drop=True), use_container_width=True, height=350)
+        gb = GridOptionsBuilder.from_dataframe(pd_table.head(100).reset_index(drop=True))
+        gb.configure_default_column(editable=False, filter=True, sortable=True)
+        AgGrid(pd_table.head(100).reset_index(drop=True), gridOptions=gb.build(), columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS, theme="streamlit", height=350)
         
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 3 — REGIONAL TALENT
@@ -1311,7 +1316,9 @@ elif selected_tab == "Centres & Academies":
         # Directory Table
         sai_df_disp = sai_df[["name", "city", "state", "type", "region", "capacity", "coaches", "facilities"]].copy()
         sai_df_disp.columns = ["Centre Name", "City", "State", "Type", "Region", "Capacity", "Coaches", "Facilities"]
-        st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=280)
+        gb = GridOptionsBuilder.from_dataframe(sai_df_disp.reset_index(drop=True))
+        gb.configure_default_column(editable=False, filter=True, sortable=True)
+        AgGrid(sai_df_disp.reset_index(drop=True), gridOptions=gb.build(), columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS, theme="streamlit", height=280)
 
     with ca_tabs[2]:
         st.markdown('<div class="stitle" style="font-size:1rem;"> Top Private Sports Academies & Akharas</div>', unsafe_allow_html=True)
@@ -1590,7 +1597,9 @@ elif selected_tab == "Profile":
                 
                 ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Style / Category", "Weight / Achievements", "DOB / Profile", "Father's Name / Outlook"]
                 st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
-                st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280)
+                gb = GridOptionsBuilder.from_dataframe(ath_display.reset_index(drop=True))
+                gb.configure_default_column(editable=False, filter=True, sortable=True)
+                AgGrid(ath_display.reset_index(drop=True), gridOptions=gb.build(), columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS, theme="streamlit", height=280)
                 
             if not filtered_coaches.empty:
                 st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
@@ -1605,7 +1614,9 @@ elif selected_tab == "Profile":
                 
                 co_display.columns = ["Coach Name", "Sport Focus", "State Registry", "Licence / Certificate", "Credentials", "Father's Name / Exp.", "DOB / Specialization", "Additional Notes"]
                 st.write(f"Showing all matching coaches (total: {len(co_display)}):")
-                st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=280)
+                gb = GridOptionsBuilder.from_dataframe(co_display.reset_index(drop=True))
+                gb.configure_default_column(editable=False, filter=True, sortable=True)
+                AgGrid(co_display.reset_index(drop=True), gridOptions=gb.build(), columns_auto_size_mode=ColumnsAutoSizeMode.FIT_CONTENTS, theme="streamlit", height=280)
         else:
             # Find the person row and entity type
             is_coach = selected_name in filtered_coaches["name"].values
