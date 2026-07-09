@@ -239,6 +239,15 @@ div[data-baseweb="select"] > div:hover {
     border-radius: 8px;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
 }
+/* Force the parent Streamlit container to be sticky */
+div[data-testid="stMarkdownContainer"]:has(.sticky-header),
+div[data-testid="element-container"]:has(.sticky-header),
+div.element-container:has(.sticky-header),
+div.stElementContainer:has(.sticky-header) {
+    position: sticky !important;
+    top: 2.5rem !important;
+    z-index: 999 !important;
+}
 
 .stitle { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text1); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .chip { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.2rem 0.7rem; border-radius: 50px; }
