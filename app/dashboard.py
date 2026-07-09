@@ -618,23 +618,42 @@ st.markdown('''<style>
         margin: 0 !important;
         cursor: pointer;
     }
+    /* Hide the radio button circles */
+    div[data-testid="stRadio"] div[role="radiogroup"] > label > div:first-child {
+        display: none !important;
+    }
     /* Style the labels as tab text */
+    div[data-testid="stRadio"] div[role="radiogroup"] label {
+        padding: 0.4rem 1rem !important;
+        border-radius: 8px !important;
+        margin-right: 0.4rem;
+        cursor: pointer;
+        background: transparent;
+        transition: all 0.2s ease;
+    }
     div[data-testid="stRadio"] label p {
         font-family: 'Outfit', sans-serif !important;
         font-size: 1.05rem !important;
         color: rgba(255,255,255,0.6) !important;
-        transition: all 0.2s ease;
         margin-bottom: 0 !important;
+    }
+    div[data-testid="stRadio"] label:hover {
+        background: rgba(255,255,255,0.05) !important;
     }
     div[data-testid="stRadio"] label:hover p {
         color: #fff !important;
     }
-    div[data-testid="stRadio"] label[data-checked="true"] p {
+    /* Active State styling */
+    div[data-testid="stRadio"] label[data-checked="true"],
+    div[data-testid="stRadio"] label:has(input:checked) {
+        background: rgba(16, 229, 179, 0.15) !important;
+        border: 1px solid rgba(16, 229, 179, 0.4) !important;
+    }
+    div[data-testid="stRadio"] label[data-checked="true"] p,
+    div[data-testid="stRadio"] label:has(input:checked) p {
         color: #10E5B3 !important;
-        font-weight: 700 !important;
-        border-bottom: 2px solid #10E5B3 !important;
-        padding-bottom: 4px;
-        text-shadow: 0 0 10px rgba(16,229,179,0.3);
+        font-weight: 800 !important;
+        text-shadow: 0 0 10px rgba(16,229,179,0.5);
     }
 </style>''', unsafe_allow_html=True)
 
