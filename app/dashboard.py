@@ -1044,20 +1044,18 @@ if selected_tab == "Pathway Overview":
     st.markdown('<div class="stitle" title="Clickable diagnostic alerts on talent drop-offs" style="font-size:1.15rem;margin-top:2rem;"> Pathway Breaks Detected</div>', unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns(3)
+    
+    def nav_to(tab_name):
+        st.session_state["main_navigation"] = tab_name
+        
     with col1:
-        if st.button(" 1. Discovery Gaps (Go to Leagues)", use_container_width=True):
-            st.session_state["main_navigation"] = "Discovery & Leagues"
-            st.rerun()
+        st.button(" 1. Discovery Gaps (Go to Leagues)", use_container_width=True, on_click=nav_to, args=("Discovery & Leagues",))
         st.caption("9 regional talent clusters currently unmapped.")
     with col2:
-        if st.button(" 2. Coaching Shortage (Go to Coaches)", use_container_width=True):
-            st.session_state["main_navigation"] = "Centres & Academies"
-            st.rerun()
+        st.button(" 2. Coaching Shortage (Go to Coaches)", use_container_width=True, on_click=nav_to, args=("Centres & Academies",))
         st.caption("Severe capacity gaps in NIS certified coaching.")
     with col3:
-        if st.button(" 3. Funding Deficit (Go to Sponsors)", use_container_width=True):
-            st.session_state["main_navigation"] = "Sponsor Pipeline"
-            st.rerun()
+        st.button(" 3. Funding Deficit (Go to Sponsors)", use_container_width=True, on_click=nav_to, args=("Sponsor Pipeline",))
         st.caption("82% of sub-junior athletes remain unfunded.")
 
     # 4. States Lagging in Opportunities
