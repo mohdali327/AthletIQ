@@ -1099,15 +1099,15 @@ elif selected_tab == "Discovery & Leagues":
     
     fc1, fc2 = st.columns(2)
     with fc1:
-        f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["sport"]))), key="live_sport_select")
+        f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
     with fc2:
-        f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["state"]))), key="live_state_select")
+        f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
         
     filtered_leagues = leagues_disp.copy()
     if f_sport != "All Core Sports":
-        filtered_leagues = filtered_leagues[filtered_leagues["sport"] == f_sport]
+        filtered_leagues = filtered_leagues[filtered_leagues["Sport"] == f_sport]
     if f_state != "All Mapped States":
-        filtered_leagues = filtered_leagues[filtered_leagues["state"] == f_state]
+        filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
             
     st.dataframe(filtered_leagues.reset_index(drop=True), use_container_width=True, height=350)
     
