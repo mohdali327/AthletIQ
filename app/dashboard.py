@@ -1373,31 +1373,6 @@ elif selected_tab == "Centres & Academies":
             </div>
             ''', unsafe_allow_html=True)
 
-    with ca_tabs[3]:
-        st.markdown('<div class="stitle" style="font-size:1.15rem;"> Add Custom Athlete Profile</div>', unsafe_allow_html=True)
-        st.markdown("Manually enter emerging athletes into the AthletIQ database for tracking and matching.")
-        
-        with st.form("custom_athlete_form"):
-            ca_col1, ca_col2 = st.columns(2)
-            c_name = ca_col1.text_input("Full Name")
-            c_sport = ca_col2.selectbox("Sport", ["Wrestling", "Boxing", "Archery", "Athletics", "Hockey", "Shooting", "Weightlifting"])
-            
-            ca_col3, ca_col4, ca_col5 = st.columns(3)
-            c_age = ca_col3.number_input("Age", min_value=8, max_value=40, value=18)
-            c_gender = ca_col4.selectbox("Gender", ["Male", "Female"])
-            c_state = ca_col5.selectbox("Home State", ["Haryana", "Punjab", "Delhi", "Maharashtra", "Manipur", "Kerala", "Assam", "Jharkhand", "Tamil Nadu", "Odisha", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan", "Gujarat"])
-            
-            c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"])
-            c_coach = st.text_input("Current Coach (Optional)")
-            c_funding = st.selectbox("Funding Status", ["Fully Funded", "Partially Funded", "Unfunded"])
-            
-            submit_ath = st.form_submit_button("Add Athlete to Database")
-            if submit_ath:
-                if c_name:
-                    st.success(f"Successfully added {c_name} to the {c_state} {c_sport} cohort!")
-                else:
-                    st.error("Please enter the athlete's name.")
-
 elif selected_tab == "Sponsor Pipeline":
     st.markdown('<div class="stitle sticky-header" title="Discover and match commercial sponsors with academies and sports." style="font-size:1.8rem;"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
     
