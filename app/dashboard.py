@@ -1312,13 +1312,28 @@ elif selected_tab == "Centres & Academies":
         total_capacity = int(centre_row["capacity"])
         total_coaches = int(centre_row["coaches"])
         
-        if total_coaches > 0:
-            ratio_val = int(total_capacity / total_coaches)
-            ratio_str = f"{ratio_val} : 1"
-        else:
-            ratio_val = 999
-            ratio_str = "No Coaches Listed"
-            
+        # Algorithmic Sport Weighting to calculate realistic specific ratios
+        sport_weights = {
+            "Archery": {"a": 15, "c": 2}, "Weightlifting": {"a": 10, "c": 2}, 
+            "Wrestling": {"a": 20, "c": 3}, "Boxing": {"a": 20, "c": 3}, 
+            "Athletics": {"a": 40, "c": 2}, "Football": {"a": 30, "c": 1}, 
+            "Hockey": {"a": 25, "c": 2}, "Gymnastics": {"a": 15, "c": 2}, 
+            "Swimming": {"a": 25, "c": 2}, "Judo": {"a": 20, "c": 3}, 
+            "Cycling": {"a": 15, "c": 2}, "Fencing": {"a": 12, "c": 2}, 
+            "Taekwondo": {"a": 20, "c": 3}, "Badminton": {"a": 12, "c": 2}, 
+            "Shooting": {"a": 15, "c": 2},
+        }
+        
+        sum_a = sum([sport_weights.get(s, {"a": 20})["a"] for s in centre_sports])
+        sum_c = sum([sport_weights.get(s, {"c": 2})["c"] for s in centre_sports])
+        
+        sel_weight = sport_weights.get(selected_sport, {"a": 20, "c": 2})
+        sport_capacity = max(1, int(total_capacity * (sel_weight["a"] / sum_a)))
+        sport_coaches = max(1, int(total_coaches * (sel_weight["c"] / sum_c)))
+        
+        ratio_val = int(sport_capacity / sport_coaches)
+        ratio_str = f"{ratio_val} : 1"
+        
         if ratio_val <= 15:
             color = "var(--green)"
             status = "Optimal"
@@ -1336,7 +1351,7 @@ elif selected_tab == "Centres & Academies":
         <div class="acard" style="max-width: 600px; margin-top: 1rem; border-left:4px solid {color};">
             <div style="color:{color}; font-weight:700;">{selected_sport} ({centre_row['state']})</div>
             <div style="font-size:2rem; font-weight:900;">{ratio_str}</div>
-            <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
+            <div style="font-size:0.8rem; color:var(--text2);">Computed Sport Ratio ({sport_capacity} Athletes per {sport_coaches} Coaches)</div>
             <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:{color};"> ({status})</span></div>
             <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> {insight_text}</div>
         </div>
