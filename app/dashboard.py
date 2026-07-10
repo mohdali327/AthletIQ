@@ -146,7 +146,11 @@ css_code = """
 /* ── Hero ── */
 .hero { text-align: center; padding: 2.5rem 1rem 1rem; position: relative; z-index: 1; }
 .hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; }
-.hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; }
+@keyframes titleSlideFade {
+    0% { opacity: 0; transform: translateY(-30px) scale(0.95); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+}
+.hero-title { font-family: 'Outfit', sans-serif; font-size: 4.8rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; animation: titleSlideFade 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
 .hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
 .hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
 
@@ -1290,39 +1294,53 @@ elif selected_tab == "Centres & Academies":
     st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
         "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
         
-    ca_tabs = st.tabs(["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas", "Add Custom Athlete Profile"])
+    ca_tabs = st.tabs(["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas"])
     
     with ca_tabs[0]:
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
         
-        # Improved Coach-to-Athlete Ratio UI
-        st.markdown("""<div style="display:flex; gap:1rem; margin-bottom:1.5rem;">
-<div class="acard" style="flex:1; border-left:4px solid var(--red);">
-<div style="color:var(--red); font-weight:700;">Archery (Jharkhand)</div>
-<div style="font-size:1.5rem; font-weight:900;">45 : 1</div>
-<div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
-<div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--red);"> (Critical Deficit)</span></div>
-<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> High risk of injury. Deploy NIS masterclass immediately.</div>
-</div>
-<div class="acard" style="flex:1; border-left:4px solid var(--amber);">
-<div style="color:var(--amber); font-weight:700;">Weightlifting (Assam)</div>
-<div style="font-size:1.5rem; font-weight:900;">32 : 1</div>
-<div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Platform)</div>
-<div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 10:1 <span style="color:var(--amber);"> (Platform Shortage)</span></div>
-<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Physical safety hazard. Sponsor barbell platforms.</div>
-</div>
-<div class="acard" style="flex:1; border-left:4px solid var(--green);">
-<div style="color:var(--green); font-weight:700;">Wrestling (Haryana)</div>
-<div style="font-size:1.5rem; font-weight:900;">12 : 1</div>
-<div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
-<div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:var(--green);"> (Optimal)</span></div>
-<div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> Well-resourced. Focus on funding international exposure.</div>
-</div>
-</div>""", unsafe_allow_html=True)
+        col1, col2 = st.columns(2)
+        with col1:
+            all_centres = sai_df["name"].unique().tolist()
+            selected_centre = st.selectbox("Select SAI Centre", all_centres)
         
-        st.markdown('<div class="stitle" style="font-size:1rem; margin-top:2rem;"> Former-Athlete-to-Coach Registry</div>', unsafe_allow_html=True)
-        st.markdown(insight(" Candidate: Vinesh Phogat (Wrestling)", "<b>Olympic finalist | Proposed: Head Coach, Haryana Women's Academy</b><br>Expertise in women's combat sports. Ready for empanelment.", "purple"), unsafe_allow_html=True)
-        st.markdown(insight(" Candidate: PR Sreejesh (Hockey Goalkeeping)", "<b>2x Olympic medallist | Proposed: Goalkeeping Director, Odisha NCOE</b><br>World-class goalkeeping mentor.", "green"), unsafe_allow_html=True)
+        centre_row = sai_df[sai_df["name"] == selected_centre].iloc[0]
+        centre_sports = centre_row["sports"]
+        with col2:
+            selected_sport = st.selectbox("Select Sport", centre_sports)
+        
+        total_capacity = int(centre_row["capacity"])
+        total_coaches = int(centre_row["coaches"])
+        
+        if total_coaches > 0:
+            ratio_val = int(total_capacity / total_coaches)
+            ratio_str = f"{ratio_val} : 1"
+        else:
+            ratio_val = 999
+            ratio_str = "No Coaches Listed"
+            
+        if ratio_val <= 15:
+            color = "var(--green)"
+            status = "Optimal"
+            insight_text = f"Well-resourced for {selected_sport}. Focus on performance scaling."
+        elif ratio_val <= 30:
+            color = "var(--amber)"
+            status = "Strained"
+            insight_text = f"Coaching staff stretched for {selected_sport}. Consider empanelling additional coaches."
+        else:
+            color = "var(--red)"
+            status = "Critical Deficit"
+            insight_text = f"High risk of injury/burnout in {selected_sport}. Deploy NIS masterclass immediately."
+            
+        st.markdown(f'''
+        <div class="acard" style="max-width: 600px; margin-top: 1rem; border-left:4px solid {color};">
+            <div style="color:{color}; font-weight:700;">{selected_sport} ({centre_row['state']})</div>
+            <div style="font-size:2rem; font-weight:900;">{ratio_str}</div>
+            <div style="font-size:0.8rem; color:var(--text2);">Current Ratio (Athletes per Coach)</div>
+            <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:{color};"> ({status})</span></div>
+            <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> {insight_text}</div>
+        </div>
+        ''', unsafe_allow_html=True)
 
     with ca_tabs[1]:
         st.markdown('<div class="stitle" style="font-size:1rem;"> Sports Authority of India Training Network</div>', unsafe_allow_html=True)
