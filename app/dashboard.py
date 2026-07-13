@@ -1158,6 +1158,12 @@ if selected_tab == "Pathway Overview":
     c4, c5, c6 = st.columns(3)
     c4.markdown(insight(" Karnataka", "<b>1. Athletics</b> (Inspire Institute of Sport)<br><b>2. Judo</b> (IIS Bellary)<br><b>3. Badminton</b> (Prakash Padukone Academy)", "green"), unsafe_allow_html=True)
     c5.markdown(insight(" Tamil Nadu", "<b>1. Athletics</b> (Sprints/Jumps pipeline)<br><b>2. Kabaddi</b> (State game origin)<br><b>3. Kho-Kho</b> (Historic national strength)", "green"), unsafe_allow_html=True)
+    c6.markdown(insight(" Odisha", "<b>1. Field Hockey</b> (Global hub/Kalinga Stadium)<br><b>2. Athletics</b> (High Performance Centre)<br><b>3. Rugby</b> (State-sponsored pipeline)", "green"), unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    c7, c8, c9 = st.columns(3)
+    c7.markdown(insight(" Manipur", "<b>1. Boxing</b> (Mary Kom legacy/SAI NCOE)<br><b>2. Weightlifting</b> (Olympic medals/Mirabai Chanu)<br><b>3. Football</b> (Massive grassroots base)", "green"), unsafe_allow_html=True)
+    c8.markdown(insight(" Kerala", "<b>1. Football</b> (Massive fan/club culture)<br><b>2. Athletics</b> (Historic sprint legacy)<br><b>3. Volleyball</b> (Strong district ecosystem)", "green"), unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
 
