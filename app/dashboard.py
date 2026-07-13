@@ -1872,21 +1872,8 @@ elif selected_tab == "Profile":
                 render_bio(selected_coach, True, person_row)
 
 elif selected_tab == "AI Assistant":
-    try:
-        import google.generativeai as genai
-    except ImportError:
-        import subprocess
-        import sys
-        
-        with st.spinner("Installing required AI dependencies. This will only happen once..."):
-            try:
-                subprocess.check_call([sys.executable, "-m", "pip", "install", "google-generativeai==0.8.6"])
-                st.success("Dependencies installed successfully! Reloading...")
-                st.rerun()
-            except Exception as e:
-                st.error(f"Failed to install dependencies automatically: {e}")
-                st.stop()
-        
+    import requests
+    
     st.markdown('<div class="header-container"><div class="header-title">🤖 AI Assistant</div></div>', unsafe_allow_html=True)
     st.markdown("<p style='color:#a0aec0;margin-bottom:2rem;'>Ask me anything about AthletIQ's data (athletes, coaches, events, etc.)</p>", unsafe_allow_html=True)
 
@@ -1900,58 +1887,78 @@ elif selected_tab == "AI Assistant":
     if not api_key:
         st.warning("Please provide a Gemini API Key in the sidebar or via the GEMINI_API_KEY environment variable to use the AI Assistant.")
     else:
-        try:
-            genai.configure(api_key=api_key)
+        if "ai_messages" not in st.session_state:
+            # Prepare context
+            context = "ATHLETIQ MASTER DATABASE SUMMARY:\n"
             
-            # System prompt and context
-            if "ai_messages" not in st.session_state:
-                # Prepare context
-                context = "ATHLETIQ MASTER DATABASE SUMMARY:\n"
+            try:
+                events = master_df[master_df["entity_type"] == "Event"]
+                if not events.empty:
+                    context += "EVENTS & CSR:\n"
+                    context += events[["name", "sport", "funding_status", "notes"]].to_csv(index=False) + "\n"
                 
+                athletes = master_df[master_df["entity_type"] == "Athlete"]
+                if not athletes.empty:
+                    context += "ATHLETES:\n"
+                    context += athletes[["name", "sport", "notes"]].to_csv(index=False) + "\n"
+                    
+                coaches = master_df[master_df["entity_type"] == "Coach"]
+                if not coaches.empty:
+                    context += "COACHES:\n"
+                    context += coaches[["name", "sport", "notes"]].to_csv(index=False) + "\n"
+            except Exception as e:
+                context += f"Failed to load data: {e}"
+
+            sys_prompt = f"You are the AthletIQ AI Assistant. You must ONLY answer questions based on the following database snapshot. If the user asks something outside of this data, politely decline.\n\n{context[:50000]}"
+            
+            st.session_state.ai_messages = []
+            st.session_state.ai_system_instruction = sys_prompt
+
+        # Display chat messages
+        for msg in st.session_state.ai_messages:
+            with st.chat_message(msg["role"]):
+                st.markdown(msg["content"])
+
+        if prompt := st.chat_input("Ask about athletes, sponsors, or coaches..."):
+            st.session_state.ai_messages.append({"role": "user", "content": prompt})
+            with st.chat_message("user"):
+                st.markdown(prompt)
+                
+            with st.chat_message("assistant"):
+                response_placeholder = st.empty()
+                response_placeholder.markdown("Thinking...")
                 try:
-                    events = master_df[master_df["entity_type"] == "Event"]
-                    if not events.empty:
-                        context += "EVENTS & CSR:\n"
-                        context += events[["name", "sport", "funding_status", "notes"]].to_csv(index=False) + "\n"
+                    # Construct Gemini REST API request
+                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
                     
-                    athletes = master_df[master_df["entity_type"] == "Athlete"]
-                    if not athletes.empty:
-                        context += "ATHLETES:\n"
-                        context += athletes[["name", "sport", "notes"]].to_csv(index=False) + "\n"
+                    contents = []
+                    for msg in st.session_state.ai_messages:
+                        contents.append({
+                            "role": msg["role"] if msg["role"] == "user" else "model",
+                            "parts": [{"text": msg["content"]}]
+                        })
                         
-                    coaches = master_df[master_df["entity_type"] == "Coach"]
-                    if not coaches.empty:
-                        context += "COACHES:\n"
-                        context += coaches[["name", "sport", "notes"]].to_csv(index=False) + "\n"
-                except Exception as e:
-                    context += f"Failed to load data: {e}"
-
-                sys_prompt = f"You are the AthletIQ AI Assistant. You must ONLY answer questions based on the following database snapshot. If the user asks something outside of this data, politely decline.\n\n{context[:50000]}"
-                
-                st.session_state.ai_messages = []
-                st.session_state.ai_model = genai.GenerativeModel('gemini-1.5-flash', system_instruction=sys_prompt)
-                st.session_state.ai_chat = st.session_state.ai_model.start_chat(history=[])
-
-            # Display chat messages
-            for msg in st.session_state.ai_messages:
-                with st.chat_message(msg["role"]):
-                    st.markdown(msg["content"])
-
-            if prompt := st.chat_input("Ask about athletes, sponsors, or coaches..."):
-                st.session_state.ai_messages.append({"role": "user", "content": prompt})
-                with st.chat_message("user"):
-                    st.markdown(prompt)
+                    payload = {
+                        "systemInstruction": {
+                            "parts": [{"text": st.session_state.ai_system_instruction}]
+                        },
+                        "contents": contents,
+                        "generationConfig": {
+                            "temperature": 0.7,
+                            "maxOutputTokens": 800
+                        }
+                    }
                     
-                with st.chat_message("assistant"):
-                    response_placeholder = st.empty()
-                    response_placeholder.markdown("Thinking...")
-                    try:
-                        response = st.session_state.ai_chat.send_message(prompt)
-                        response_placeholder.markdown(response.text)
-                        st.session_state.ai_messages.append({"role": "assistant", "content": response.text})
-                    except Exception as e:
-                        response_placeholder.error(f"Error communicating with Gemini: {e}")
-        except Exception as err:
-            st.error(f"Initialization error: {err}")
+                    response = requests.post(url, json=payload, headers={'Content-Type': 'application/json'}, timeout=30)
+                    
+                    if response.status_code == 200:
+                        response_data = response.json()
+                        reply_text = response_data['candidates'][0]['content']['parts'][0]['text']
+                        response_placeholder.markdown(reply_text)
+                        st.session_state.ai_messages.append({"role": "assistant", "content": reply_text})
+                    else:
+                        response_placeholder.error(f"Error communicating with Gemini (HTTP {response.status_code}): {response.text}")
+                except Exception as e:
+                    response_placeholder.error(f"Error communicating with Gemini: {e}")
 
 
