@@ -5,7 +5,6 @@ Decision-Making Dashboard — Built for Action, Not Display
 """
 
 import streamlit as st
-import google.generativeai as genai
 import os
 import pandas as pd
 import pandas as pd
@@ -1872,6 +1871,12 @@ elif selected_tab == "Profile":
                 render_bio(selected_coach, True, person_row)
 
 elif selected_tab == "AI Assistant":
+    try:
+        import google.generativeai as genai
+    except ImportError:
+        st.error("The 'google-generativeai' package is not installed. Please add it to your requirements.txt or contact support.")
+        st.stop()
+        
     st.markdown('<div class="header-container"><div class="header-title">🤖 AI Assistant</div></div>', unsafe_allow_html=True)
     st.markdown("<p style='color:#a0aec0;margin-bottom:2rem;'>Ask me anything about AthletIQ's data (athletes, coaches, events, etc.)</p>", unsafe_allow_html=True)
 
