@@ -1871,3 +1871,72 @@ elif selected_tab == "Profile":
                 person_row = filtered_coaches[filtered_coaches["name"] == selected_coach].iloc[0]
                 render_bio(selected_coach, True, person_row)
 
+elif selected_tab == "AI Assistant":
+    st.markdown('<div class="header-container"><div class="header-title">🤖 AI Assistant</div></div>', unsafe_allow_html=True)
+    st.markdown("<p style='color:#a0aec0;margin-bottom:2rem;'>Ask me anything about AthletIQ's data (athletes, coaches, events, etc.)</p>", unsafe_allow_html=True)
+
+    # Sidebar for API Key
+    with st.sidebar:
+        st.markdown("### Settings")
+        api_key_input = st.text_input("Gemini API Key", type="password", help="Enter your Gemini API Key or set GEMINI_API_KEY environment variable")
+    
+    api_key = api_key_input or os.environ.get("GEMINI_API_KEY")
+    
+    if not api_key:
+        st.warning("Please provide a Gemini API Key in the sidebar or via the GEMINI_API_KEY environment variable to use the AI Assistant.")
+    else:
+        try:
+            genai.configure(api_key=api_key)
+            
+            # System prompt and context
+            if "ai_messages" not in st.session_state:
+                # Prepare context
+                context = "ATHLETIQ MASTER DATABASE SUMMARY:\n"
+                
+                try:
+                    events = master_df[master_df["entity_type"] == "Event"]
+                    if not events.empty:
+                        context += "EVENTS & CSR:\n"
+                        context += events[["name", "sport", "funding_status", "notes"]].to_csv(index=False) + "\n"
+                    
+                    athletes = master_df[master_df["entity_type"] == "Athlete"]
+                    if not athletes.empty:
+                        context += "ATHLETES:\n"
+                        context += athletes[["name", "sport", "notes"]].to_csv(index=False) + "\n"
+                        
+                    coaches = master_df[master_df["entity_type"] == "Coach"]
+                    if not coaches.empty:
+                        context += "COACHES:\n"
+                        context += coaches[["name", "sport", "notes"]].to_csv(index=False) + "\n"
+                except Exception as e:
+                    context += f"Failed to load data: {e}"
+
+                sys_prompt = f"You are the AthletIQ AI Assistant. You must ONLY answer questions based on the following database snapshot. If the user asks something outside of this data, politely decline.\n\n{context[:50000]}"
+                
+                st.session_state.ai_messages = []
+                st.session_state.ai_model = genai.GenerativeModel('gemini-1.5-flash', system_instruction=sys_prompt)
+                st.session_state.ai_chat = st.session_state.ai_model.start_chat(history=[])
+
+            # Display chat messages
+            for msg in st.session_state.ai_messages:
+                with st.chat_message(msg["role"]):
+                    st.markdown(msg["content"])
+
+            if prompt := st.chat_input("Ask about athletes, sponsors, or coaches..."):
+                st.session_state.ai_messages.append({"role": "user", "content": prompt})
+                with st.chat_message("user"):
+                    st.markdown(prompt)
+                    
+                with st.chat_message("assistant"):
+                    response_placeholder = st.empty()
+                    response_placeholder.markdown("Thinking...")
+                    try:
+                        response = st.session_state.ai_chat.send_message(prompt)
+                        response_placeholder.markdown(response.text)
+                        st.session_state.ai_messages.append({"role": "assistant", "content": response.text})
+                    except Exception as e:
+                        response_placeholder.error(f"Error communicating with Gemini: {e}")
+        except Exception as err:
+            st.error(f"Initialization error: {err}")
+
+
