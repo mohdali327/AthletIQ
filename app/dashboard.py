@@ -2009,7 +2009,10 @@ elif selected_tab == "AI Assistant":
                         response_placeholder.markdown(reply_text)
                         st.session_state.ai_messages.append({"role": "assistant", "content": reply_text})
                     else:
-                        response_placeholder.error(f"Error communicating with Gemini (HTTP {response.status_code}): {response.text}")
+                        if response.status_code == 404:
+                            response_placeholder.error(f"Error (HTTP 404): The API Key you provided does not have access to standard Gemini models.\\n\\n**How to fix:** Please generate a new API key from **[Google AI Studio](https://aistudio.google.com/app/apikey)**. Keys generated from Google Cloud Console (Vertex AI) use different endpoints and will cause this error. Also ensure you are using a standard Gemini Developer key.")
+                        else:
+                            response_placeholder.error(f"Error communicating with Gemini (HTTP {response.status_code}): {response.text}")
                 except Exception as e:
                     response_placeholder.error(f"Error communicating with Gemini: {e}")
 
