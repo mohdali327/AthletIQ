@@ -1971,7 +1971,7 @@ elif selected_tab == "AI Assistant":
                 response_placeholder.markdown("Thinking...")
                 try:
                     # Construct Gemini REST API request
-                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
+                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={api_key}"
                     
                     contents = []
                     for msg in st.session_state.ai_messages:
