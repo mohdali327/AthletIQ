@@ -1826,15 +1826,16 @@ elif selected_tab == "Profile":
             if selected_athlete == "-- Select Athlete --":
                 if not filtered_athletes.empty:
                     st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
-                    ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "notes"]].copy()
-                    notes_split = ath_display["notes"].str.split(r"\||;", expand=True, regex=True)
-                    ath_display["Style / Category"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
-                    ath_display["Weight / Achievements"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
-                    ath_display["DOB / Profile"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
-                    ath_display["Father's Name / Outlook"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
-                    if "notes" in ath_display.columns:
-                        ath_display.drop(columns=["notes"], inplace=True)
-                    ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Style / Category", "Weight / Achievements", "DOB / Profile", "Father's Name / Outlook"]
+                    ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                    
+                    ath_display["Specialization"] = ath_display["sport"]
+                    ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) else "Unknown")
+                    ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
+                    
+                    ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
+                    ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
+                    ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
+                    
                     st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
                     st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
             else:
