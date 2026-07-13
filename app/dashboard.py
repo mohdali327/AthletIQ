@@ -1147,12 +1147,17 @@ if selected_tab == "Pathway Overview":
         st.button(" 3. Funding Deficit (Go to Sponsors)", use_container_width=True, on_click=nav_to, args=("Sponsor Pipeline",))
         st.caption("82% of sub-junior athletes remain unfunded.")
 
-    # 4. States Lagging in Opportunities
-    st.markdown('<div class="stitle" title="States requiring immediate infrastructure and funding support" style="font-size:1.15rem;margin-top:2rem;"> States Lagging in Opportunities</div>', unsafe_allow_html=True)
+    # 4. Statewise Top Sports
+    st.markdown('<div class="stitle" title="Top performing sports across major states based on Khelo India and Olympic pipeline metrics" style="font-size:1.15rem;margin-top:2rem;"> Statewise Top Sports</div>', unsafe_allow_html=True)
     c1, c2, c3 = st.columns(3)
-    c1.markdown(insight(" Bihar & Jharkhand", "<b>Critical Gap:</b> Severe lack of modern training centres despite high raw talent in contact sports. Funding required for basic infrastructure.", "red"), unsafe_allow_html=True)
-    c2.markdown(insight(" Chhattisgarh", "<b>Critical Gap:</b> No specialized NCOEs. Athletes forced to migrate early, leading to 60%+ dropout rates before state championships.", "red"), unsafe_allow_html=True)
-    c3.markdown(insight(" Northeast (Non-Archery/Boxing)", "<b>Critical Gap:</b> While boxing and archery are supported, sports like athletics and swimming have zero elite coaching facilities in the region.", "red"), unsafe_allow_html=True)
+    c1.markdown(insight(" Haryana", "<b>1. Wrestling</b> (Olympic medals; Sonepat hub)<br><b>2. Boxing</b> (Bhiwani pipeline)<br><b>3. Shooting</b> (Jhajjar/Panchkula)", "green"), unsafe_allow_html=True)
+    c2.markdown(insight(" Punjab", "<b>1. Field Hockey</b> (Jalandhar/Sansarpur belt)<br><b>2. Athletics</b> (Sprints/Javelin pipeline)<br><b>3. Kabaddi</b> (Traditional circle style)", "green"), unsafe_allow_html=True)
+    c3.markdown(insight(" Maharashtra", "<b>1. Multi-Sport / KIYG</b> (4x Champion)<br><b>2. Wrestling</b> (Kolhapur/Pune talims)<br><b>3. Kho-Kho</b> (Historic stronghold)", "green"), unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    c4, c5, c6 = st.columns(3)
+    c4.markdown(insight(" Karnataka", "<b>1. Athletics</b> (Inspire Institute of Sport)<br><b>2. Judo</b> (IIS Bellary)<br><b>3. Badminton</b> (Prakash Padukone Academy)", "green"), unsafe_allow_html=True)
+    c5.markdown(insight(" Tamil Nadu", "<b>1. Athletics</b> (Sprints/Jumps pipeline)<br><b>2. Kabaddi</b> (State game origin)<br><b>3. Kho-Kho</b> (Historic national strength)", "green"), unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
 
