@@ -1829,7 +1829,7 @@ elif selected_tab == "Profile":
                     ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
                     
                     ath_display["Specialization"] = ath_display["sport"]
-                    ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) else "Unknown")
+                    ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
                     ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
                     
                     ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
@@ -1853,15 +1853,15 @@ elif selected_tab == "Profile":
             if selected_coach == "-- Select Coach --":
                 if not filtered_coaches.empty:
                     st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
-                    co_display = filtered_coaches[["name", "sport", "state", "performance_level", "notes"]].copy()
-                    notes_split = co_display["notes"].str.split(r"\||;", expand=True, regex=True)
-                    co_display["Credentials"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
-                    co_display["Father's Name / Exp."] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
-                    co_display["DOB / Specialization"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
-                    co_display["Additional Notes"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
-                    if "notes" in co_display.columns:
-                        co_display.drop(columns=["notes"], inplace=True)
-                    co_display.columns = ["Coach Name", "Sport Focus", "State Registry", "Licence / Certificate", "Credentials", "Father's Name / Exp.", "DOB / Specialization", "Additional Notes"]
+                    co_display = filtered_coaches[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                    
+                    co_display["Specialization"] = co_display["sport"]
+                    co_display["DOB / Age"] = co_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
+                    co_display["Credentials / Notes"] = co_display["notes"].fillna("-")
+                    
+                    co_display.drop(columns=["notes", "age", "sport"], inplace=True)
+                    co_display = co_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Credentials / Notes"]]
+                    co_display.columns = ["Coach Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Credentials / Notes"]
                     st.write(f"Showing all matching coaches (total: {len(co_display)}):")
                     st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
             else:
