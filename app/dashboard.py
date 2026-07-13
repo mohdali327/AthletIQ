@@ -1627,69 +1627,8 @@ elif selected_tab == "Profile":
     if filtered_athletes.empty and filtered_coaches.empty:
         st.warning("No result found")
     else:
-        # Combined names list
-        combined_names = sorted(list(set(filtered_athletes["name"].unique().tolist() + filtered_coaches["name"].unique().tolist())))
-        
-        # Render selector for specific person
-        selected_name = st.selectbox(
-            "Select Athlete or Coach to View Bio-Data:",
-            options=["-- Select Name to View Bio --"] + combined_names,
-            key="profile_selected_name"
-        )
-        
-        if selected_name == "-- Select Name to View Bio --":
-            # Display matching lists (both Athletes and Coaches)
-            if not filtered_athletes.empty:
-                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
-                ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "notes"]].copy()
-                
-                notes_split = ath_display["notes"].str.split(r"\||;", expand=True, regex=True)
-                ath_display["Style / Category"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
-                ath_display["Weight / Achievements"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
-                ath_display["DOB / Profile"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
-                ath_display["Father's Name / Outlook"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
-                ath_display.drop(columns=["notes"], inplace=True)
-                
-                ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Style / Category", "Weight / Achievements", "DOB / Profile", "Father's Name / Outlook"]
-                st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
-                st.dataframe(
-                ath_display.reset_index(drop=True),
-                use_container_width=True,
-                height=280,
-                hide_index=True
-            )
-                
-            if not filtered_coaches.empty:
-                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
-                co_display = filtered_coaches[["name", "sport", "state", "performance_level", "notes"]].copy()
-                
-                notes_split = co_display["notes"].str.split(r"\||;", expand=True, regex=True)
-                co_display["Credentials"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
-                co_display["Father's Name / Exp."] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
-                co_display["DOB / Specialization"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
-                co_display["Additional Notes"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
-                co_display.drop(columns=["notes"], inplace=True)
-                
-                co_display.columns = ["Coach Name", "Sport Focus", "State Registry", "Licence / Certificate", "Credentials", "Father's Name / Exp.", "DOB / Specialization", "Additional Notes"]
-                st.write(f"Showing all matching coaches (total: {len(co_display)}):")
-                st.dataframe(
-                co_display.reset_index(drop=True),
-                use_container_width=True,
-                height=280,
-                hide_index=True
-            )
-        else:
-            # Find the person row and entity type
-            is_coach = selected_name in filtered_coaches["name"].values
-            person_row = None
-            entity_type = "Sportsperson"
-            
-            if is_coach:
-                person_row = filtered_coaches[filtered_coaches["name"] == selected_name].iloc[0]
-                entity_type = "Coach"
-            else:
-                person_row = filtered_athletes[filtered_athletes["name"] == selected_name].iloc[0]
-                entity_type = "Sportsperson"
+        def render_bio(selected_name, is_coach_flag, person_row):
+            entity_type = "Coach" if is_coach_flag else "Sportsperson"
             
             # Wrestling TOPS details dict
             wrestling_tops = {
@@ -1873,4 +1812,58 @@ elif selected_tab == "Profile":
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
+
+        tab_ath, tab_coa = st.tabs(["Athlete Search", "Coach Search"])
+        
+        with tab_ath:
+            athlete_names = sorted(filtered_athletes["name"].dropna().unique().tolist()) if not filtered_athletes.empty else []
+            selected_athlete = st.selectbox(
+                "Select Athlete to View Bio-Data:",
+                options=["-- Select Athlete --"] + athlete_names,
+                key="profile_selected_athlete"
+            )
+            
+            if selected_athlete == "-- Select Athlete --":
+                if not filtered_athletes.empty:
+                    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
+                    ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "notes"]].copy()
+                    notes_split = ath_display["notes"].str.split(r"\||;", expand=True, regex=True)
+                    ath_display["Style / Category"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
+                    ath_display["Weight / Achievements"] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
+                    ath_display["DOB / Profile"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
+                    ath_display["Father's Name / Outlook"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
+                    if "notes" in ath_display.columns:
+                        ath_display.drop(columns=["notes"], inplace=True)
+                    ath_display.columns = ["Sportsperson Name", "Sport", "State Registry", "Performance Level", "Style / Category", "Weight / Achievements", "DOB / Profile", "Father's Name / Outlook"]
+                    st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
+                    st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+            else:
+                person_row = filtered_athletes[filtered_athletes["name"] == selected_athlete].iloc[0]
+                render_bio(selected_athlete, False, person_row)
+
+        with tab_coa:
+            coach_names = sorted(filtered_coaches["name"].dropna().unique().tolist()) if not filtered_coaches.empty else []
+            selected_coach = st.selectbox(
+                "Select Coach to View Bio-Data:",
+                options=["-- Select Coach --"] + coach_names,
+                key="profile_selected_coach"
+            )
+            
+            if selected_coach == "-- Select Coach --":
+                if not filtered_coaches.empty:
+                    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
+                    co_display = filtered_coaches[["name", "sport", "state", "performance_level", "notes"]].copy()
+                    notes_split = co_display["notes"].str.split(r"\||;", expand=True, regex=True)
+                    co_display["Credentials"] = notes_split[0].str.strip() if 0 in notes_split.columns else "-"
+                    co_display["Father's Name / Exp."] = notes_split[1].str.strip() if 1 in notes_split.columns else "-"
+                    co_display["DOB / Specialization"] = notes_split[2].str.strip() if 2 in notes_split.columns else "-"
+                    co_display["Additional Notes"] = notes_split[3].str.strip() if 3 in notes_split.columns else "-"
+                    if "notes" in co_display.columns:
+                        co_display.drop(columns=["notes"], inplace=True)
+                    co_display.columns = ["Coach Name", "Sport Focus", "State Registry", "Licence / Certificate", "Credentials", "Father's Name / Exp.", "DOB / Specialization", "Additional Notes"]
+                    st.write(f"Showing all matching coaches (total: {len(co_display)}):")
+                    st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+            else:
+                person_row = filtered_coaches[filtered_coaches["name"] == selected_coach].iloc[0]
+                render_bio(selected_coach, True, person_row)
 
