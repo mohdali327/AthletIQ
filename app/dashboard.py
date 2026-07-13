@@ -5,6 +5,9 @@ Decision-Making Dashboard — Built for Action, Not Display
 """
 
 import streamlit as st
+import google.generativeai as genai
+import os
+import pandas as pd
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
