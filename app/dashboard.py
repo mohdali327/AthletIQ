@@ -1970,50 +1970,27 @@ elif selected_tab == "AI Assistant":
                 response_placeholder = st.empty()
                 response_placeholder.markdown("Thinking...")
                 try:
-                    # Test known stable models sequentially to avoid experimental/restricted models
-                    known_models = ["models/gemini-1.5-flash", "models/gemini-1.5-pro", "models/gemini-1.0-pro"]
-                    target_model = "models/gemini-1.5-flash" # Default fallback
+                    from google import genai
                     
-                    for model in known_models:
-                        test_url = f"https://generativelanguage.googleapis.com/v1beta/{model}?key={api_key}"
-                        test_res = requests.get(test_url, timeout=5)
-                        if test_res.status_code == 200:
-                            target_model = model
-                            break
+                    client = genai.Client(api_key=api_key)
                     
-                    url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={api_key}"
+                    full_prompt = f"{st.session_state.ai_system_instruction}\\n\\nUser Question: {prompt}"
                     
-                    contents = []
-                    for msg in st.session_state.ai_messages:
-                        contents.append({
-                            "role": msg["role"] if msg["role"] == "user" else "model",
-                            "parts": [{"text": msg["content"]}]
-                        })
-                        
-                    payload = {
-                        "systemInstruction": {
-                            "parts": [{"text": st.session_state.ai_system_instruction}]
-                        },
-                        "contents": contents,
-                        "generationConfig": {
-                            "temperature": 0.7,
-                            "maxOutputTokens": 800
-                        }
-                    }
+                    response = client.models.generate_content(
+                        model='gemini-1.5-flash',
+                        contents=full_prompt,
+                    )
                     
-                    response = requests.post(url, json=payload, headers={'Content-Type': 'application/json'}, timeout=30)
-                    
-                    if response.status_code == 200:
-                        response_data = response.json()
-                        reply_text = response_data['candidates'][0]['content']['parts'][0]['text']
+                    if response.text:
+                        reply_text = response.text
                         response_placeholder.markdown(reply_text)
                         st.session_state.ai_messages.append({"role": "assistant", "content": reply_text})
                     else:
-                        if response.status_code == 404:
-                            response_placeholder.error(f"Error (HTTP 404): The API Key you provided does not have access to standard Gemini models.\\n\\n**How to fix:** Please generate a new API key from **[Google AI Studio](https://aistudio.google.com/app/apikey)**. Keys generated from Google Cloud Console (Vertex AI) use different endpoints and will cause this error. Also ensure you are using a standard Gemini Developer key.")
-                        else:
-                            response_placeholder.error(f"Error communicating with Gemini (HTTP {response.status_code}): {response.text}")
+                        response_placeholder.error("Error: The model returned an empty response.")
+                        
+                except ImportError:
+                    response_placeholder.error("The google-genai package is not installed. Please add google-genai to requirements.txt and reboot the app.")
                 except Exception as e:
-                    response_placeholder.error(f"Error communicating with Gemini: {e}")
+                    response_placeholder.error(f"Error communicating with Gemini via SDK: {e}")
 
 
