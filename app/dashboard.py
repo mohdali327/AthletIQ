@@ -1970,19 +1970,16 @@ elif selected_tab == "AI Assistant":
                 response_placeholder = st.empty()
                 response_placeholder.markdown("Thinking...")
                 try:
-                    # First, dynamically fetch the available models for this specific API Key
-                    models_url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
-                    models_response = requests.get(models_url, timeout=10)
+                    # Test known stable models sequentially to avoid experimental/restricted models
+                    known_models = ["models/gemini-1.5-flash", "models/gemini-1.5-pro", "models/gemini-1.0-pro"]
+                    target_model = "models/gemini-1.5-flash" # Default fallback
                     
-                    target_model = "models/gemini-1.5-flash" # fallback
-                    if models_response.status_code == 200:
-                        models_data = models_response.json().get("models", [])
-                        # Find the first model that supports generateContent and is a gemini model
-                        for m in models_data:
-                            if "gemini" in m.get("name", "") and "generateContent" in m.get("supportedGenerationMethods", []):
-                                target_model = m["name"]
-                                if "flash" in target_model: # Prefer flash if available
-                                    break
+                    for model in known_models:
+                        test_url = f"https://generativelanguage.googleapis.com/v1beta/{model}?key={api_key}"
+                        test_res = requests.get(test_url, timeout=5)
+                        if test_res.status_code == 200:
+                            target_model = model
+                            break
                     
                     url = f"https://generativelanguage.googleapis.com/v1beta/{target_model}:generateContent?key={api_key}"
                     
