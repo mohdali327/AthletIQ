@@ -1877,6 +1877,48 @@ elif selected_tab == "AI Assistant":
     st.markdown('<div class="header-container"><div class="header-title">🤖 AI Assistant</div></div>', unsafe_allow_html=True)
     st.markdown("<p style='color:#a0aec0;margin-bottom:2rem;'>Ask me anything about AthletIQ's data (athletes, coaches, events, etc.)</p>", unsafe_allow_html=True)
 
+    # Custom CSS for the Chat Interface to match AthletIQ Dark Theme
+    st.markdown("""
+    <style>
+    /* Main bottom container */
+    div[data-testid="stBottom"] {
+        background-color: transparent !important;
+    }
+    div[data-testid="stBottom"] > div {
+        background-color: transparent !important;
+    }
+    /* Chat Input Background */
+    .stChatInputContainer {
+        background-color: transparent !important;
+    }
+    div[data-testid="stChatInput"] {
+        background-color: transparent !important;
+    }
+    div[data-testid="stChatInput"] textarea {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        color: white !important;
+        border: 1px solid rgba(16, 229, 179, 0.4) !important;
+    }
+    /* Chat Message Backgrounds */
+    div[data-testid="stChatMessage"] {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 8px !important;
+        padding: 1rem !important;
+        margin-bottom: 1rem !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+    /* AI specific chat bubble (usually has a different avatar) */
+    div[data-testid="stChatMessage"]:has([data-testid="stIconMaterial"]) {
+        background: linear-gradient(145deg, rgba(16, 229, 179, 0.05) 0%, rgba(13, 22, 35, 0.8) 100%) !important;
+        border: 1px solid rgba(16, 229, 179, 0.2) !important;
+    }
+    div[data-testid="stChatMessage"] p, div[data-testid="stChatMessage"] div {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-family: 'Outfit', sans-serif !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     # Sidebar for API Key
     with st.sidebar:
         st.markdown("### Settings")
@@ -1929,7 +1971,7 @@ elif selected_tab == "AI Assistant":
                 response_placeholder.markdown("Thinking...")
                 try:
                     # Construct Gemini REST API request
-                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+                    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
                     
                     contents = []
                     for msg in st.session_state.ai_messages:
