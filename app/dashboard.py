@@ -1875,8 +1875,17 @@ elif selected_tab == "AI Assistant":
     try:
         import google.generativeai as genai
     except ImportError:
-        st.error("The 'google-generativeai' package is not installed. Please add it to your requirements.txt or contact support.")
-        st.stop()
+        import subprocess
+        import sys
+        
+        with st.spinner("Installing required AI dependencies. This will only happen once..."):
+            try:
+                subprocess.check_call([sys.executable, "-m", "pip", "install", "google-generativeai==0.8.6"])
+                st.success("Dependencies installed successfully! Reloading...")
+                st.rerun()
+            except Exception as e:
+                st.error(f"Failed to install dependencies automatically: {e}")
+                st.stop()
         
     st.markdown('<div class="header-container"><div class="header-title">🤖 AI Assistant</div></div>', unsafe_allow_html=True)
     st.markdown("<p style='color:#a0aec0;margin-bottom:2rem;'>Ask me anything about AthletIQ's data (athletes, coaches, events, etc.)</p>", unsafe_allow_html=True)
