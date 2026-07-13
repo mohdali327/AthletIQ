@@ -737,7 +737,8 @@ selected_tab = st.radio(
         "Regional Talent",
         "Centres & Academies",
         "Sponsor Pipeline",
-        "Profile"
+        "Profile",
+        "AI Assistant"
     ],
     label_visibility="collapsed",
     key="main_navigation",
