@@ -696,16 +696,16 @@ st.markdown('''<style>
     }
     /* Style the labels as tab text */
     div[data-testid="stRadio"] div[role="radiogroup"] label {
-        padding: 0.4rem 1rem !important;
+        padding: 0.3rem 0.6rem !important;
         border-radius: 8px !important;
-        margin-right: 0.4rem;
+        margin-right: 0.2rem;
         cursor: pointer;
         background: transparent;
         transition: all 0.2s ease;
     }
     div[data-testid="stRadio"] label p {
         font-family: 'Outfit', sans-serif !important;
-        font-size: 1.05rem !important;
+        font-size: 0.85rem !important;
         color: rgba(255,255,255,0.6) !important;
         margin-bottom: 0 !important;
     }
