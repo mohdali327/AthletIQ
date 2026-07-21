@@ -1248,23 +1248,14 @@ elif selected_tab == "Discovery & Leagues":
         prospects_display["Live Match Score"] = [min(100, x * 10 + 15) for x in prospects_display["athletiq_opportunity_score"]]
         prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes" if x >= 7.5 else "No")
         
-        pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned", "Live Match Score"]].copy()
-        pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned", "Live Evaluation Score"]
+        pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned"]].copy()
+        pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned"]
         
         st.dataframe(
             pd_table.head(100).reset_index(drop=True),
             use_container_width=True,
             height=350,
-            hide_index=True,
-            column_config={
-                "Live Evaluation Score": st.column_config.ProgressColumn(
-                    "Live Evaluation Score",
-                    help="Real-time match scoring",
-                    format="%d",
-                    min_value=0,
-                    max_value=100,
-                ),
-            }
+            hide_index=True
         )
         
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -1301,21 +1292,7 @@ elif selected_tab == "Regional Talent":
     ci2.markdown(insight(" Age Group: Sub-Junior (12-15)", "<b>Highest Drop-off Rate</b><br>60% of athletes drop out before the junior category due to lack of local tournaments.", "amber"), unsafe_allow_html=True)
     ci3.markdown(insight(" Age Group: Junior (16-19)", "<b>Prime Scouting Window</b><br>Peak age for NCOE induction and international exposure funding.", "blue"), unsafe_allow_html=True)
     
-    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;"> Top Athletes Spotlight</div>', unsafe_allow_html=True)
-    if df_all is not None:
-        elite_athletes = df_all[(df_all["entity_type"] == "Athlete") & (df_all["performance_level"] == "International")].head(3)
-        for _, row in elite_athletes.iterrows():
-            st.markdown(f'''
-            <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-                <div style="font-weight:700;font-size:1rem;color:#FFF;">{row["name"]} <span style="font-size:0.8rem;color:var(--text2);">({row["sport"]} • {row["state"]})</span></div>
-                <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
-                    <b>Medal Record:</b> International Level Competitor<br>
-                    <b>Training Centre:</b> SAI NCOE (Nearest assigned based on region)<br>
-                    <b>Coach:</b> Assigned National Coach<br>
-                    <b>Backstory/Funding:</b> Currently CSR supported. Requires targeted Olympic prep funding.
-                </div>
-            </div>
-            ''', unsafe_allow_html=True)
+
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 4 — COACH CAPACITY
