@@ -1775,7 +1775,7 @@ elif selected_tab == "Profile":
                 </div>
                 """, unsafe_allow_html=True)
 
-        tab_ath, tab_coa, tab_aca, tab_evt = st.tabs(["Athlete Search", "Coach Search", "Academy Search", "Event Search"])
+        tab_ath, tab_coa, tab_aca = st.tabs(["Athlete Search", "Coach Search", "Academy Search"])
         
         with tab_ath:
             athlete_names = sorted(filtered_athletes["name"].dropna().unique().tolist()) if not filtered_athletes.empty else []
@@ -1839,15 +1839,7 @@ elif selected_tab == "Profile":
             st.write(f"Showing all matching academies (total: {len(sai_df_disp)}):")
             st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
 
-        with tab_evt:
-            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Events Directory</div>', unsafe_allow_html=True)
-            leagues_disp = pd.DataFrame(get_live_tournaments())
-            if state_choice != "All States":
-                leagues_disp = leagues_disp[leagues_disp["State"].str.lower() == state_choice.lower()]
-            if sport_choice != "All Sports":
-                leagues_disp = leagues_disp[leagues_disp["Sport"].str.lower() == sport_choice.lower()]
-            st.write(f"Showing all matching events (total: {len(leagues_disp)}):")
-            st.dataframe(leagues_disp.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+
 
 elif selected_tab == "AI Assistant":
     import requests
