@@ -1238,25 +1238,7 @@ elif selected_tab == "Discovery & Leagues":
     
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # 2. Emerging Athlete Prospects (Based on live data)
-    st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Emerging Athlete Prospects</div>', unsafe_allow_html=True)
-    st.markdown(insight(" Real-time Prospects Tracker", "Prospects identified through live tournament performance data mapping and scout evaluations.", "purple"), unsafe_allow_html=True)
-    
-    athletes_data = df_all[df_all["entity_type"]=="Athlete"].copy() if df_all is not None else pd.DataFrame()
-    if not athletes_data.empty:
-        prospects_display = athletes_data.copy()
-        prospects_display["Live Match Score"] = [min(100, x * 10 + 15) for x in prospects_display["athletiq_opportunity_score"]]
-        prospects_display["coach_assigned"] = prospects_display["athletiq_opportunity_score"].apply(lambda x: "Yes" if x >= 7.5 else "No")
-        
-        pd_table = prospects_display[["name", "sport", "state", "performance_level", "funding_status", "coach_assigned"]].copy()
-        pd_table.columns = ["Athlete Name", "Sport", "Home State", "Performance Level", "Funding Status", "Coach Assigned"]
-        
-        st.dataframe(
-            pd_table.head(100).reset_index(drop=True),
-            use_container_width=True,
-            height=350,
-            hide_index=True
-        )
+
         
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 3 — REGIONAL TALENT
