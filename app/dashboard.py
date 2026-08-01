@@ -1092,31 +1092,45 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 if selected_tab == "Pathway Overview":
     st.markdown('<div class="stitle sticky-header" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
-    st.markdown("""
+    # Calculate dynamic stats for Projected Scale
+    num_participants = 0
+    num_academies = 0
+    num_sports = 0
+    num_events = 0
+    if df_all is not None:
+        num_participants = len(df_all[df_all["entity_type"] == "Athlete"])
+        num_sports = df_all["sport"].nunique()
+        num_events = len(df_all[df_all["entity_type"] == "Event"])
+    try:
+        num_academies = len(sai_df)
+    except NameError:
+        num_academies = 0
+
+    st.markdown(f"""
     <style>
-    .impact-model-section {
+    .impact-model-section {{
         margin-top: 1.5rem;
         margin-bottom: 2.5rem;
         font-family: 'Inter', sans-serif;
         background-color: transparent;
-    }
-    .section-heading {
+    }}
+    .section-heading {{
         color: #F6C85F;
         font-size: 0.85rem;
         font-weight: 700;
         letter-spacing: 1px;
         text-transform: uppercase;
         margin-bottom: 1.5rem;
-    }
-    .timeline-container {
+    }}
+    .timeline-container {{
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: relative;
         margin-bottom: 3rem;
         padding: 0 10px;
-    }
-    .timeline-line {
+    }}
+    .timeline-line {{
         position: absolute;
         top: 40px;
         left: 50px;
@@ -1124,21 +1138,21 @@ if selected_tab == "Pathway Overview":
         height: 1px;
         background-color: #2D3A54;
         z-index: 1;
-    }
-    .timeline-step {
+    }}
+    .timeline-step {{
         display: flex;
         flex-direction: column;
         align-items: center;
         z-index: 2;
         position: relative;
         width: 100px;
-    }
-    .step-number {
+    }}
+    .step-number {{
         font-size: 0.75rem;
         color: #8C9BAB;
         margin-bottom: 0.5rem;
-    }
-    .step-circle {
+    }}
+    .step-circle {{
         width: 55px;
         height: 55px;
         border-radius: 50%;
@@ -1149,31 +1163,31 @@ if selected_tab == "Pathway Overview":
         justify-content: center;
         color: #8C9BAB;
         margin-bottom: 0.8rem;
-    }
-    .step-circle svg {
+    }}
+    .step-circle svg {{
         width: 24px;
         height: 24px;
-    }
-    .step-circle.active {
+    }}
+    .step-circle.active {{
         background-color: #F6C85F;
         border-color: #F6C85F;
         color: #1A233A;
         box-shadow: 0 0 20px rgba(246, 200, 95, 0.4);
-    }
-    .step-label {
+    }}
+    .step-label {{
         font-size: 0.85rem;
         font-weight: 600;
         color: #E5E7EB;
-    }
-    .step-label.active {
+    }}
+    .step-label.active {{
         color: #F6C85F;
-    }
-    .stats-grid {
+    }}
+    .stats-grid {{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
-    }
-    .stat-card {
+    }}
+    .stat-card {{
         background-color: #1A2642;
         border-radius: 8px;
         padding: 2rem 1.5rem;
@@ -1182,8 +1196,8 @@ if selected_tab == "Pathway Overview":
         align-items: center;
         position: relative;
         border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    .stat-icon-wrapper {
+    }}
+    .stat-icon-wrapper {{
         position: absolute;
         top: 1rem;
         left: 1rem;
@@ -1195,24 +1209,24 @@ if selected_tab == "Pathway Overview":
         align-items: center;
         justify-content: center;
         color: #8C9BAB;
-    }
-    .stat-icon-wrapper svg {
+    }}
+    .stat-icon-wrapper svg {{
         width: 16px;
         height: 16px;
-    }
-    .stat-value {
+    }}
+    .stat-value {{
         font-size: 2.5rem;
         font-weight: 700;
         color: #10B981;
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         text-align: center;
-    }
-    .stat-label {
+    }}
+    .stat-label {{
         font-size: 0.85rem;
         color: #E5E7EB;
         text-align: center;
-    }
+    }}
     </style>
     <div class="impact-model-section">
         <div class="section-heading">THE IMPACT MODEL</div>
@@ -1274,28 +1288,28 @@ if selected_tab == "Pathway Overview":
                 <div class="stat-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97-4.97 8-9.4 8-14a8 8 0 1 0-16 0c0 4.6 3.03 9.03 8 14z"></path><path d="M12 22V12"></path><path d="M12 12c-2.76 0-5-2.24-5-5"></path></svg>
                 </div>
-                <div class="stat-value">10,000+</div>
+                <div class="stat-value">{num_participants:,}</div>
                 <div class="stat-label">Participants</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 </div>
-                <div class="stat-value">100+</div>
+                <div class="stat-value">{num_academies:,}</div>
                 <div class="stat-label">Academies</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
                 </div>
-                <div class="stat-value">25+</div>
+                <div class="stat-value">{num_sports:,}</div>
                 <div class="stat-label">Sports Mapped</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon-wrapper">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                 </div>
-                <div class="stat-value">50+</div>
+                <div class="stat-value">{num_events:,}</div>
                 <div class="stat-label">Events</div>
             </div>
         </div>
