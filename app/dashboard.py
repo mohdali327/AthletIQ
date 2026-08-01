@@ -1321,56 +1321,75 @@ if selected_tab == "Pathway Overview":
     st.markdown(insight(" Pipeline Description", 
         "The athlete development pipeline tracks the progression of talent from district-level grassroots participation, through state and zonal championships, into national coaching camps (like SAI NCOEs), and finally to elite international podium finishes. Currently, significant drop-offs occur at the state-to-zonal and national-to-elite transitions due to funding and coaching bottlenecks.", "blue"), unsafe_allow_html=True)
 
-    # 2. Simplified Leakage Analysis
-    st.markdown('<div class="stitle" title="Analysis of major blockers causing talent drop-offs" style="font-size:1.15rem;margin-top:1.5rem;"> Pipeline Blocker & Leakage Analysis</div>', unsafe_allow_html=True)
-    st.markdown('''
-    <div class="acard" style="border-left:3px solid var(--purple);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">District ➔ State Transition</div>
-        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
-            <b>Leakage Blocker:</b> Lack of standardized equipment kits & travel funding in Tier-3 districts.<br>
-            <b>Recommended CSR Intervention:</b> Support village-level league travel grants.
+    # 2. Pipeline Blocker & Leakage Analysis (Timeline UI)
+    st.markdown("""
+    <div class="impact-model-section" style="margin-top: 2rem;">
+        <div class="section-heading">PIPELINE BLOCKER & LEAKAGE ANALYSIS</div>
+        <div class="timeline-container" style="margin-bottom: 4rem;">
+            <div class="timeline-line" style="top: 30px;"></div>
+            <div class="timeline-step" style="width: 25%; align-items: center; text-align: center;">
+                <div class="step-circle" style="border-color: #683DE4; width: 60px; height: 60px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#683DE4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <div class="step-label" style="color: #683DE4; margin-bottom: 0.5rem; font-size: 0.95rem;">District ➔ State</div>
+                <div style="font-size: 0.8rem; color: #8C9BAB; padding: 0 5px; line-height: 1.3;">
+                    <b>Blocker:</b> Equipment & travel funding in Tier-3.<br><b style="color: #683DE4;">Intervention:</b> Village-level travel grants.
+                </div>
+            </div>
+            <div class="timeline-step" style="width: 25%; align-items: center; text-align: center;">
+                <div class="step-circle" style="border-color: #10E5B3; width: 60px; height: 60px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#10E5B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                </div>
+                <div class="step-label" style="color: #10E5B3; margin-bottom: 0.5rem; font-size: 0.95rem;">State ➔ Zonal</div>
+                <div style="font-size: 0.8rem; color: #8C9BAB; padding: 0 5px; line-height: 1.3;">
+                    <b>Blocker:</b> Insufficient NIS certified coaches.<br><b style="color: #10E5B3;">Intervention:</b> Train former state athletes.
+                </div>
+            </div>
+            <div class="timeline-step" style="width: 25%; align-items: center; text-align: center;">
+                <div class="step-circle" style="border-color: #FDD663; width: 60px; height: 60px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#FDD663" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                </div>
+                <div class="step-label" style="color: #FDD663; margin-bottom: 0.5rem; font-size: 0.95rem;">Zonal ➔ National</div>
+                <div style="font-size: 0.8rem; color: #8C9BAB; padding: 0 5px; line-height: 1.3;">
+                    <b>Blocker:</b> Lack of specialized residential academies.<br><b style="color: #FDD663;">Intervention:</b> Partner with SAI NCOEs.
+                </div>
+            </div>
+            <div class="timeline-step" style="width: 25%; align-items: center; text-align: center;">
+                <div class="step-circle" style="border-color: #F28B82; width: 60px; height: 60px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#F28B82" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <div class="step-label" style="color: #F28B82; margin-bottom: 0.5rem; font-size: 0.95rem;">National ➔ Elite</div>
+                <div style="font-size: 0.8rem; color: #8C9BAB; padding: 0 5px; line-height: 1.3;">
+                    <b>Blocker:</b> Insufficient corporate sponsorship.<br><b style="color: #F28B82;">Intervention:</b> Align private sponsor contracts.
+                </div>
+            </div>
+        </div>
+        <div class="section-heading" style="margin-top: 3rem;">PATHWAY BREAKS DETECTED</div>
+        <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper" style="background-color: rgba(16, 229, 179, 0.1); color: #10E5B3;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                </div>
+                <div class="stat-value" style="font-size: 1.25rem; color: #10E5B3; margin-top: 1rem; margin-bottom: 0.5rem;">Discovery Gaps</div>
+                <div class="stat-label">9 regional talent clusters currently unmapped.</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper" style="background-color: rgba(253, 214, 99, 0.1); color: #FDD663;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div class="stat-value" style="font-size: 1.25rem; color: #FDD663; margin-top: 1rem; margin-bottom: 0.5rem;">Coaching Shortage</div>
+                <div class="stat-label">Severe capacity gaps in NIS certified coaching.</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper" style="background-color: rgba(242, 139, 130, 0.1); color: #F28B82;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div class="stat-value" style="font-size: 1.25rem; color: #F28B82; margin-top: 1rem; margin-bottom: 0.5rem;">Funding Deficit</div>
+                <div class="stat-label">82% of sub-junior athletes remain unfunded.</div>
+            </div>
         </div>
     </div>
-    <div class="acard" style="border-left:3px solid var(--teal);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">State ➔ Zonal Transition</div>
-        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
-            <b>Leakage Blocker:</b> Insufficient NIS certified coaches and sports science clinics at state levels.<br>
-            <b>Recommended Intervention:</b> Train former state athletes as district coaches.
-        </div>
-    </div>
-    <div class="acard" style="border-left:3px solid var(--gold);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">Zonal ➔ National Transition</div>
-        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
-            <b>Leakage Blocker:</b> Lack of specialized residential sports academy placements and advanced nutrition.<br>
-            <b>Recommended Intervention:</b> Partner with private/SAI NCOE centres.
-        </div>
-    </div>
-    <div class="acard" style="border-left:3px solid var(--pink);margin-bottom:0.6rem;padding:0.8rem 1.2rem;">
-        <div style="font-weight:700;font-size:0.95rem;color:#FFF;">National ➔ Elite Transition</div>
-        <div style="font-size:0.85rem;color:var(--text2);margin-top:0.25rem;">
-            <b>Leakage Blocker:</b> Insufficient corporate sponsorship for international exposure tournaments.<br>
-            <b>Recommended Intervention:</b> Align private sponsor contracts to elite athletes.
-        </div>
-    </div>
-    ''', unsafe_allow_html=True)
-    
-    # 3. Pathway Breaks Detected (Clickable Insights Redirecting to Tabs)
-    st.markdown('<div class="stitle" title="Clickable diagnostic alerts on talent drop-offs" style="font-size:1.15rem;margin-top:2rem;"> Pathway Breaks Detected</div>', unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns(3)
-    
-    def nav_to(tab_name):
-        st.session_state["main_navigation"] = tab_name
-        
-    with col1:
-        st.button(" 1. Discovery Gaps (Go to Leagues)", use_container_width=True, on_click=nav_to, args=("Discovery & Leagues",))
-        st.caption("9 regional talent clusters currently unmapped.")
-    with col2:
-        st.button(" 2. Coaching Shortage (Go to Coaches)", use_container_width=True, on_click=nav_to, args=("Centres & Academies",))
-        st.caption("Severe capacity gaps in NIS certified coaching.")
-    with col3:
-        st.button(" 3. Funding Deficit (Go to Sponsors)", use_container_width=True, on_click=nav_to, args=("Sponsor Pipeline",))
-        st.caption("82% of sub-junior athletes remain unfunded.")
+    """, unsafe_allow_html=True)
 
     # 4. Statewise Top Sports
     st.markdown('<div class="stitle" title="Top performing sports across major states based on Khelo India and Olympic pipeline metrics" style="font-size:1.15rem;margin-top:2rem;"> Statewise Top Sports</div>', unsafe_allow_html=True)
