@@ -1717,7 +1717,8 @@ elif selected_tab == "Centres & Academies":
 
         # AI Decision Maker: Coach Redistribution
         if ratio_val < 15:
-            ideal_coaches_needed = (sport_capacity + 14) // 15
+            # Use floor division to aggressively flag surpluses (e.g., 25 athletes = 1 ideal coach instead of 2)
+            ideal_coaches_needed = max(1, sport_capacity // 15)
             surplus_coaches = sport_coaches - ideal_coaches_needed
             
             if surplus_coaches > 0:
