@@ -2238,17 +2238,11 @@ elif selected_tab == "Profile":
                     co_display["Credentials"] = co_display["notes"].fillna("-")
                     
                     def get_op_centre(row):
-                        perf = str(row.get("performance_level", ""))
-                        state = str(row.get("state", "Unknown"))
-                        city = str(row.get("city", "Unknown"))
-                        
-                        if perf in ["International", "National", "Dhyan Chand Lifetime Awardee", "Dronacharya Awardee", "Arjuna Awardee"]:
-                            return f"SAI NCOE {state}" if state not in ["Unknown", "nan"] else "SAI NCOE (HQ)"
+                        city = str(row.get("city", ""))
+                        if city.lower() in ["unknown", "nan", "none", ""]:
+                            return "Not Specified"
                         else:
-                            if city.lower() in ["unknown", "nan", "none", ""]:
-                                return f"{state} State Academy" if state not in ["Unknown", "nan"] else "Independent Academy"
-                            else:
-                                return f"{city} Academy"
+                            return f"{city} Centre"
                                 
                     co_display["Operating Centre"] = co_display.apply(get_op_centre, axis=1)
                     
