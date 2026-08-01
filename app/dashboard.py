@@ -23,6 +23,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+with st.sidebar:
+    st.markdown("### Appearance")
+    theme_mode = st.radio("Theme Mode", ["Dark", "Light"], index=0, horizontal=True)
+
 # ─────────────────────────────────────────────────────────────────────────────
 # CSS — Gemini Neural Expressive + Decision-First Design
 # ─────────────────────────────────────────────────────────────────────────────
@@ -455,25 +459,88 @@ div[class*="collapsedSidebar"]::before {
 """
 st.markdown(css_code.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
 
+if theme_mode == "Light":
+    light_theme_css = """
+    <style>
+    :root {
+        --glass: #f4f5f8;
+        --glass2: #ffffff;
+        --border: rgba(0, 0, 0, 0.12);
+        --text1: #111111;
+        --text2: #444444;
+        --text3: #666666;
+        --teal: #0b9e7b;
+        --purple: #5c35cc;
+        --blue: #00b396;
+    }
+    .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+        background-color: #f8f9fa !important;
+        background-image: 
+            linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 250, 0.96) 100%),
+            url("data:image/jpeg;base64,PLACEHOLDER_BG") !important;
+    }
+    .kpi {
+        background: rgba(255, 255, 255, 0.85) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+    }
+    .stTabs [data-baseweb="tab-list"] {
+        background: #ffffff !important; 
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+    .stTabs [data-baseweb="tab"] { color: var(--text2) !important; }
+    .stTabs [data-baseweb="tab"]:hover { background: rgba(0, 0, 0, 0.05) !important; color: var(--teal) !important; }
+    div[data-baseweb="select"] > div {
+        background-color: rgba(255, 255, 255, 0.90) !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+    .acard {
+        background: rgba(255, 255, 255, 0.85) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+    }
+    .block-card {
+        background: rgba(255, 255, 255, 0.9) !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+    }
+    .insight-box {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    }
+    .stMarkdown, .stText, p, div, span, label {
+        color: var(--text1);
+    }
+    .hero-title {
+        background: linear-gradient(135deg, #0b9e7b 0%, #5c35cc 100%) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
+    }
+    .acard-title { color: #111 !important; }
+    .redirect-text { color: #333 !important; }
+    </style>
+    """
+    st.markdown(light_theme_css.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PLOTLY THEME
 # ─────────────────────────────────────────────────────────────────────────────
 PL = dict(
-    template="plotly_dark",
+    template="plotly_dark" if theme_mode == "Dark" else "plotly_white",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6", size=12),
+    font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6" if theme_mode == "Dark" else "#444444", size=12),
     margin=dict(l=30, r=20, t=45, b=35),
-    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"],
-    legend=dict(bgcolor="rgba(22,28,48,0.7)", bordercolor="rgba(255,255,255,0.07)", borderwidth=1, font=dict(size=11)),
-    xaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
-    yaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
+    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"] if theme_mode == "Dark" else ["#0b9e7b","#5c35cc","#0b9e7b","#d9534f","#f0ad4e","#5bc0de","#f0ad4e","#FF8BCB"],
+    legend=dict(bgcolor="rgba(22,28,48,0.7)" if theme_mode == "Dark" else "rgba(255,255,255,0.7)", bordercolor="rgba(255,255,255,0.07)" if theme_mode == "Dark" else "rgba(0,0,0,0.1)", borderwidth=1, font=dict(size=11)),
+    xaxis=dict(gridcolor="rgba(255,255,255,0.04)" if theme_mode == "Dark" else "rgba(0,0,0,0.06)", linecolor="rgba(255,255,255,0.06)" if theme_mode == "Dark" else "rgba(0,0,0,0.1)"),
+    yaxis=dict(gridcolor="rgba(255,255,255,0.04)" if theme_mode == "Dark" else "rgba(0,0,0,0.06)", linecolor="rgba(255,255,255,0.06)" if theme_mode == "Dark" else "rgba(0,0,0,0.1)"),
 )
 
 def playout(fig, title="", h=400):
     fig.update_layout(**PL,
-        title=dict(text=title, font=dict(size=15, family="Outfit, sans-serif", color="#E8EAED")), height=h)
+        title=dict(text=title, font=dict(size=15, family="Outfit, sans-serif", color="#E8EAED" if theme_mode == "Dark" else "#1A1A1A")), height=h)
     return fig
 
 COLOR_SCALES = {
@@ -1437,11 +1504,8 @@ if selected_tab == "Pathway Overview":
 elif selected_tab == "Discovery & Leagues":
     st.markdown('<div class="stitle sticky-header" title="Track rising talent from local and state leagues"> Discovery & Leagues <span class="chip chip-purple">Live Grassroots & Emerging Athlete Prospects</span></div>', unsafe_allow_html=True)
     
-    st.caption("Data Availability Period: January 2026 - Present (Live Updates)")
-    
     # 1. Grassroots Leagues & Tournaments (Dynamic API Mock)
     st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Live Grassroots Leagues & Tournaments</div>', unsafe_allow_html=True)
-    st.markdown(insight(" API Integration", "Fetching live tournament data from regional state sports association APIs and Khelo India district nodes.", "blue"), unsafe_allow_html=True)
     
     live_data = get_live_tournaments()
     leagues_disp = pd.DataFrame(live_data)
@@ -1530,34 +1594,39 @@ elif selected_tab == "Discovery & Leagues":
 elif selected_tab == "Regional Talent":
     st.markdown('<div class="stitle sticky-header" title="Analyze top states, sports, and regional talent clusters"> Regional Talent <span class="chip chip-gold">Top Regional Clusters</span></div>', unsafe_allow_html=True)
     
-    st.markdown(insight(" Regional Talent Clusters", 
-        "Explore India's top performing states, dominant sports, and high-potential athletes grouped by regions and demographics.", "gold"), unsafe_allow_html=True)
+    if df_all is not None:
+        athlete_df = df_all[df_all["entity_type"] == "Athlete"]
+        total_mapped = len(athlete_df)
+        top_state = athlete_df["state"].value_counts().idxmax() if not athlete_df.empty else "N/A"
+        top_sport = athlete_df["sport"].value_counts().idxmax() if not athlete_df.empty else "N/A"
         
-    c1, c2 = st.columns(2)
-    
-    with c1:
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1rem;"> Top States (Athlete Representation)</div>', unsafe_allow_html=True)
-        if df_all is not None:
-            state_counts = df_all[df_all["entity_type"] == "Athlete"]["state"].value_counts().head(5).reset_index()
-            state_counts.columns = ["State", "Athletes"]
-            fig1 = px.bar(state_counts, x="State", y="Athletes", color="Athletes", color_continuous_scale=COLOR_SCALES["teal"])
-            playout(fig1, "Top States by Athlete Volume", h=300)
-            st.plotly_chart(fig1, use_container_width=True)
-            
-    with c2:
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1rem;"> Top Sports (Performance)</div>', unsafe_allow_html=True)
-        if df_all is not None:
-            sport_counts = df_all[df_all["entity_type"] == "Athlete"]["sport"].value_counts().head(5).reset_index()
-            sport_counts.columns = ["Sport", "Athletes"]
-            fig2 = px.pie(sport_counts, names="Sport", values="Athletes", hole=0.4, color_discrete_sequence=px.colors.sequential.Teal)
-            playout(fig2, "Top Performing Sports", h=300)
-            st.plotly_chart(fig2, use_container_width=True)
-
-    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1rem;"> Category-Wise Insights (Age Group & Gender)</div>', unsafe_allow_html=True)
-    ci1, ci2, ci3 = st.columns(3)
-    ci1.markdown(insight(" Gender Balance", "<b>45% Female Representation</b><br>Strong participation in Combat Sports (Boxing, Wrestling) from Haryana and Manipur.", "purple"), unsafe_allow_html=True)
-    ci2.markdown(insight(" Age Group: Sub-Junior (12-15)", "<b>Highest Drop-off Rate</b><br>60% of athletes drop out before the junior category due to lack of local tournaments.", "amber"), unsafe_allow_html=True)
-    ci3.markdown(insight(" Age Group: Junior (16-19)", "<b>Prime Scouting Window</b><br>Peak age for NCOE induction and international exposure funding.", "blue"), unsafe_allow_html=True)
+        kpi1, kpi2, kpi3 = st.columns(3)
+        kpi1.markdown(f'<div class="kpi">Total Mapped Athletes<br><span style="font-size:2rem;font-weight:800;color:var(--teal);">{total_mapped}</span></div>', unsafe_allow_html=True)
+        kpi2.markdown(f'<div class="kpi">Leading State<br><span style="font-size:2rem;font-weight:800;color:var(--blue);">{top_state}</span></div>', unsafe_allow_html=True)
+        kpi3.markdown(f'<div class="kpi">Dominant Sport<br><span style="font-size:2rem;font-weight:800;color:var(--purple);">{top_sport}</span></div>', unsafe_allow_html=True)
+        
+        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Regional Sport Clusters (Treemap)</div>', unsafe_allow_html=True)
+        
+        state_sport_counts = athlete_df.groupby(["state", "sport"]).size().reset_index(name="Count")
+        fig_tree = px.treemap(state_sport_counts, path=["state", "sport"], values="Count", color="Count", color_continuous_scale=COLOR_SCALES["teal"])
+        playout(fig_tree, "State-to-Sport Athlete Distribution", h=450)
+        st.plotly_chart(fig_tree, use_container_width=True)
+        
+        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Demographic Deep-Dive (Age & Gender)</div>', unsafe_allow_html=True)
+        dem1, dem2 = st.columns(2)
+        
+        with dem1:
+            if "age" in athlete_df.columns:
+                fig_age = px.histogram(athlete_df, x="age", nbins=15, color_discrete_sequence=["#10E5B3"])
+                playout(fig_age, "Athlete Age Distribution", h=300)
+                st.plotly_chart(fig_age, use_container_width=True)
+        with dem2:
+            if "gender" in athlete_df.columns:
+                gender_counts = athlete_df["gender"].value_counts().reset_index()
+                gender_counts.columns = ["Gender", "Count"]
+                fig_gender = px.pie(gender_counts, names="Gender", values="Count", hole=0.5, color_discrete_sequence=["#10E5B3", "#683DE4", "#FDD663"])
+                playout(fig_gender, "Gender Balance", h=300)
+                st.plotly_chart(fig_gender, use_container_width=True)
     
 
 
