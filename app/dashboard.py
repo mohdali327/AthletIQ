@@ -1470,12 +1470,54 @@ elif selected_tab == "Discovery & Leagues":
     if f_state != "All Mapped States":
         filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
             
-    st.dataframe(
-            filtered_leagues.reset_index(drop=True),
-            use_container_width=True,
-            height=350,
-            hide_index=True
-        )
+    st.markdown("<br>", unsafe_allow_html=True)
+    if filtered_leagues.empty:
+        st.info("No leagues found matching the current filters.")
+    else:
+        for idx, row in filtered_leagues.iterrows():
+            # Extract fields
+            name = row.get("Tournament/League Name", "Tournament")
+            sport = row.get("Sport", "")
+            level = row.get("League Level", "")
+            gender = row.get("Gender", "")
+            state = row.get("State", "")
+            participants = row.get("Participants", "")
+            funding = row.get("Funding Status", "")
+            live_status = str(row.get("Live Status", ""))
+            action = row.get("Action Details", "")
+            
+            # Determine status color
+            status_color = "var(--text2)"
+            if "LIVE NOW" in live_status.upper():
+                status_color = "var(--red)"
+            elif "COMPLETED" in live_status.upper():
+                status_color = "var(--green)"
+            elif "SCHEDULED" in live_status.upper() or "STARTING SOON" in live_status.upper():
+                status_color = "var(--amber)"
+                
+            st.markdown(f"""
+            <div class="acard" style="border-left:4px solid {status_color}; margin-bottom: 1rem; padding: 1.2rem;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <div class="acard-title" style="font-size:1.15rem; margin-bottom:0.4rem;">{name}</div>
+                        <div style="font-size:0.9rem; color:var(--text2);">
+                            <b>Sport:</b> {sport} &nbsp;|&nbsp; 
+                            <b>Level:</b> {level} &nbsp;|&nbsp; 
+                            <b>State:</b> {state}
+                        </div>
+                    </div>
+                    <div style="text-align:right; background: rgba(255,255,255,0.05); padding: 0.5rem 1rem; border-radius: 8px;">
+                        <div style="font-weight:800; color:{status_color}; font-size:0.95rem; margin-bottom:0.2rem;">{live_status}</div>
+                        <div style="font-size:0.8rem; color:var(--text3);">{action}</div>
+                    </div>
+                </div>
+                <div style="margin-top:1rem; padding-top:0.8rem; border-top:1px solid rgba(255,255,255,0.08); font-size:0.85rem; display:flex; gap:2rem; color: #FFF;">
+                    <div><span style="color:var(--text3);">Gender Segment:</span> <b>{gender}</b></div>
+                    <div><span style="color:var(--text3);">Participants:</span> <b>{participants}</b></div>
+                    <div><span style="color:var(--text3);">Funding Status:</span> <b>{funding}</b></div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     
