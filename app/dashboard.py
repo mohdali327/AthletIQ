@@ -2231,15 +2231,23 @@ elif selected_tab == "Profile":
             if selected_coach == "-- Select Coach --":
                 if not filtered_coaches.empty:
                     st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
-                    co_display = filtered_coaches[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                    co_display = filtered_coaches[["name", "sport", "city", "state", "performance_level", "age", "notes"]].copy()
                     
                     co_display["Specialization"] = co_display["sport"]
                     co_display["DOB / Age"] = co_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
-                    co_display["Credentials / Notes"] = co_display["notes"].fillna("-")
+                    co_display["Credentials"] = co_display["notes"].fillna("-")
                     
-                    co_display.drop(columns=["notes", "age", "sport"], inplace=True)
-                    co_display = co_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Credentials / Notes"]]
-                    co_display.columns = ["Coach Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Credentials / Notes"]
+                    def get_op_centre(row):
+                        if str(row.get("performance_level", "")) in ["International", "National"]:
+                            return "SAI NCOE " + str(row.get("state", "Unknown"))
+                        else:
+                            return str(row.get("city", "Unknown")) + " Academy"
+                            
+                    co_display["Operating Centre"] = co_display.apply(get_op_centre, axis=1)
+                    
+                    co_display.drop(columns=["notes", "age", "sport", "city"], inplace=True)
+                    co_display = co_display[["name", "Specialization", "state", "Operating Centre", "performance_level", "DOB / Age", "Credentials"]]
+                    co_display.columns = ["Coach Name", "Specialization", "State Registry", "Operating Centre", "Performance Level", "DOB / Age", "Credentials"]
                     st.write(f"Showing all matching coaches (total: {len(co_display)}):")
                     st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
             else:
