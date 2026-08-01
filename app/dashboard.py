@@ -1605,12 +1605,24 @@ elif selected_tab == "Regional Talent":
         kpi2.markdown(f'<div class="kpi">Leading State<br><span style="font-size:2rem;font-weight:800;color:var(--blue);">{top_state}</span></div>', unsafe_allow_html=True)
         kpi3.markdown(f'<div class="kpi">Dominant Sport<br><span style="font-size:2rem;font-weight:800;color:var(--purple);">{top_sport}</span></div>', unsafe_allow_html=True)
         
-        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Regional Sport Clusters (Treemap)</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Regional Talent Concentration</div>', unsafe_allow_html=True)
         
-        state_sport_counts = athlete_df.groupby(["state", "sport"]).size().reset_index(name="Count")
-        fig_tree = px.treemap(state_sport_counts, path=["state", "sport"], values="Count", color="Count", color_continuous_scale=COLOR_SCALES["teal"])
-        playout(fig_tree, "State-to-Sport Athlete Distribution", h=450)
-        st.plotly_chart(fig_tree, use_container_width=True)
+        top_states = athlete_df["state"].value_counts().nlargest(12).index
+        filtered_df = athlete_df[athlete_df["state"].isin(top_states)]
+        state_sport_counts = filtered_df.groupby(["state", "sport"]).size().reset_index(name="Count")
+        
+        state_sport_counts["state"] = pd.Categorical(state_sport_counts["state"], categories=top_states, ordered=True)
+        state_sport_counts = state_sport_counts.sort_values("state")
+        
+        fig_bar = px.bar(
+            state_sport_counts, 
+            x="state", y="Count", color="sport",
+            color_discrete_sequence=["#10E5B3", "#683DE4", "#FDD663", "#2196F3", "#E91E63", "#FF9800", "#00BCD4", "#9C27B0"],
+            labels={"state": "State / Region", "Count": "Number of Athletes", "sport": "Sport"}
+        )
+        playout(fig_bar, "Top States: Athlete Volume by Sport", h=450)
+        fig_bar.update_layout(barmode='stack', xaxis_tickangle=-45)
+        st.plotly_chart(fig_bar, use_container_width=True)
         
         st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Demographic Deep-Dive (Age & Gender)</div>', unsafe_allow_html=True)
         dem1, dem2 = st.columns(2)
