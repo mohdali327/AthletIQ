@@ -1092,6 +1092,8 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 if selected_tab == "Pathway Overview":
     st.markdown('<div class="stitle sticky-header" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
+    st.markdown("<p style='font-size:1.05rem; color:var(--text2); margin-top:1.5rem; line-height:1.6;'><b>AthletIQ</b> tracks athletic progression across 36 states by unifying real-time data on emerging sportspersons, coaches, and SAI centres. This comprehensive intelligence pinpoints critical talent drop-offs, enabling data-driven sponsorship interventions that maximize funding impact for India's sporting future.</p>", unsafe_allow_html=True)
+
     # 1. Pipeline Description
     st.markdown('<div class="stitle" title="Overview of athlete progression from grassroots to elite levels" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Pipeline</div>', unsafe_allow_html=True)
     st.markdown(insight(" Pipeline Description", 
