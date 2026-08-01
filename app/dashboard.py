@@ -1527,7 +1527,7 @@ elif selected_tab == "Centres & Academies":
     st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
         "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
         
-    ca_tabs = st.tabs(["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas"])
+    ca_tabs = st.tabs(["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas", "SAI Proximity Matcher"])
     
     with ca_tabs[0]:
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
@@ -1621,128 +1621,128 @@ elif selected_tab == "Centres & Academies":
             </div>
             ''', unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
-        with st.expander("🔍 SAI Training Centre Proximity & Suitability Matcher"):
-            # Toggle between Database search and Custom Profile Creator
-            matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode")
+    with ca_tabs[3]:
+        st.markdown('<div class="stitle" style="font-size:1.15rem;"> 🔍 SAI Training Centre Proximity & Suitability Matcher</div>', unsafe_allow_html=True)
+        # Toggle between Database search and Custom Profile Creator
+        matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode")
 
-            if matcher_mode == "Search Database Athletes":
-                c_tla1, c_tla2 = st.columns([3, 1])
-                with c_tla1:
-                    db_athletes = sorted(list(set(df_all[df_all["entity_type"] == "Athlete"]["name"].dropna().tolist() + [a["name"] for a in elite_athletes])))
-                    selected_athlete_name = st.selectbox("Select Athlete to Match", db_athletes, index=db_athletes.index("Manu Bhaker") if "Manu Bhaker" in db_athletes else 0, key="top_search_athlete_select")
-                with c_tla2:
-                    st.write("")
-                    st.write("")
-                    run_db_match = st.button(" Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
+        if matcher_mode == "Search Database Athletes":
+            c_tla1, c_tla2 = st.columns([3, 1])
+            with c_tla1:
+                db_athletes = sorted(list(set(df_all[df_all["entity_type"] == "Athlete"]["name"].dropna().tolist() + [a["name"] for a in elite_athletes])))
+                selected_athlete_name = st.selectbox("Select Athlete to Match", db_athletes, index=db_athletes.index("Manu Bhaker") if "Manu Bhaker" in db_athletes else 0, key="top_search_athlete_select")
+            with c_tla2:
+                st.write("")
+                st.write("")
+                run_db_match = st.button(" Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
                 
-                if run_db_match:
-                    # First check elite_athletes json list
-                    ath_data = next((a for a in elite_athletes if a["name"] == selected_athlete_name), None)
-                    if not ath_data:
-                        # Fallback to master CSV database
-                        match_rows = df_all[(df_all["entity_type"] == "Athlete") & (df_all["name"] == selected_athlete_name)]
-                        if not match_rows.empty:
-                            row = match_rows.iloc[0]
-                            gender_val = "F" if str(row["gender"]).strip().lower().startswith("f") else "M"
-                            perf_val = str(row["performance_level"]).strip()
-                            ath_data = {
-                                "name": row["name"],
-                                "sport": str(row["sport"]).upper(),
-                                "age": str(row["age"]) if pd.notna(row["age"]) else "17",
-                                "gender": gender_val,
-                                "medals": perf_val,
-                                "records": str(row["notes"]) if pd.notna(row["notes"]) else f"Registered athlete in {row['sport']} representing {row['state']}."
-                            }
-                            # Set custom state and performance parameters for recommender mapping
-                            st.session_state["top_custom_matched_state"] = str(row["state"])
-                            st.session_state["top_custom_matched_perf"] = perf_val
+            if run_db_match:
+                # First check elite_athletes json list
+                ath_data = next((a for a in elite_athletes if a["name"] == selected_athlete_name), None)
+                if not ath_data:
+                    # Fallback to master CSV database
+                    match_rows = df_all[(df_all["entity_type"] == "Athlete") & (df_all["name"] == selected_athlete_name)]
+                    if not match_rows.empty:
+                        row = match_rows.iloc[0]
+                        gender_val = "F" if str(row["gender"]).strip().lower().startswith("f") else "M"
+                        perf_val = str(row["performance_level"]).strip()
+                        ath_data = {
+                            "name": row["name"],
+                            "sport": str(row["sport"]).upper(),
+                            "age": str(row["age"]) if pd.notna(row["age"]) else "17",
+                            "gender": gender_val,
+                            "medals": perf_val,
+                            "records": str(row["notes"]) if pd.notna(row["notes"]) else f"Registered athlete in {row['sport']} representing {row['state']}."
+                        }
+                        # Set custom state and performance parameters for recommender mapping
+                        st.session_state["top_custom_matched_state"] = str(row["state"])
+                        st.session_state["top_custom_matched_perf"] = perf_val
                         
-                    if ath_data:
-                        st.session_state["top_matched_athlete"] = ath_data
-                        # Only delete previous custom session parameters if the selected athlete is indeed in elite_athletes (which defaults to Haryana/International)
-                        if any(a["name"] == selected_athlete_name for a in elite_athletes):
-                            if "top_custom_matched_state" in st.session_state:
-                                del st.session_state["top_custom_matched_state"]
-                                del st.session_state["top_custom_matched_perf"]
-                        st.rerun()
+                if ath_data:
+                    st.session_state["top_matched_athlete"] = ath_data
+                    # Only delete previous custom session parameters if the selected athlete is indeed in elite_athletes (which defaults to Haryana/International)
+                    if any(a["name"] == selected_athlete_name for a in elite_athletes):
+                        if "top_custom_matched_state" in st.session_state:
+                            del st.session_state["top_custom_matched_state"]
+                            del st.session_state["top_custom_matched_perf"]
+                    st.rerun()
 
+        else:
+            c_tla1, c_tla2 = st.columns(2)
+            with c_tla1:
+                c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="top_c_ath_name")
+                all_sai_disciplines = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
+                c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="top_c_ath_sport")
+                all_sai_states = sorted(list(set(c["state"] for c in SAI_CENTRES)))
+                c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="top_c_ath_state")
+            with c_tla2:
+                c_age = st.slider("Age (Years)", 8, 35, 17, key="top_c_ath_age")
+                c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender")
+                c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf")
+                
+            run_custom_match = st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
+            if run_custom_match:
+                custom_ath_mock = {
+                    "name": c_name,
+                    "sport": c_sport.upper(),
+                    "age": str(c_age),
+                    "gender": "F" if c_gender == "Female" else "M",
+                    "medals": f"{c_perf} Level Competitor",
+                    "records": f"Custom entered athlete from state of {c_state} competing in {c_sport}."
+                }
+                st.session_state["top_matched_athlete"] = custom_ath_mock
+                st.session_state["top_custom_matched_state"] = c_state
+                st.session_state["top_custom_matched_perf"] = c_perf
+                st.rerun()
+
+        # Render top-level recommendation answers
+        if "top_matched_athlete" in st.session_state:
+            t_ath = st.session_state["top_matched_athlete"]
+            t_gender = "Female" if t_ath["gender"] == "F" else "Male"
+            try: t_age = int(t_ath["age"])
+            except ValueError: t_age = 17
+            
+            if "top_custom_matched_state" in st.session_state:
+                t_state = st.session_state["top_custom_matched_state"]
+                t_perf = st.session_state["top_custom_matched_perf"]
             else:
-                c_tla1, c_tla2 = st.columns(2)
-                with c_tla1:
-                    c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="top_c_ath_name")
-                    all_sai_disciplines = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
-                    c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="top_c_ath_sport")
-                    all_sai_states = sorted(list(set(c["state"] for c in SAI_CENTRES)))
-                    c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="top_c_ath_state")
-                with c_tla2:
-                    c_age = st.slider("Age (Years)", 8, 35, 17, key="top_c_ath_age")
-                    c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender")
-                    c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf")
-                
-                run_custom_match = st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
-                if run_custom_match:
-                    custom_ath_mock = {
-                        "name": c_name,
-                        "sport": c_sport.upper(),
-                        "age": str(c_age),
-                        "gender": "F" if c_gender == "Female" else "M",
-                        "medals": f"{c_perf} Level Competitor",
-                        "records": f"Custom entered athlete from state of {c_state} competing in {c_sport}."
-                    }
-                    st.session_state["top_matched_athlete"] = custom_ath_mock
-                    st.session_state["top_custom_matched_state"] = c_state
-                    st.session_state["top_custom_matched_perf"] = c_perf
-                    st.rerun()
-
-            # Render top-level recommendation answers
-            if "top_matched_athlete" in st.session_state:
-                t_ath = st.session_state["top_matched_athlete"]
-                t_gender = "Female" if t_ath["gender"] == "F" else "Male"
-                try: t_age = int(t_ath["age"])
-                except ValueError: t_age = 17
-            
-                if "top_custom_matched_state" in st.session_state:
-                    t_state = st.session_state["top_custom_matched_state"]
-                    t_perf = st.session_state["top_custom_matched_perf"]
-                else:
-                    t_perf = "International" if any(x in t_ath["medals"].lower() for x in ["olympic", "world", "asian", "cwg", "issf", "international"]) else "National"
-                    t_state = "Haryana"
-                    state_keywords = {
-                        "haryana": "Haryana", "punjab": "Punjab", "delhi": "Delhi", "manipur": "Manipur",
-                        "maharashtra": "Maharashtra", "kerala": "Kerala", "tamil nadu": "Tamil Nadu",
-                        "odisha": "Odisha", "uttar pradesh": "Uttar Pradesh", "madhya pradesh": "Madhya Pradesh",
-                        "assam": "Assam", "telangana": "Telangana", "andhra": "Andhra Pradesh",
-                        "west bengal": "West Bengal", "rajasthan": "Rajasthan", "gujarat": "Gujarat",
-                        "jharkhand": "Jharkhand"
-                    }
-                    for kw, st_name in state_keywords.items():
-                        if kw in t_ath["records"].lower() or kw in t_ath["medals"].lower():
-                            t_state = st_name
-                            break
+                t_perf = "International" if any(x in t_ath["medals"].lower() for x in ["olympic", "world", "asian", "cwg", "issf", "international"]) else "National"
+                t_state = "Haryana"
+                state_keywords = {
+                    "haryana": "Haryana", "punjab": "Punjab", "delhi": "Delhi", "manipur": "Manipur",
+                    "maharashtra": "Maharashtra", "kerala": "Kerala", "tamil nadu": "Tamil Nadu",
+                    "odisha": "Odisha", "uttar pradesh": "Uttar Pradesh", "madhya pradesh": "Madhya Pradesh",
+                    "assam": "Assam", "telangana": "Telangana", "andhra": "Andhra Pradesh",
+                    "west bengal": "West Bengal", "rajasthan": "Rajasthan", "gujarat": "Gujarat",
+                    "jharkhand": "Jharkhand"
+                }
+                for kw, st_name in state_keywords.items():
+                    if kw in t_ath["records"].lower() or kw in t_ath["medals"].lower():
+                        t_state = st_name
+                        break
                         
-                recs = recommend_sai_centres(t_ath["sport"].title(), t_state, t_perf, t_age, t_gender, top_n=3)
+            recs = recommend_sai_centres(t_ath["sport"].title(), t_state, t_perf, t_age, t_gender, top_n=3)
             
-                st.markdown(f'''
-                <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
-                  <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
-                     Top 3 Recommended SAI Centres for {t_ath['name']}
-                  </div>
-                  <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
-                    Sport Focus: {t_ath['sport'].title()} &nbsp;|&nbsp; Home State: {t_state} &nbsp;|&nbsp; Age: {t_age} &nbsp;|&nbsp; Performance Level: {t_perf}
-                  </div>
-                </div>
-                ''', unsafe_allow_html=True)
+            st.markdown(f'''
+            <div style="background:rgba(138,180,248,0.1);border:1px solid rgba(138,180,248,0.3);border-radius:15px;padding:1.2rem;margin-top:1rem;margin-bottom:1rem;">
+              <div style="font-family:Outfit,sans-serif;font-size:1.15rem;font-weight:800;color:#FFF;">
+                 Top 3 Recommended SAI Centres for {t_ath['name']}
+              </div>
+              <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
+                Sport Focus: {t_ath['sport'].title()} &nbsp;|&nbsp; Home State: {t_state} &nbsp;|&nbsp; Age: {t_age} &nbsp;|&nbsp; Performance Level: {t_perf}
+              </div>
+            </div>
+            ''', unsafe_allow_html=True)
             
-                for idx, rec in enumerate(recs):
-                    st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
+            for idx, rec in enumerate(recs):
+                st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
                 
-                if st.button(" Clear Recommendations & Close Panel", key="btn_top_close_matcher"):
-                    del st.session_state["top_matched_athlete"]
-                    if "top_custom_matched_state" in st.session_state:
-                        del st.session_state["top_custom_matched_state"]
-                        del st.session_state["top_custom_matched_perf"]
-                    st.rerun()
+            if st.button(" Clear Recommendations & Close Panel", key="btn_top_close_matcher"):
+                del st.session_state["top_matched_athlete"]
+                if "top_custom_matched_state" in st.session_state:
+                    del st.session_state["top_custom_matched_state"]
+                    del st.session_state["top_custom_matched_perf"]
+                st.rerun()
 
 elif selected_tab == "Sponsor Pipeline":
     st.markdown('<div class="stitle sticky-header" title="Discover and match commercial sponsors with academies and sports." style="font-size:1.8rem;"> Sponsor Pipeline <span class="chip chip-amber">Commercial Prospects & Packages</span></div>', unsafe_allow_html=True)
