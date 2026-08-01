@@ -1168,7 +1168,6 @@ if selected_tab == "Pathway Overview":
     .step-label.active {
         color: #F6C85F;
     }
-
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -1215,7 +1214,6 @@ if selected_tab == "Pathway Overview":
         text-align: center;
     }
     </style>
-
     <div class="impact-model-section">
         <div class="section-heading">THE IMPACT MODEL</div>
         <div class="timeline-container">
@@ -1264,13 +1262,12 @@ if selected_tab == "Pathway Overview":
             </div>
             <div class="timeline-step">
                 <div class="step-number">7</div>
-                <div class="step-circle active">
+                <div class="step-circle">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
                 </div>
-                <div class="step-label active">Impact</div>
+                <div class="step-label">Impact</div>
             </div>
         </div>
-
         <div class="section-heading">PROJECTED SCALE AT FULL OPERATION</div>
         <div class="stats-grid">
             <div class="stat-card">
