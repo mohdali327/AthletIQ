@@ -801,7 +801,6 @@ selected_tab = st.radio(
     options=[
         "Pathway Overview",
         "Discovery & Leagues",
-        "Regional Talent",
         "Centres & Academies",
         "Sponsor Pipeline",
         "Profile",
@@ -1589,58 +1588,6 @@ elif selected_tab == "Discovery & Leagues":
     
 
         
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# TAB 3 — REGIONAL TALENT
-elif selected_tab == "Regional Talent":
-    st.markdown('<div class="stitle sticky-header" title="Analyze top states, sports, and regional talent clusters"> Regional Talent <span class="chip chip-gold">Top Regional Clusters</span></div>', unsafe_allow_html=True)
-    
-    if df_all is not None:
-        athlete_df = df_all[df_all["entity_type"] == "Athlete"]
-        total_mapped = len(athlete_df)
-        top_state = athlete_df["state"].value_counts().idxmax() if not athlete_df.empty else "N/A"
-        top_sport = athlete_df["sport"].value_counts().idxmax() if not athlete_df.empty else "N/A"
-        
-        kpi1, kpi2, kpi3 = st.columns(3)
-        kpi1.markdown(f'<div class="kpi">Total Mapped Athletes<br><span style="font-size:2rem;font-weight:800;color:var(--teal);">{total_mapped}</span></div>', unsafe_allow_html=True)
-        kpi2.markdown(f'<div class="kpi">Leading State<br><span style="font-size:2rem;font-weight:800;color:var(--blue);">{top_state}</span></div>', unsafe_allow_html=True)
-        kpi3.markdown(f'<div class="kpi">Dominant Sport<br><span style="font-size:2rem;font-weight:800;color:var(--purple);">{top_sport}</span></div>', unsafe_allow_html=True)
-        
-        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Regional Talent Concentration</div>', unsafe_allow_html=True)
-        
-        top_states = athlete_df["state"].value_counts().nlargest(12).index
-        filtered_df = athlete_df[athlete_df["state"].isin(top_states)]
-        state_sport_counts = filtered_df.groupby(["state", "sport"]).size().reset_index(name="Count")
-        
-        state_sport_counts["state"] = pd.Categorical(state_sport_counts["state"], categories=top_states, ordered=True)
-        state_sport_counts = state_sport_counts.sort_values("state")
-        
-        fig_bar = px.bar(
-            state_sport_counts, 
-            x="state", y="Count", color="sport",
-            color_discrete_sequence=["#10E5B3", "#683DE4", "#FDD663", "#2196F3", "#E91E63", "#FF9800", "#00BCD4", "#9C27B0"],
-            labels={"state": "State / Region", "Count": "Number of Athletes", "sport": "Sport"}
-        )
-        playout(fig_bar, "Top States: Athlete Volume by Sport", h=450)
-        fig_bar.update_layout(barmode='stack', xaxis_tickangle=-45)
-        st.plotly_chart(fig_bar, use_container_width=True)
-        
-        st.markdown('<div class="stitle" style="font-size:1.15rem;margin-top:2rem;"> Demographic Deep-Dive (Age & Gender)</div>', unsafe_allow_html=True)
-        dem1, dem2 = st.columns(2)
-        
-        with dem1:
-            if "age" in athlete_df.columns:
-                fig_age = px.histogram(athlete_df, x="age", nbins=15, color_discrete_sequence=["#10E5B3"])
-                playout(fig_age, "Athlete Age Distribution", h=300)
-                st.plotly_chart(fig_age, use_container_width=True)
-        with dem2:
-            if "gender" in athlete_df.columns:
-                gender_counts = athlete_df["gender"].value_counts().reset_index()
-                gender_counts.columns = ["Gender", "Count"]
-                fig_gender = px.pie(gender_counts, names="Gender", values="Count", hole=0.5, color_discrete_sequence=["#10E5B3", "#683DE4", "#FDD663"])
-                playout(fig_gender, "Gender Balance", h=300)
-                st.plotly_chart(fig_gender, use_container_width=True)
-    
-
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 4 — COACH CAPACITY
