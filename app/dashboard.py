@@ -1669,7 +1669,7 @@ elif selected_tab == "Centres & Academies":
             surplus_coaches = sport_coaches - ideal_coaches_needed
             
             if surplus_coaches > 0:
-                st.markdown('<div class="stitle" style="font-size:1.05rem; margin-top: 2rem; color:var(--teal);">🤖 AI Decision Maker: Coach Redistribution</div>', unsafe_allow_html=True)
+                st.markdown('<div class="stitle" style="font-size:1.05rem; margin-top: 2rem; color:var(--teal);">Coach Redistribution</div>', unsafe_allow_html=True)
                 st.markdown(f'<div style="font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem;">Detected a surplus of <b style="color:var(--text1);">{surplus_coaches} {selected_sport} coach(es)</b> at {selected_centre}. Analyzing national deficit centres...</div>', unsafe_allow_html=True)
                 
                 deficit_centres = []
