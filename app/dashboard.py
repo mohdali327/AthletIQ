@@ -2106,12 +2106,15 @@ elif selected_tab == "Profile":
                 
             with c_bio2:
                 if entity_type == "Coach":
+                    op_centre = "SAI NCOE " + str(person_row.get('state', 'Unknown')) if str(person_row.get('performance_level', '')) in ["International", "National"] else str(person_row.get('city', 'Unknown')) + " Academy"
+                    
                     st.markdown(f"""
                     <div class="acard" style="min-height:220px;">
                         <span class="tag blue" style="float:right;">Certification</span>
                         <b style="font-size:1.05rem;color:var(--blue);">Licence & Certificate Status</b>
                         <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
                         <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                            <b>Operating Centre:</b> {op_centre}<br>
                             <b>Active Licence:</b> <span class="tag green">{person_row['performance_level']}</span><br>
                             <b>Licencing Body:</b> {person_row.get('source_link', 'Official Registry')}<br>
                             <b>Empanelled Stage:</b> {person_row.get('pipeline_stage', 'Empanelled')}<br>
