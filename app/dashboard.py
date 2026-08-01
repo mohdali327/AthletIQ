@@ -1092,7 +1092,218 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 if selected_tab == "Pathway Overview":
     st.markdown('<div class="stitle sticky-header" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
 
-    st.markdown("<p style='font-size:1.05rem; color:var(--text2); margin-top:1.5rem; line-height:1.6;'><b>AthletIQ</b> tracks athletic progression across 36 states by unifying real-time data on emerging sportspersons, coaches, and SAI centres. This comprehensive intelligence pinpoints critical talent drop-offs, enabling data-driven sponsorship interventions that maximize funding impact for India's sporting future.</p>", unsafe_allow_html=True)
+    st.markdown("""
+    <style>
+    .impact-model-section {
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+        font-family: 'Inter', sans-serif;
+        background-color: transparent;
+    }
+    .section-heading {
+        color: #F6C85F;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+    .timeline-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        margin-bottom: 3rem;
+        padding: 0 10px;
+    }
+    .timeline-line {
+        position: absolute;
+        top: 40px;
+        left: 50px;
+        right: 50px;
+        height: 1px;
+        background-color: #2D3A54;
+        z-index: 1;
+    }
+    .timeline-step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+        position: relative;
+        width: 100px;
+    }
+    .step-number {
+        font-size: 0.75rem;
+        color: #8C9BAB;
+        margin-bottom: 0.5rem;
+    }
+    .step-circle {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        background-color: #1A233A;
+        border: 2px solid #0E9F6E;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #8C9BAB;
+        margin-bottom: 0.8rem;
+    }
+    .step-circle svg {
+        width: 24px;
+        height: 24px;
+    }
+    .step-circle.active {
+        background-color: #F6C85F;
+        border-color: #F6C85F;
+        color: #1A233A;
+        box-shadow: 0 0 20px rgba(246, 200, 95, 0.4);
+    }
+    .step-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #E5E7EB;
+    }
+    .step-label.active {
+        color: #F6C85F;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+    }
+    .stat-card {
+        background-color: #1A2642;
+        border-radius: 8px;
+        padding: 2rem 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .stat-icon-wrapper {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #253353;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #8C9BAB;
+    }
+    .stat-icon-wrapper svg {
+        width: 16px;
+        height: 16px;
+    }
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #10B981;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+    .stat-label {
+        font-size: 0.85rem;
+        color: #E5E7EB;
+        text-align: center;
+    }
+    </style>
+
+    <div class="impact-model-section">
+        <div class="section-heading">THE IMPACT MODEL</div>
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+            <div class="timeline-step">
+                <div class="step-number">1</div>
+                <div class="step-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div class="step-label">Participation</div>
+            </div>
+            <div class="timeline-step">
+                <div class="step-number">2</div>
+                <div class="step-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                </div>
+                <div class="step-label">Data</div>
+            </div>
+            <div class="timeline-step">
+                <div class="step-number">3</div>
+                <div class="step-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path></svg>
+                </div>
+                <div class="step-label">Insight</div>
+            </div>
+            <div class="timeline-step">
+                <div class="step-number">4</div>
+                <div class="step-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.4 14.4l-4.8-4.8"></path><path d="M12 16.8l4.8-4.8"></path><path d="M9.6 14.4l-4.8-4.8"></path><path d="M20.4 10.8A2.4 2.4 0 0 0 17.02 7.42L16.6 7.84a2.4 2.4 0 0 0 3.38 3.38z"></path><path d="M3.6 13.2a2.4 2.4 0 0 0 3.38 3.38l.42-.42a2.4 2.4 0 0 0-3.38-3.38z"></path></svg>
+                </div>
+                <div class="step-label">Training</div>
+            </div>
+            <div class="timeline-step">
+                <div class="step-number">5</div>
+                <div class="step-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg>
+                </div>
+                <div class="step-label">Support</div>
+            </div>
+            <div class="timeline-step">
+                <div class="step-number">6</div>
+                <div class="step-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line><line x1="2" y1="20" x2="22" y2="20"></line></svg>
+                </div>
+                <div class="step-label">Performance</div>
+            </div>
+            <div class="timeline-step">
+                <div class="step-number">7</div>
+                <div class="step-circle active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+                </div>
+                <div class="step-label active">Impact</div>
+            </div>
+        </div>
+
+        <div class="section-heading">PROJECTED SCALE AT FULL OPERATION</div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c4.97-4.97 8-9.4 8-14a8 8 0 1 0-16 0c0 4.6 3.03 9.03 8 14z"></path><path d="M12 22V12"></path><path d="M12 12c-2.76 0-5-2.24-5-5"></path></svg>
+                </div>
+                <div class="stat-value">10,000+</div>
+                <div class="stat-label">Participants</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div class="stat-value">100+</div>
+                <div class="stat-label">Academies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                </div>
+                <div class="stat-value">25+</div>
+                <div class="stat-label">Sports Mapped</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon-wrapper">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                </div>
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Events</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     # 1. Pipeline Description
     st.markdown('<div class="stitle" title="Overview of athlete progression from grassroots to elite levels" style="font-size:1.15rem;margin-top:2rem;"> Grassroots-to-Podium Conversion Pipeline</div>', unsafe_allow_html=True)
