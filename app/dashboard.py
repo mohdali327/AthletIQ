@@ -1461,15 +1461,19 @@ if selected_tab == "Pathway Overview":
     # 4. Statewise Top Sports
     st.markdown('<div class="stitle" title="Top performing sports across major states based on Khelo India and Olympic pipeline metrics" style="font-size:1.15rem;margin-top:2rem;"> Statewise Top Sports</div>', unsafe_allow_html=True)
     
+    def go_to_profile(st_name):
+        st.session_state.main_navigation = "Profile"
+        st.session_state.profile_state = st_name
+
     def state_card(col, state_name, body, color, tooltip=""):
         col.markdown(insight(f" {state_name}", body, color, tooltip), unsafe_allow_html=True)
-        if col.button(f"View Profiles", key=f"nav_{state_name}", use_container_width=True):
-            st.session_state.main_navigation = "Profile"
-            st.session_state.profile_state = state_name
-            if hasattr(st, "rerun"):
-                st.rerun()
-            else:
-                st.experimental_rerun()
+        col.button(
+            f"View Profiles", 
+            key=f"nav_{state_name}", 
+            on_click=go_to_profile, 
+            args=(state_name,), 
+            use_container_width=True
+        )
 
     c1, c2, c3 = st.columns(3)
     state_card(c1, "Haryana", "<b>1. Wrestling</b> (Olympic medals; Sonepat hub)<br><b>2. Boxing</b> (Bhiwani pipeline)<br><b>3. Shooting</b> (Jhajjar/Panchkula)", "green", "Emerging: Ankush Panghal (Boxing)")
