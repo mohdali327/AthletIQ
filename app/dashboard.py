@@ -23,10 +23,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-with st.sidebar:
-    st.markdown("### Appearance")
-    theme_mode = st.radio("Theme Mode", ["Dark", "Light"], index=0, horizontal=True)
-
 # ─────────────────────────────────────────────────────────────────────────────
 # CSS — Gemini Neural Expressive + Decision-First Design
 # ─────────────────────────────────────────────────────────────────────────────
@@ -459,146 +455,24 @@ div[class*="collapsedSidebar"]::before {
 """
 st.markdown(css_code.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
 
-if theme_mode == "Light":
-    light_theme_css = """
-    <style>
-    :root {
-        --glass: #f4f5f8;
-        --glass2: #ffffff;
-        --border: rgba(0, 0, 0, 0.12);
-        --text1: #111111;
-        --text2: #444444;
-        --text3: #666666;
-        --teal: #0b9e7b;
-        --purple: #5c35cc;
-        --blue: #00b396;
-        --pink: #d9534f;
-        --gold: #f0ad4e;
-    }
-    .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        background-color: #f8f9fa !important;
-        background-image: 
-            linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.97) 100%),
-            url("data:image/jpeg;base64,PLACEHOLDER_BG") !important;
-        background-size: cover, cover !important;
-        background-position: center center, center 20% !important;
-        background-repeat: no-repeat, no-repeat !important;
-        background-attachment: fixed, fixed !important;
-    }
-    .kpi {
-        background: rgba(255, 255, 255, 0.85) !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
-        color: #111 !important;
-    }
-    .sticky-header {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
-    }
-    /* Radio Button Fixes */
-    div[data-testid="stRadio"] [role="radiogroup"] label > div:first-child,
-    div[data-testid="stRadio"] [data-baseweb="radio"] > div:first-child {
-        display: none !important;
-        opacity: 0 !important;
-        width: 0 !important;
-    }
-    div[data-testid="stRadio"] label p,
-    div[data-testid="stRadio"] label span,
-    div[data-testid="stRadio"] label div[data-testid="stMarkdownContainer"] {
-        color: #555 !important;
-    }
-    div[data-testid="stRadio"] label:hover {
-        background: rgba(0, 0, 0, 0.05) !important;
-    }
-    div[data-testid="stRadio"] label:hover p,
-    div[data-testid="stRadio"] label:hover span {
-        color: #111 !important;
-    }
-    div[data-testid="stRadio"] label[data-checked="true"],
-    div[data-testid="stRadio"] label:has(input:checked) {
-        background: rgba(11, 158, 123, 0.1) !important;
-        border: 1px solid rgba(11, 158, 123, 0.3) !important;
-    }
-    div[data-testid="stRadio"] label[data-checked="true"] p,
-    div[data-testid="stRadio"] label:has(input:checked) p,
-    div[data-testid="stRadio"] label[data-checked="true"] span,
-    div[data-testid="stRadio"] label:has(input:checked) span {
-        color: #0b9e7b !important;
-        font-weight: 800 !important;
-        text-shadow: none !important;
-    }
-    /* Buttons Fix */
-    .stButton > button, .stDownloadButton > button {
-        background: rgba(11, 158, 123, 0.08) !important;
-        color: #0b9e7b !important;
-        border: 1px solid rgba(11, 158, 123, 0.25) !important;
-        box-shadow: none !important;
-        text-shadow: none !important;
-    }
-    .stButton > button:hover, .stDownloadButton > button:hover {
-        background: rgba(11, 158, 123, 0.15) !important;
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 10px rgba(11, 158, 123, 0.1) !important;
-    }
-    .stTabs [data-baseweb="tab-list"] {
-        background: #ffffff !important; 
-        border: 1px solid rgba(0, 0, 0, 0.08) !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
-    }
-    .stTabs [data-baseweb="tab"] { color: var(--text2) !important; }
-    .stTabs [data-baseweb="tab"]:hover { background: rgba(0, 0, 0, 0.05) !important; color: var(--teal) !important; }
-    div[data-baseweb="select"] > div {
-        background-color: rgba(255, 255, 255, 0.90) !important;
-        border: 1px solid rgba(0, 0, 0, 0.1) !important;
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-        color: #111 !important;
-    }
-    .acard {
-        background: rgba(255, 255, 255, 0.85) !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
-    }
-    .block-card {
-        background: rgba(255, 255, 255, 0.9) !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
-    }
-    .insight-box {
-        background: rgba(255, 255, 255, 0.9) !important;
-        border: 1px solid rgba(0, 0, 0, 0.08) !important;
-    }
-    .stMarkdown, .stText, p, div, span, label {
-        color: var(--text1);
-    }
-    .hero-title {
-        background: linear-gradient(135deg, #0b9e7b 0%, #5c35cc 100%) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        background-clip: text !important;
-    }
-    .acard-title { color: #111 !important; }
-    .redirect-text { color: #333 !important; }
-    </style>
-    """
-    st.markdown(light_theme_css.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
-
-
 # ─────────────────────────────────────────────────────────────────────────────
 # PLOTLY THEME
 # ─────────────────────────────────────────────────────────────────────────────
 PL = dict(
-    template="plotly_dark" if theme_mode == "Dark" else "plotly_white",
+    template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6" if theme_mode == "Dark" else "#444444", size=12),
+    font=dict(family="Outfit, Inter, sans-serif", color="#9AA0A6", size=12),
     margin=dict(l=30, r=20, t=45, b=35),
-    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"] if theme_mode == "Dark" else ["#0b9e7b","#5c35cc","#0b9e7b","#d9534f","#f0ad4e","#5bc0de","#f0ad4e","#FF8BCB"],
-    legend=dict(bgcolor="rgba(22,28,48,0.7)" if theme_mode == "Dark" else "rgba(255,255,255,0.7)", bordercolor="rgba(255,255,255,0.07)" if theme_mode == "Dark" else "rgba(0,0,0,0.1)", borderwidth=1, font=dict(size=11)),
-    xaxis=dict(gridcolor="rgba(255,255,255,0.04)" if theme_mode == "Dark" else "rgba(0,0,0,0.06)", linecolor="rgba(255,255,255,0.06)" if theme_mode == "Dark" else "rgba(0,0,0,0.1)"),
-    yaxis=dict(gridcolor="rgba(255,255,255,0.04)" if theme_mode == "Dark" else "rgba(0,0,0,0.06)", linecolor="rgba(255,255,255,0.06)" if theme_mode == "Dark" else "rgba(0,0,0,0.1)"),
+    colorway=["#10E5B3","#683DE4","#10E5B3","#F28B82","#FDD663","#78D9EC","#FCAD70","#FF8BCB"],
+    legend=dict(bgcolor="rgba(22,28,48,0.7)", bordercolor="rgba(255,255,255,0.07)", borderwidth=1, font=dict(size=11)),
+    xaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
+    yaxis=dict(gridcolor="rgba(255,255,255,0.04)", linecolor="rgba(255,255,255,0.06)"),
 )
 
 def playout(fig, title="", h=400):
     fig.update_layout(**PL,
-        title=dict(text=title, font=dict(size=15, family="Outfit, sans-serif", color="#E8EAED" if theme_mode == "Dark" else "#1A1A1A")), height=h)
+        title=dict(text=title, font=dict(size=15, family="Outfit, sans-serif", color="#E8EAED")), height=h)
     return fig
 
 COLOR_SCALES = {
