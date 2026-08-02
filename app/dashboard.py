@@ -472,16 +472,43 @@ if theme_mode == "Light":
         --teal: #0b9e7b;
         --purple: #5c35cc;
         --blue: #00b396;
+        --pink: #d9534f;
+        --gold: #f0ad4e;
     }
     .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
         background-color: #f8f9fa !important;
         background-image: 
-            linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 250, 0.96) 100%),
-            url("data:image/jpeg;base64,PLACEHOLDER_BG") !important;
+            linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 250, 0.96) 100%) !important;
     }
     .kpi {
         background: rgba(255, 255, 255, 0.85) !important;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+        color: #111 !important;
+    }
+    .sticky-header {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05) !important;
+    }
+    div[data-testid="stRadio"] label p {
+        color: #666 !important;
+    }
+    div[data-testid="stRadio"] label:hover {
+        background: rgba(0, 0, 0, 0.05) !important;
+    }
+    div[data-testid="stRadio"] label:hover p {
+        color: #111 !important;
+    }
+    div[data-testid="stRadio"] label[data-checked="true"],
+    div[data-testid="stRadio"] label:has(input:checked) {
+        background: rgba(11, 158, 123, 0.1) !important;
+        border: 1px solid rgba(11, 158, 123, 0.3) !important;
+    }
+    div[data-testid="stRadio"] label[data-checked="true"] p,
+    div[data-testid="stRadio"] label:has(input:checked) p {
+        color: #0b9e7b !important;
+        font-weight: 800 !important;
+        text-shadow: none !important;
     }
     .stTabs [data-baseweb="tab-list"] {
         background: #ffffff !important; 
@@ -520,7 +547,7 @@ if theme_mode == "Light":
     .redirect-text { color: #333 !important; }
     </style>
     """
-    st.markdown(light_theme_css.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
+    st.markdown(light_theme_css, unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
