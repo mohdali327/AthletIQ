@@ -214,29 +214,34 @@ css_code = """
     box-shadow: 0 4px 15px rgba(16, 229, 179, 0.3);
 }
 
-/* ── 3D Tactile Buttons ── */
+/* ── Immersive Glass Buttons ── */
 .stButton > button, .stDownloadButton > button {
-    background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
-    color: #FFFFFF !important;
-    border: none !important;
+    background: rgba(16, 229, 179, 0.05) !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid rgba(16, 229, 179, 0.2) !important;
     border-radius: 8px !important;
     padding: 0.45rem 1.4rem !important;
     font-family: 'Outfit', sans-serif !important;
-    font-weight: 700 !important;
+    font-weight: 500 !important;
     font-size: 0.85rem !important;
     letter-spacing: 1px !important;
     text-transform: uppercase !important;
-    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.25), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
-    transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    box-shadow: none !important;
+    transition: all 0.3s ease !important;
     position: relative;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
 }
 .stButton > button:hover, .stDownloadButton > button:hover {
-    transform: translateY(-3px) !important;
-    box-shadow: 0 8px 22px rgba(16, 229, 179, 0.38), inset 0 -3px 0 rgba(0,0,0,0.3) !important;
+    background: rgba(16, 229, 179, 0.15) !important;
+    border: 1px solid rgba(16, 229, 179, 0.5) !important;
+    color: #10E5B3 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.1) !important;
 }
 .stButton > button:active, .stDownloadButton > button:active {
     transform: translateY(1px) !important;
-    box-shadow: 0 2px 8px rgba(16, 229, 179, 0.15), inset 0 -1px 0 rgba(0,0,0,0.3) !important;
+    box-shadow: none !important;
 }
 
 /* ── 3D Inset Selectboxes & Dropdowns ── */
