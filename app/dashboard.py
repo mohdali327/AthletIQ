@@ -1460,40 +1460,51 @@ if selected_tab == "Pathway Overview":
 
     # 4. Statewise Top Sports
     st.markdown('<div class="stitle" title="Top performing sports across major states based on Khelo India and Olympic pipeline metrics" style="font-size:1.15rem;margin-top:2rem;"> Statewise Top Sports</div>', unsafe_allow_html=True)
+    
+    def state_card(col, state_name, body, color, tooltip=""):
+        col.markdown(insight(f" {state_name}", body, color, tooltip), unsafe_allow_html=True)
+        if col.button(f"View Profiles", key=f"nav_{state_name}", use_container_width=True):
+            st.session_state.main_navigation = "Profile"
+            st.session_state.profile_state = state_name
+            if hasattr(st, "rerun"):
+                st.rerun()
+            else:
+                st.experimental_rerun()
+
     c1, c2, c3 = st.columns(3)
-    c1.markdown(insight(" Haryana", "<b>1. Wrestling</b> (Olympic medals; Sonepat hub)<br><b>2. Boxing</b> (Bhiwani pipeline)<br><b>3. Shooting</b> (Jhajjar/Panchkula)", "green", "Emerging: Ankush Panghal (Boxing)"), unsafe_allow_html=True)
-    c2.markdown(insight(" Punjab", "<b>1. Field Hockey</b> (Jalandhar/Sansarpur belt)<br><b>2. Athletics</b> (Sprints/Javelin pipeline)<br><b>3. Kabaddi</b> (Traditional circle style)", "green"), unsafe_allow_html=True)
-    c3.markdown(insight(" Maharashtra", "<b>1. Multi-Sport / KIYG</b> (4x Champion)<br><b>2. Wrestling</b> (Kolhapur/Pune talims)<br><b>3. Kho-Kho</b> (Historic stronghold)", "green", "Emerging: Preeti Pawar (Boxing), Yash Khandagale (Weightlifting)"), unsafe_allow_html=True)
+    state_card(c1, "Haryana", "<b>1. Wrestling</b> (Olympic medals; Sonepat hub)<br><b>2. Boxing</b> (Bhiwani pipeline)<br><b>3. Shooting</b> (Jhajjar/Panchkula)", "green", "Emerging: Ankush Panghal (Boxing)")
+    state_card(c2, "Punjab", "<b>1. Field Hockey</b> (Jalandhar/Sansarpur belt)<br><b>2. Athletics</b> (Sprints/Javelin pipeline)<br><b>3. Kabaddi</b> (Traditional circle style)", "green")
+    state_card(c3, "Maharashtra", "<b>1. Multi-Sport / KIYG</b> (4x Champion)<br><b>2. Wrestling</b> (Kolhapur/Pune talims)<br><b>3. Kho-Kho</b> (Historic stronghold)", "green", "Emerging: Preeti Pawar (Boxing), Yash Khandagale (Weightlifting)")
     
     st.markdown("<br>", unsafe_allow_html=True)
     c4, c5, c6 = st.columns(3)
-    c4.markdown(insight(" Karnataka", "<b>1. Athletics</b> (Inspire Institute of Sport)<br><b>2. Judo</b> (IIS Bellary)<br><b>3. Badminton</b> (Prakash Padukone Academy)", "green", "Emerging: Manikanta L (Swimming)"), unsafe_allow_html=True)
-    c5.markdown(insight(" Tamil Nadu", "<b>1. Athletics</b> (Sprints/Jumps pipeline)<br><b>2. Kabaddi</b> (State game origin)<br><b>3. Kho-Kho</b> (Historic national strength)", "green", "Emerging: Praveen Chithravel (Athletics - Triple Jump)"), unsafe_allow_html=True)
-    c6.markdown(insight(" Odisha", "<b>1. Field Hockey</b> (Global hub/Kalinga Stadium)<br><b>2. Athletics</b> (High Performance Centre)<br><b>3. Rugby</b> (State-sponsored pipeline)", "green", "Emerging: Anjali Munda (Swimming), Jhilli Dalabehera (Weightlifting), Animesh Kujur (Athletics)"), unsafe_allow_html=True)
+    state_card(c4, "Karnataka", "<b>1. Athletics</b> (Inspire Institute of Sport)<br><b>2. Judo</b> (IIS Bellary)<br><b>3. Badminton</b> (Prakash Padukone Academy)", "green", "Emerging: Manikanta L (Swimming)")
+    state_card(c5, "Tamil Nadu", "<b>1. Athletics</b> (Sprints/Jumps pipeline)<br><b>2. Kabaddi</b> (State game origin)<br><b>3. Kho-Kho</b> (Historic national strength)", "green", "Emerging: Praveen Chithravel (Athletics - Triple Jump)")
+    state_card(c6, "Odisha", "<b>1. Field Hockey</b> (Global hub/Kalinga Stadium)<br><b>2. Athletics</b> (High Performance Centre)<br><b>3. Rugby</b> (State-sponsored pipeline)", "green", "Emerging: Anjali Munda (Swimming), Jhilli Dalabehera (Weightlifting), Animesh Kujur (Athletics)")
     
     st.markdown("<br>", unsafe_allow_html=True)
     c7, c8, c9 = st.columns(3)
-    c7.markdown(insight(" Manipur", "<b>1. Boxing</b> (Mary Kom legacy/SAI NCOE)<br><b>2. Weightlifting</b> (Olympic medals/Mirabai Chanu)<br><b>3. Football</b> (Massive grassroots base)", "green"), unsafe_allow_html=True)
-    c8.markdown(insight(" Kerala", "<b>1. Football</b> (Massive fan/club culture)<br><b>2. Athletics</b> (Historic sprint legacy)<br><b>3. Volleyball</b> (Strong district ecosystem)", "green"), unsafe_allow_html=True)
-    c9.markdown(insight(" Uttar Pradesh", "<b>1. Wrestling</b> (Historic Akharas)<br><b>2. Hockey</b> (KD Singh Babu Legacy)<br><b>3. Athletics</b> (Strong rural talent)", "green", "Emerging: Rohit Yadav (Athletics - Javelin Throw)"), unsafe_allow_html=True)
+    state_card(c7, "Manipur", "<b>1. Boxing</b> (Mary Kom legacy/SAI NCOE)<br><b>2. Weightlifting</b> (Olympic medals/Mirabai Chanu)<br><b>3. Football</b> (Massive grassroots base)", "green")
+    state_card(c8, "Kerala", "<b>1. Football</b> (Massive fan/club culture)<br><b>2. Athletics</b> (Historic sprint legacy)<br><b>3. Volleyball</b> (Strong district ecosystem)", "green")
+    state_card(c9, "Uttar Pradesh", "<b>1. Wrestling</b> (Historic Akharas)<br><b>2. Hockey</b> (KD Singh Babu Legacy)<br><b>3. Athletics</b> (Strong rural talent)", "green", "Emerging: Rohit Yadav (Athletics - Javelin Throw)")
     
     st.markdown("<br>", unsafe_allow_html=True)
     c10, c11, c12 = st.columns(3)
-    c10.markdown(insight(" Bihar", "<b>1. Kabaddi</b> (Grassroots popularity)<br><b>2. Athletics</b> (Eklavya centres)<br><b>3. Rugby</b> (Rising state investments)", "green"), unsafe_allow_html=True)
-    c11.markdown(insight(" Madhya Pradesh", "<b>1. Shooting</b> (MP Shooting Academy)<br><b>2. Water Sports</b> (Bhopal lakes hub)<br><b>3. Athletics</b> (T.T. Nagar Stadium)", "green"), unsafe_allow_html=True)
-    c12.markdown(insight(" West Bengal", "<b>1. Football</b> (Historic clubs/Salt Lake)<br><b>2. Table Tennis</b> (Strong club ecosystem)<br><b>3. Archery</b> (SAI Kolkata)", "green", "Emerging: Harita Bhadra (Athletics - Sprint)"), unsafe_allow_html=True)
+    state_card(c10, "Bihar", "<b>1. Kabaddi</b> (Grassroots popularity)<br><b>2. Athletics</b> (Eklavya centres)<br><b>3. Rugby</b> (Rising state investments)", "green")
+    state_card(c11, "Madhya Pradesh", "<b>1. Shooting</b> (MP Shooting Academy)<br><b>2. Water Sports</b> (Bhopal lakes hub)<br><b>3. Athletics</b> (T.T. Nagar Stadium)", "green")
+    state_card(c12, "West Bengal", "<b>1. Football</b> (Historic clubs/Salt Lake)<br><b>2. Table Tennis</b> (Strong club ecosystem)<br><b>3. Archery</b> (SAI Kolkata)", "green", "Emerging: Harita Bhadra (Athletics - Sprint)")
 
     st.markdown("<br>", unsafe_allow_html=True)
     c13, c14, c15 = st.columns(3)
-    c13.markdown(insight(" Himachal Pradesh", "<b>1. Boxing</b> (Hill endurance advantage)<br><b>2. Volleyball</b> (Widespread popularity)<br><b>3. Winter Sports</b> (Skiing/Snowboarding)", "green"), unsafe_allow_html=True)
-    c14.markdown(insight(" Chhattisgarh", "<b>1. Hockey</b> (Rajnandgaon nursery)<br><b>2. Archery</b> (Tribal dominance)<br><b>3. Basketball</b> (Bhilai hub)", "green", "Emerging: Kiran Pisda (Football)"), unsafe_allow_html=True)
-    c15.markdown(insight(" Rajasthan", "<b>1. Shooting</b> (Jaipur/Bikaner ranges)<br><b>2. Athletics</b> (Desert endurance/Throws)<br><b>3. Archery</b> (Tribal belts)", "green"), unsafe_allow_html=True)
+    state_card(c13, "Himachal Pradesh", "<b>1. Boxing</b> (Hill endurance advantage)<br><b>2. Volleyball</b> (Widespread popularity)<br><b>3. Winter Sports</b> (Skiing/Snowboarding)", "green")
+    state_card(c14, "Chhattisgarh", "<b>1. Hockey</b> (Rajnandgaon nursery)<br><b>2. Archery</b> (Tribal dominance)<br><b>3. Basketball</b> (Bhilai hub)", "green", "Emerging: Kiran Pisda (Football)")
+    state_card(c15, "Rajasthan", "<b>1. Shooting</b> (Jaipur/Bikaner ranges)<br><b>2. Athletics</b> (Desert endurance/Throws)<br><b>3. Archery</b> (Tribal belts)", "green")
 
     st.markdown("<br>", unsafe_allow_html=True)
     c16, c17, c18 = st.columns(3)
-    c16.markdown(insight(" Gujarat", "<b>1. Table Tennis</b> (State-sponsored leagues)<br><b>2. Tennis</b> (SAGG infrastructure)<br><b>3. Swimming</b> (Rajkot/Ahmedabad pools)", "green", "Emerging: Bhargavi Bhagora (Archery)"), unsafe_allow_html=True)
-    c17.markdown(insight(" Arunachal Pradesh", "<b>1. Football</b> (Hangpan Dada Trophy)<br><b>2. Weightlifting</b> (Natural strength base)<br><b>3. Martial Arts</b> (Wushu/Karate focus)", "green"), unsafe_allow_html=True)
-    c18.markdown(insight(" Mizoram", "<b>1. Football</b> (Mizoram Premier League)<br><b>2. Weightlifting</b> (Rising Olympic prospects)<br><b>3. Boxing</b> (Northeast combative edge)", "green"), unsafe_allow_html=True)
+    state_card(c16, "Gujarat", "<b>1. Table Tennis</b> (State-sponsored leagues)<br><b>2. Tennis</b> (SAGG infrastructure)<br><b>3. Swimming</b> (Rajkot/Ahmedabad pools)", "green", "Emerging: Bhargavi Bhagora (Archery)")
+    state_card(c17, "Arunachal Pradesh", "<b>1. Football</b> (Hangpan Dada Trophy)<br><b>2. Weightlifting</b> (Natural strength base)<br><b>3. Martial Arts</b> (Wushu/Karate focus)", "green")
+    state_card(c18, "Mizoram", "<b>1. Football</b> (Mizoram Premier League)<br><b>2. Weightlifting</b> (Rising Olympic prospects)<br><b>3. Boxing</b> (Northeast combative edge)", "green")
     
     st.markdown("<br>", unsafe_allow_html=True)
 
