@@ -1486,8 +1486,7 @@ elif selected_tab == "Discovery & Leagues":
             "Starting Soon",
             "Scheduled",
             "Completed",
-            "Just Completed",
-            "Other"
+            "Just Completed"
         ]
         f_status = st.selectbox("Filter by Event Status", status_options, key="live_status_select")
         
@@ -1507,9 +1506,6 @@ elif selected_tab == "Discovery & Leagues":
             filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("COMPLETED")]
         elif f_status == "Just Completed":
             filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("JUST COMPLETED")]
-        elif f_status == "Other":
-            known = ["LIVE NOW", "STARTING SOON", "SCHEDULED", "COMPLETED", "JUST COMPLETED"]
-            filtered_leagues = filtered_leagues[~filtered_leagues["Live Status"].str.upper().isin(known)]
             
     st.markdown("<br>", unsafe_allow_html=True)
     if filtered_leagues.empty:
