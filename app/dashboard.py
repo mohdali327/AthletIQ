@@ -1474,17 +1474,42 @@ elif selected_tab == "Discovery & Leagues":
     </div>
     ''', unsafe_allow_html=True)
     
-    fc1, fc2 = st.columns(2)
+    fc1, fc2, fc3 = st.columns(3)
     with fc1:
         f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
     with fc2:
         f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
+    with fc3:
+        status_options = [
+            "All Statuses",
+            "Live Now",
+            "Starting Soon",
+            "Scheduled",
+            "Completed",
+            "Just Completed",
+            "Other"
+        ]
+        f_status = st.selectbox("Filter by Event Status", status_options, key="live_status_select")
         
     filtered_leagues = leagues_disp.copy()
     if f_sport != "All Core Sports":
         filtered_leagues = filtered_leagues[filtered_leagues["Sport"] == f_sport]
     if f_state != "All Mapped States":
         filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
+    if f_status != "All Statuses":
+        if f_status == "Live Now":
+            filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("LIVE NOW")]
+        elif f_status == "Starting Soon":
+            filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("STARTING SOON")]
+        elif f_status == "Scheduled":
+            filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("SCHEDULED") | filtered_leagues["Live Status"].str.upper().str.contains("STARTING SOON")]
+        elif f_status == "Completed":
+            filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("COMPLETED")]
+        elif f_status == "Just Completed":
+            filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("JUST COMPLETED")]
+        elif f_status == "Other":
+            known = ["LIVE NOW", "STARTING SOON", "SCHEDULED", "COMPLETED", "JUST COMPLETED"]
+            filtered_leagues = filtered_leagues[~filtered_leagues["Live Status"].str.upper().isin(known)]
             
     st.markdown("<br>", unsafe_allow_html=True)
     if filtered_leagues.empty:
@@ -1748,19 +1773,40 @@ elif selected_tab == "Centres & Academies":
                 c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="top_c_ath_sport")
                 all_sai_states = sorted(list(set(c["state"] for c in SAI_CENTRES)))
                 c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="top_c_ath_state")
+                c_gold = st.number_input("Gold Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_gold")
+                c_silver = st.number_input("Silver Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_silver")
+                c_bronze = st.number_input("Bronze Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_bronze")
+
+                st.markdown(f"""
+                <div style='margin-top:1rem; display:flex; gap:0.75rem;'>
+                    <div style='flex:1; background:rgba(255,215,0,0.12); border:1px solid rgba(255,215,0,0.25); border-radius:12px; padding:0.85rem;'>
+                        <div style='font-size:0.8rem; color:#FFE066; font-weight:700; margin-bottom:0.35rem;'>Gold</div>
+                        <div style='font-size:1.5rem; font-weight:800; color:#FFD700;'>{c_gold}</div>
+                    </div>
+                    <div style='flex:1; background:rgba(192,192,192,0.12); border:1px solid rgba(192,192,192,0.25); border-radius:12px; padding:0.85rem;'>
+                        <div style='font-size:0.8rem; color:#D3D3D3; font-weight:700; margin-bottom:0.35rem;'>Silver</div>
+                        <div style='font-size:1.5rem; font-weight:800; color:#C0C0C0;'>{c_silver}</div>
+                    </div>
+                    <div style='flex:1; background:rgba(205,127,50,0.12); border:1px solid rgba(205,127,50,0.25); border-radius:12px; padding:0.85rem;'>
+                        <div style='font-size:0.8rem; color:#D2A679; font-weight:700; margin-bottom:0.35rem;'>Bronze</div>
+                        <div style='font-size:1.5rem; font-weight:800; color:#CD7F32;'>{c_bronze}</div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
             with c_tla2:
                 c_age = st.slider("Age (Years)", 8, 35, 17, key="top_c_ath_age")
                 c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender")
                 c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf")
-                
+            
             run_custom_match = st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
             if run_custom_match:
+                medal_total = int(c_gold) + int(c_silver) + int(c_bronze)
                 custom_ath_mock = {
                     "name": c_name,
                     "sport": c_sport.upper(),
                     "age": str(c_age),
                     "gender": "F" if c_gender == "Female" else "M",
-                    "medals": f"{c_perf} Level Competitor",
+                    "medals": f"Gold: {c_gold} | Silver: {c_silver} | Bronze: {c_bronze} | Total: {medal_total}",
                     "records": f"Custom entered athlete from state of {c_state} competing in {c_sport}."
                 }
                 st.session_state["top_matched_athlete"] = custom_ath_mock
@@ -1803,6 +1849,9 @@ elif selected_tab == "Centres & Academies":
               </div>
               <div style="font-size:0.82rem;color:#9AA0A6;margin-top:0.2rem;">
                 Sport Focus: {t_ath['sport'].title()} &nbsp;|&nbsp; Home State: {t_state} &nbsp;|&nbsp; Age: {t_age} &nbsp;|&nbsp; Performance Level: {t_perf}
+              </div>
+              <div style="font-size:0.82rem;color:#FFF;margin-top:0.6rem;">
+                <b>Medals:</b> {t_ath.get('medals', 'Gold: 0 | Silver: 0 | Bronze: 0 | Total: 0')}
               </div>
             </div>
             ''', unsafe_allow_html=True)
