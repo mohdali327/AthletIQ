@@ -450,6 +450,21 @@ div[class*="collapsedSidebar"]::before {
     font-size: 1rem; font-weight: 600; letter-spacing: 0.06em;
     text-transform: uppercase;
 }
+/* Custom Cursor styles for Inputs, Selectboxes, and Buttons */
+div[data-testid="stTextInput"] input,
+div[data-testid="stSelectbox"] div[role="combobox"],
+div[data-testid="stSelectbox"] [data-baseweb="select"],
+div[data-testid="stSelectbox"] svg,
+div[data-testid="stSelectbox"] div,
+button[data-testid="baseButton-secondary"],
+button[data-testid="baseButton-primary"] {
+    cursor: pointer !important;
+}
+div[data-baseweb="popover"] li,
+div[role="listbox"] li,
+div[role="option"] {
+    cursor: pointer !important;
+}
 </style>
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
   <div class="orb orb-1"></div>
@@ -457,6 +472,28 @@ div[class*="collapsedSidebar"]::before {
   <div class="orb orb-3"></div>
   <div class="grid-3d"></div>
 </div>
+<img src="x" onerror="
+    if (!window.hasClearInputSetup) {
+        window.hasClearInputSetup = true;
+        document.addEventListener('focusin', function(e) {
+            if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'text') {
+                const input = e.target;
+                if (!input.dataset.focusedBefore) {
+                    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                    nativeInputValueSetter.call(input, '');
+                    const event = new Event('input', { bubbles: true });
+                    input.dispatchEvent(event);
+                    input.dataset.focusedBefore = 'true';
+                }
+            }
+        });
+        document.addEventListener('focusout', function(e) {
+            if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'text') {
+                e.target.removeAttribute('data-focused-before');
+            }
+        });
+    }
+" style="display:none;">
 """
 st.markdown(css_code.replace("PLACEHOLDER_BG", bg_base64), unsafe_allow_html=True)
 
@@ -651,13 +688,6 @@ if elite_athletes and df_all is not None:
 # ── TOP HORIZONTAL NAVIGATION ──
 st.markdown('''<style>
 
-/* ── 3D Sports Background ── */
-.stApp {
-    background-image: url("data:image/jpeg;base64,PLACEHOLDER_BG");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-}
 /* Make main block translucent so background shows through */
 .st-emotion-cache-1jicfl2 {
     background-color: rgba(8, 6, 17, 0.6) !important;
