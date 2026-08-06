@@ -2277,122 +2277,73 @@ elif selected_tab == "Womens":
             </div>
             """, unsafe_allow_html=True)
 
-        # ── Tabs: Search & Directory ──
-        w_tab_search, w_tab_dir = st.tabs(["Athlete Search", "Full Directory"])
+    # ── Athlete Search & Directory ──
+        w_athlete_names = sorted(filtered_women["name"].tolist())
+        w_selected = st.selectbox(
+            "Select Women Athlete to View Bio-Data:",
+            options=["-- Select Athlete --"] + w_athlete_names,
+            key="women_selected_athlete"
+        )
 
-        with w_tab_search:
-            w_athlete_names = sorted(filtered_women["name"].tolist())
-            w_selected = st.selectbox(
-                "Select Women Athlete to View Bio-Data:",
-                options=["-- Select Athlete --"] + w_athlete_names,
-                key="women_selected_athlete"
-            )
+        if w_selected != "-- Select Athlete --":
+            person = filtered_women[filtered_women["name"] == w_selected].iloc[0]
+            st.markdown("---")
+            st.markdown(f'<div class="stitle" style="font-size:1.15rem;margin-top:0rem;">Bio-Data: {w_selected}</div>', unsafe_allow_html=True)
 
-            if w_selected != "-- Select Athlete --":
-                person = filtered_women[filtered_women["name"] == w_selected].iloc[0]
-                st.markdown("---")
-                st.markdown(f'<div class="stitle" style="font-size:1.15rem;margin-top:0rem;">Bio-Data: {w_selected}</div>', unsafe_allow_html=True)
-
-                # Bio card — Left: Personal Info, Right: Performance & Training
-                w_c1, w_c2 = st.columns([1, 1])
-                with w_c1:
-                    st.markdown(f"""
-                    <div class="acard" style="min-height:250px;">
-                        <span class="tag green" style="float:right;">Sportsperson</span>
-                        <b style="font-size:1.1rem;color:var(--teal);">{person['name']}</b><br>
-                        <span style="font-size:0.75rem;color:var(--text2);">{person['sport']} · {person['state']} · {person['city']}</span>
-                        <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
-                        <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                            <b>Age:</b> {person['age']}<br>
-                            <b>Gender:</b> {person['gender']}<br>
-                            <b>Tier:</b> {person['tier']}<br>
-                            <b>Status:</b> <span class="tag amber">{person['status']}</span><br>
-                            <b>Registry Base:</b> {person['city']}, {person['state']}<br>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-
-                with w_c2:
-                    st.markdown(f"""
-                    <div class="acard" style="min-height:250px;">
-                        <span class="tag blue" style="float:right;">Performance & Training</span>
-                        <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
-                        <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
-                        <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                            <b>Performance Level:</b> <span class="tag green">{person['performance_level']}</span><br>
-                            <b>Opportunity Score:</b> <span class="tag amber">{person['athletiq_opportunity_score']} / 10.0</span><br>
-                            <b>Current Funding:</b> {person['funding_status']}<br>
-                            <b>Highlight:</b> {person['highlight']}<br>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-
-                # Achievements & Remarks card
+            # Bio card — Left: Personal Info, Right: Performance & Training
+            w_c1, w_c2 = st.columns([1, 1])
+            with w_c1:
                 st.markdown(f"""
-                <div class="acard">
-                    <span class="tag amber" style="float:right;">Achievements</span>
-                    <b style="font-size:1rem;color:var(--gold);">Key Achievements & Scouting Notes</b>
-                    <hr style="margin:0.8rem 0;border-color:rgba(253,214,99,0.2);">
-                    <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
-                        <b>Achievements:</b> {person['achievements']}<br>
-                        <b>Scouting Remarks:</b> {person['remarks']}
+                <div class="acard" style="min-height:250px;">
+                    <span class="tag green" style="float:right;">Sportsperson</span>
+                    <b style="font-size:1.1rem;color:var(--teal);">{person['name']}</b><br>
+                    <span style="font-size:0.75rem;color:var(--text2);">{person['sport']} · {person['state']} · {person['city']}</span>
+                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                        <b>Age:</b> {person['age']}<br>
+                        <b>Gender:</b> {person['gender']}<br>
+                        <b>Tier:</b> {person['tier']}<br>
+                        <b>Status:</b> <span class="tag amber">{person['status']}</span><br>
+                        <b>Registry Base:</b> {person['city']}, {person['state']}<br>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
-            else:
-                # Show summary info when no athlete is selected
-                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Select an athlete above to view her full profile, or browse the Full Directory tab.</div>', unsafe_allow_html=True)
-                
-                # Show sport distribution chart
-                sport_counts = filtered_women["sport"].value_counts().head(15)
-                fig_sport = go.Figure(go.Bar(
-                    x=sport_counts.values,
-                    y=sport_counts.index,
-                    orientation='h',
-                    marker_color='rgba(16,229,179,0.7)',
-                    text=sport_counts.values,
-                    textposition='outside'
-                ))
-                fig_sport.update_layout(
-                    title="Athletes by Sport (Top 15)",
-                    paper_bgcolor='rgba(0,0,0,0)',
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    font=dict(color='#a0aec0', size=12),
-                    height=420,
-                    margin=dict(l=10, r=40, t=40, b=10),
-                    yaxis=dict(autorange="reversed"),
-                    xaxis=dict(showgrid=False),
-                )
-                st.plotly_chart(fig_sport, use_container_width=True)
 
-                # Show state distribution
-                state_counts = filtered_women["state"].value_counts().head(15)
-                fig_state = go.Figure(go.Bar(
-                    x=state_counts.values,
-                    y=state_counts.index,
-                    orientation='h',
-                    marker_color='rgba(99,179,237,0.7)',
-                    text=state_counts.values,
-                    textposition='outside'
-                ))
-                fig_state.update_layout(
-                    title="Athletes by State (Top 15)",
-                    paper_bgcolor='rgba(0,0,0,0)',
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    font=dict(color='#a0aec0', size=12),
-                    height=420,
-                    margin=dict(l=10, r=40, t=40, b=10),
-                    yaxis=dict(autorange="reversed"),
-                    xaxis=dict(showgrid=False),
-                )
-                st.plotly_chart(fig_state, use_container_width=True)
+            with w_c2:
+                st.markdown(f"""
+                <div class="acard" style="min-height:250px;">
+                    <span class="tag blue" style="float:right;">Performance & Training</span>
+                    <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
+                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                        <b>Performance Level:</b> <span class="tag green">{person['performance_level']}</span><br>
+                        <b>Opportunity Score:</b> <span class="tag amber">{person['athletiq_opportunity_score']} / 10.0</span><br>
+                        <b>Current Funding:</b> {person['funding_status']}<br>
+                        <b>Highlight:</b> {person['highlight']}<br>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
 
-        with w_tab_dir:
-            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Full Women Athletes Directory</div>', unsafe_allow_html=True)
-            dir_display = filtered_women[["name", "sport", "event", "state", "city", "age", "performance_level", "status", "athletiq_opportunity_score", "achievements"]].copy()
-            dir_display.columns = ["Athlete Name", "Sport", "Event", "State", "City", "Age", "Level", "Status", "Score", "Achievements"]
-            st.write(f"Showing all matching women athletes (total: {len(dir_display):,}):")
-            st.dataframe(dir_display.reset_index(drop=True), use_container_width=True, height=500, hide_index=True)
+            # Achievements & Remarks card
+            st.markdown(f"""
+            <div class="acard">
+                <span class="tag amber" style="float:right;">Achievements</span>
+                <b style="font-size:1rem;color:var(--gold);">Key Achievements & Scouting Notes</b>
+                <hr style="margin:0.8rem 0;border-color:rgba(253,214,99,0.2);">
+                <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
+                    <b>Achievements:</b> {person['achievements']}<br>
+                    <b>Scouting Remarks:</b> {person['remarks']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        else:
+            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Select an athlete above to view her full profile, or browse the directory below.</div>', unsafe_allow_html=True)
+            
+        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Full Women Athletes Directory</div>', unsafe_allow_html=True)
+        dir_display = filtered_women[["name", "sport", "event", "state", "city", "age", "performance_level", "status", "athletiq_opportunity_score", "achievements"]].copy()
+        dir_display.columns = ["Athlete Name", "Sport", "Event", "State", "City", "Age", "Level", "Status", "Score", "Achievements"]
+        st.write(f"Showing all matching women athletes (total: {len(dir_display):,}):")
+        st.dataframe(dir_display.reset_index(drop=True), use_container_width=True, height=500, hide_index=True)
 
 
 elif selected_tab == "AI Assistant":
