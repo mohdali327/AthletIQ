@@ -2201,156 +2201,44 @@ elif selected_tab == "Profile":
 
 
 elif selected_tab == "Womens":
-    # ─── Women Athletes Data (from Emerging Athlete PDF) ───
-    women_athletes_data = [
-        {
-            "name": "Anjali Munda",
-            "sport": "Swimming",
-            "state": "Odisha",
-            "age": 15,
-            "gender": "Female",
-            "status": "Emerging",
-            "tier": "Junior",
-            "performance_level": "National",
-            "city": "Rourkela",
-            "funding_status": "Khelo India Scholarship",
-            "athletiq_opportunity_score": 8.2,
-            "remarks": "15-year-old swimmer from Odisha who won multiple gold medals at the Khelo India Tribal Games 2026. Shows exceptional potential in freestyle and backstroke events.",
-            "achievements": "Multiple Gold medals at Khelo India Tribal Games 2026",
-            "highlight": "Youngest multi-gold medalist at Tribal Games 2026"
-        },
-        {
-            "name": "Harita Bhadra",
-            "sport": "Athletics (Sprint)",
-            "state": "West Bengal",
-            "age": 19,
-            "gender": "Female",
-            "status": "Rising Athlete",
-            "tier": "Senior",
-            "performance_level": "International",
-            "city": "Kolkata",
-            "funding_status": "State Scholarship + SAI Support",
-            "athletiq_opportunity_score": 7.8,
-            "remarks": "One of India's promising women sprinters with strong domestic performances and age-group international exposure.",
-            "achievements": "Strong domestic sprint champion with international age-group exposure",
-            "highlight": "India's next generation women sprinter"
-        },
-        {
-            "name": "Komalika Bari",
-            "sport": "Archery",
-            "state": "Jharkhand",
-            "age": 20,
-            "gender": "Female",
-            "status": "Emerging",
-            "tier": "Elite",
-            "performance_level": "International",
-            "city": "Ranchi",
-            "funding_status": "TOPS Scheme + SAI",
-            "athletiq_opportunity_score": 9.1,
-            "remarks": "Internationally successful junior archer and highlighted as one of the standout athletes from the Khelo India Tribal Games. World Youth Archery Champion.",
-            "achievements": "World Youth Archery Champion, Khelo India Tribal Games standout",
-            "highlight": "World Youth Champion — 2028 LA Olympics prospect"
-        },
-        {
-            "name": "Bhargavi Bhagora",
-            "sport": "Archery",
-            "state": "Gujarat",
-            "age": 17,
-            "gender": "Female",
-            "status": "Emerging",
-            "tier": "Junior",
-            "performance_level": "National",
-            "city": "Ahmedabad",
-            "funding_status": "State Scholarship",
-            "athletiq_opportunity_score": 7.5,
-            "remarks": "Recognized as one of the promising archers highlighted during the Khelo India Tribal Games. Shows consistent accuracy and composure under pressure.",
-            "achievements": "Recognized as promising archer at Khelo India Tribal Games",
-            "highlight": "Gujarat's rising archery talent"
-        },
-        {
-            "name": "Jhilli Dalabehera",
-            "sport": "Weightlifting",
-            "state": "Odisha",
-            "age": 18,
-            "gender": "Female",
-            "status": "Emerging",
-            "tier": "Junior",
-            "performance_level": "National",
-            "city": "Berhampur",
-            "funding_status": "Khelo India Support",
-            "athletiq_opportunity_score": 7.9,
-            "remarks": "Young weightlifter identified among the promising athletes at the Khelo India Tribal Games. Displays raw strength and improving technique.",
-            "achievements": "Promising performances at Khelo India Tribal Games",
-            "highlight": "Odisha's promising weightlifting talent"
-        },
-        {
-            "name": "Kiran Pisda",
-            "sport": "Football",
-            "state": "Chhattisgarh",
-            "age": 19,
-            "gender": "Female",
-            "status": "Emerging",
-            "tier": "Senior",
-            "performance_level": "National",
-            "city": "Raipur",
-            "funding_status": "State Sports Authority",
-            "athletiq_opportunity_score": 7.6,
-            "remarks": "Led the Chhattisgarh women's football team at the Khelo India Tribal Games and is considered a rising football talent. Natural leadership qualities.",
-            "achievements": "Captain — Chhattisgarh Women's Football Team at Khelo India Tribal Games",
-            "highlight": "Captain & leader of Chhattisgarh women's football"
-        },
-        {
-            "name": "Preeti Pawar",
-            "sport": "Boxing",
-            "state": "Maharashtra",
-            "age": 20,
-            "gender": "Female",
-            "status": "Rising International Athlete",
-            "tier": "Elite",
-            "performance_level": "International",
-            "city": "Pune",
-            "funding_status": "TOPS Scheme",
-            "athletiq_opportunity_score": 8.7,
-            "remarks": "Young boxer already competing internationally and considered one of India's top future boxing prospects. Showed medal-winning form at youth world championships.",
-            "achievements": "International Youth Boxing medals, India's top future boxing prospect",
-            "highlight": "India's No.1 rising women boxing prospect"
-        },
-        {
-            "name": "Asmita Dey",
-            "sport": "Judo",
-            "state": "Tripura",
-            "age": 18,
-            "gender": "Female",
-            "status": "Rising International Athlete",
-            "tier": "Elite",
-            "performance_level": "International",
-            "city": "Agartala",
-            "funding_status": "SAI Scholarship",
-            "athletiq_opportunity_score": 8.0,
-            "remarks": "Young judoka with strong national and international age-group performances. One of the few elite athletes from the North-East region.",
-            "achievements": "Strong national and international age-group performances in Judo",
-            "highlight": "North-East's premier judo talent"
-        }
-    ]
+    # ─── Load 5000 Women Athletes from JSON ───
+    women_json_path = os.path.join(os.path.dirname(__file__), "..", "data", "women_athletes.json")
+    if not os.path.exists(women_json_path):
+        women_json_path = os.path.join(os.path.dirname(__file__), "data", "women_athletes.json")
+    
+    if os.path.exists(women_json_path):
+        with open(women_json_path, "r", encoding="utf-8") as wf:
+            women_athletes_data = json.load(wf)
+    else:
+        women_athletes_data = []
 
     women_df = pd.DataFrame(women_athletes_data)
 
     st.markdown('<div class="stitle sticky-header"> Womens Directory <span class="chip chip-blue">Emerging Women Athletes</span></div>', unsafe_allow_html=True)
 
     # ── Filters ──
-    wcol_spt, wcol_st = st.columns(2)
+    wcol_search, wcol_spt, wcol_st, wcol_lvl = st.columns([2, 1, 1, 1])
+    with wcol_search:
+        w_search = st.text_input("🔍 Search by Name:", placeholder="Type athlete name...", key="women_search")
     with wcol_spt:
         w_sports_list = ["All Sports"] + sorted(women_df["sport"].unique().tolist())
-        w_sport_choice = st.selectbox("Choose Sport:", w_sports_list, key="women_sport")
+        w_sport_choice = st.selectbox("Sport:", w_sports_list, key="women_sport")
     with wcol_st:
         w_states_list = ["All States"] + sorted(women_df["state"].unique().tolist())
-        w_state_choice = st.selectbox("Choose State:", w_states_list, key="women_state")
+        w_state_choice = st.selectbox("State:", w_states_list, key="women_state")
+    with wcol_lvl:
+        w_levels_list = ["All Levels", "International", "National", "State", "District"]
+        w_level_choice = st.selectbox("Level:", w_levels_list, key="women_level")
 
     filtered_women = women_df.copy()
+    if w_search and w_search.strip():
+        filtered_women = filtered_women[filtered_women["name"].str.lower().str.contains(w_search.strip().lower())]
     if w_sport_choice != "All Sports":
         filtered_women = filtered_women[filtered_women["sport"].str.lower() == w_sport_choice.lower()]
     if w_state_choice != "All States":
         filtered_women = filtered_women[filtered_women["state"].str.lower() == w_state_choice.lower()]
+    if w_level_choice != "All Levels":
+        filtered_women = filtered_women[filtered_women["performance_level"] == w_level_choice]
 
     if filtered_women.empty:
         st.warning("No women athletes found for the selected filters.")
@@ -2452,33 +2340,59 @@ elif selected_tab == "Womens":
                 </div>
                 """, unsafe_allow_html=True)
             else:
-                # Show overview cards when no athlete is selected
-                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Emerging Women Athletes Overview</div>', unsafe_allow_html=True)
-                for idx, row in filtered_women.iterrows():
-                    score_color = "var(--teal)" if row['athletiq_opportunity_score'] >= 8.0 else "var(--gold)" if row['athletiq_opportunity_score'] >= 7.5 else "var(--text2)"
-                    st.markdown(f"""
-                    <div class="acard" style="margin-bottom:0.5rem;">
-                        <div style="display:flex;justify-content:space-between;align-items:center;">
-                            <div>
-                                <b style="font-size:1rem;color:var(--teal);">{row['name']}</b>
-                                <span class="tag green" style="margin-left:0.5rem;">{row['sport']}</span>
-                                <span class="tag blue" style="margin-left:0.3rem;">{row['state']}</span>
-                            </div>
-                            <div style="text-align:right;">
-                                <span style="font-size:1.3rem;font-weight:800;color:{score_color};">{row['athletiq_opportunity_score']}</span>
-                                <span style="font-size:0.7rem;color:var(--text2);">/10</span>
-                            </div>
-                        </div>
-                        <div style="font-size:0.78rem;color:var(--text2);margin-top:0.3rem;">{row['highlight']}</div>
-                    </div>
-                    """, unsafe_allow_html=True)
+                # Show summary info when no athlete is selected
+                st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Select an athlete above to view her full profile, or browse the Full Directory tab.</div>', unsafe_allow_html=True)
+                
+                # Show sport distribution chart
+                sport_counts = filtered_women["sport"].value_counts().head(15)
+                fig_sport = go.Figure(go.Bar(
+                    x=sport_counts.values,
+                    y=sport_counts.index,
+                    orientation='h',
+                    marker_color='rgba(16,229,179,0.7)',
+                    text=sport_counts.values,
+                    textposition='outside'
+                ))
+                fig_sport.update_layout(
+                    title="Athletes by Sport (Top 15)",
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    plot_bgcolor='rgba(0,0,0,0)',
+                    font=dict(color='#a0aec0', size=12),
+                    height=420,
+                    margin=dict(l=10, r=40, t=40, b=10),
+                    yaxis=dict(autorange="reversed"),
+                    xaxis=dict(showgrid=False),
+                )
+                st.plotly_chart(fig_sport, use_container_width=True)
+
+                # Show state distribution
+                state_counts = filtered_women["state"].value_counts().head(15)
+                fig_state = go.Figure(go.Bar(
+                    x=state_counts.values,
+                    y=state_counts.index,
+                    orientation='h',
+                    marker_color='rgba(99,179,237,0.7)',
+                    text=state_counts.values,
+                    textposition='outside'
+                ))
+                fig_state.update_layout(
+                    title="Athletes by State (Top 15)",
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    plot_bgcolor='rgba(0,0,0,0)',
+                    font=dict(color='#a0aec0', size=12),
+                    height=420,
+                    margin=dict(l=10, r=40, t=40, b=10),
+                    yaxis=dict(autorange="reversed"),
+                    xaxis=dict(showgrid=False),
+                )
+                st.plotly_chart(fig_state, use_container_width=True)
 
         with w_tab_dir:
             st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Full Women Athletes Directory</div>', unsafe_allow_html=True)
-            dir_display = filtered_women[["name", "sport", "state", "age", "performance_level", "status", "athletiq_opportunity_score", "achievements"]].copy()
-            dir_display.columns = ["Athlete Name", "Sport", "State", "Age", "Level", "Status", "Score", "Achievements"]
-            st.write(f"Showing all matching women athletes (total: {len(dir_display)}):")
-            st.dataframe(dir_display.reset_index(drop=True), use_container_width=True, height=350, hide_index=True)
+            dir_display = filtered_women[["name", "sport", "event", "state", "city", "age", "performance_level", "status", "athletiq_opportunity_score", "achievements"]].copy()
+            dir_display.columns = ["Athlete Name", "Sport", "Event", "State", "City", "Age", "Level", "Status", "Score", "Achievements"]
+            st.write(f"Showing all matching women athletes (total: {len(dir_display):,}):")
+            st.dataframe(dir_display.reset_index(drop=True), use_container_width=True, height=500, hide_index=True)
 
 
 elif selected_tab == "AI Assistant":
