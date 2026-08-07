@@ -16,7 +16,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data"))
+DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../data"))
+if not os.path.exists(DATA_DIR) or not os.path.exists(os.path.join(DATA_DIR, "athletiq_master_database.csv")):
+    DATA_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../data"))
 
 def get_data_path(filename):
     return os.path.join(DATA_DIR, filename)
