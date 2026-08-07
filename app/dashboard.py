@@ -28,6 +28,13 @@ st.set_page_config(
 # ─────────────────────────────────────────────────────────────────────────────
 import base64
 
+# Global navigation callbacks for Centres & Academies sub-tabs
+def set_proximity_tab():
+    st.session_state.ca_active_tab = "SAI Proximity Matcher"
+
+def set_ratio_tab():
+    st.session_state.ca_active_tab = "Coach-to-Athlete Ratios & Capacity"
+
 def load_bg_base64():
     bg_path = os.path.join(os.path.dirname(__file__), "cyber_sports_bg.jpg")
     if os.path.exists(bg_path):
@@ -1717,12 +1724,12 @@ elif selected_tab == "Centres & Academies":
         col1, col2 = st.columns(2)
         with col1:
             all_centres = sai_df["name"].unique().tolist()
-            selected_centre = st.selectbox("Select SAI Centre", all_centres, key="ca_selected_centre")
+            selected_centre = st.selectbox("Select SAI Centre", all_centres, key="ca_selected_centre", on_change=set_ratio_tab)
         
         centre_row = sai_df[sai_df["name"] == selected_centre].iloc[0]
         centre_sports = centre_row["sports"]
         with col2:
-            selected_sport = st.selectbox("Select Sport", centre_sports, key="ca_selected_sport")
+            selected_sport = st.selectbox("Select Sport", centre_sports, key="ca_selected_sport", on_change=set_ratio_tab)
         
         total_capacity = int(centre_row["capacity"])
         total_coaches = int(centre_row["coaches"])
@@ -1854,17 +1861,17 @@ elif selected_tab == "Centres & Academies":
     with ca_tabs[3]:
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> 🔍 SAI Training Centre Proximity & Suitability Matcher</div>', unsafe_allow_html=True)
         # Toggle between Database search and Custom Profile Creator
-        matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode")
+        matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode", on_change=set_proximity_tab)
 
         if matcher_mode == "Search Database Athletes":
             c_tla1, c_tla2 = st.columns([3, 1])
             with c_tla1:
                 db_athletes = sorted(list(set(df_all[df_all["entity_type"] == "Athlete"]["name"].dropna().tolist() + [a["name"] for a in elite_athletes])))
-                selected_athlete_name = st.selectbox("Select Athlete to Match", db_athletes, index=db_athletes.index("Manu Bhaker") if "Manu Bhaker" in db_athletes else 0, key="top_search_athlete_select")
+                selected_athlete_name = st.selectbox("Select Athlete to Match", db_athletes, index=db_athletes.index("Manu Bhaker") if "Manu Bhaker" in db_athletes else 0, key="top_search_athlete_select", on_change=set_proximity_tab)
             with c_tla2:
                 st.write("")
                 st.write("")
-                run_db_match = st.button(" Match SAI Centre", key="btn_top_run_db_match", use_container_width=True)
+                run_db_match = st.button(" Match SAI Centre", key="btn_top_run_db_match", use_container_width=True, on_click=set_proximity_tab)
                 
             if run_db_match:
                 # First check elite_athletes json list
@@ -1900,14 +1907,14 @@ elif selected_tab == "Centres & Academies":
         else:
             c_tla1, c_tla2 = st.columns(2)
             with c_tla1:
-                c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="top_c_ath_name")
+                c_name = st.text_input("Athlete Name", value="Custom Athlete Profile", key="top_c_ath_name", on_change=set_proximity_tab)
                 all_sai_disciplines = sorted(list(set(sp for c in SAI_CENTRES for sp in c["sports"])))
-                c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="top_c_ath_sport")
+                c_sport = st.selectbox("Sport Discipline", all_sai_disciplines, index=all_sai_disciplines.index("Wrestling") if "Wrestling" in all_sai_disciplines else 0, key="top_c_ath_sport", on_change=set_proximity_tab)
                 all_sai_states = sorted(list(set(c["state"] for c in SAI_CENTRES)))
-                c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="top_c_ath_state")
-                c_gold = st.number_input("Gold Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_gold")
-                c_silver = st.number_input("Silver Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_silver")
-                c_bronze = st.number_input("Bronze Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_bronze")
+                c_state = st.selectbox("Home State", all_sai_states, index=all_sai_states.index("Haryana") if "Haryana" in all_sai_states else 0, key="top_c_ath_state", on_change=set_proximity_tab)
+                c_gold = st.number_input("Gold Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_gold", on_change=set_proximity_tab)
+                c_silver = st.number_input("Silver Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_silver", on_change=set_proximity_tab)
+                c_bronze = st.number_input("Bronze Medals", min_value=0, max_value=50, value=0, step=1, key="top_c_ath_bronze", on_change=set_proximity_tab)
 
                 st.markdown(f"""
                 <div style='margin-top:1rem; display:flex; gap:0.75rem;'>
@@ -1926,11 +1933,11 @@ elif selected_tab == "Centres & Academies":
                 </div>
                 """, unsafe_allow_html=True)
             with c_tla2:
-                c_age = st.slider("Age (Years)", 8, 35, 17, key="top_c_ath_age")
-                c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender")
-                c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf")
+                c_age = st.slider("Age (Years)", 8, 35, 17, key="top_c_ath_age", on_change=set_proximity_tab)
+                c_gender = st.selectbox("Gender", ["Male", "Female"], key="top_c_ath_gender", on_change=set_proximity_tab)
+                c_perf = st.selectbox("Current Performance Level", ["District", "State", "National", "International"], key="top_c_ath_perf", on_change=set_proximity_tab)
             
-            run_custom_match = st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match")
+            run_custom_match = st.button(" Calculate Optimal Training Centre", use_container_width=True, key="btn_top_run_custom_match", on_click=set_proximity_tab)
             if run_custom_match:
                 medal_total = int(c_gold) + int(c_silver) + int(c_bronze)
                 custom_ath_mock = {
@@ -1991,7 +1998,7 @@ elif selected_tab == "Centres & Academies":
             for idx, rec in enumerate(recs):
                 st.markdown(render_sai_card(rec["centre"], rec["score"], idx+1), unsafe_allow_html=True)
                 
-            if st.button(" Clear Recommendations & Close Panel", key="btn_top_close_matcher"):
+            if st.button(" Clear Recommendations & Close Panel", key="btn_top_close_matcher", on_click=set_proximity_tab):
                 del st.session_state["top_matched_athlete"]
                 if "top_custom_matched_state" in st.session_state:
                     del st.session_state["top_custom_matched_state"]
