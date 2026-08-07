@@ -465,6 +465,25 @@ div[role="listbox"] li,
 div[role="option"] {
     cursor: pointer !important;
 }
+.back-btn-container {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+.back-btn-container button {
+    background: rgba(16, 229, 179, 0.1) !important;
+    border: 1px solid rgba(16, 229, 179, 0.3) !important;
+    color: #10E5B3 !important;
+    font-weight: 600 !important;
+    border-radius: 6px !important;
+    padding: 0.4rem 1rem !important;
+    transition: all 0.3s ease !important;
+}
+.back-btn-container button:hover {
+    background: rgba(16, 229, 179, 0.2) !important;
+    border-color: #10E5B3 !important;
+    box-shadow: 0 0 12px rgba(16, 229, 179, 0.2) !important;
+}
 </style>
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;">
   <div class="orb orb-1"></div>
@@ -682,6 +701,46 @@ if elite_athletes and df_all is not None:
         df_new_elites = df_new_elites[df_all.columns]
         df_all = pd.concat([df_all, df_new_elites], ignore_index=True)
 
+# Dynamically inject women athletes into df_all
+women_path, women_mtime = find_file(["../data/women_athletes.json", "data/women_athletes.json", "./data/women_athletes.json"])
+if women_path and df_all is not None:
+    try:
+        with open(women_path, "r", encoding="utf-8") as wf:
+            women_athletes_data = json.load(wf)
+        if women_athletes_data:
+            df_women = pd.DataFrame(women_athletes_data)
+            df_women["entity_type"] = "Athlete"
+            
+            # Map key names to match df_all columns
+            if "notes" not in df_women.columns:
+                df_women["notes"] = df_women["achievements"].fillna("") + " | " + df_women["remarks"].fillna("")
+            if "cwg_2036_relevance" not in df_women.columns:
+                df_women["cwg_2036_relevance"] = 8.0
+            if "olympic_2032_relevance" not in df_women.columns:
+                df_women["olympic_2032_relevance"] = 8.0
+            if "digital_readiness" not in df_women.columns:
+                df_women["digital_readiness"] = 7.0
+            if "pipeline_stage" not in df_women.columns:
+                df_women["pipeline_stage"] = "Discovery"
+            if "participants_or_capacity" not in df_women.columns:
+                df_women["participants_or_capacity"] = 1.0
+            if "frequency" not in df_women.columns:
+                df_women["frequency"] = "Daily"
+            if "tags" not in df_women.columns:
+                df_women["tags"] = df_women["sport"].str.lower() + ",women,grassroots"
+            if "source_link" not in df_women.columns:
+                df_women["source_link"] = "Official Registry"
+            
+            # Fill missing columns from df_all with default/None
+            for col in df_all.columns:
+                if col not in df_women.columns:
+                    df_women[col] = None
+                    
+            df_women = df_women[df_all.columns]
+            df_all = pd.concat([df_all, df_women], ignore_index=True)
+    except Exception as e:
+        pass
+
 # ─────────────────────────────────────────────────────────────────────────────
 # SIDEBAR NAVIGATION & FILTERS
 # ─────────────────────────────────────────────────────────────────────────────
@@ -785,6 +844,32 @@ if "_last_tab" not in st.session_state:
 if st.session_state._last_tab != selected_tab:
     st.session_state._last_tab = selected_tab
     st.markdown(f'<div class="redirect-overlay"><div class="redirect-spinner"></div><div class="redirect-text">Loading {selected_tab}...</div></div>', unsafe_allow_html=True)
+
+# Track navigation history
+if "nav_history" not in st.session_state:
+    st.session_state.nav_history = []
+
+if "current_tab" not in st.session_state:
+    st.session_state.current_tab = selected_tab
+
+if st.session_state.current_tab != selected_tab:
+    # Only append to history if it is different from the last state in history
+    if not st.session_state.nav_history or st.session_state.nav_history[-1] != st.session_state.current_tab:
+        st.session_state.nav_history.append(st.session_state.current_tab)
+    st.session_state.current_tab = selected_tab
+
+# Back button handler
+def go_back():
+    if st.session_state.nav_history:
+        prev_tab = st.session_state.nav_history.pop()
+        st.session_state.main_navigation = prev_tab
+        st.session_state.current_tab = prev_tab
+
+# Display Back Button if history exists
+if st.session_state.nav_history:
+    st.markdown('<div class="back-btn-container">', unsafe_allow_html=True)
+    st.button("⬅️ Back to Previous View", on_click=go_back, key="global_back_button")
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ── DYNAMIC SAI CENTRES LOADER ──
