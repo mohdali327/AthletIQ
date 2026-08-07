@@ -384,3 +384,159 @@ def match_centre(profile: dict):
 
     scores.sort(key=lambda x: x["score"], reverse=True)
     return scores[:3]
+
+
+# Helper for live tournaments
+def get_live_tournaments():
+    import random
+    import datetime
+    
+    sports = ["Wrestling", "Archery", "Boxing", "Hockey", "Athletics", "Shooting", "Weightlifting", "Badminton"]
+    states = ["Haryana", "Punjab", "Manipur", "Jharkhand", "Delhi", "Maharashtra", "Kerala", "Tamil Nadu", "Assam", "Uttar Pradesh"]
+    levels = ["District Cup", "State Selection Trial", "Zonal Championship", "Khelo India Cadet Roster", "Sub-Junior Nationals"]
+    genders = ["Male", "Female", "Mixed"]
+    funding_status_options = ["Fully Funded", "Partially Funded", "Unfunded"]
+    
+    tournaments = []
+    
+    realistic_seeds = [
+        ("Haryana Sub-Junior Freestyle Wrestling Trials", "Wrestling", "Haryana", "State Selection Trial"),
+        ("North East Recurve Archery Cadet Cup", "Archery", "Assam", "Zonal Championship"),
+        ("Punjab State Junior Boxing Roster", "Boxing", "Punjab", "State Selection Trial"),
+        ("Khelo India Women's Hockey League West", "Hockey", "Maharashtra", "Khelo India Cadet Roster"),
+        ("Delhi Pistol & Rifle Championship", "Shooting", "Delhi", "District Cup"),
+        ("Manipur Weightlifting Cadet Trials", "Weightlifting", "Manipur", "Sub-Junior Nationals"),
+        ("South Zone Junior Badminton Open", "Badminton", "Tamil Nadu", "Zonal Championship"),
+        ("National Youth Athletics Elite Selection", "Athletics", "Kerala", "Sub-Junior Nationals"),
+    ]
+    
+    for name, sport, state, lvl in realistic_seeds:
+        tournaments.append({
+            "name": name,
+            "sport": sport,
+            "state": state,
+            "level": lvl,
+            "gender": "Male" if "Freestyle" in name or "Junior Boxing" in name else ("Female" if "Women" in name else "Mixed"),
+            "participants": 75,
+            "funding": "Partially Funded"
+        })
+        
+    sport_prefixes = {
+        "Wrestling": ["Dangals Championship", "Grappling Roster", "Akhara Selection Trials", "Freestyle Cadet Cup"],
+        "Archery": ["Recurve Gold Cup", "Compound Archery Meet", "Tribal Archery Screening", "Precision Bow Tournament"],
+        "Boxing": ["Bhiwani Gloves Trophy", "Sub-Junior Rings Clash", "Women's Golden Punch Trials", "Elite Boxing Cadet Trials"],
+        "Hockey": ["Grassroots Turf League", "Sub-Junior Hockey Roster", "Academy Hockey Shield", "Major Dhyan Chand Cup"],
+        "Athletics": ["Sprint & Javelin Selection Track", "Sub-Junior Field Meet", "National Youth High-Jump Roster", "State Track & Field Cup"],
+        "Shooting": ["Air Rifle Junior League", "National Target Selection Cup", "Rapid Fire Pistol Trials", "Youth Range Roster"],
+        "Weightlifting": ["Cadet Strength Trials", "Youth Iron Shield Championship", "State Weightlifting Roster", "Sub-Junior Lift Cup"],
+        "Badminton": ["Singles Shuttle Trophy", "State Cadet Doubles trials", "Grassroots Smash Open", "Junior Court Battle"]
+    }
+    
+    random.seed(42)
+    while len(tournaments) < 105:
+        sp = random.choice(sports)
+        st_name = random.choice(states)
+        lvl = random.choice(levels)
+        g = random.choice(genders)
+        prefix = random.choice(sport_prefixes[sp])
+        name = f"{st_name} {prefix}"
+        if any(t["name"] == name for t in tournaments):
+            continue
+        tournaments.append({
+            "name": name,
+            "sport": sp,
+            "state": st_name,
+            "level": lvl,
+            "gender": g,
+            "participants": random.randint(30, 200),
+            "funding": random.choice(funding_status_options)
+        })
+        
+    now = datetime.datetime.now()
+    minute = now.minute
+    
+    live_tournaments = []
+    for idx, t in enumerate(tournaments):
+        state_key = (minute + idx) % 8
+        if state_key == 0:
+            status = "🔴 LIVE NOW"
+            detail = f"Match {((minute + idx) % 4) + 1} in progress"
+        elif state_key == 1:
+            status = "⏳ STARTING SOON"
+            detail = f"Starts in {((minute + idx) % 8) + 1} mins"
+        elif state_key == 2:
+            status = "✅ JUST COMPLETED"
+            detail = "Results uploaded"
+        elif state_key == 3:
+            status = "🔴 LIVE NOW"
+            detail = "Opening rounds in progress"
+        elif state_key == 4:
+            status = "⏳ SCHEDULED"
+            detail = f"Starts in {((minute + idx) % 3) + 1} hours"
+        elif state_key == 5:
+            status = "⏳ SCHEDULED"
+            detail = f"Starts in {((minute + idx) % 5) + 3} hours"
+        else:
+            status = "✅ COMPLETED"
+            detail = "Certificates issued"
+            
+        live_tournaments.append({
+            "Tournament/League Name": t["name"],
+            "Sport": t["sport"],
+            "League Level": t["level"],
+            "Gender": t["gender"],
+            "State": t["state"],
+            "Participants": t["participants"],
+            "Funding Status": t["funding"],
+            "Live Status": status,
+            "Action Details": detail
+        })
+        
+    return live_tournaments
+
+@app.get("/api/live-tournaments")
+def get_live_events():
+    return get_live_tournaments()
+
+@app.get("/api/women-athletes")
+def get_women():
+    women_path = get_data_path("women_athletes.json")
+    if os.path.exists(women_path):
+        with open(women_path, "r", encoding="utf-8") as wf:
+            return json.load(wf)
+    return []
+
+@app.post("/api/chat")
+def chat_ai(payload: dict):
+    api_key = payload.get("api_key")
+    message = payload.get("message")
+    
+    if not api_key:
+        raise HTTPException(status_code=400, detail="Gemini API Key is required")
+        
+    try:
+        from google import genai
+        
+        df, _ = load_data()
+        context = "ATHLETIQ MASTER DATABASE SUMMARY:\n"
+        if df is not None:
+            athletes = df[df["entity_type"] == "Athlete"]
+            context += "ATHLETES:\n"
+            context += athletes[["name", "sport", "notes"]].head(100).to_csv(index=False) + "\n"
+            coaches = df[df["entity_type"] == "Coach"]
+            context += "COACHES:\n"
+            context += coaches[["name", "sport", "notes"]].head(100).to_csv(index=False) + "\n"
+            
+        sys_prompt = f"You are the AthletIQ AI Assistant. You must ONLY answer questions based on the following database snapshot. If the user asks something outside of this data, politely decline.\n\n{context[:40000]}"
+        
+        client = genai.Client(api_key=api_key)
+        full_prompt = f"{sys_prompt}\n\nUser Question: {message}"
+        
+        response = client.models.generate_content(
+            model='gemini-1.5-flash',
+            contents=full_prompt,
+        )
+        
+        return {"reply": response.text if response.text else "No response generated."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
