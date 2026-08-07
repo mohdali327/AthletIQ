@@ -1689,7 +1689,27 @@ elif selected_tab == "Centres & Academies":
     st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
         "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
         
-    ca_tabs = st.tabs(["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas", "SAI Proximity Matcher"])
+    # Determine default sub-tab based on user interaction to prevent redirect glitch
+    if "ca_active_tab" not in st.session_state:
+        st.session_state.ca_active_tab = "Coach-to-Athlete Ratios & Capacity"
+
+    t3_keys = [
+        "top_matcher_mode", "top_search_athlete_select", "btn_top_run_db_match",
+        "top_c_ath_name", "top_c_ath_sport", "top_c_ath_state", "top_c_ath_gold",
+        "top_c_ath_silver", "top_c_ath_bronze", "top_c_ath_age", "top_c_ath_gender",
+        "top_c_ath_perf", "btn_top_run_custom_match", "top_matched_athlete"
+    ]
+    if any(k in st.session_state for k in t3_keys):
+        st.session_state.ca_active_tab = "SAI Proximity Matcher"
+
+    t0_keys = ["ca_selected_centre", "ca_selected_sport"]
+    if any(k in st.session_state for k in t0_keys):
+        st.session_state.ca_active_tab = "Coach-to-Athlete Ratios & Capacity"
+
+    ca_tabs = st.tabs(
+        ["Coach-to-Athlete Ratios & Capacity", "SAI Centres & NCOEs", "Private Academies & Akharas", "SAI Proximity Matcher"],
+        default=st.session_state.ca_active_tab
+    )
     
     with ca_tabs[0]:
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
@@ -1697,12 +1717,12 @@ elif selected_tab == "Centres & Academies":
         col1, col2 = st.columns(2)
         with col1:
             all_centres = sai_df["name"].unique().tolist()
-            selected_centre = st.selectbox("Select SAI Centre", all_centres)
+            selected_centre = st.selectbox("Select SAI Centre", all_centres, key="ca_selected_centre")
         
         centre_row = sai_df[sai_df["name"] == selected_centre].iloc[0]
         centre_sports = centre_row["sports"]
         with col2:
-            selected_sport = st.selectbox("Select Sport", centre_sports)
+            selected_sport = st.selectbox("Select Sport", centre_sports, key="ca_selected_sport")
         
         total_capacity = int(centre_row["capacity"])
         total_coaches = int(centre_row["coaches"])
