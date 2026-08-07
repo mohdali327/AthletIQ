@@ -2276,19 +2276,90 @@ elif selected_tab == "Profile":
             
             if selected_athlete == "-- Select Athlete --":
                 if not filtered_athletes.empty:
-                    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
-                    ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                    # Initialize selected level in session state if not present
+                    if "athlete_selected_level" not in st.session_state:
+                        st.session_state.athlete_selected_level = None
+                        
+                    # Inject CSS active styling dynamically based on session state selection
+                    style_intl = "background: rgba(16, 229, 179, 0.25) !important; border-color: #10E5B3 !important; box-shadow: 0 0 10px rgba(16,229,179,0.3) !important;" if st.session_state.athlete_selected_level == "International" else ""
+                    style_nat = "background: rgba(16, 229, 179, 0.25) !important; border-color: #10E5B3 !important; box-shadow: 0 0 10px rgba(16,229,179,0.3) !important;" if st.session_state.athlete_selected_level == "National" else ""
+                    style_state = "background: rgba(16, 229, 179, 0.25) !important; border-color: #10E5B3 !important; box-shadow: 0 0 10px rgba(16,229,179,0.3) !important;" if st.session_state.athlete_selected_level == "State-wise" else ""
                     
-                    ath_display["Specialization"] = ath_display["sport"]
-                    ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
-                    ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
+                    st.markdown(f"""
+                    <style>
+                    #level-selection-trigger ~ div[data-testid="column"] button {{
+                        height: 90px !important;
+                        background: rgba(255, 255, 255, 0.03) !important;
+                        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+                        border-radius: 12px !important;
+                        font-size: 1.05rem !important;
+                        font-weight: 700 !important;
+                        color: #E8EAED !important;
+                        transition: all 0.3s ease !important;
+                    }}
+                    #level-selection-trigger ~ div[data-testid="column"] button:hover {{
+                        background: rgba(16, 229, 179, 0.12) !important;
+                        border-color: #10E5B3 !important;
+                        box-shadow: 0 6px 16px rgba(16, 229, 179, 0.2) !important;
+                        transform: translateY(-2px) !important;
+                    }}
+                    #level-selection-trigger ~ div[data-testid="column"]:nth-of-type(1) button {{ {style_intl} }}
+                    #level-selection-trigger ~ div[data-testid="column"]:nth-of-type(2) button {{ {style_nat} }}
+                    #level-selection-trigger ~ div[data-testid="column"]:nth-of-type(3) button {{ {style_state} }}
+                    </style>
+                    <div id="level-selection-trigger"></div>
+                    <div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;margin-bottom:0.8rem;">Filter Athletes Directory by Performance Level</div>
+                    """, unsafe_allow_html=True)
                     
-                    ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
-                    ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
-                    ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
-                    
-                    st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
-                    st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+                    col_intl, col_nat, col_state = st.columns(3)
+                    with col_intl:
+                        if st.button("🌍 International Level", key="btn_level_intl", use_container_width=True):
+                            st.session_state.athlete_selected_level = "International"
+                            st.rerun()
+                    with col_nat:
+                        if st.button("🏆 National Level", key="btn_level_nat", use_container_width=True):
+                            st.session_state.athlete_selected_level = "National"
+                            st.rerun()
+                    with col_state:
+                        if st.button("📍 State-wise / District", key="btn_level_state", use_container_width=True):
+                            st.session_state.athlete_selected_level = "State-wise"
+                            st.rerun()
+                            
+                    # Show table of the selected field if active
+                    if st.session_state.athlete_selected_level:
+                        lvl = st.session_state.athlete_selected_level
+                        if lvl == "International":
+                            filtered_ath_by_lvl = filtered_athletes[filtered_athletes["performance_level"].str.lower().str.contains("internat", na=False)]
+                        elif lvl == "National":
+                            filtered_ath_by_lvl = filtered_athletes[filtered_athletes["performance_level"].str.lower() == "national"]
+                        else: # State-wise
+                            filtered_ath_by_lvl = filtered_athletes[filtered_athletes["performance_level"].str.lower().isin(["state", "district"])]
+                            
+                        st.markdown("---")
+                        
+                        col_tbl_hdr, col_tbl_cls = st.columns([3, 1])
+                        with col_tbl_hdr:
+                            st.markdown(f'<div class="stitle" style="font-size:1rem;margin-top:0.3rem;">Matching {lvl} Athletes Directory</div>', unsafe_allow_html=True)
+                        with col_tbl_cls:
+                            if st.button("❌ Close Table", key="btn_clear_level_filter", use_container_width=True):
+                                st.session_state.athlete_selected_level = None
+                                st.rerun()
+                                
+                        if not filtered_ath_by_lvl.empty:
+                            ath_display = filtered_ath_by_lvl[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                            
+                            ath_display["Specialization"] = ath_display["sport"]
+                            ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
+                            ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
+                            
+                            ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
+                            ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
+                            ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
+                            
+                            st.write(f"Showing matching {lvl.lower()} athletes (total: {len(ath_display)}):")
+                            st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+                        else:
+                            st.info(f"No {lvl.lower()} athletes found matching the current Sport/State filters.")
             else:
                 person_row = filtered_athletes[filtered_athletes["name"] == selected_athlete].iloc[0]
                 render_bio(selected_athlete, False, person_row)
