@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --blue: #00ffd1;
+    --purple: #683DE4;
+    --pink: #F28B82;
+    --teal: #10E5B3;
+    --gold: #FDD663;
+    --cyan: #78D9EC;
+    --orange: #FCAD70;
+    --glass: rgba(11, 8, 25, 0.75);
+    --glass2: rgba(13, 8, 28, 0.90);
+    --border: rgba(16, 229, 179, 0.12);
+    --text1: #FFFFFF;
+    --text2: #abb8c3;
+    --text3: #6c7b88;
+    --green-dot: #10E5B3;
+    --red-dot: #F28B82;
+    --amber-dot: #FDD663;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #030012;
+    background-image: 
+        linear-gradient(135deg, rgba(3, 0, 18, 0.94) 0%, rgba(3, 0, 18, 0.94) 100%),
+        linear-gradient(-45deg, #030012, #0a081c, #05141c, #0e071c, #030012);
+    background-size: cover, 600% 600%;
+    background-position: center center, 0% 50%;
+    background-repeat: no-repeat, repeat;
+    background-attachment: fixed, fixed;
+    animation: gradientShift 22s ease infinite;
+    font-family: 'Inter', sans-serif;
+    color: var(--text1);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ── 3D Floating Orbs ── */
+@keyframes orbFloat1 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(80px, -70px) scale(1.1); }
+}
+@keyframes orbFloat2 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(-70px, 60px) scale(0.92); }
+}
+@keyframes orbFloat3 {
+    0%, 100% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(60px, 50px) scale(1.06); }
+}
+
+.orb { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: -1; }
+.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(16, 229, 179, 0.08) 0%, transparent 70%); top: -150px; left: -150px; animation: orbFloat1 22s ease-in-out infinite; }
+.orb-2 { width: 450px; height: 450px; background: radial-gradient(circle, rgba(104, 61, 228, 0.08) 0%, transparent 70%); top: 35%; right: -80px; animation: orbFloat2 26s ease-in-out infinite; }
+.orb-3 { width: 380px; height: 380px; background: radial-gradient(circle, rgba(16, 229, 179, 0.05) 0%, transparent 70%); bottom: 5%; left: 25%; animation: orbFloat3 18s ease-in-out infinite; }
+
+/* ── 3D Perspective Grid Background ── */
+@keyframes gridScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 50px; }
+}
+.grid-3d {
+    position: fixed;
+    bottom: -10%;
+    left: -10%;
+    width: 120%;
+    height: 60%;
+    background-image: 
+        linear-gradient(rgba(16, 229, 179, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(16, 229, 179, 0.04) 1px, transparent 1px);
+    background-size: 50px 50px;
+    transform: perspective(600px) rotateX(65deg) translateZ(0);
+    transform-origin: bottom center;
+    opacity: 0.45;
+    pointer-events: none;
+    z-index: -1;
+    animation: gridScroll 15s linear infinite;
+}
+
+/* ── Hero ── */
+.hero { text-align: center; padding: 2.5rem 1rem 1rem; position: relative; z-index: 1; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); border-radius: 50px; padding: 0.35rem 1.1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); margin-bottom: 1.2rem; }
+@keyframes titleSlideFade {
+    0% { opacity: 0; transform: translateY(-30px) scale(0.95); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
+}
+.hero-title { font-family: 'Outfit', sans-serif; font-size: 4rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0.5rem 0 0.8rem; animation: titleSlideFade 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; }
+.hero-sub { color: var(--text2); font-size: 1.15rem; max-width: 700px; margin: 0.8rem auto 0; line-height: 1.7; text-align: center; display: block; }
+.hero-rule { width: 70px; height: 3px; background: linear-gradient(90deg, #10E5B3, #683DE4); border-radius: 2px; margin: 1.4rem auto; }
+
+/* ── 3D Glassmorphic KPI Cards ── */
+.kpi {
+    background: rgba(11, 8, 25, 0.75);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.6rem 1.2rem;
+    text-align: center;
+    transition: all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.kpi:hover {
+    transform: translateY(-5px) scale(1.01);
+    border-color: rgba(16, 229, 179, 0.40);
+    box-shadow: 0 20px 45px rgba(16, 229, 179, 0.18), 0 30px 60px rgba(0, 0, 0, 0.7);
+}
+.kpi::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+.kpi.blue::before { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+.kpi.purple::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+.kpi.teal::before { background: linear-gradient(90deg, var(--teal), var(--blue)); }
+.kpi.gold::before { background: linear-gradient(90deg, var(--gold), var(--orange)); }
+.kpi.pink::before { background: linear-gradient(90deg, var(--pink), var(--gold)); }
+.kpi-em { font-size: 1.8rem; margin-bottom: 0.4rem; display: block; }
+.kpi-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; color: var(--text3); margin-bottom: 0.5rem; }
+.kpi-val { font-family: 'Outfit', sans-serif; font-size: 2.3rem; font-weight: 900; line-height: 1; }
+.kpi-val.blue { color: var(--blue); }
+.kpi-val.purple { color: var(--purple); }
+.kpi-val.teal { color: var(--teal); }
+.kpi-val.gold { color: var(--gold); }
+.kpi-val.pink { color: var(--pink); }
+.kpi-sub { font-size: 0.72rem; color: var(--text3); margin-top: 0.4rem; }
+
+/* ── 3D Pill Tab Selector ── */
+.custom-tabs-container {
+    background: #0b0819; border: 1px solid rgba(16, 229, 179, 0.15);
+    border-radius: 50px; padding: 6px; gap: 4px; display: flex;
+    flex-wrap: wrap; width: fit-content; margin: 0 auto 2.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.custom-tab {
+    background: transparent; border: none; border-radius: 50px;
+    color: var(--text2); font-family: 'Outfit', sans-serif;
+    font-weight: 600; font-size: 0.85rem; padding: 0.5rem 1.4rem;
+    transition: all 0.22s ease; white-space: nowrap;
+    cursor: pointer;
+}
+.custom-tab:hover { background: rgba(16, 229, 179, 0.08); color: var(--teal); }
+.custom-tab.active {
+    background: linear-gradient(135deg, #10E5B3 0%, #683DE4 100%) !important;
+    color: #ffffff !important; border: none !important;
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.3);
+}
+
+/* ── Immersive Glass Buttons & Inputs ── */
+.glass-btn {
+    background: rgba(16, 229, 179, 0.05);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(16, 229, 179, 0.2);
+    border-radius: 8px;
+    padding: 0.5rem 1.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+.glass-btn:hover {
+    background: rgba(16, 229, 179, 0.15);
+    border: 1px solid rgba(16, 229, 179, 0.5);
+    color: #10E5B3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(16, 229, 179, 0.1);
+}
+
+.glass-input {
+    background-color: rgba(11, 8, 25, 0.80);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    color: var(--text1);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    width: 100%;
+    outline: none;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+.glass-input:focus, .glass-input:hover {
+    border-color: rgba(16, 229, 179, 0.35);
+}
+
+.stitle { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--text1); margin: 1.5rem 0 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.chip { font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 0.2rem 0.7rem; border-radius: 50px; display: inline-block; }
+.chip-blue { background: rgba(0, 255, 209, 0.1); border: 1px solid rgba(0, 255, 209, 0.25); color: var(--blue); }
+.chip-green { background: rgba(16, 229, 179, 0.1); border: 1px solid rgba(16, 229, 179, 0.25); color: var(--teal); }
+.chip-amber { background: rgba(253,214,99,0.14); border: 1px solid rgba(253,214,99,0.28); color: var(--gold); }
+.chip-red { background: rgba(242,139,130,0.14); border: 1px solid rgba(242,139,130,0.28); color: var(--pink); }
+.chip-purple { background: rgba(104, 61, 228, 0.1); border: 1px solid rgba(104, 61, 228, 0.25); color: var(--purple); }
+
+/* ── 3D Glassmorphic Action Cards ── */
+.acard {
+    background: rgba(11, 8, 25, 0.75);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(104, 61, 228, 0.15);
+    border-radius: 16px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+.acard:hover {
+    background: rgba(13, 8, 28, 0.90);
+    border-color: rgba(16, 229, 179, 0.32);
+    transform: translateY(-4px) scale(1.005);
+    box-shadow: 0 18px 40px rgba(16, 229, 179, 0.15), 0 30px 60px rgba(0, 0, 0, 0.7);
+}
+.acard-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+.acard-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text1); }
+.acard-meta { font-size: 0.75rem; color: var(--text2); line-height: 1.6; }
+.acard-score { font-family: 'Outfit', sans-serif; font-size: 1.6rem; font-weight: 800; }
+.acard-tags { margin-top: 0.6rem; display: flex; flex-wrap: wrap; gap: 5px; }
+.tag { font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; padding: 0.18rem 0.6rem; border-radius: 50px; background: rgba(0, 255, 209, 0.1); color: var(--blue); border: 1px solid rgba(0, 255, 209, 0.2); display: inline-block; }
+.tag.green { background: rgba(16, 229, 179, 0.1); color: var(--teal); border-color: rgba(16, 229, 179, 0.2); }
+.tag.amber { background: rgba(253,214,99,0.1); color: var(--gold); border-color: rgba(253,214,99,0.2); }
+.tag.red { background: rgba(242,139,130,0.1); color: var(--pink); border-color: rgba(242,139,130,0.2); }
+.tag.purple { background: rgba(104, 61, 228, 0.1); color: var(--purple); border-color: rgba(104, 61, 228, 0.2); }
+
+/* ── Insight box ── */
+.insight { background: linear-gradient(135deg, rgba(16, 229, 179, 0.05), rgba(104, 61, 228, 0.05)); border: 1px solid rgba(16, 229, 179, 0.15); border-left: 3px solid var(--teal); border-radius: 12px; padding: 1rem 1.2rem; margin-bottom: 0.8rem; }
+.insight.green { background: linear-gradient(135deg, rgba(16, 229, 179, 0.05), rgba(104, 61, 228, 0.03)); border-color: rgba(16, 229, 179, 0.15); border-left-color: var(--teal); }
+.insight.amber { background: linear-gradient(135deg, rgba(253,214,99,0.07), rgba(252,173,112,0.07)); border-color: rgba(253,214,99,0.15); border-left-color: var(--gold); }
+.insight.red { background: linear-gradient(135deg, rgba(242,139,130,0.07), rgba(253,214,99,0.05)); border-color: rgba(242,139,130,0.15); border-left-color: var(--pink); }
+.insight.purple{ background: linear-gradient(135deg, rgba(104, 61, 228, 0.05), rgba(16, 229, 179, 0.03)); border-color: rgba(104, 61, 228, 0.15); border-left-color: var(--purple); }
+.insight-title { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--teal); margin-bottom: 0.35rem; }
+.insight.green .insight-title { color: var(--teal); }
+.insight.amber .insight-title { color: var(--gold); }
+.insight.red .insight-title { color: var(--pink); }
+.insight.purple .insight-title { color: var(--purple); }
+.insight-body { font-size: 0.85rem; color: var(--text2); line-height: 1.7; }
+
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+.dot-green { background: var(--teal); animation: pulse 2s infinite; }
+.dot-amber { background: var(--gold); }
+.dot-red { background: var(--pink); }
+
+.dq-bar-wrap { background: rgba(255,255,255,0.05); border-radius: 50px; height: 8px; overflow: hidden; margin-top: 4px; }
+.dq-bar { height: 100%; border-radius: 50px; transition: width 1s ease; }
+
+.mkpi { background: var(--glass); border: 1px solid var(--border); border-radius: 14px; padding: 1.2rem; text-align: center; }
+.mkpi-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); margin-bottom: 0.4rem; }
+.mkpi-val { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; }
+
+/* ── Custom Layout Grid & Table ── */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: rgba(11, 8, 25, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+.custom-table th {
+    background: rgba(16, 229, 179, 0.05);
+    color: var(--teal);
+    text-align: left;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.82rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+}
+.custom-table td {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.85rem;
+    color: var(--text2);
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+}
+.custom-table tr:last-child td {
+    border-bottom: none;
+}
+.custom-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+    color: #fff;
+}
