@@ -2050,14 +2050,16 @@ elif selected_tab == "Profile":
     # 1. Title
     st.markdown('<div class="stitle sticky-header"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
     
-    # 2. Category & Location Filters (Sport & State)
-    col_spt, col_st = st.columns(2)
+    # 2. Category, Location, & Name Search Filters
+    col_spt, col_st, col_name = st.columns([1, 1, 1])
     with col_spt:
         sports_list = ["All Sports"] + sorted(list(df_all["sport"].unique()))
         sport_choice = st.selectbox("Choose Sport:", sports_list, key="profile_sport")
     with col_st:
         states_list = ["All States"] + sorted(list(df_all["state"].unique()))
         state_choice = st.selectbox("Choose State:", states_list, key="profile_state")
+    with col_name:
+        name_query = st.text_input("🔍 Search by Name:", placeholder="Type name...", key="profile_name_search")
         
     # Filter datasets for both Athletes and Coaches
     filtered_athletes = df_all[df_all["entity_type"] == "Athlete"].copy()
@@ -2069,6 +2071,9 @@ elif selected_tab == "Profile":
     if state_choice != "All States":
         filtered_athletes = filtered_athletes[filtered_athletes["state"].str.lower() == state_choice.lower()]
         filtered_coaches = filtered_coaches[filtered_coaches["state"].str.lower() == state_choice.lower()]
+    if name_query.strip():
+        filtered_athletes = filtered_athletes[filtered_athletes["name"].str.lower().str.contains(name_query.strip().lower(), na=False)]
+        filtered_coaches = filtered_coaches[filtered_coaches["name"].str.lower().str.contains(name_query.strip().lower(), na=False)]
         
     # 3. Check for Empty State
     if filtered_athletes.empty and filtered_coaches.empty:
