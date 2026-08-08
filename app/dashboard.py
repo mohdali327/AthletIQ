@@ -1519,6 +1519,8 @@ if selected_tab == "Pathway Overview":
     def go_to_profile(st_name):
         st.session_state.main_navigation = "Profile"
         st.session_state.profile_state = st_name
+        st.session_state.profile_selected_athlete = "-- Select Athlete --"
+        st.session_state.athlete_selected_level = None
 
     def state_card(col, state_name, body, color, tooltip=""):
         col.markdown(insight(f" {state_name}", body, color, tooltip), unsafe_allow_html=True)
@@ -2360,6 +2362,25 @@ elif selected_tab == "Profile":
                             st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
                         else:
                             st.info(f"No {lvl.lower()} athletes found matching the current Sport/State filters.")
+                    else:
+                        if state_choice != "All States" or sport_choice != "All Sports":
+                            st.markdown("---")
+                            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:0.3rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
+                            if not filtered_athletes.empty:
+                                ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                                
+                                ath_display["Specialization"] = ath_display["sport"]
+                                ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
+                                ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
+                                
+                                ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
+                                ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
+                                ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
+                                
+                                st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
+                                st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+                            else:
+                                st.info("No athletes found matching the current filters.")
             else:
                 person_row = filtered_athletes[filtered_athletes["name"] == selected_athlete].iloc[0]
                 render_bio(selected_athlete, False, person_row)
