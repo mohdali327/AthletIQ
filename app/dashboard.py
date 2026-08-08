@@ -867,11 +867,7 @@ def go_back():
         st.session_state.main_navigation = prev_tab
         st.session_state.current_tab = prev_tab
 
-# Display Back Button if history exists
-if st.session_state.nav_history:
-    st.markdown('<div class="back-btn-container">', unsafe_allow_html=True)
-    st.button("⬅️ Back to Previous View", on_click=go_back, key="global_back_button")
-    st.markdown('</div>', unsafe_allow_html=True)
+
 
 
 # ── DYNAMIC SAI CENTRES LOADER ──
