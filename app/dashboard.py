@@ -2265,6 +2265,41 @@ elif selected_tab == "Profile":
         tab_ath, tab_coa, tab_aca = st.tabs(["Athlete Search", "Coach Search", "Academy Search"])
         
         with tab_ath:
+            def render_athlete_cards_grid(df_disp, total_len, level_txt):
+                limit = 24
+                st.write(f"Showing top {min(limit, total_len)} matching {level_txt} athletes (total: {total_len:,}):")
+                cols = st.columns(3)
+                for idx, (_, row) in enumerate(df_disp.head(limit).iterrows()):
+                    name = row["Sportsperson Name"]
+                    spec = row["Specialization"]
+                    state = row["State Registry"]
+                    perf = row["Performance Level"]
+                    age = row["DOB / Age"]
+                    ach = row["Achievements / Notes"]
+                    badge_color = "#10E5B3" if "Medalist" in perf or "Internat" in perf.lower() else ("#683DE4" if "National" in perf else "#FDD663")
+                    
+                    card_html = f"""
+                    <div class="acard" style="border-left: 3px solid {badge_color}; margin-bottom: 1rem; padding: 1.2rem; height: 100%;">
+                        <div class="acard-top">
+                            <div class="acard-title" style="font-size:1.05rem;">{name}</div>
+                            <span class="tag green" style="background: rgba(16,229,179,0.1); border: 1px solid rgba(16,229,179,0.25); color: #10E5B3; font-size: 0.68rem; padding: 1px 6px; border-radius: 4px;">{perf}</span>
+                        </div>
+                        <div class="acard-meta" style="margin-top:0.4rem; font-size:0.78rem; line-height: 1.5; color: var(--text2);">
+                            <b>Specialization:</b> {spec} <br>
+                            <b>State Registry:</b> {state} <br>
+                            <b>DOB / Age:</b> {age}
+                        </div>
+                        <hr style="margin:0.6rem 0; border:0; border-top: 1px solid rgba(255,255,255,0.06);">
+                        <div style="font-size:0.75rem; color: var(--text3); line-height:1.4;">
+                            {ach}
+                        </div>
+                    </div>
+                    """
+                    with cols[idx % 3]:
+                        st.markdown(card_html, unsafe_allow_html=True)
+                if total_len > limit:
+                    st.info(f"Showing first {limit} athletes. Use the 'Select Athlete' dropdown above to search or inspect any specific profile.")
+
             athlete_names = sorted(filtered_athletes["name"].dropna().unique().tolist()) if not filtered_athletes.empty else []
             selected_athlete = st.selectbox(
                 "Select Athlete to View Bio-Data:",
@@ -2354,8 +2389,7 @@ elif selected_tab == "Profile":
                             ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
                             ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
                             
-                            st.write(f"Showing matching {lvl.lower()} athletes (total: {len(ath_display)}):")
-                            st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+                            render_athlete_cards_grid(ath_display, len(ath_display), lvl.lower())
                         else:
                             st.info(f"No {lvl.lower()} athletes found matching the current Sport/State filters.")
                     else:
@@ -2373,8 +2407,7 @@ elif selected_tab == "Profile":
                                 ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
                                 ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
                                 
-                                st.write(f"Showing all matching athletes (total: {len(ath_display)}):")
-                                st.dataframe(ath_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
+                                render_athlete_cards_grid(ath_display, len(ath_display), "")
                             else:
                                 st.info("No athletes found matching the current filters.")
             else:
