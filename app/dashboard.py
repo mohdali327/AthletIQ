@@ -1541,19 +1541,27 @@ if selected_tab == "Pathway Overview":
             
         state_counts["geojson_state"] = state_counts["state"].apply(map_state_name_to_geojson)
         
-        # Draw choropleth map
+        # Assign a numerical ID for coloring to keep it as a single trace and avoid HTML duplication
+        state_counts["state_color_id"] = range(len(state_counts))
+
+        # Draw choropleth map using numerical state_color_id
         fig_map = px.choropleth(
             state_counts,
             geojson=india_geojson,
             locations="geojson_state",
             featureidkey="properties.ST_NM",
-            color="state",
-            color_discrete_sequence=px.colors.qualitative.Pastel,
+            color="state_color_id",
+            color_continuous_scale=["#CBA97E", "#113E21", "#B38B59", "#1B4E2C", "#3F5348", "#CBA97E"],
             hover_name="state",
-            hover_data={"geojson_state": False, "athlete_count": True, "state": False},
+            hover_data={"geojson_state": False, "athlete_count": True, "state_color_id": False, "state": False},
             labels={"athlete_count": "Athletes Registered"}
         )
-        fig_map.update_geos(fitbounds="locations", visible=False)
+        fig_map.update_geos(
+            projection_type="mercator",
+            lonaxis_range=[68.0, 98.0],
+            lataxis_range=[7.0, 36.0],
+            visible=False
+        )
         fig_map.update_layout(
             height=750,
             margin=dict(l=0, r=0, t=10, b=10),
