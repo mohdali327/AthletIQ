@@ -1562,6 +1562,7 @@ if selected_tab == "Pathway Overview":
             lataxis_range=[7.0, 36.0],
             visible=False
         )
+        fig_map.update_coloraxes(showscale=False)
         fig_map.update_layout(
             height=750,
             margin=dict(l=0, r=0, t=10, b=10),
@@ -1602,6 +1603,7 @@ if selected_tab == "Pathway Overview":
                 st.session_state.main_navigation = "Profile"
                 st.session_state.profile_selected_athlete = "-- Select Athlete --"
                 st.session_state.athlete_selected_level = None
+                st.session_state.nav_to_profile = True
                 st.rerun()
                 
     except Exception as e:
