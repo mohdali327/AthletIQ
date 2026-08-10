@@ -1184,6 +1184,8 @@ def get_live_tournaments():
             "Live Status": status,
             "Action Details": detail
         })
+        
+    return live_tournaments
 
 st.markdown("---")
 
