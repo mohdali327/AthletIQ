@@ -1835,7 +1835,7 @@ elif selected_tab == "Centres & Academies":
     st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
         "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
         
-    ca_sub_tab = st.radio(
+    ca_sub_tab = st.segmented_control(
         label="Centres & Academies Sub-Navigation",
         options=[
             "Coach-to-Athlete Ratios & Capacity",
@@ -1845,8 +1845,11 @@ elif selected_tab == "Centres & Academies":
         ],
         label_visibility="collapsed",
         key="ca_sub_navigation",
-        horizontal=True
+        selection_mode="single",
+        default="Coach-to-Athlete Ratios & Capacity"
     )
+    if not ca_sub_tab:
+        ca_sub_tab = "Coach-to-Athlete Ratios & Capacity"
     
     if ca_sub_tab == "Coach-to-Athlete Ratios & Capacity":
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
@@ -1991,7 +1994,15 @@ elif selected_tab == "Centres & Academies":
     elif ca_sub_tab == "SAI Proximity Matcher":
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> 🔍 SAI Training Centre Proximity & Suitability Matcher</div>', unsafe_allow_html=True)
         # Toggle between Database search and Custom Profile Creator
-        matcher_mode = st.radio("Choose Athlete Matching Mode:", ["Search Database Athletes", "Create Custom Athlete Profile"], horizontal=True, key="top_matcher_mode")
+        matcher_mode = st.segmented_control(
+            "Choose Athlete Matching Mode:",
+            options=["Search Database Athletes", "Create Custom Athlete Profile"],
+            selection_mode="single",
+            default="Search Database Athletes",
+            key="top_matcher_mode"
+        )
+        if not matcher_mode:
+            matcher_mode = "Search Database Athletes"
 
         if matcher_mode == "Search Database Athletes":
             c_tla1, c_tla2 = st.columns([3, 1])
