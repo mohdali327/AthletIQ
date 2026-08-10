@@ -2571,17 +2571,13 @@ elif selected_tab == "Profile":
                             else:
                                 st.info("No athletes found matching the current filters.")
                         else:
-                            # Show default view (some top athletes)
                             st.markdown("---")
-                            st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">All Registered Athletes</div>', unsafe_allow_html=True)
-                            ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
-                            ath_display["Specialization"] = ath_display["sport"]
-                            ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
-                            ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
-                            ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
-                            ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
-                            ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
-                            render_athlete_cards_grid(ath_display, len(ath_display), "")
+                            st.markdown("""
+                            <div style="border: 1px dashed var(--line); border-radius: 0px; padding: 3rem 2rem; text-align: center; color: var(--ink-soft); font-size: 0.95rem; margin-top: 1.5rem; background: var(--gray);">
+                                <div style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--forest); font-family: var(--serif);">🔍 Search Directory</div>
+                                Use the filters above to browse athletes by Sport, State Registry, or search by name.
+                            </div>
+                            """, unsafe_allow_html=True)
 
         with tab_coa:
             coach_names = sorted(filtered_coaches["name"].dropna().unique().tolist()) if not filtered_coaches.empty else []
