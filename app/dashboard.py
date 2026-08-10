@@ -1372,12 +1372,8 @@ if selected_tab == "Pathway Overview":
         state_counts = athletes_df["state"].value_counts().reset_index()
         state_counts.columns = ["state", "athlete_count"]
         
-        # Geohacker NAME_1 uses 'Orissa' for 'Odisha', 'Uttaranchal' for 'Uttarakhand', and 'Jammu and Kashmir' for 'Jammu & Kashmir'
+        # Map database state names to the new optimized GeoJSON ST_NM values
         def map_state_name_to_geojson(st_name):
-            if st_name == "Odisha":
-                return "Orissa"
-            if st_name == "Uttarakhand":
-                return "Uttaranchal"
             if st_name == "Jammu & Kashmir":
                 return "Jammu and Kashmir"
             return st_name
@@ -1389,7 +1385,7 @@ if selected_tab == "Pathway Overview":
             state_counts,
             geojson=india_geojson,
             locations="geojson_state",
-            featureidkey="properties.NAME_1",
+            featureidkey="properties.ST_NM",
             color="state",
             color_discrete_sequence=px.colors.qualitative.Pastel,
             hover_name="state",
@@ -1430,11 +1426,7 @@ if selected_tab == "Pathway Overview":
             if clicked_location:
                 # Reverse map
                 db_state = clicked_location
-                if clicked_location == "Orissa":
-                    db_state = "Odisha"
-                elif clicked_location == "Uttaranchal":
-                    db_state = "Uttarakhand"
-                elif clicked_location == "Jammu and Kashmir":
+                if clicked_location == "Jammu and Kashmir":
                     db_state = "Jammu & Kashmir"
                     
                 st.session_state.profile_state = db_state
