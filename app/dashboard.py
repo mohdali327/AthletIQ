@@ -1364,12 +1364,14 @@ if selected_tab == "Pathway Overview":
         state_counts = athletes_df["state"].value_counts().reset_index()
         state_counts.columns = ["state", "athlete_count"]
         
-        # Geohacker NAME_1 uses 'Orissa' for 'Odisha' and 'Uttaranchal' for 'Uttarakhand'
+        # Geohacker NAME_1 uses 'Orissa' for 'Odisha', 'Uttaranchal' for 'Uttarakhand', and 'Jammu and Kashmir' for 'Jammu & Kashmir'
         def map_state_name_to_geojson(st_name):
             if st_name == "Odisha":
                 return "Orissa"
             if st_name == "Uttarakhand":
                 return "Uttaranchal"
+            if st_name == "Jammu & Kashmir":
+                return "Jammu and Kashmir"
             return st_name
             
         state_counts["geojson_state"] = state_counts["state"].apply(map_state_name_to_geojson)
@@ -1382,15 +1384,16 @@ if selected_tab == "Pathway Overview":
             featureidkey="properties.NAME_1",
             color="athlete_count",
             color_continuous_scale=["#F0F0F0", "#113E21"],
-            labels={"athlete_count": "Athletes Mapped"},
-            hover_data=["state"]
+            hover_name="state",
+            hover_data={"geojson_state": False, "athlete_count": True, "state": False},
+            labels={"athlete_count": "Athletes Registered"}
         )
         fig_map.update_geos(fitbounds="locations", visible=False)
         fig_map.update_layout(
             margin=dict(l=0, r=0, t=10, b=10),
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            coloraxis_showscale=True,
+            coloraxis_showscale=False,
             dragmode=False
         )
         
@@ -1406,6 +1409,8 @@ if selected_tab == "Pathway Overview":
                     db_state = "Odisha"
                 elif clicked_location == "Uttaranchal":
                     db_state = "Uttarakhand"
+                elif clicked_location == "Jammu and Kashmir":
+                    db_state = "Jammu & Kashmir"
                     
                 st.session_state.profile_state = db_state
                 st.session_state.main_navigation = "Profile"
