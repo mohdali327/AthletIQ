@@ -789,6 +789,17 @@ selected_tab = st.radio(
 
 st.session_state.main_navigation = selected_tab
 
+# Global Settings (API Key configuration shared by chatbot and live search features)
+with st.sidebar:
+    st.markdown("### Settings")
+    api_key_input = st.text_input(
+        "Gemini API Key",
+        type="password",
+        key="global_api_key",
+        help="Enter your Gemini API Key or set GEMINI_API_KEY environment variable"
+    )
+api_key = api_key_input or os.environ.get("GEMINI_API_KEY")
+
 if "_last_tab" not in st.session_state:
     st.session_state._last_tab = selected_tab
 if st.session_state._last_tab != selected_tab:
@@ -989,9 +1000,91 @@ st.markdown("""
 
 
 def get_live_tournaments():
+    import os
+    import json
     import random
     import datetime
     
+    # Try to load API key from global setting
+    global_key = st.session_state.get("global_api_key") or os.environ.get("GEMINI_API_KEY")
+    
+    if global_key:
+        try:
+            from google import genai
+            from google.genai import types
+            
+            # Cache the live search results for 1 hour to prevent hitting the API repeatedly on runs
+            @st.cache_data(ttl=3600)
+            def fetch_real_tournaments(key):
+                client = genai.Client(api_key=key)
+                prompt = """
+                Search the web and return a JSON list of 12 real, actual sports tournaments (grassroots, junior, sub-junior, or national level) being held or scheduled to be held in India during August 2026 or late 2026.
+                Examples: Khelo India Games, Senior/Junior National Championships, state selection trials, local cups.
+                For each tournament, provide:
+                1. "Tournament/League Name" (e.g. "Khelo India Women's Hockey League")
+                2. "Sport" (e.g. "Hockey", "Wrestling", "Athletics", "Boxing", "Archery", "Shooting", "Weightlifting", "Badminton")
+                3. "State" (e.g. "Haryana", "Maharashtra", "Punjab", etc.)
+                4. "League Level" (e.g. "State Selection Trial", "Khelo India Cadet Roster", "Sub-Junior Nationals", "Zonal Championship", "District Cup")
+                5. "Gender" (e.g. "Male", "Female", "Mixed")
+                6. "Participants" (e.g. "120 Athletes")
+                7. "Funding Status" (e.g. "Fully Funded", "Partially Funded", "Unfunded")
+                8. "Live Status" (One of: '🔴 LIVE NOW', '⏳ STARTING SOON', 'Scheduled', 'Completed', 'Just Completed')
+                9. "Action Details" (e.g. "Final rounds in progress" or "Starts in 4 hours" or "Results uploaded")
+                
+                Return ONLY a raw JSON array matching this exact format, with no markdown code block wraps:
+                [
+                  {
+                    "Tournament/League Name": "Name",
+                    "Sport": "Wrestling",
+                    "State": "Haryana",
+                    "League Level": "State Selection Trial",
+                    "Gender": "Male/Female/Mixed",
+                    "Participants": "120 Athletes",
+                    "Funding Status": "Fully Funded",
+                    "Live Status": "🔴 LIVE NOW",
+                    "Action Details": "Final rounds in progress"
+                  }
+                ]
+                """
+                
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        tools=[types.Tool(google_search=types.GoogleSearch())],
+                        response_mime_type="application/json"
+                    )
+                )
+                
+                text = response.text.strip()
+                if text.startswith("```json"):
+                    text = text[7:]
+                if text.endswith("```"):
+                    text = text[:-3]
+                text = text.strip()
+                
+                return json.loads(text)
+                
+            real_data = fetch_real_tournaments(global_key)
+            if real_data and isinstance(real_data, list) and len(real_data) > 0:
+                formatted_tournaments = []
+                for t in real_data:
+                    formatted_tournaments.append({
+                        "Tournament/League Name": t.get("Tournament/League Name", "Tournament"),
+                        "Sport": t.get("Sport", "Athletics").title(),
+                        "League Level": t.get("League Level", "Sub-Junior Nationals"),
+                        "Gender": t.get("Gender", "Mixed"),
+                        "State": t.get("State", "Delhi"),
+                        "Participants": t.get("Participants", "100 Athletes"),
+                        "Funding Status": t.get("Funding Status", "Partially Funded"),
+                        "Live Status": t.get("Live Status", "Scheduled"),
+                        "Action Details": t.get("Action Details", "Starts soon")
+                    })
+                return formatted_tournaments
+        except Exception as e:
+            pass
+
+    # FALLBACK MOCK DATA GENERATOR (Used if no API key is supplied or search fails)
     sports = ["Wrestling", "Archery", "Boxing", "Hockey", "Athletics", "Shooting", "Weightlifting", "Badminton"]
     states = ["Haryana", "Punjab", "Manipur", "Jharkhand", "Delhi", "Maharashtra", "Kerala", "Tamil Nadu", "Assam", "Uttar Pradesh"]
     levels = ["District Cup", "State Selection Trial", "Zonal Championship", "Khelo India Cadet Roster", "Sub-Junior Nationals"]
@@ -999,7 +1092,6 @@ def get_live_tournaments():
     funding_status_options = ["Fully Funded", "Partially Funded", "Unfunded"]
     
     tournaments = []
-    
     realistic_seeds = [
         ("Haryana Sub-Junior Freestyle Wrestling Trials", "Wrestling", "Haryana", "State Selection Trial"),
         ("North East Recurve Archery Cadet Cup", "Archery", "Assam", "Zonal Championship"),
@@ -1087,13 +1179,11 @@ def get_live_tournaments():
             "League Level": t["level"],
             "Gender": t["gender"],
             "State": t["state"],
-            "Participants": t["participants"],
+            "Participants": f"{t['participants']} Athletes",
             "Funding Status": t["funding"],
             "Live Status": status,
             "Action Details": detail
         })
-        
-    return live_tournaments
 
 st.markdown("---")
 
@@ -2688,13 +2778,7 @@ elif selected_tab == "AI Assistant":
     </style>
     """, unsafe_allow_html=True)
 
-    # Sidebar for API Key
-    with st.sidebar:
-        st.markdown("### Settings")
-        api_key_input = st.text_input("Gemini API Key", type="password", help="Enter your Gemini API Key or set GEMINI_API_KEY environment variable")
-    
-    api_key = api_key_input or os.environ.get("GEMINI_API_KEY")
-    
+    # API Key is defined globally at the top of the app
     if not api_key:
         st.warning("Please provide a Gemini API Key in the sidebar or via the GEMINI_API_KEY environment variable to use the AI Assistant.")
     else:
