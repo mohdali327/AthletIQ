@@ -662,21 +662,29 @@ st.markdown('''<style>
     }
 </style>''', unsafe_allow_html=True)
 
+if "main_navigation" not in st.session_state:
+    st.session_state.main_navigation = "Pathway Overview"
+
+nav_options = [
+    "Pathway Overview",
+    "Discovery & Leagues",
+    "Centres & Academies",
+    "Sponsor Pipeline",
+    "Profile",
+    "Womens",
+    "AI Assistant"
+]
+
 selected_tab = st.radio(
     label="Navigation",
-    options=[
-        "Pathway Overview",
-        "Discovery & Leagues",
-        "Centres & Academies",
-        "Sponsor Pipeline",
-        "Profile",
-        "Womens",
-        "AI Assistant"
-    ],
+    options=nav_options,
+    index=nav_options.index(st.session_state.main_navigation),
     label_visibility="collapsed",
-    key="main_navigation",
+    key="nav_radio",
     horizontal=True
 )
+
+st.session_state.main_navigation = selected_tab
 
 if "_last_tab" not in st.session_state:
     st.session_state._last_tab = selected_tab
@@ -1398,7 +1406,7 @@ if selected_tab == "Pathway Overview":
         )
         
         # Render the map and handle click select event
-        event = st.plotly_chart(fig_map, use_container_width=True, on_select="rerun", key="india_state_map_select")
+        event = st.plotly_chart(fig_map, use_container_width=True, on_select='rerun', key='india_state_map_select', config={'scrollZoom': False, 'displayModeBar': False})
         
         if event and "selection" in event and "points" in event["selection"] and len(event["selection"]["points"]) > 0:
             clicked_location = event["selection"]["points"][0].get("location")
