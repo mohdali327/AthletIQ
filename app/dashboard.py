@@ -493,6 +493,16 @@ def load_master(filepath, mtime):
     for c in ["entity_type","name","sport","city","state","tier","pipeline_stage",
               "funding_status","gender","performance_level","tags","notes","source_link","frequency"]:
         if c in df.columns: df[c] = df[c].fillna("Unknown").astype(str).str.strip()
+        
+    if "sport" in df.columns:
+        def clean_sport(name):
+            name = name.replace("§", "").strip()
+            if name == "Athetics":
+                return "Athletics"
+            if name == "Kho kho":
+                return "Kho Kho"
+            return name
+        df["sport"] = df["sport"].apply(clean_sport)
     for c in ["cwg_2036_relevance","olympic_2032_relevance","digital_readiness",
               "athletiq_opportunity_score","participants_or_capacity","age"]:
         if c in df.columns: df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0)
