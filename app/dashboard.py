@@ -810,11 +810,7 @@ with st.sidebar:
     )
 api_key = api_key_input or os.environ.get("GEMINI_API_KEY")
 
-if "_last_tab" not in st.session_state:
-    st.session_state._last_tab = selected_tab
-if st.session_state._last_tab != selected_tab:
-    st.session_state._last_tab = selected_tab
-    st.markdown(f'<div class="redirect-overlay"><div class="redirect-spinner"></div><div class="redirect-text">Loading {selected_tab}...</div></div>', unsafe_allow_html=True)
+
 
 # Track navigation history
 if "nav_history" not in st.session_state:
