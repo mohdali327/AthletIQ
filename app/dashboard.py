@@ -952,7 +952,7 @@ def render_sai_card(centre, score, rank):
       <div class="acard-top">
         <div>
           <div class="acard-title">#{rank} {name} {flagship}</div>
-          <div style="font-size:0.75rem;color:#9AA0A6;margin-top:3px;">
+          <div style="font-size:0.75rem;color:var(--ink-soft);margin-top:3px;">
              {city}, {state} &nbsp;|&nbsp;
             <span style="color:{type_col};font-weight:700;">{ctype}</span> &nbsp;|&nbsp;
             Capacity: {capacity} athletes &nbsp;|&nbsp; Coaches: {coaches}
@@ -1626,7 +1626,7 @@ elif selected_tab == "Discovery & Leagues":
     soon_count = len(leagues_disp[leagues_disp["Live Status"] == "⏳ STARTING SOON"]) if "Live Status" in leagues_disp.columns else 24
     
     st.markdown(f'''
-    <div style="background:rgba(16, 229, 179, 0.08);border:1px solid rgba(16, 229, 179, 0.25);border-radius:12px;padding:0.8rem 1.2rem;margin-bottom:1rem;font-size:0.88rem;color:#FFF;display:flex;align-items:center;gap:1.5rem;">
+    <div style="background:rgba(16, 229, 179, 0.08);border:1px solid rgba(16, 229, 179, 0.25);border-radius:12px;padding:0.8rem 1.2rem;margin-bottom:1rem;font-size:0.88rem;color:var(--forest);display:flex;align-items:center;gap:1.5rem;">
       <span style="font-weight:700;color:var(--teal);">📡 LIVE STREAM SIGNAL:</span>
       <span><b>{live_count}</b> tournaments are actively <b>LIVE NOW</b></span>
       <span style="color:var(--text3);">|</span>
@@ -1710,7 +1710,7 @@ elif selected_tab == "Discovery & Leagues":
                             <div style="font-size:0.75rem; color:var(--text3);">{action}</div>
                         </div>
                     </div>
-                    <div style="margin-top:1rem; padding-top:0.8rem; border-top:1px solid rgba(255,255,255,0.08); font-size:0.75rem; display:flex; flex-direction: column; gap:0.3rem; color: #FFF;">
+                    <div style="margin-top:1rem; padding-top:0.8rem; border-top:1px solid var(--line); font-size:0.75rem; display:flex; flex-direction: column; gap:0.3rem; color: var(--ink);">
                         <div><span style="color:var(--text3);">Gender:</span> <b>{gender}</b></div>
                         <div><span style="color:var(--text3);">Participants:</span> <b>{participants}</b></div>
                         <div><span style="color:var(--text3);">Funding:</span> <b>{funding}</b></div>
