@@ -1390,31 +1390,25 @@ if selected_tab == "Pathway Overview":
             geojson=india_geojson,
             locations="geojson_state",
             featureidkey="properties.NAME_1",
-            color="athlete_count",
-            color_continuous_scale=["#F0F0F0", "#113E21"],
+            color="state",
+            color_discrete_sequence=px.colors.qualitative.Pastel,
             hover_name="state",
             hover_data={"geojson_state": False, "athlete_count": True, "state": False},
             labels={"athlete_count": "Athletes Registered"}
         )
         fig_map.update_geos(fitbounds="locations", visible=False)
         fig_map.update_layout(
+            height=750,
             margin=dict(l=0, r=0, t=10, b=10),
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
-            coloraxis_showscale=False,
-            dragmode=False
+            showlegend=False,
+            dragmode=False,
+            clickmode="event+select"
         )
         
         # Render the map and handle click select event
-        import sys
-        print("MAP EVENT LOG:", file=sys.stderr)
         event = st.plotly_chart(fig_map, use_container_width=True, on_select='rerun', key='india_state_map_select', config={'scrollZoom': False, 'displayModeBar': False})
-        print(f"EVENT TYPE: {type(event)}", file=sys.stderr)
-        print(f"EVENT CONTENT: {event}", file=sys.stderr)
-        
-        # Check dictionary style
-        is_dict = isinstance(event, dict)
-        print(f"IS DICT: {is_dict}", file=sys.stderr)
         
         # Support both dictionary and object formats
         points = []
@@ -1426,7 +1420,6 @@ if selected_tab == "Pathway Overview":
                     points = event.selection.points
                 except AttributeError:
                     pass
-        print(f"POINTS EXTRACTED: {points}", file=sys.stderr)
         
         if points and len(points) > 0:
             point0 = points[0]
