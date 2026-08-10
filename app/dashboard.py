@@ -2187,15 +2187,15 @@ elif selected_tab == "Profile":
     st.markdown('<div class="stitle sticky-header"> Profile Directory <span class="chip chip-blue">Athlete & Coach Bios</span></div>', unsafe_allow_html=True)
     
     # 2. Category, Location, & Name Search Filters
-    col_spt, col_st, col_name = st.columns([1, 1, 1])
+    col_spt, col_st, col_name = st.columns([1, 1, 1.2])
     with col_spt:
         sports_list = ["All Sports"] + sorted(list(df_all["sport"].unique()))
-        sport_choice = st.selectbox("Choose Sport:", sports_list, key="profile_sport")
+        sport_choice = st.selectbox("Sport Focus", sports_list, key="profile_sport")
     with col_st:
         states_list = ["All States"] + sorted(list(df_all["state"].unique()))
-        state_choice = st.selectbox("Choose State:", states_list, key="profile_state")
+        state_choice = st.selectbox("State Registry", states_list, key="profile_state")
     with col_name:
-        name_query = st.text_input("🔍 Search by Name:", placeholder="Type name...", key="profile_name_search")
+        name_query = st.text_input("Search Name", placeholder="Type athlete or coach name...", key="profile_name_search")
         
     # Filter datasets for both Athletes and Coaches
     filtered_athletes = df_all[df_all["entity_type"] == "Athlete"].copy()
@@ -2213,7 +2213,7 @@ elif selected_tab == "Profile":
         
     # 3. Check for Empty State
     if filtered_athletes.empty and filtered_coaches.empty:
-        st.warning("No result found")
+        st.warning("No results found matching your filters.")
     else:
         def render_bio(selected_name, is_coach_flag, person_row):
             entity_type = "Coach" if is_coach_flag else "Sportsperson"
@@ -2294,74 +2294,67 @@ elif selected_tab == "Profile":
                 }
             }
             
-            # Display Bio Card
-            st.markdown("---")
-            st.markdown(f'<div class="stitle" style="font-size:1.15rem;margin-top:0rem;">Bio-Data: {selected_name}</div>', unsafe_allow_html=True)
+            # Display Bio Card - Stacked vertically for narrow column layout
+            st.markdown(f'<div style="font-size:0.95rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.8px; margin-top:0.5rem; margin-bottom:0.8rem;">Profile Details: {selected_name}</div>', unsafe_allow_html=True)
             
-            # Main details columns
-            c_bio1, c_bio2 = st.columns([1, 1])
+            # General details card
+            st.markdown(f"""
+            <div class="acard" style="margin-bottom: 1rem;">
+                <span class="tag green" style="float:right;">{entity_type}</span>
+                <b style="font-size:1.1rem;color:var(--teal);">{person_row['name']}</b><br>
+                <span style="font-size:0.75rem;color:var(--text2);">{person_row['sport']} · {person_row['state']} · {person_row.get('city', 'Unknown')}</span>
+                <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
+                <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                    <b>Age:</b> {int(person_row['age']) if pd.notna(person_row['age']) else 'Unknown'}<br>
+                    <b>Gender:</b> {person_row['gender']}<br>
+                    <b>Tier:</b> {person_row['tier']}<br>
+                    <b>Registry Base:</b> {person_row.get('city', 'Unknown')}, {person_row['state']}<br>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
             
-            with c_bio1:
+            # Training details card
+            if entity_type == "Coach":
                 st.markdown(f"""
-                <div class="acard" style="min-height:220px;">
-                    <span class="tag green" style="float:right;">{entity_type}</span>
-                    <b style="font-size:1.1rem;color:var(--teal);">{person_row['name']}</b><br>
-                    <span style="font-size:0.75rem;color:var(--text2);">{person_row['sport']} · {person_row['state']} · {person_row.get('city', 'Unknown')}</span>
-                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                <div class="acard" style="margin-bottom: 1rem;">
+                    <span class="tag blue" style="float:right;">Certification</span>
+                    <b style="font-size:1.05rem;color:var(--blue);">Licence & Certificate Status</b>
+                    <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
                     <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                        <b>Age:</b> {int(person_row['age']) if pd.notna(person_row['age']) else 'Unknown'}<br>
-                        <b>Gender:</b> {person_row['gender']}<br>
-                        <b>Tier:</b> {person_row['tier']}<br>
-                        <b>Registry Base:</b> {person_row.get('city', 'Unknown')}, {person_row['state']}<br>
+                        <b>Active Licence:</b> <span class="tag green">{person_row['performance_level']}</span><br>
+                        <b>Licencing Body:</b> {person_row.get('source_link', 'Official Registry')}<br>
+                        <b>Empanelled Stage:</b> {person_row.get('pipeline_stage', 'Empanelled')}<br>
+                        <b>Notes:</b> {person_row.get('notes', 'No additional certificate notes recorded.')}<br>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                coach_val = "Assigned National Coach" if person_row['performance_level'] in ["International", "National"] else "Regional Academy Coach"
+                centre_val = "SAI NCOE " + str(person_row.get('state', 'Unknown')) if person_row['performance_level'] in ["International", "National"] else "Local State Academy"
+                
+                st.markdown(f"""
+                <div class="acard" style="margin-bottom: 1rem;">
+                    <span class="tag blue" style="float:right;">Performance & Training</span>
+                    <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
+                    <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
+                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                        <b>Primary Coach:</b> {coach_val}<br>
+                        <b>Training Centre:</b> {centre_val}<br>
+                        <b>Opportunity Score:</b> <span class="tag amber">{person_row['athletiq_opportunity_score']} / 10.0</span><br>
+                        <b>Current Funding:</b> {person_row['funding_status']}<br>
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
                 
-            with c_bio2:
-                if entity_type == "Coach":
-                    op_centre = "SAI NCOE " + str(person_row.get('state', 'Unknown')) if str(person_row.get('performance_level', '')) in ["International", "National"] else str(person_row.get('city', 'Unknown')) + " Academy"
-                    
-                    st.markdown(f"""
-                    <div class="acard" style="min-height:220px;">
-                        <span class="tag blue" style="float:right;">Certification</span>
-                        <b style="font-size:1.05rem;color:var(--blue);">Licence & Certificate Status</b>
-                        <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
-                        <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                            <b>Active Licence:</b> <span class="tag green">{person_row['performance_level']}</span><br>
-                            <b>Licencing Body:</b> {person_row.get('source_link', 'Official Registry')}<br>
-                            <b>Empanelled Stage:</b> {person_row.get('pipeline_stage', 'Empanelled')}<br>
-                            <b>Notes:</b> {person_row.get('notes', 'No additional certificate notes recorded.')}<br>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                else:
-                    # Determine mock coach and centre based on performance/state
-                    coach_val = "Assigned National Coach" if person_row['performance_level'] in ["International", "National"] else "Regional Academy Coach"
-                    centre_val = "SAI NCOE " + str(person_row.get('state', 'Unknown')) if person_row['performance_level'] in ["International", "National"] else "Local State Academy"
-                    
-                    st.markdown(f"""
-                    <div class="acard" style="min-height:220px;">
-                        <span class="tag blue" style="float:right;">Performance & Training</span>
-                        <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
-                        <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
-                        <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                            <b>Primary Coach:</b> {coach_val}<br>
-                            <b>Training Centre:</b> {centre_val}<br>
-                            <b>Opportunity Score:</b> <span class="tag amber">{person_row['athletiq_opportunity_score']} / 10.0</span><br>
-                            <b>Current Funding:</b> {person_row['funding_status']}<br>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-            # 4. Check for Elite Medals & Records (from JSON)
+            # Elite achievements
             matching_elites = [e for e in elite_athletes if e["name"].lower() == selected_name.lower()]
             if matching_elites:
                 elite_profile = matching_elites[0]
                 st.markdown(f"""
-                <div class="acard">
+                <div class="acard" style="margin-bottom: 1rem;">
                     <span class="tag amber" style="float:right;">Elite Registry</span>
                     <b style="font-size:1rem;color:var(--gold);">Major Achievements & Olympic Medals</b>
-                    <hr style="margin:0.8rem 0;border-color:rgba(253,214,99,0.2);">
+                    <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
                     <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
                         <b>Medals / Placement:</b> {elite_profile.get('medals', 'None')}<br>
                         <b>National Records & Historical Profile:</b> {elite_profile.get('records', 'None')}<br>
@@ -2370,33 +2363,33 @@ elif selected_tab == "Profile":
                 </div>
                 """, unsafe_allow_html=True)
                 
-            # 5. Check for Wrestling TOPS Slide Bios (from PPTX)
+            # Wrestling TOPS slides
             selected_name_lower = selected_name.lower().strip()
             if selected_name_lower in wrestling_tops:
                 w_bio = wrestling_tops[selected_name_lower]
                 st.markdown(f"""
-                <div class="acard">
+                <div class="acard" style="margin-bottom: 1rem;">
                     <span class="tag purple" style="float:right;">Wrestling TOPS Profile</span>
-                    <b style="font-size:1rem;color:var(--purple);">Detailed Slide Bio (parsed from Wrestling TOPS profile.pptx)</b>
-                    <hr style="margin:0.8rem 0;border-color:rgba(104,61,228,0.25);">
+                    <b style="font-size:1rem;color:var(--purple);">Detailed Slide Bio</b>
+                    <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
                     <div style="font-size:0.88rem;line-height:1.7;color:var(--text2);">
-                        <b>Weight Category / Event:</b> {w_bio['category']}<br>
+                        <b>Weight Category:</b> {w_bio['category']}<br>
                         <b>Date of Birth / Age:</b> {w_bio['dob_age']}<br>
                         <b>Training Base:</b> {w_bio['base']}<br>
-                        <b>Best Career Performance:</b> {w_bio['best']}<br>
-                        <b>Latest International Performance:</b> {w_bio['latest']}<br>
-                        <b>Position at Senior/Cadet Nationals:</b> {w_bio['national_pos']}<br>
-                        <b>2028 LA Olympic Games Outlook:</b> {w_bio['outlook']}
+                        <b>Best Career:</b> {w_bio['best']}<br>
+                        <b>Latest:</b> {w_bio['latest']}<br>
+                        <b>National Pos:</b> {w_bio['national_pos']}<br>
+                        <b>Olympic Outlook:</b> {w_bio['outlook']}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
                 
-            # 6. Fallback Display Notes
+            # Notes notes
             if person_row.get("notes") and pd.notna(person_row["notes"]) and selected_name_lower not in wrestling_tops:
                 st.markdown(f"""
-                <div class="acard">
+                <div class="acard" style="margin-bottom: 1rem;">
                     <b style="font-size:1rem;color:var(--teal);">Performance Records & History Notes</b>
-                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
+                    <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
                     <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
                         {person_row['notes']}
                     </div>
@@ -2423,14 +2416,14 @@ elif selected_tab == "Profile":
                     <div class="acard" style="border-left: 3px solid {badge_color}; margin-bottom: 1rem; padding: 1.2rem; height: 100%;">
                         <div class="acard-top">
                             <div class="acard-title" style="font-size:1.05rem;">{name}</div>
-                            <span class="tag green" style="background: rgba(16,229,179,0.1); border: 1px solid rgba(16,229,179,0.25); color: #10E5B3; font-size: 0.68rem; padding: 1px 6px; border-radius: 4px;">{perf}</span>
+                            <span class="tag green" style="background: rgba(16,229,179,0.1); border: 1px solid rgba(16,229,179,0.25); color: #113E21; font-size: 0.68rem; padding: 1px 6px; border-radius: 4px;">{perf}</span>
                         </div>
                         <div class="acard-meta" style="margin-top:0.4rem; font-size:0.78rem; line-height: 1.5; color: var(--text2);">
                             <b>Specialization:</b> {spec} <br>
                             <b>State Registry:</b> {state} <br>
                             <b>DOB / Age:</b> {age}
                         </div>
-                        <hr style="margin:0.6rem 0; border:0; border-top: 1px solid rgba(255,255,255,0.06);">
+                        <hr style="margin:0.6rem 0; border:0; border-top: 1px solid var(--line);">
                         <div style="font-size:0.75rem; color: var(--text3); line-height:1.4;">
                             {ach}
                         </div>
@@ -2439,16 +2432,30 @@ elif selected_tab == "Profile":
                     with cols[idx % 3]:
                         st.markdown(card_html, unsafe_allow_html=True)
                 if total_len > limit:
-                    st.info(f"Showing first {limit} athletes. Use the 'Select Athlete' dropdown above to search or inspect any specific profile.")
+                    st.info(f"Showing first {limit} athletes. Use the 'Select Athlete' dropdown in the right panel to search or inspect any specific profile.")
 
             athlete_names = sorted(filtered_athletes["name"].dropna().unique().tolist()) if not filtered_athletes.empty else []
-            selected_athlete = st.selectbox(
-                "Select Athlete to View Bio-Data:",
-                options=["-- Select Athlete --"] + athlete_names,
-                key="profile_selected_athlete"
-            )
             
-            if selected_athlete == "-- Select Athlete --":
+            c_master, c_detail = st.columns([3, 2])
+            
+            with c_detail:
+                st.markdown("<div style='font-size:0.95rem; font-weight:600; color:var(--forest); margin-bottom:0.4rem;'>Profile Inspector</div>", unsafe_allow_html=True)
+                selected_athlete = st.selectbox(
+                    "Inspect Profile Details:",
+                    options=["-- Select Athlete --"] + athlete_names,
+                    key="profile_selected_athlete"
+                )
+                if selected_athlete != "-- Select Athlete --":
+                    person_row = filtered_athletes[filtered_athletes["name"] == selected_athlete].iloc[0]
+                    render_bio(selected_athlete, False, person_row)
+                else:
+                    st.markdown("""
+                    <div style="border: 1px dashed var(--line); border-radius:0px; padding: 2rem; text-align:center; color: var(--ink-soft); font-size:0.88rem; margin-top:0.5rem;">
+                        Select an athlete from the dropdown above to view their comprehensive training metrics, achievements, and coach assignments.
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+            with c_master:
                 if not filtered_athletes.empty:
                     # Initialize selected level in session state if not present
                     if "athlete_selected_level" not in st.session_state:
@@ -2462,12 +2469,12 @@ elif selected_tab == "Profile":
                     st.markdown(f"""
                     <style>
                     #level-selection-trigger ~ div[data-testid="column"] button {{
-                        height: 90px !important;
+                        height: 50px !important;
                         background: var(--white) !important;
                         border: 1px solid var(--line) !important;
                         border-radius: 0px !important;
                         font-family: var(--serif) !important;
-                        font-size: 1.1rem !important;
+                        font-size: 0.95rem !important;
                         font-weight: 500 !important;
                         color: var(--forest) !important;
                         transition: all 0.3s ease !important;
@@ -2484,7 +2491,7 @@ elif selected_tab == "Profile":
                     #level-selection-trigger ~ div[data-testid="column"]:nth-of-type(3) button {{ {style_state} }}
                     </style>
                     <div id="level-selection-trigger"></div>
-                    <div class="stitle" style="font-size:1.1rem;margin-top:1.5rem;margin-bottom:0.8rem;">Filter Athletes Directory by Performance Level</div>
+                    <div class="stitle" style="font-size:1.05rem;margin-top:0.5rem;margin-bottom:0.8rem;">Filter by Performance Level</div>
                     """, unsafe_allow_html=True)
                     
                     col_intl, col_nat, col_state = st.columns(3)
@@ -2497,7 +2504,7 @@ elif selected_tab == "Profile":
                             st.session_state.athlete_selected_level = "National"
                             st.rerun()
                     with col_state:
-                        if st.button("📍 State-wise / District", key="btn_level_state", use_container_width=True):
+                        if st.button("📍 State & District", key="btn_level_state", use_container_width=True):
                             st.session_state.athlete_selected_level = "State-wise"
                             st.rerun()
                             
@@ -2515,9 +2522,9 @@ elif selected_tab == "Profile":
                         
                         col_tbl_hdr, col_tbl_cls = st.columns([3, 1])
                         with col_tbl_hdr:
-                            st.markdown(f'<div class="stitle" style="font-size:1rem;margin-top:0.3rem;">Matching {lvl} Athletes Directory</div>', unsafe_allow_html=True)
+                            st.markdown(f'<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">Matching {lvl} Athletes</div>', unsafe_allow_html=True)
                         with col_tbl_cls:
-                            if st.button("❌ Close Table", key="btn_clear_level_filter", use_container_width=True):
+                            if st.button("❌ Close", key="btn_clear_level_filter", use_container_width=True):
                                 st.session_state.athlete_selected_level = None
                                 st.rerun()
                                 
@@ -2534,11 +2541,11 @@ elif selected_tab == "Profile":
                             
                             render_athlete_cards_grid(ath_display, len(ath_display), lvl.lower())
                         else:
-                            st.info(f"No {lvl.lower()} athletes found matching the current Sport/State filters.")
+                            st.info(f"No {lvl.lower()} athletes found matching the current filters.")
                     else:
-                        if state_choice != "All States" or sport_choice != "All Sports":
+                        if state_choice != "All States" or sport_choice != "All Sports" or name_query.strip():
                             st.markdown("---")
-                            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:0.3rem;">Matching Athletes Directory</div>', unsafe_allow_html=True)
+                            st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">Matching Athletes</div>', unsafe_allow_html=True)
                             if not filtered_athletes.empty:
                                 ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
                                 
@@ -2553,21 +2560,44 @@ elif selected_tab == "Profile":
                                 render_athlete_cards_grid(ath_display, len(ath_display), "")
                             else:
                                 st.info("No athletes found matching the current filters.")
-            else:
-                person_row = filtered_athletes[filtered_athletes["name"] == selected_athlete].iloc[0]
-                render_bio(selected_athlete, False, person_row)
+                        else:
+                            # Show default view (some top athletes)
+                            st.markdown("---")
+                            st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">All Registered Athletes</div>', unsafe_allow_html=True)
+                            ath_display = filtered_athletes[["name", "sport", "state", "performance_level", "age", "notes"]].copy()
+                            ath_display["Specialization"] = ath_display["sport"]
+                            ath_display["DOB / Age"] = ath_display["age"].apply(lambda x: f"{int(x)} yrs" if pd.notna(x) and float(x) > 0 else "Unknown")
+                            ath_display["Achievements / Notes"] = ath_display["notes"].fillna("-")
+                            ath_display.drop(columns=["notes", "age", "sport"], inplace=True)
+                            ath_display = ath_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Achievements / Notes"]]
+                            ath_display.columns = ["Sportsperson Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Achievements / Notes"]
+                            render_athlete_cards_grid(ath_display, len(ath_display), "")
 
         with tab_coa:
             coach_names = sorted(filtered_coaches["name"].dropna().unique().tolist()) if not filtered_coaches.empty else []
-            selected_coach = st.selectbox(
-                "Select Coach to View Bio-Data:",
-                options=["-- Select Coach --"] + coach_names,
-                key="profile_selected_coach"
-            )
             
-            if selected_coach == "-- Select Coach --":
+            c_master_c, c_detail_c = st.columns([3, 2])
+            
+            with c_detail_c:
+                st.markdown("<div style='font-size:0.95rem; font-weight:600; color:var(--forest); margin-bottom:0.4rem;'>Profile Inspector</div>", unsafe_allow_html=True)
+                selected_coach = st.selectbox(
+                    "Inspect Coach Details:",
+                    options=["-- Select Coach --"] + coach_names,
+                    key="profile_selected_coach"
+                )
+                if selected_coach != "-- Select Coach --":
+                    person_row = filtered_coaches[filtered_coaches["name"] == selected_coach].iloc[0]
+                    render_bio(selected_coach, True, person_row)
+                else:
+                    st.markdown("""
+                    <div style="border: 1px dashed var(--line); border-radius:0px; padding: 2rem; text-align:center; color: var(--ink-soft); font-size:0.88rem; margin-top:0.5rem;">
+                        Select a coach from the dropdown above to view their certifications, licences, and career details.
+                    </div>
+                    """, unsafe_allow_html=True)
+            
+            with c_master_c:
                 if not filtered_coaches.empty:
-                    st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Coaches Directory</div>', unsafe_allow_html=True)
+                    st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.5rem;margin-bottom:0.8rem;">Matching Coaches</div>', unsafe_allow_html=True)
                     co_display = filtered_coaches[["name", "sport", "city", "state", "performance_level", "age", "notes"]].copy()
                     
                     co_display["Specialization"] = co_display["sport"]
@@ -2577,21 +2607,18 @@ elif selected_tab == "Profile":
                     co_display = co_display[["name", "Specialization", "state", "performance_level", "DOB / Age", "Credentials"]]
                     co_display.columns = ["Coach Name", "Specialization", "State Registry", "Performance Level", "DOB / Age", "Credentials"]
                     st.write(f"Showing all matching coaches (total: {len(co_display)}):")
-                    st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
-            else:
-                person_row = filtered_coaches[filtered_coaches["name"] == selected_coach].iloc[0]
-                render_bio(selected_coach, True, person_row)
+                    st.dataframe(co_display.reset_index(drop=True), use_container_width=True, height=350, hide_index=True)
+                else:
+                    st.info("No coaches found matching the current filters.")
 
         with tab_aca:
-            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Matching Academies Directory</div>', unsafe_allow_html=True)
+            st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.5rem;margin-bottom:0.8rem;">Matching Academies</div>', unsafe_allow_html=True)
             sai_df_disp = sai_df[["name", "city", "state", "type", "region", "capacity", "coaches", "facilities"]].copy()
             if state_choice != "All States":
                 sai_df_disp = sai_df_disp[sai_df_disp["state"].str.lower() == state_choice.lower()]
             sai_df_disp.columns = ["Centre Name", "City", "State", "Type", "Region", "Capacity", "Coaches", "Facilities"]
             st.write(f"Showing all matching academies (total: {len(sai_df_disp)}):")
-            st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=280, hide_index=True)
-
-
+            st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=450, hide_index=True)
 elif selected_tab == "Womens":
     # ─── Load 5000 Women Athletes from JSON ───
     women_json_path = os.path.join(os.path.dirname(__file__), "..", "data", "women_athletes.json")
