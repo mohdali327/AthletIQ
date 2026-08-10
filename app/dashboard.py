@@ -2571,13 +2571,7 @@ elif selected_tab == "Profile":
                             else:
                                 st.info("No athletes found matching the current filters.")
                         else:
-                            st.markdown("---")
-                            st.markdown("""
-                            <div style="border: 1px dashed var(--line); border-radius: 0px; padding: 3rem 2rem; text-align: center; color: var(--ink-soft); font-size: 0.95rem; margin-top: 1.5rem; background: var(--gray);">
-                                <div style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--forest); font-family: var(--serif);">🔍 Search Directory</div>
-                                Use the filters above to browse athletes by Sport, State Registry, or search by name.
-                            </div>
-                            """, unsafe_allow_html=True)
+                            pass
 
         with tab_coa:
             coach_names = sorted(filtered_coaches["name"].dropna().unique().tolist()) if not filtered_coaches.empty else []
