@@ -1406,10 +1406,34 @@ if selected_tab == "Pathway Overview":
         )
         
         # Render the map and handle click select event
+        import sys
+        print("MAP EVENT LOG:", file=sys.stderr)
         event = st.plotly_chart(fig_map, use_container_width=True, on_select='rerun', key='india_state_map_select', config={'scrollZoom': False, 'displayModeBar': False})
+        print(f"EVENT TYPE: {type(event)}", file=sys.stderr)
+        print(f"EVENT CONTENT: {event}", file=sys.stderr)
         
-        if event and "selection" in event and "points" in event["selection"] and len(event["selection"]["points"]) > 0:
-            clicked_location = event["selection"]["points"][0].get("location")
+        # Check dictionary style
+        is_dict = isinstance(event, dict)
+        print(f"IS DICT: {is_dict}", file=sys.stderr)
+        
+        # Support both dictionary and object formats
+        points = []
+        if event:
+            if isinstance(event, dict):
+                points = event.get("selection", {}).get("points", [])
+            else:
+                try:
+                    points = event.selection.points
+                except AttributeError:
+                    pass
+        print(f"POINTS EXTRACTED: {points}", file=sys.stderr)
+        
+        if points and len(points) > 0:
+            point0 = points[0]
+            if isinstance(point0, dict):
+                clicked_location = point0.get("location")
+            else:
+                clicked_location = getattr(point0, "location", None)
             if clicked_location:
                 # Reverse map
                 db_state = clicked_location
