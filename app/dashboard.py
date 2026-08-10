@@ -1068,13 +1068,13 @@ if selected_tab == "Pathway Overview":
 
     st.markdown(f"""
     <style>
-    .impact-model-section {
+    .impact-model-section {{
         margin-top: 1.5rem;
         margin-bottom: 2.5rem;
         font-family: var(--sans);
         background-color: transparent;
-    }
-    .section-heading {
+    }}
+    .section-heading {{
         color: var(--gold);
         font-family: var(--mono);
         font-size: 11px;
@@ -1082,16 +1082,16 @@ if selected_tab == "Pathway Overview":
         letter-spacing: 1px;
         text-transform: uppercase;
         margin-bottom: 1.5rem;
-    }
-    .timeline-container {
+    }}
+    .timeline-container {{
         display: flex;
         align-items: center;
         justify-content: space-between;
         position: relative;
         margin-bottom: 3rem;
         padding: 0 10px;
-    }
-    .timeline-line {
+    }}
+    .timeline-line {{
         position: absolute;
         top: 40px;
         left: 50px;
@@ -1099,22 +1099,22 @@ if selected_tab == "Pathway Overview":
         height: 1px;
         background-color: var(--line);
         z-index: 1;
-    }
-    .timeline-step {
+    }}
+    .timeline-step {{
         display: flex;
         flex-direction: column;
         align-items: center;
         z-index: 2;
         position: relative;
         width: 100px;
-    }
-    .step-number {
+    }}
+    .step-number {{
         font-family: var(--mono);
         font-size: 0.75rem;
         color: var(--gold);
         margin-bottom: 0.5rem;
-    }
-    .step-circle {
+    }}
+    .step-circle {{
         width: 55px;
         height: 55px;
         border-radius: 50%;
@@ -1125,36 +1125,36 @@ if selected_tab == "Pathway Overview":
         justify-content: center;
         color: var(--ink-soft);
         margin-bottom: 0.8rem;
-    }
-    .step-circle svg {
+    }}
+    .step-circle svg {{
         width: 24px;
         height: 24px;
         stroke: var(--forest);
-    }
-    .step-circle.active {
+    }}
+    .step-circle.active {{
         background-color: var(--forest);
         border-color: var(--forest);
         color: var(--white);
         box-shadow: none;
-    }
-    .step-circle.active svg {
+    }}
+    .step-circle.active svg {{
         stroke: var(--white);
-    }
-    .step-label {
+    }}
+    .step-label {{
         font-family: var(--serif);
         font-size: 15px;
         font-weight: 500;
         color: var(--forest);
-    }
-    .step-label.active {
+    }}
+    .step-label.active {{
         color: var(--gold);
-    }
-    .stats-grid {
+    }}
+    .stats-grid {{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1.5rem;
-    }
-    .stat-card {
+    }}
+    .stat-card {{
         background-color: var(--white);
         border-radius: 0px;
         padding: 2rem 1.5rem;
@@ -1163,11 +1163,11 @@ if selected_tab == "Pathway Overview":
         align-items: center;
         position: relative;
         border: 1px solid var(--line);
-    }
-    .stat-icon-wrapper {
+    }}
+    .stat-icon-wrapper {{
         display: none;
-    }
-    .stat-value {
+    }}
+    .stat-value {{
         font-family: var(--serif);
         font-size: 30px;
         font-weight: 500;
@@ -1175,15 +1175,15 @@ if selected_tab == "Pathway Overview":
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
         text-align: center;
-    }
-    .stat-label {
+    }}
+    .stat-label {{
         font-family: var(--mono);
         font-size: 10px;
         text-transform: uppercase;
         color: var(--ink-soft);
         text-align: center;
         letter-spacing: 0.05em;
-    }
+    }}
     </style>
     <div class="impact-model-section">
         <div class="section-heading">THE IMPACT MODEL</div>
