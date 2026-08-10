@@ -338,6 +338,97 @@ input[data-testid="stTextInput-Input"]:focus {
     border-color: var(--forest) !important;
     box-shadow: none !important;
 }
+
+/* Hero section formatting */
+.hero-subtitle {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+.hero-heading {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    line-height: 1.15;
+    color: var(--forest);
+    margin: 0 0 1.5rem 0;
+    font-weight: 500;
+}
+.hero-heading .highlight {
+    color: var(--gold);
+    font-style: italic;
+}
+.hero-description {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Hierarchy Tree Visual */
+.hierarchy-tree-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+}
+.hierarchy-tree {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+.tree-node {
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: 0.5rem 1rem;
+    min-width: 200px;
+    text-align: center;
+    border-radius: 0px;
+    z-index: 2;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+}
+.tree-node.active-node {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: var(--white);
+}
+.tree-node.active-node-bottom {
+    background: var(--forest);
+    border-color: var(--forest);
+    color: var(--white);
+}
+.tree-node .node-tag {
+    font-family: var(--mono);
+    font-size: 8px;
+    color: var(--gold);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 0.15rem;
+}
+.tree-node .node-title {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+}
+.tree-node.active-node .node-title, .tree-node.active-node-bottom .node-title {
+    font-family: var(--serif);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+}
+.tree-line {
+    width: 1px;
+    height: 24px;
+    border-left: 1px dashed var(--gold);
+    z-index: 1;
+}
 </style>
 <img src="x" onerror="
     if (!window.focusListenerAdded) {
@@ -675,10 +766,22 @@ nav_options = [
     "AI Assistant"
 ]
 
+if "main_navigation" not in st.session_state:
+    st.session_state.main_navigation = "Pathway Overview"
+
+# Programmatic redirection handling
+if st.session_state.get("nav_to_profile", False):
+    st.session_state.nav_radio = "Profile"
+    st.session_state.main_navigation = "Profile"
+    st.session_state.nav_to_profile = False
+
+# Set default of key-bound state if not set
+if "nav_radio" not in st.session_state:
+    st.session_state.nav_radio = st.session_state.main_navigation
+
 selected_tab = st.radio(
     label="Navigation",
     options=nav_options,
-    index=nav_options.index(st.session_state.main_navigation),
     label_visibility="collapsed",
     key="nav_radio",
     horizontal=True
@@ -1058,7 +1161,65 @@ def render_gtm_exporter(key_prefix, name, sport, state, details=""):
 # Purpose: Top opportunities, top gaps, top recommended actions.
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 if selected_tab == "Pathway Overview":
-    st.markdown('<div class="stitle sticky-header" title="Strategic Dashboard Homepage"> Pathway Overview <span class="chip chip-blue">Strategic Dashboard Homepage</span></div>', unsafe_allow_html=True)
+    # 2-Column Hero Landing Section (as requested in the second photo)
+    col_hero_l, col_hero_r = st.columns([3, 2])
+    with col_hero_l:
+        st.markdown("""
+            <div class="hero-subtitle">—— INDIA'S SPORTS INTELLIGENCE LAYER</div>
+            <h1 class="hero-heading">Every athlete.<br>Every coach.<br><span class="highlight">One intelligence system.</span></h1>
+            <p class="hero-description">
+                AthletIQ structures India's entire sporting ecosystem — athletes, coaches, sports, competitions and medals — into one connected, searchable, drillable intelligence platform.
+            </p>
+        """, unsafe_allow_html=True)
+        
+        # Render action buttons (Explore Platform redirects to Profile; See Map scrolls down)
+        btn_col1, btn_col2 = st.columns([1, 1])
+        with btn_col1:
+            if st.button("Explore the Platform →", key="explore_platform_btn", type="primary", use_container_width=True):
+                st.session_state.nav_to_profile = True
+                st.session_state.main_navigation = "Profile"
+                st.rerun()
+        with btn_col2:
+            st.markdown('<a href="#interactive-india-sports-map" style="display:inline-block; margin-top:0.6rem; color:var(--forest); font-family:var(--sans); font-size:0.95rem; font-weight:600; text-decoration:underline;">See the India map</a>', unsafe_allow_html=True)
+
+    with col_hero_r:
+        st.markdown("""
+            <div class="hierarchy-tree-container">
+                <div class="hierarchy-tree">
+                    <div class="tree-node active-node">
+                        <div class="node-tag" style="color: #FEFEFE !important;">INDIA</div>
+                        <div class="node-title">National Layer</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">STATE</div>
+                        <div class="node-title">36 States & UTs</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">DISTRICT</div>
+                        <div class="node-title">700+ Districts</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">SPORT</div>
+                        <div class="node-title">42 Disciplines</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">CATEGORY</div>
+                        <div class="node-title">U-12 · Senior</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node active-node-bottom">
+                        <div class="node-tag" style="color: #FEFEFE !important;">ATHLETE</div>
+                        <div class="node-title">Priya Singh · Boxing</div>
+                    </div>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    st.markdown("---")
 
     # Calculate dynamic stats for Projected Scale
     num_participants = 0
