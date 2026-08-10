@@ -2642,127 +2642,223 @@ elif selected_tab == "Womens":
 
     st.markdown('<div class="stitle sticky-header"> Womens Directory <span class="chip chip-blue">Emerging Women Athletes</span></div>', unsafe_allow_html=True)
 
-    # ── Filters ──
-    wcol_search, wcol_spt, wcol_st, wcol_lvl = st.columns([2, 1, 1, 1])
-    with wcol_search:
-        w_search = st.text_input("🔍 Search by Name:", placeholder="Type athlete name...", key="women_search")
+    # 1. Sport Focus, State Registry, & Name Search Filters
+    wcol_spt, wcol_st, wcol_name = st.columns([1, 1, 1.2])
     with wcol_spt:
         w_sports_list = ["All Sports"] + sorted(women_df["sport"].unique().tolist())
-        w_sport_choice = st.selectbox("Sport:", w_sports_list, key="women_sport")
+        w_sport_choice = st.selectbox("Sport Focus", w_sports_list, key="women_sport")
     with wcol_st:
         w_states_list = ["All States"] + sorted(women_df["state"].unique().tolist())
-        w_state_choice = st.selectbox("State:", w_states_list, key="women_state")
-    with wcol_lvl:
-        w_levels_list = ["All Levels", "International", "National", "State", "District"]
-        w_level_choice = st.selectbox("Level:", w_levels_list, key="women_level")
+        w_state_choice = st.selectbox("State Registry", w_states_list, key="women_state")
+    with wcol_name:
+        w_name_query = st.text_input("Athlete Name", placeholder="Type athlete name...", key="women_search")
 
+    # Filter datasets for Women
     filtered_women = women_df.copy()
-    if w_search and w_search.strip():
-        filtered_women = filtered_women[filtered_women["name"].str.lower().str.contains(w_search.strip().lower())]
+    
     if w_sport_choice != "All Sports":
         filtered_women = filtered_women[filtered_women["sport"].str.lower() == w_sport_choice.lower()]
     if w_state_choice != "All States":
         filtered_women = filtered_women[filtered_women["state"].str.lower() == w_state_choice.lower()]
-    if w_level_choice != "All Levels":
-        filtered_women = filtered_women[filtered_women["performance_level"] == w_level_choice]
+    if w_name_query.strip():
+        filtered_women = filtered_women[filtered_women["name"].str.lower().str.contains(w_name_query.strip().lower(), na=False)]
 
+    # 2. Check for Empty State
     if filtered_women.empty:
-        st.warning("No women athletes found for the selected filters.")
+        st.warning("No results found matching your filters in the Women Athletes Directory.")
     else:
-        # ── KPI Summary Cards ──
-        kpi_c1, kpi_c2, kpi_c3 = st.columns(3)
-        with kpi_c1:
+        def render_women_bio(selected_name, person_row):
+            st.markdown(f'<div style="font-size:0.95rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.8px; margin-top:0.5rem; margin-bottom:0.8rem;">Profile Details: {selected_name}</div>', unsafe_allow_html=True)
+            
+            # General details card
             st.markdown(f"""
-            <div class="acard" style="text-align:center;padding:1rem;">
-                <div style="font-size:2rem;font-weight:800;color:var(--teal);">{len(filtered_women)}</div>
-                <div style="font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">Athletes</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with kpi_c2:
-            intl_count = len(filtered_women[filtered_women["performance_level"] == "International"])
-            st.markdown(f"""
-            <div class="acard" style="text-align:center;padding:1rem;">
-                <div style="font-size:2rem;font-weight:800;color:var(--blue);">{intl_count}</div>
-                <div style="font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">International</div>
-            </div>
-            """, unsafe_allow_html=True)
-        with kpi_c3:
-            sport_count = filtered_women["sport"].nunique()
-            st.markdown(f"""
-            <div class="acard" style="text-align:center;padding:1rem;">
-                <div style="font-size:2rem;font-weight:800;color:var(--purple);">{sport_count}</div>
-                <div style="font-size:0.75rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;">Sports</div>
-            </div>
-            """, unsafe_allow_html=True)
-
-    # ── Athlete Search & Directory ──
-        w_athlete_names = sorted(filtered_women["name"].tolist())
-        w_selected = st.selectbox(
-            "Select Women Athlete to View Bio-Data:",
-            options=["-- Select Athlete --"] + w_athlete_names,
-            key="women_selected_athlete"
-        )
-
-        if w_selected != "-- Select Athlete --":
-            person = filtered_women[filtered_women["name"] == w_selected].iloc[0]
-            st.markdown("---")
-            st.markdown(f'<div class="stitle" style="font-size:1.15rem;margin-top:0rem;">Bio-Data: {w_selected}</div>', unsafe_allow_html=True)
-
-            # Bio card — Left: Personal Info, Right: Performance & Training
-            w_c1, w_c2 = st.columns([1, 1])
-            with w_c1:
-                st.markdown(f"""
-                <div class="acard" style="min-height:250px;">
-                    <span class="tag green" style="float:right;">Sportsperson</span>
-                    <b style="font-size:1.1rem;color:var(--teal);">{person['name']}</b><br>
-                    <span style="font-size:0.75rem;color:var(--text2);">{person['sport']} · {person['state']} · {person['city']}</span>
-                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
-                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                        <b>Age:</b> {person['age']}<br>
-                        <b>Gender:</b> {person['gender']}<br>
-                        <b>Tier:</b> {person['tier']}<br>
-                        <b>Status:</b> <span class="tag amber">{person['status']}</span><br>
-                        <b>Registry Base:</b> {person['city']}, {person['state']}<br>
-                    </div>
+            <div class="acard" style="margin-bottom: 1rem;">
+                <span class="tag green" style="float:right;">Sportsperson</span>
+                <b style="font-size:1.1rem;color:var(--teal);">{person_row['name']}</b><br>
+                <span style="font-size:0.75rem;color:var(--text2);">{person_row['sport']} · {person_row['state']} · {person_row.get('city', 'Unknown')}</span>
+                <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
+                <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                    <b>Age:</b> {int(person_row['age']) if pd.notna(person_row['age']) else 'Unknown'}<br>
+                    <b>Gender:</b> {person_row['gender']}<br>
+                    <b>Tier:</b> {person_row['tier']}<br>
+                    <b>Status:</b> <span class="tag amber">{person_row.get('status', 'Scouted')}</span><br>
+                    <b>Registry Base:</b> {person_row.get('city', 'Unknown')}, {person_row['state']}<br>
                 </div>
-                """, unsafe_allow_html=True)
-
-            with w_c2:
-                st.markdown(f"""
-                <div class="acard" style="min-height:250px;">
-                    <span class="tag blue" style="float:right;">Performance & Training</span>
-                    <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
-                    <hr style="margin:0.8rem 0;border-color:rgba(16,229,179,0.15);">
-                    <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
-                        <b>Performance Level:</b> <span class="tag green">{person['performance_level']}</span><br>
-                        <b>Opportunity Score:</b> <span class="tag amber">{person['athletiq_opportunity_score']} / 10.0</span><br>
-                        <b>Current Funding:</b> {person['funding_status']}<br>
-                        <b>Highlight:</b> {person['highlight']}<br>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-
-            # Achievements & Remarks card
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Performance & Training details card
             st.markdown(f"""
-            <div class="acard">
+            <div class="acard" style="margin-bottom: 1rem;">
+                <span class="tag blue" style="float:right;">Performance & Training</span>
+                <b style="font-size:1.05rem;color:var(--blue);">Training Profile & Metrics</b>
+                <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
+                <div style="font-size:0.85rem;line-height:1.6;color:var(--text2);">
+                    <b>Performance Level:</b> <span class="tag green">{person_row['performance_level']}</span><br>
+                    <b>Opportunity Score:</b> <span class="tag amber">{person_row['athletiq_opportunity_score']} / 10.0</span><br>
+                    <b>Current Funding:</b> {person_row['funding_status']}<br>
+                    <b>Highlight:</b> {person_row.get('highlight', 'Identified through grassroots trials.')}<br>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Achievements & Scouting Remarks card
+            st.markdown(f"""
+            <div class="acard" style="margin-bottom: 1rem;">
                 <span class="tag amber" style="float:right;">Achievements</span>
                 <b style="font-size:1rem;color:var(--gold);">Key Achievements & Scouting Notes</b>
-                <hr style="margin:0.8rem 0;border-color:rgba(253,214,99,0.2);">
+                <hr style="margin:0.8rem 0;border:0;border-top:1px solid var(--line);">
                 <div style="font-size:0.88rem;line-height:1.6;color:var(--text2);">
-                    <b>Achievements:</b> {person['achievements']}<br>
-                    <b>Scouting Remarks:</b> {person['remarks']}
+                    <b>Achievements:</b> {person_row.get('achievements', 'Standard track performance recorded.')}<br>
+                    <b>Scouting Remarks:</b> {person_row.get('remarks', 'High development potential.')}
                 </div>
             </div>
             """, unsafe_allow_html=True)
-        else:
-            st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Select an athlete above to view her full profile, or browse the directory below.</div>', unsafe_allow_html=True)
-            
-        st.markdown('<div class="stitle" style="font-size:1rem;margin-top:1.5rem;">Full Women Athletes Directory</div>', unsafe_allow_html=True)
-        dir_display = filtered_women[["name", "sport", "event", "state", "city", "age", "performance_level", "status", "achievements"]].copy()
-        dir_display.columns = ["Athlete Name", "Sport", "Event", "State", "City", "Age", "Level", "Status", "Achievements"]
-        st.write(f"Showing all matching women athletes (total: {len(dir_display):,}):")
-        st.dataframe(dir_display.reset_index(drop=True), use_container_width=True, height=500, hide_index=True)
 
+        # 3. Master-Detail Column Split
+        w_athlete_names = sorted(filtered_women["name"].dropna().unique().tolist())
+        
+        c_master_w, c_detail_w = st.columns([3, 2])
+        
+        with c_detail_w:
+            st.markdown("<div style='font-size:0.95rem; font-weight:600; color:var(--forest); margin-bottom:0.4rem;'>Profile Inspector</div>", unsafe_allow_html=True)
+            selected_w_athlete = st.selectbox(
+                "Inspect Profile Details:",
+                options=["-- Select Athlete --"] + w_athlete_names,
+                key="women_selected_athlete"
+            )
+            if selected_w_athlete != "-- Select Athlete --":
+                person_row = filtered_women[filtered_women["name"] == selected_w_athlete].iloc[0]
+                render_women_bio(selected_w_athlete, person_row)
+            else:
+                st.markdown("""
+                <div style="border: 1px dashed var(--line); border-radius:0px; padding: 2rem; text-align:center; color: var(--ink-soft); font-size:0.88rem; margin-top:0.5rem;">
+                    Select a women athlete from the dropdown above to view her comprehensive training metrics, achievements, and scouting notes.
+                </div>
+                """, unsafe_allow_html=True)
+                
+        with c_master_w:
+            def render_women_cards_grid(df_disp, total_len, level_txt):
+                limit = 24
+                st.write(f"Showing top {min(limit, total_len)} matching {level_txt} athletes (total: {total_len:,}):")
+                cols = st.columns(3)
+                for idx, (_, row) in enumerate(df_disp.head(limit).iterrows()):
+                    name = row["name"]
+                    spec = row["sport"] + (" - " + row["event"] if pd.notna(row.get("event")) and row.get("event") not in ["", "Unknown"] else "")
+                    state = row["state"]
+                    perf = row["performance_level"]
+                    age = f"{int(row['age'])} yrs" if pd.notna(row['age']) and float(row['age']) > 0 else "Unknown"
+                    ach = row["achievements"]
+                    badge_color = "#10E5B3" if "Medalist" in perf or "Internat" in perf.lower() else ("#683DE4" if "National" in perf else "#FDD663")
+                    
+                    card_html = f"""
+                    <div class="acard" style="border-left: 3px solid {badge_color}; margin-bottom: 1rem; padding: 1.2rem; height: 100%;">
+                        <div class="acard-top">
+                            <div class="acard-title" style="font-size:1.05rem;">{name}</div>
+                            <span class="tag green" style="background: rgba(16,229,179,0.1); border: 1px solid rgba(16,229,179,0.25); color: #113E21; font-size: 0.68rem; padding: 1px 6px; border-radius: 4px;">{perf}</span>
+                        </div>
+                        <div class="acard-meta" style="margin-top:0.4rem; font-size:0.78rem; line-height: 1.5; color: var(--text2);">
+                            <b>Specialization:</b> {spec} <br>
+                            <b>State Registry:</b> {state} <br>
+                            <b>DOB / Age:</b> {age}
+                        </div>
+                        <hr style="margin:0.6rem 0; border:0; border-top: 1px solid var(--line);">
+                        <div style="font-size:0.75rem; color: var(--text3); line-height:1.4;">
+                            {ach}
+                        </div>
+                    </div>
+                    """
+                    with cols[idx % 3]:
+                        st.markdown(card_html, unsafe_allow_html=True)
+                if total_len > limit:
+                    st.info(f"Showing first {limit} athletes. Use the selectbox in the right panel to search or inspect any specific profile.")
+
+            # Initialize selected level in session state if not present
+            if "women_selected_level" not in st.session_state:
+                st.session_state.women_selected_level = None
+                
+            # Inject CSS active styling dynamically based on session state selection
+            style_intl = "background: var(--forest) !important; color: var(--white) !important; border-color: var(--forest) !important;" if st.session_state.women_selected_level == "International" else ""
+            style_nat = "background: var(--forest) !important; color: var(--white) !important; border-color: var(--forest) !important;" if st.session_state.women_selected_level == "National" else ""
+            style_state = "background: var(--forest) !important; color: var(--white) !important; border-color: var(--forest) !important;" if st.session_state.women_selected_level == "State-wise" else ""
+            
+            st.markdown(f"""
+            <style>
+            #women-level-selection-trigger ~ div[data-testid="column"] button {{
+                height: 50px !important;
+                background: var(--white) !important;
+                border: 1px solid var(--line) !important;
+                border-radius: 0px !important;
+                font-family: var(--serif) !important;
+                font-size: 0.95rem !important;
+                font-weight: 500 !important;
+                color: var(--forest) !important;
+                transition: all 0.3s ease !important;
+            }}
+            #women-level-selection-trigger ~ div[data-testid="column"] button:hover {{
+                background: var(--gray) !important;
+                border-color: var(--gold) !important;
+                color: var(--forest) !important;
+                transform: none !important;
+                box-shadow: none !important;
+            }}
+            #women-level-selection-trigger ~ div[data-testid="column"]:nth-of-type(1) button {{ {style_intl} }}
+            #women-level-selection-trigger ~ div[data-testid="column"]:nth-of-type(2) button {{ {style_nat} }}
+            #women-level-selection-trigger ~ div[data-testid="column"]:nth-of-type(3) button {{ {style_state} }}
+            </style>
+            <div id="women-level-selection-trigger"></div>
+            <div class="stitle" style="font-size:1.05rem;margin-top:0.5rem;margin-bottom:0.8rem;">Filter by Performance Level</div>
+            """, unsafe_allow_html=True)
+            
+            col_intl, col_nat, col_state = st.columns(3)
+            with col_intl:
+                if st.button("🌍 International Level", key="btn_w_level_intl", use_container_width=True):
+                    st.session_state.women_selected_level = "International"
+                    st.rerun()
+            with col_nat:
+                if st.button("🏆 National Level", key="btn_w_level_nat", use_container_width=True):
+                    st.session_state.women_selected_level = "National"
+                    st.rerun()
+            with col_state:
+                if st.button("📍 State & District", key="btn_w_level_state", use_container_width=True):
+                    st.session_state.women_selected_level = "State-wise"
+                    st.rerun()
+                    
+            # Show table of the selected field if active
+            if st.session_state.women_selected_level:
+                lvl = st.session_state.women_selected_level
+                if lvl == "International":
+                    filtered_w_by_lvl = filtered_women[filtered_women["performance_level"].str.lower().str.contains("internat", na=False)]
+                elif lvl == "National":
+                    filtered_w_by_lvl = filtered_women[filtered_women["performance_level"].str.lower() == "national"]
+                else: # State-wise
+                    filtered_w_by_lvl = filtered_women[filtered_women["performance_level"].str.lower().isin(["state", "district"])]
+                    
+                st.markdown("---")
+                
+                col_tbl_hdr, col_tbl_cls = st.columns([3, 1])
+                with col_tbl_hdr:
+                    st.markdown(f'<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">Matching {lvl} Women Athletes</div>', unsafe_allow_html=True)
+                with col_tbl_cls:
+                    if st.button("❌ Close", key="btn_w_clear_level_filter", use_container_width=True):
+                        st.session_state.women_selected_level = None
+                        st.rerun()
+                        
+                if not filtered_w_by_lvl.empty:
+                    render_women_cards_grid(filtered_w_by_lvl, len(filtered_w_by_lvl), lvl.lower())
+                else:
+                    st.info(f"No {lvl.lower()} women athletes found matching the current filters.")
+            else:
+                if w_state_choice != "All States" or w_sport_choice != "All Sports" or w_name_query.strip():
+                    st.markdown("---")
+                    st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">Matching Women Athletes</div>', unsafe_allow_html=True)
+                    if not filtered_women.empty:
+                        render_women_cards_grid(filtered_women, len(filtered_women), "")
+                    else:
+                        st.info("No women athletes found matching the current filters.")
+                else:
+                    # Show nothing at start (same as Profile directory start condition)
+                    pass
 
 elif selected_tab == "AI Assistant":
     import requests
