@@ -709,59 +709,70 @@ st.markdown('''<style>
         padding: 0 !important;
     }
     div[data-testid="stRadio"] > div {
-        flex-direction: row; 
-        gap: 2rem; 
-        justify-content: center; 
         background: transparent !important;
         border: none !important;
+        padding: 0 !important;
     }
+    /* Force all tabs to display in a single horizontal row and allow horizontal scrolling if overflow */
+    div[data-testid="stRadio"] div[role="radiogroup"] {
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        overflow-x: auto !important;
+        scrollbar-width: none !important; /* Hide scrollbar for clean layout */
+    }
+    div[data-testid="stRadio"] div[role="radiogroup"]::-webkit-scrollbar {
+        display: none !important;
+    }
+    
     /* Hide the radio button circles completely */
-    div[data-testid="stRadio"] label[data-baseweb="radio"] > div:first-child {
+    div[data-testid="stRadio"] label div:first-child,
+    div[data-testid="stRadio"] [data-testid="stFiberIndicator"] {
         display: none !important;
     }
-    div[data-testid="stRadio"] label[data-baseweb="radio"] {
+    
+    /* Style all option tab items */
+    div[data-testid="stRadio"] label {
+        padding: 6px 14px !important;
+        border-radius: 20px !important;
+        cursor: pointer !important;
+        background: transparent !important;
+        transition: all 0.2s ease !important;
         margin: 0 !important;
-        cursor: pointer;
-    }
-    /* Hide the radio button circles */
-    div[data-testid="stRadio"] div[role="radiogroup"] > label > div:first-child {
-        display: none !important;
-    }
-    /* Style the labels as tab text */
-    div[data-testid="stRadio"] div[role="radiogroup"] label {
-        padding: 0.3rem 0.6rem !important;
-        border-radius: 0px !important;
-        margin-right: 0.2rem;
-        cursor: pointer;
-        background: transparent;
-        transition: all 0.2s ease;
+        display: inline-flex !important;
+        align-items: center !important;
     }
     div[data-testid="stRadio"] label p {
         font-family: var(--sans) !important;
         font-size: 13.5px !important;
         color: var(--ink-soft) !important;
         margin-bottom: 0 !important;
+        white-space: nowrap !important; /* Prevent text wrapping inside tab */
     }
+    
+    /* Hover State */
     div[data-testid="stRadio"] label:hover {
-        background: transparent !important;
+        background: #F0F4F1 !important;
     }
     div[data-testid="stRadio"] label:hover p {
         color: var(--forest) !important;
     }
-    /* Active State styling */
+    
+    /* Active State (Highlighted Pill) */
     div[data-testid="stRadio"] label[data-checked="true"],
     div[data-testid="stRadio"] label:has(input:checked) {
-        background: transparent !important;
+        background: #113E21 !important;
+        color: #FEFEFE !important;
         border: none !important;
-        border-bottom: none !important;
     }
     div[data-testid="stRadio"] label[data-checked="true"] p,
     div[data-testid="stRadio"] label:has(input:checked) p {
-        color: var(--forest) !important;
+        color: #FEFEFE !important;
         font-weight: 600 !important;
         text-shadow: none !important;
-    }
-</style>''', unsafe_allow_html=True)
+    }</style>''', unsafe_allow_html=True)
 
 if "main_navigation" not in st.session_state:
     st.session_state.main_navigation = "Pathway Overview"
