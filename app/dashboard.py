@@ -727,8 +727,12 @@ st.markdown('''<style>
         display: none !important;
     }
     
-    /* Hide the radio button circles completely */
-    div[data-testid="stRadio"] label > div:first-child,
+    /* Hide the main widget label (text 'Navigation') completely */
+    div[data-testid="stRadio"] label[data-testid="stWidgetLabel"] {
+        display: none !important;
+    }
+    /* Hide the radio button circles completely using a wrapper-safe selector */
+    div[data-testid="stRadio"] label > div:not(:last-child),
     div[data-testid="stRadio"] [data-testid="stFiberIndicator"] {
         display: none !important;
     }
@@ -797,15 +801,15 @@ col_logo, col_nav, col_btn = st.columns([1.1, 7.8, 1.1], vertical_alignment="cen
 
 with col_logo:
     st.markdown("""
-    <div style="display: flex; align-items: center; gap: 8px; text-align: left; margin-left: 0.5rem; margin-top: 5px;">
-        <svg viewBox="0 0 32 32" fill="none" style="width: 28px; height: 28px;">
+    <div style="display: flex; align-items: center; gap: 10px; text-align: left; margin-left: 0.5rem; margin-top: 5px;">
+        <svg viewBox="0 0 32 32" fill="none" style="width: 38px; height: 38px;">
             <circle cx="16" cy="16" r="13" stroke="#113E21" stroke-width="1.6"/>
             <circle cx="16" cy="16" r="2.4" fill="#B38B59"/>
             <path d="M16 3v6M16 23v6M3 16h6M23 16h6" stroke="#113E21" stroke-width="1.4"/>
         </svg>
         <div style="display: flex; flex-direction: column;">
-            <span style="font-family: 'Fraunces', serif; font-size: 17px; color: #113E21; font-weight: 600; line-height: 1.0;">AthletIQ</span>
-            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 7px; letter-spacing: 0.08em; color: #B38B59; text-transform: uppercase; margin-top: 1px;">India Sports Intelligence</span>
+            <span style="font-family: 'Fraunces', serif; font-size: 24px; color: #113E21; font-weight: 600; line-height: 1.0;">AthletIQ</span>
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 9px; letter-spacing: 0.08em; color: #B38B59; text-transform: uppercase; margin-top: 2px;">India Sports Intelligence</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
