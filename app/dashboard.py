@@ -1649,97 +1649,61 @@ if selected_tab == "Pathway Overview":
     </div>
     """, unsafe_allow_html=True)
 
-        # 4. Interactive India Sports Map
-    st.markdown("""<div class="stitle" title="Interactive map of India's states. Click on a state to view top athlete profiles." style="font-size:1.15rem;margin-top:2rem;"> Interactive India Sports Map</div>""", unsafe_allow_html=True)
-    st.markdown("<p style='font-family: var(--sans); font-size:0.9rem; color: var(--ink-soft); margin-bottom: 1.5rem;'>Click on any state to explore its mapped athlete profiles and regional registry:</p>", unsafe_allow_html=True)
+        # 4. Statewise Top Sports
+    st.markdown('<div class="stitle" title="Top performing sports across major states based on Khelo India and Olympic pipeline metrics" style="font-size:1.15rem;margin-top:2rem;"> Statewise Top Sports</div>', unsafe_allow_html=True)
+    st.markdown("<p style='font-family: var(--sans); font-size:0.9rem; color: var(--ink-soft); margin-bottom: 1.5rem;'>Click 'View Profiles' on any state card to explore its mapped athlete registry and emerging talents:</p>", unsafe_allow_html=True)
+    
+    def go_to_profile(st_name):
+        st.session_state.profile_state = st_name
+        st.session_state.profile_selected_athlete = "-- Select Athlete --"
+        st.session_state.athlete_selected_level = None
+        st.session_state.nav_to_profile = True
+        st.rerun()
 
-    import json
-    import plotly.express as px
-
-    try:
-        with open("data/india.geojson", "r") as f:
-            india_geojson = json.load(f)
-            
-        # Get count of athletes in each state from df_all
-        athletes_df = df_all[df_all["entity_type"] == "Athlete"]
-        state_counts = athletes_df["state"].value_counts().reset_index()
-        state_counts.columns = ["state", "athlete_count"]
-        
-        # Map database state names to the new optimized GeoJSON ST_NM values
-        def map_state_name_to_geojson(st_name):
-            if st_name == "Jammu & Kashmir":
-                return "Jammu and Kashmir"
-            return st_name
-            
-        state_counts["geojson_state"] = state_counts["state"].apply(map_state_name_to_geojson)
-        
-        # Assign a numerical ID for coloring to keep it as a single trace and avoid HTML duplication
-        state_counts["state_color_id"] = range(len(state_counts))
-
-        # Draw choropleth map using numerical state_color_id
-        fig_map = px.choropleth(
-            state_counts,
-            geojson=india_geojson,
-            locations="geojson_state",
-            featureidkey="properties.ST_NM",
-            color="state_color_id",
-            color_continuous_scale=["#CBA97E", "#113E21", "#B38B59", "#1B4E2C", "#3F5348", "#CBA97E"],
-            hover_name="state",
-            hover_data={"geojson_state": False, "athlete_count": True, "state_color_id": False, "state": False},
-            labels={"athlete_count": "Athletes Registered"}
-        )
-        fig_map.update_geos(
-            projection_type="mercator",
-            lonaxis_range=[68.0, 98.0],
-            lataxis_range=[7.0, 36.0],
-            visible=False
-        )
-        fig_map.update_coloraxes(showscale=False)
-        fig_map.update_layout(
-            height=750,
-            margin=dict(l=0, r=0, t=10, b=10),
-            paper_bgcolor="rgba(0,0,0,0)",
-            plot_bgcolor="rgba(0,0,0,0)",
-            showlegend=False,
-            dragmode=False,
-            clickmode="event+select"
+    def state_card(col, state_name, body, color, tooltip=""):
+        col.markdown(insight(f"📍 {state_name}", body, color, tooltip), unsafe_allow_html=True)
+        col.button(
+            f"View {state_name} Profiles", 
+            key=f"nav_{state_name.replace(' ', '_')}", 
+            on_click=go_to_profile, 
+            args=(state_name,), 
+            use_container_width=True
         )
         
-        # Render the map and handle click select event
-        event = st.plotly_chart(fig_map, use_container_width=True, on_select='rerun', key='india_state_map_select', config={'scrollZoom': False, 'displayModeBar': False})
-        
-        # Support both dictionary and object formats
-        points = []
-        if event:
-            if isinstance(event, dict):
-                points = event.get("selection", {}).get("points", [])
-            else:
-                try:
-                    points = event.selection.points
-                except AttributeError:
-                    pass
-        
-        if points and len(points) > 0:
-            point0 = points[0]
-            if isinstance(point0, dict):
-                clicked_location = point0.get("location")
-            else:
-                clicked_location = getattr(point0, "location", None)
-            if clicked_location:
-                # Reverse map
-                db_state = clicked_location
-                if clicked_location == "Jammu and Kashmir":
-                    db_state = "Jammu & Kashmir"
-                    
-                st.session_state.profile_state = db_state
-                st.session_state.main_navigation = "Profile"
-                st.session_state.profile_selected_athlete = "-- Select Athlete --"
-                st.session_state.athlete_selected_level = None
-                st.session_state.nav_to_profile = True
-                st.rerun()
-                
-    except Exception as e:
-        st.error(f"Error loading map: {e}")
+    c1, c2, c3 = st.columns(3)
+    state_card(c1, "Haryana", "<b>1. Wrestling</b> (Olympic medals; Sonepat hub)<br><b>2. Boxing</b> (Bhiwani pipeline)<br><b>3. Shooting</b> (Jhajjar/Panchkula)", "green", "Emerging: Ankush Panghal (Boxing)")
+    state_card(c2, "Punjab", "<b>1. Field Hockey</b> (Jalandhar/Sansarpur belt)<br><b>2. Athletics</b> (Sprints/Javelin pipeline)<br><b>3. Kabaddi</b> (Traditional circle style)", "green")
+    state_card(c3, "Maharashtra", "<b>1. Multi-Sport / KIYG</b> (4x Champion)<br><b>2. Wrestling</b> (Kolhapur/Pune talims)<br><b>3. Kho-Kho</b> (Historic stronghold)", "green", "Emerging: Preeti Pawar (Boxing), Yash Khandagale (Weightlifting)")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    c4, c5, c6 = st.columns(3)
+    state_card(c4, "Karnataka", "<b>1. Athletics</b> (Inspire Institute of Sport)<br><b>2. Judo</b> (IIS Bellary)<br><b>3. Badminton</b> (Prakash Padukone Academy)", "green", "Emerging: Manikanta L (Swimming)")
+    state_card(c5, "Tamil Nadu", "<b>1. Athletics</b> (Sprints/Jumps pipeline)<br><b>2. Kabaddi</b> (State game origin)<br><b>3. Kho-Kho</b> (Historic national strength)", "green", "Emerging: Praveen Chithravel (Athletics - Triple Jump)")
+    state_card(c6, "Odisha", "<b>1. Field Hockey</b> (Global hub/Kalinga Stadium)<br><b>2. Athletics</b> (High Performance Centre)<br><b>3. Rugby</b> (State-sponsored pipeline)", "green", "Emerging: Anjali Munda (Swimming), Jhilli Dalabehera (Weightlifting), Animesh Kujur (Athletics)")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    c7, c8, c9 = st.columns(3)
+    state_card(c7, "Manipur", "<b>1. Boxing</b> (Mary Kom legacy/SAI NCOE)<br><b>2. Weightlifting</b> (Olympic medals/Mirabai Chanu)<br><b>3. Football</b> (Massive grassroots base)", "green")
+    state_card(c8, "Kerala", "<b>1. Football</b> (Massive fan/club culture)<br><b>2. Athletics</b> (Historic sprint legacy)<br><b>3. Volleyball</b> (Strong district ecosystem)", "green")
+    state_card(c9, "Uttar Pradesh", "<b>1. Wrestling</b> (Historic Akharas)<br><b>2. Hockey</b> (KD Singh Babu Legacy)<br><b>3. Athletics</b> (Strong rural talent)", "green", "Emerging: Rohit Yadav (Athletics - Javelin Throw)")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    c10, c11, c12 = st.columns(3)
+    state_card(c10, "Bihar", "<b>1. Kabaddi</b> (Grassroots popularity)<br><b>2. Athletics</b> (Eklavya centres)<br><b>3. Rugby</b> (Rising state investments)", "green")
+    state_card(c11, "Madhya Pradesh", "<b>1. Shooting</b> (MP Shooting Academy)<br><b>2. Water Sports</b> (Bhopal lakes hub)<br><b>3. Athletics</b> (T.T. Nagar Stadium)", "green")
+    state_card(c12, "West Bengal", "<b>1. Football</b> (Historic clubs/Salt Lake)<br><b>2. Table Tennis</b> (Strong club ecosystem)<br><b>3. Archery</b> (SAI Kolkata)", "green", "Emerging: Harita Bhadra (Athletics - Sprint)")
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    c13, c14, c15 = st.columns(3)
+    state_card(c13, "Himachal Pradesh", "<b>1. Boxing</b> (Hill endurance advantage)<br><b>2. Volleyball</b> (Widespread popularity)<br><b>3. Winter Sports</b> (Skiing/Snowboarding)", "green")
+    state_card(c14, "Chhattisgarh", "<b>1. Hockey</b> (Rajnandgaon nursery)<br><b>2. Archery</b> (Tribal dominance)<br><b>3. Basketball</b> (Bhilai hub)", "green", "Emerging: Kiran Pisda (Football)")
+    state_card(c15, "Rajasthan", "<b>1. Shooting</b> (Jaipur/Bikaner ranges)<br><b>2. Athletics</b> (Desert endurance/Throws)<br><b>3. Archery</b> (Tribal belts)", "green")
+
+    st.markdown("<br>", unsafe_allow_html=True)
+    c16, c17, c18 = st.columns(3)
+    state_card(c16, "Gujarat", "<b>1. Table Tennis</b> (State-sponsored leagues)<br><b>2. Tennis</b> (SAGG infrastructure)<br><b>3. Swimming</b> (Rajkot/Ahmedabad pools)", "green", "Emerging: Bhargavi Bhagora (Archery)")
+    state_card(c17, "Arunachal Pradesh", "<b>1. Football</b> (Hangpan Dada Trophy)<br><b>2. Weightlifting</b> (Natural strength base)<br><b>3. Martial Arts</b> (Wushu/Karate focus)", "green")
+    state_card(c18, "Mizoram", "<b>1. Football</b> (Mizoram Premier League)<br><b>2. Weightlifting</b> (Rising Olympic prospects)<br><b>3. Boxing</b> (Northeast combative edge)", "green")
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # TAB 2 — TALENT DISCOVERY
