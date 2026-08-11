@@ -339,6 +339,33 @@ input[data-testid="stTextInput-Input"]:focus {
     box-shadow: none !important;
 }
 
+/* Style Segmented Controls (Centres & Academies Sub-Navigation) to match stTabs design */
+div[data-testid="stSegmentedControl"] button {
+    background: var(--white) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 0px !important;
+    color: var(--ink-soft) !important;
+    font-family: var(--mono) !important;
+    font-size: 11px !important;
+    letter-spacing: 0.04em !important;
+    padding: 9px 18px !important;
+    transition: all 0.25s ease !important;
+    box-shadow: none !important;
+    margin-right: 4px !important;
+}
+div[data-testid="stSegmentedControl"] button:hover {
+    border-color: var(--gold) !important;
+    color: var(--forest) !important;
+    background: var(--white) !important;
+}
+div[data-testid="stSegmentedControl"] button[aria-selected="true"],
+div[data-testid="stSegmentedControl"] button[aria-checked="true"],
+div[data-testid="stSegmentedControl"] button[data-checked="true"] {
+    background: var(--forest) !important;
+    color: var(--white) !important;
+    border-color: var(--forest) !important;
+}
+
 /* Hero section formatting */
 .hero-subtitle {
     font-family: var(--mono);
