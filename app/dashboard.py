@@ -1954,7 +1954,6 @@ elif selected_tab == "Centres & Academies":
     
     if ca_sub_tab == "Coach-to-Athlete Ratios & Capacity":
         st.markdown('<div class="stitle" style="font-size:1.15rem;"> Coach Capacity & Ratio Insights</div>', unsafe_allow_html=True)
-        st.info("💡 **Note on Facility Types:** Bangalore hosts two distinct facilities in the official registry: **SAI Bangalore (NCOE)** (National Centre of Excellence for elite national players) and **SAI Bangalore (STC)** (SAI Training Centre for state talent). They have different athlete enrollments, sport disciplines, and coach allocations, which is why their ratios differ (11:1 vs 15:1).")
         
         col1, col2 = st.columns(2)
         with col1:
