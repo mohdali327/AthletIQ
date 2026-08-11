@@ -837,7 +837,7 @@ if "nav_radio" not in st.session_state:
     st.session_state.nav_radio = st.session_state.main_navigation
 
 # Layout the top header in columns matching the layout reference
-col_logo, col_nav, col_btn = st.columns([1.1, 7.8, 1.1], vertical_alignment="center")
+col_logo, col_nav = st.columns([1.2, 8.8], vertical_alignment="center")
 
 with col_logo:
     st.markdown("""
@@ -864,30 +864,6 @@ with col_nav:
     )
 
 st.session_state.main_navigation = selected_tab
-
-with col_btn:
-    st.markdown("""
-    <style>
-    #request-access-btn-container button {
-        background: transparent !important;
-        color: #113E21 !important;
-        border: 1px solid #113E21 !important;
-        border-radius: 0px !important;
-        font-family: 'Inter', sans-serif !important;
-        font-size: 12px !important;
-        font-weight: 500 !important;
-        padding: 5px 10px !important;
-        text-transform: none !important;
-        width: 100% !important;
-    }
-    #request-access-btn-container button:hover {
-        background: #113E21 !important;
-        color: #FFFFFF !important;
-    }
-    </style>
-    <div id="request-access-btn-container"></div>
-    """, unsafe_allow_html=True)
-    st.button("Request Access", key="btn_request_access", use_container_width=True)
 
 # Global Settings (API Key configuration shared by chatbot and live search features)
 with st.sidebar:
@@ -1772,19 +1748,36 @@ elif selected_tab == "Discovery & Leagues":
     
     fc1, fc2, fc3, fc4 = st.columns([1, 1, 1, 1.2])
     with fc1:
-        f_sport = st.selectbox("Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
+        f_sport = st.selectbox(
+            "Sport Focus",
+            options=sorted(list(set(leagues_disp["Sport"]))),
+            index=None,
+            placeholder="All Core Sports",
+            key="live_sport_select"
+        )
     with fc2:
-        f_state = st.selectbox("State Registry", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
+        f_state = st.selectbox(
+            "State Registry",
+            options=sorted(list(set(leagues_disp["State"]))),
+            index=None,
+            placeholder="All Mapped States",
+            key="live_state_select"
+        )
     with fc3:
         status_options = [
-            "All Statuses",
             "Live Now",
             "Starting Soon",
             "Scheduled",
             "Completed",
             "Just Completed"
         ]
-        f_status = st.selectbox("Event Status", status_options, key="live_status_select")
+        f_status = st.selectbox(
+            "Event Status",
+            options=status_options,
+            index=None,
+            placeholder="All Statuses",
+            key="live_status_select"
+        )
     with fc4:
         f_search = st.text_input("Search Tournament", placeholder="Type tournament name...", key="live_search_query")
         
@@ -1957,12 +1950,18 @@ elif selected_tab == "Centres & Academies":
         
         col1, col2 = st.columns(2)
         with col1:
-            all_centres = ["-- Select Centre --"] + sorted(sai_df["name"].unique().tolist())
-            selected_centre = st.selectbox("Select SAI Centre", all_centres, key="ca_selected_centre")
+            all_centres = sorted(sai_df["name"].unique().tolist())
+            selected_centre = st.selectbox(
+                "Select SAI Centre", 
+                options=all_centres, 
+                index=None,
+                placeholder="Select SAI Centre...",
+                key="ca_selected_centre"
+            )
         
-        if selected_centre == "-- Select Centre --":
+        if selected_centre is None:
             with col2:
-                selected_sport = st.selectbox("Select Sport", ["-- Select Sport --"], key="ca_selected_sport")
+                selected_sport = st.selectbox("Select Sport", [], index=None, placeholder="Select Sport...", key="ca_selected_sport")
             
             st.markdown("""
             <div style="text-align: center; padding: 3rem 1.5rem; margin-top: 2rem; border: 1px dashed var(--line); border-radius: 12px; background: rgba(0,0,0,0.02); max-width: 600px;">
@@ -1973,11 +1972,17 @@ elif selected_tab == "Centres & Academies":
             """, unsafe_allow_html=True)
         else:
             centre_row = sai_df[sai_df["name"] == selected_centre].iloc[0]
-            centre_sports = ["-- Select Sport --"] + sorted(list(centre_row["sports"]))
+            centre_sports = sorted(list(centre_row["sports"]))
             with col2:
-                selected_sport = st.selectbox("Select Sport", centre_sports, key="ca_selected_sport")
+                selected_sport = st.selectbox(
+                    "Select Sport", 
+                    options=centre_sports, 
+                    index=None,
+                    placeholder="Select Sport...",
+                    key="ca_selected_sport"
+                )
             
-            if selected_sport == "-- Select Sport --":
+            if selected_sport is None:
                 st.markdown(f"""
                 <div style="text-align: center; padding: 3rem 1.5rem; margin-top: 2rem; border: 1px dashed var(--line); border-radius: 12px; background: rgba(0,0,0,0.02); max-width: 600px;">
                     <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏹</div>
@@ -2380,12 +2385,38 @@ elif selected_tab == "Profile":
     
     # 2. Category, Location, & Name Search Filters
     col_spt, col_st, col_name = st.columns([1, 1, 1.2])
+    
+    # Resolve and preserve redirected state selection index mapping
+    states_list = sorted(list(df_all["state"].unique()))
+    profile_state_val = st.session_state.get("profile_state", None)
+    if profile_state_val == "All States":
+        profile_state_val = None
+        
+    state_index = None
+    if profile_state_val in states_list:
+        state_index = states_list.index(profile_state_val)
+
     with col_spt:
-        sports_list = ["All Sports"] + sorted(list(df_all["sport"].unique()))
-        sport_choice = st.selectbox("Sport Focus", sports_list, key="profile_sport")
+        sports_list = sorted(list(df_all["sport"].unique()))
+        sport_choice = st.selectbox(
+            "Sport Focus", 
+            options=sports_list, 
+            index=None,
+            placeholder="All Sports",
+            key="profile_sport_select"
+        )
     with col_st:
-        states_list = ["All States"] + sorted(list(df_all["state"].unique()))
-        state_choice = st.selectbox("State Registry", states_list, key="profile_state")
+        state_choice = st.selectbox(
+            "State Registry", 
+            options=states_list, 
+            index=state_index,
+            placeholder="All States",
+            key="profile_state_select"
+        )
+    
+    # Synchronize back to session state for filtering and logic
+    st.session_state.profile_sport = sport_choice if sport_choice else "All Sports"
+    st.session_state.profile_state = state_choice if state_choice else "All States" 
     with col_name:
         name_query = st.text_input("Search Name", placeholder="Type athlete or coach name...", key="profile_name_search")
         
@@ -2393,10 +2424,10 @@ elif selected_tab == "Profile":
     filtered_athletes = df_all[df_all["entity_type"] == "Athlete"].copy()
     filtered_coaches = df_all[df_all["entity_type"] == "Coach"].copy()
     
-    if sport_choice != "All Sports":
+    if sport_choice:
         filtered_athletes = filtered_athletes[filtered_athletes["sport"].str.lower() == sport_choice.lower()]
         filtered_coaches = filtered_coaches[filtered_coaches["sport"].str.lower() == sport_choice.lower()]
-    if state_choice != "All States":
+    if state_choice:
         filtered_athletes = filtered_athletes[filtered_athletes["state"].str.lower() == state_choice.lower()]
         filtered_coaches = filtered_coaches[filtered_coaches["state"].str.lower() == state_choice.lower()]
     if name_query.strip():
@@ -2821,20 +2852,32 @@ elif selected_tab == "Womens":
     # 1. Sport Focus, State Registry, & Name Search Filters
     wcol_spt, wcol_st, wcol_name = st.columns([1, 1, 1.2])
     with wcol_spt:
-        w_sports_list = ["All Sports"] + sorted(women_df["sport"].unique().tolist())
-        w_sport_choice = st.selectbox("Sport Focus", w_sports_list, key="women_sport")
+        w_sports_list = sorted(women_df["sport"].unique().tolist())
+        w_sport_choice = st.selectbox(
+            "Sport Focus", 
+            options=w_sports_list, 
+            index=None,
+            placeholder="All Sports",
+            key="women_sport_select"
+        )
     with wcol_st:
-        w_states_list = ["All States"] + sorted(women_df["state"].unique().tolist())
-        w_state_choice = st.selectbox("State Registry", w_states_list, key="women_state")
+        w_states_list = sorted(women_df["state"].unique().tolist())
+        w_state_choice = st.selectbox(
+            "State Registry", 
+            options=w_states_list, 
+            index=None,
+            placeholder="All States",
+            key="women_state_select"
+        )
     with wcol_name:
         w_name_query = st.text_input("Athlete Name", placeholder="Type athlete name...", key="women_search")
 
     # Filter datasets for Women
     filtered_women = women_df.copy()
     
-    if w_sport_choice != "All Sports":
+    if w_sport_choice:
         filtered_women = filtered_women[filtered_women["sport"].str.lower() == w_sport_choice.lower()]
-    if w_state_choice != "All States":
+    if w_state_choice:
         filtered_women = filtered_women[filtered_women["state"].str.lower() == w_state_choice.lower()]
     if w_name_query.strip():
         filtered_women = filtered_women[filtered_women["name"].str.lower().str.contains(w_name_query.strip().lower(), na=False)]
