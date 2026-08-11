@@ -1957,159 +1957,180 @@ elif selected_tab == "Centres & Academies":
         
         col1, col2 = st.columns(2)
         with col1:
-            all_centres = sai_df["name"].unique().tolist()
+            all_centres = ["-- Select Centre --"] + sorted(sai_df["name"].unique().tolist())
             selected_centre = st.selectbox("Select SAI Centre", all_centres, key="ca_selected_centre")
         
-        centre_row = sai_df[sai_df["name"] == selected_centre].iloc[0]
-        centre_sports = centre_row["sports"]
-        with col2:
-            selected_sport = st.selectbox("Select Sport", centre_sports, key="ca_selected_sport")
-        
-        total_capacity = int(centre_row["capacity"])
-        total_coaches = int(centre_row["coaches"])
-        
-        # Algorithmic Sport Weighting to calculate realistic specific ratios
-        sport_weights = {
-            "Archery": {"a": 15, "c": 2}, "Weightlifting": {"a": 10, "c": 2}, 
-            "Wrestling": {"a": 20, "c": 3}, "Boxing": {"a": 20, "c": 3}, 
-            "Athletics": {"a": 40, "c": 2}, "Football": {"a": 30, "c": 1}, 
-            "Hockey": {"a": 25, "c": 2}, "Gymnastics": {"a": 15, "c": 2}, 
-            "Swimming": {"a": 25, "c": 2}, "Judo": {"a": 20, "c": 3}, 
-            "Cycling": {"a": 15, "c": 2}, "Fencing": {"a": 12, "c": 2}, 
-            "Taekwondo": {"a": 20, "c": 3}, "Badminton": {"a": 12, "c": 2}, 
-            "Shooting": {"a": 15, "c": 2},
-        }
-        
-        sum_a = sum([sport_weights.get(s, {"a": 20})["a"] for s in centre_sports])
-        sum_c = sum([sport_weights.get(s, {"c": 2})["c"] for s in centre_sports])
-        
-        sel_weight = sport_weights.get(selected_sport, {"a": 20, "c": 2})
-        sport_capacity = max(1, int(total_capacity * (sel_weight["a"] / sum_a)))
-        sport_coaches = max(1, int(total_coaches * (sel_weight["c"] / sum_c)))
-        
-        ratio_val = int(sport_capacity / sport_coaches)
-        ratio_str = f"{ratio_val} : 1"
-        
-        if ratio_val <= 15:
-            color = "var(--green)"
-            status = "Optimal"
-            insight_text = f"Well-resourced for {selected_sport}. Focus on performance scaling."
-        elif ratio_val <= 30:
-            color = "var(--amber)"
-            status = "Strained"
-            insight_text = f"Coaching staff stretched for {selected_sport}. Consider empanelling additional coaches."
+        if selected_centre == "-- Select Centre --":
+            with col2:
+                selected_sport = st.selectbox("Select Sport", ["-- Select Sport --"], key="ca_selected_sport")
+            
+            st.markdown("""
+            <div style="text-align: center; padding: 3rem 1.5rem; margin-top: 2rem; border: 1px dashed var(--line); border-radius: 12px; background: rgba(0,0,0,0.02); max-width: 600px;">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📊</div>
+                <div style="font-weight: 600; color: var(--ink); font-size: 1.05rem; margin-bottom: 0.25rem;">No Centre Selected</div>
+                <div style="font-size: 0.85rem; color: var(--ink-soft);">Select a Sports Authority of India (SAI) training centre from the dropdown to view its coaching capacity analysis.</div>
+            </div>
+            """, unsafe_allow_html=True)
         else:
-            color = "var(--red)"
-            status = "Critical Deficit"
-            insight_text = f"High risk of injury/burnout in {selected_sport}. Deploy NIS masterclass immediately."
+            centre_row = sai_df[sai_df["name"] == selected_centre].iloc[0]
+            centre_sports = ["-- Select Sport --"] + sorted(list(centre_row["sports"]))
+            with col2:
+                selected_sport = st.selectbox("Select Sport", centre_sports, key="ca_selected_sport")
             
-        st.markdown(f'''
-        <div class="acard" style="max-width: 600px; margin-top: 1rem; border-left:4px solid {color};">
-            <div style="color:{color}; font-weight:700;">{selected_sport} ({centre_row['state']})</div>
-            <div style="font-size:2rem; font-weight:900;">{ratio_str}</div>
-            <div style="font-size:0.8rem; color:var(--text2);">Computed Sport Ratio ({sport_capacity} Athletes per {sport_coaches} Coaches)</div>
-            <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:{color};"> ({status})</span></div>
-            <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> {insight_text}</div>
-        </div>
-        ''', unsafe_allow_html=True)
-
-        # AI Decision Maker: Coach Redistribution
-        st.markdown('<div class="stitle" style="font-size:1.05rem; margin-top: 2.5rem; color:var(--teal);">Coach Redistribution Analysis</div>', unsafe_allow_html=True)
-        
-        # Calculate surplus / deficit for the selected centre
-        ideal_coaches_needed = max(1, (sport_capacity + 14) // 15)
-        
-        if ratio_val < 15 and sport_coaches > ideal_coaches_needed:
-            # SURPLUS CASE
-            surplus_coaches = sport_coaches - ideal_coaches_needed
-            st.markdown(f'<div style="font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem;">Detected a surplus of <b style="color:var(--text1);">{surplus_coaches} {selected_sport} coach(es)</b> at {selected_centre}. Analyzing national deficit centres...</div>', unsafe_allow_html=True)
-            
-            deficit_centres = []
-            for idx, row in sai_df.iterrows():
-                if row["name"] == selected_centre: continue
-                if selected_sport in row["sports"]:
-                    t_cap = int(row["capacity"])
-                    t_coa = int(row["coaches"])
-                    sum_a_o = sum([sport_weights.get(s, {"a": 20})["a"] for s in row["sports"]])
-                    sum_c_o = sum([sport_weights.get(s, {"c": 2})["c"] for s in row["sports"]])
-                    s_cap = max(1, int(t_cap * (sel_weight["a"] / sum_a_o)))
-                    s_coa = max(1, int(t_coa * (sel_weight["c"] / sum_c_o)))
-                    
-                    r_val = int(s_cap / s_coa)
-                    if r_val > 15:
-                        needed = ((s_cap + 14) // 15) - s_coa
-                        if needed > 0:
-                            deficit_centres.append({"name": row["name"], "state": row["state"], "ratio": r_val, "needed": needed})
-            
-            if deficit_centres:
-                deficit_centres = sorted(deficit_centres, key=lambda x: x["ratio"], reverse=True)
-                st.markdown('<div style="display:flex; flex-direction:column; gap:0.75rem; max-width: 600px;">', unsafe_allow_html=True)
-                for i, dc in enumerate(deficit_centres[:3]):
-                    transfer_amt = min(surplus_coaches, dc['needed'])
-                    st.markdown(f'''
-                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; display:flex; justify-content: space-between; align-items:center;">
-                        <div>
-                            <div style="font-weight: 700; color: var(--text1);">{dc['name']}</div>
-                            <div style="font-size: 0.8rem; color: var(--text2);">{dc['state']} • Current Ratio: <span style="color:var(--red); font-weight:700;">{dc['ratio']}:1</span></div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 0.75rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em;">Recommended Action</div>
-                            <div style="font-weight: 700; color: var(--blue);">Transfer {transfer_amt} Coach(es) ➔</div>
-                        </div>
-                    </div>
-                    ''', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
+            if selected_sport == "-- Select Sport --":
+                st.markdown(f"""
+                <div style="text-align: center; padding: 3rem 1.5rem; margin-top: 2rem; border: 1px dashed var(--line); border-radius: 12px; background: rgba(0,0,0,0.02); max-width: 600px;">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏹</div>
+                    <div style="font-weight: 600; color: var(--ink); font-size: 1.05rem; margin-bottom: 0.25rem;">Select Sport Focus</div>
+                    <div style="font-size: 0.85rem; color: var(--ink-soft);">Choose a sport active at <b>{selected_centre}</b> to compute athlete-to-coach ratios.</div>
+                </div>
+                """, unsafe_allow_html=True)
             else:
-                st.markdown('<div style="font-size: 0.9rem; color: var(--text2);">No critical deficits found across other centres for this sport. The ecosystem is balanced.</div>', unsafe_allow_html=True)
+                total_capacity = int(centre_row["capacity"])
+                total_coaches = int(centre_row["coaches"])
                 
-        elif ratio_val > 15:
-            # DEFICIT CASE
-            needed_coaches = ideal_coaches_needed - sport_coaches
-            st.markdown(f'<div style="font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem;">Detected a deficit of <b style="color:var(--text1);">{needed_coaches} {selected_sport} coach(es)</b> at {selected_centre}. Analyzing national surplus centres to fill this gap...</div>', unsafe_allow_html=True)
-            
-            surplus_sources = []
-            for idx, row in sai_df.iterrows():
-                if row["name"] == selected_centre: continue
-                if selected_sport in row["sports"]:
-                    t_cap = int(row["capacity"])
-                    t_coa = int(row["coaches"])
-                    sum_a_o = sum([sport_weights.get(s, {"a": 20})["a"] for s in row["sports"]])
-                    sum_c_o = sum([sport_weights.get(s, {"c": 2})["c"] for s in row["sports"]])
-                    s_cap = max(1, int(t_cap * (sel_weight["a"] / sum_a_o)))
-                    s_coa = max(1, int(t_coa * (sel_weight["c"] / sum_c_o)))
+                # Algorithmic Sport Weighting to calculate realistic specific ratios
+                sport_weights = {
+                    "Archery": {"a": 15, "c": 2}, "Weightlifting": {"a": 10, "c": 2}, 
+                    "Wrestling": {"a": 20, "c": 3}, "Boxing": {"a": 20, "c": 3}, 
+                    "Athletics": {"a": 40, "c": 2}, "Football": {"a": 30, "c": 1}, 
+                    "Hockey": {"a": 25, "c": 2}, "Gymnastics": {"a": 15, "c": 2}, 
+                    "Swimming": {"a": 25, "c": 2}, "Judo": {"a": 20, "c": 3}, 
+                    "Cycling": {"a": 15, "c": 2}, "Fencing": {"a": 12, "c": 2}, 
+                    "Taekwondo": {"a": 20, "c": 3}, "Badminton": {"a": 12, "c": 2}, 
+                    "Shooting": {"a": 15, "c": 2},
+                }
+                
+                sum_a = sum([sport_weights.get(s, {"a": 20})["a"] for s in centre_row["sports"]])
+                sum_c = sum([sport_weights.get(s, {"c": 2})["c"] for s in centre_row["sports"]])
+                
+                sel_weight = sport_weights.get(selected_sport, {"a": 20, "c": 2})
+                sport_capacity = max(1, int(total_capacity * (sel_weight["a"] / sum_a)))
+                sport_coaches = max(1, int(total_coaches * (sel_weight["c"] / sum_c)))
+                
+                ratio_val = int(sport_capacity / sport_coaches)
+                ratio_str = f"{ratio_val} : 1"
+                
+                if ratio_val <= 15:
+                    color = "var(--green)"
+                    status = "Optimal"
+                    insight_text = f"Well-resourced for {selected_sport}. Focus on performance scaling."
+                elif ratio_val <= 30:
+                    color = "var(--amber)"
+                    status = "Strained"
+                    insight_text = f"Coaching staff stretched for {selected_sport}. Consider empanelling additional coaches."
+                else:
+                    color = "var(--red)"
+                    status = "Critical Deficit"
+                    insight_text = f"High risk of injury/burnout in {selected_sport}. Deploy NIS masterclass immediately."
                     
-                    r_val = int(s_cap / s_coa)
-                    if r_val < 15:
-                        other_ideal = max(1, (s_cap + 14) // 15)
-                        other_surplus = s_coa - other_ideal
-                        if other_surplus > 0:
-                            surplus_sources.append({"name": row["name"], "state": row["state"], "ratio": r_val, "surplus": other_surplus})
-            
-            if surplus_sources:
-                surplus_sources = sorted(surplus_sources, key=lambda x: x["ratio"])
-                st.markdown('<div style="display:flex; flex-direction:column; gap:0.75rem; max-width: 600px;">', unsafe_allow_html=True)
-                for i, ss in enumerate(surplus_sources[:3]):
-                    transfer_amt = min(needed_coaches, ss['surplus'])
-                    st.markdown(f'''
-                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; display:flex; justify-content: space-between; align-items:center;">
-                        <div>
-                            <div style="font-weight: 700; color: var(--text1);">{ss['name']}</div>
-                            <div style="font-size: 0.8rem; color: var(--text2);">{ss['state']} • Current Ratio: <span style="color:var(--teal); font-weight:700;">{ss['ratio']}:1</span></div>
-                        </div>
-                        <div style="text-align: right;">
-                            <div style="font-size: 0.75rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em;">Recommended Action</div>
-                            <div style="font-weight: 700; color: var(--blue);">Transfer {transfer_amt} Coach(es) From Here ➔</div>
-                        </div>
-                    </div>
-                    ''', unsafe_allow_html=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                st.markdown('<div style="font-size: 0.9rem; color: var(--text2);">No other national centres currently have a surplus of coaches for this sport. Consider empanelling additional external coaches.</div>', unsafe_allow_html=True)
-                
-        else:
-            # OPTIMAL CASE
-            st.markdown(f'<div style="font-size: 0.95rem; color: var(--text2); line-height: 1.5; padding: 1rem; border: 1px solid rgba(16,229,179,0.15); background: rgba(16,229,179,0.02); max-width: 600px;">The coach-to-athlete ratio for <b>{selected_sport}</b> at <b>{selected_centre}</b> is at the optimal standard (15:1). The staffing level is currently balanced and sufficient.</div>', unsafe_allow_html=True)
+                st.markdown(f'''
+                <div class="acard" style="max-width: 600px; margin-top: 1rem; border-left:4px solid {color};">
+                    <div style="color:{color}; font-weight:700;">{selected_sport} ({centre_row['state']})</div>
+                    <div style="font-size:2rem; font-weight:900;">{ratio_str}</div>
+                    <div style="font-size:0.8rem; color:var(--text2);">Computed Sport Ratio ({sport_capacity} Athletes per {sport_coaches} Coaches)</div>
+                    <div style="margin-top:0.5rem; font-size:0.8rem;"><b>Standard:</b> 15:1 <span style="color:{color};"> ({status})</span></div>
+                    <div style="margin-top:0.5rem; font-size:0.8rem; color:var(--blue);"><b>Insight:</b> {insight_text}</div>
+                </div>
+                ''', unsafe_allow_html=True)
 
+                # AI Decision Maker: Coach Redistribution
+                st.markdown('<div class="stitle" style="font-size:1.05rem; margin-top: 2.5rem; color:var(--teal);">Coach Redistribution Analysis</div>', unsafe_allow_html=True)
+                
+                # Calculate surplus / deficit for the selected centre
+                ideal_coaches_needed = max(1, (sport_capacity + 14) // 15)
+                
+                if ratio_val < 15 and sport_coaches > ideal_coaches_needed:
+                    # SURPLUS CASE
+                    surplus_coaches = sport_coaches - ideal_coaches_needed
+                    st.markdown(f'<div style="font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem;">Detected a surplus of <b style="color:var(--text1);">{surplus_coaches} {selected_sport} coach(es)</b> at {selected_centre}. Analyzing national deficit centres...</div>', unsafe_allow_html=True)
+                    
+                    deficit_centres = []
+                    for idx, row in sai_df.iterrows():
+                        if row["name"] == selected_centre: continue
+                        if selected_sport in row["sports"]:
+                            t_cap = int(row["capacity"])
+                            t_coa = int(row["coaches"])
+                            sum_a_o = sum([sport_weights.get(s, {"a": 20})["a"] for s in row["sports"]])
+                            sum_c_o = sum([sport_weights.get(s, {"c": 2})["c"] for s in row["sports"]])
+                            s_cap = max(1, int(t_cap * (sel_weight["a"] / sum_a_o)))
+                            s_coa = max(1, int(t_coa * (sel_weight["c"] / sum_c_o)))
+                            
+                            r_val = int(s_cap / s_coa)
+                            if r_val > 15:
+                                needed = ((s_cap + 14) // 15) - s_coa
+                                if needed > 0:
+                                    deficit_centres.append({"name": row["name"], "state": row["state"], "ratio": r_val, "needed": needed})
+                    
+                    if deficit_centres:
+                        deficit_centres = sorted(deficit_centres, key=lambda x: x["ratio"], reverse=True)
+                        st.markdown('<div style="display:flex; flex-direction:column; gap:0.75rem; max-width: 600px;">', unsafe_allow_html=True)
+                        for i, dc in enumerate(deficit_centres[:3]):
+                            transfer_amt = min(surplus_coaches, dc['needed'])
+                            st.markdown(f'''
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; display:flex; justify-content: space-between; align-items:center;">
+                                <div>
+                                    <div style="font-weight: 700; color: var(--text1);">{dc['name']}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text2);">{dc['state']} • Current Ratio: <span style="color:var(--red); font-weight:700;">{dc['ratio']}:1</span></div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 0.75rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em;">Recommended Action</div>
+                                    <div style="font-weight: 700; color: var(--blue);">Transfer {transfer_amt} Coach(es) ➔</div>
+                                </div>
+                            </div>
+                            ''', unsafe_allow_html=True)
+                        st.markdown('</div>', unsafe_allow_html=True)
+                    else:
+                        st.markdown('<div style="font-size: 0.9rem; color: var(--text2);">No critical deficits found across other centres for this sport. The ecosystem is balanced.</div>', unsafe_allow_html=True)
+                        
+                elif ratio_val > 15:
+                    # DEFICIT CASE
+                    needed_coaches = ideal_coaches_needed - sport_coaches
+                    st.markdown(f'<div style="font-size: 0.9rem; color: var(--text2); margin-bottom: 1rem;">Detected a deficit of <b style="color:var(--text1);">{needed_coaches} {selected_sport} coach(es)</b> at {selected_centre}. Analyzing national surplus centres to fill this gap...</div>', unsafe_allow_html=True)
+                    
+                    surplus_sources = []
+                    for idx, row in sai_df.iterrows():
+                        if row["name"] == selected_centre: continue
+                        if selected_sport in row["sports"]:
+                            t_cap = int(row["capacity"])
+                            t_coa = int(row["coaches"])
+                            sum_a_o = sum([sport_weights.get(s, {"a": 20})["a"] for s in row["sports"]])
+                            sum_c_o = sum([sport_weights.get(s, {"c": 2})["c"] for s in row["sports"]])
+                            s_cap = max(1, int(t_cap * (sel_weight["a"] / sum_a_o)))
+                            s_coa = max(1, int(t_coa * (sel_weight["c"] / sum_c_o)))
+                            
+                            r_val = int(s_cap / s_coa)
+                            if r_val < 15:
+                                other_ideal = max(1, (s_cap + 14) // 15)
+                                other_surplus = s_coa - other_ideal
+                                if other_surplus > 0:
+                                    surplus_sources.append({"name": row["name"], "state": row["state"], "ratio": r_val, "surplus": other_surplus})
+                    
+                    if surplus_sources:
+                        surplus_sources = sorted(surplus_sources, key=lambda x: x["ratio"])
+                        st.markdown('<div style="display:flex; flex-direction:column; gap:0.75rem; max-width: 600px;">', unsafe_allow_html=True)
+                        for i, ss in enumerate(surplus_sources[:3]):
+                            transfer_amt = min(needed_coaches, ss['surplus'])
+                            st.markdown(f'''
+                            <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 1rem; display:flex; justify-content: space-between; align-items:center;">
+                                <div>
+                                    <div style="font-weight: 700; color: var(--text1);">{ss['name']}</div>
+                                    <div style="font-size: 0.8rem; color: var(--text2);">{ss['state']} • Current Ratio: <span style="color:var(--teal); font-weight:700;">{ss['ratio']}:1</span></div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div style="font-size: 0.75rem; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em;">Recommended Action</div>
+                                    <div style="font-weight: 700; color: var(--blue);">Transfer {transfer_amt} Coach(es) From Here ➔</div>
+                                </div>
+                            </div>
+                            ''', unsafe_allow_html=True)
+                        st.markdown('</div>', unsafe_allow_html=True)
+                    else:
+                        st.markdown('<div style="font-size: 0.9rem; color: var(--text2);">No other national centres currently have a surplus of coaches for this sport. Consider empanelling additional external coaches.</div>', unsafe_allow_html=True)
+                        
+                else:
+                    # OPTIMAL CASE
+                    st.markdown(f'<div style="font-size: 0.95rem; color: var(--text2); line-height: 1.5; padding: 1rem; border: 1px solid rgba(16,229,179,0.15); background: rgba(16,229,179,0.02); max-width: 600px;">The coach-to-athlete ratio for <b>{selected_sport}</b> at <b>{selected_centre}</b> is at the optimal standard (15:1). The staffing level is currently balanced and sufficient.</div>', unsafe_allow_html=True)
+    
     elif ca_sub_tab == "SAI Centres & NCOEs":
         st.markdown('<div class="stitle" style="font-size:1rem;"> Sports Authority of India Training Network</div>', unsafe_allow_html=True)
         
