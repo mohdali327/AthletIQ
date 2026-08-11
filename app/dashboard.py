@@ -728,7 +728,7 @@ st.markdown('''<style>
     }
     
     /* Hide the radio button circles completely */
-    div[data-testid="stRadio"] label div:first-child,
+    div[data-testid="stRadio"] label > div:first-child,
     div[data-testid="stRadio"] [data-testid="stFiberIndicator"] {
         display: none !important;
     }
