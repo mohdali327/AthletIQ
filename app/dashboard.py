@@ -340,7 +340,9 @@ input[data-testid="stTextInput-Input"]:focus {
 }
 
 /* Style Segmented Controls (Centres & Academies Sub-Navigation) to match stTabs design */
-div[data-testid="stSegmentedControl"] button {
+div[data-testid="stSegmentedControl"] button,
+div[data-testid="stSegmentedControl"] button[class*="st-"],
+div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"] {
     background: var(--white) !important;
     border: 1px solid var(--line) !important;
     border-radius: 0px !important;
@@ -353,14 +355,25 @@ div[data-testid="stSegmentedControl"] button {
     box-shadow: none !important;
     margin-right: 4px !important;
 }
-div[data-testid="stSegmentedControl"] button:hover {
+div[data-testid="stSegmentedControl"] button:hover,
+div[data-testid="stSegmentedControl"] button[class*="st-"]:hover {
     border-color: var(--gold) !important;
     color: var(--forest) !important;
     background: var(--white) !important;
 }
+/* Multi-attribute selector chain to guarantee override of active state */
 div[data-testid="stSegmentedControl"] button[aria-selected="true"],
 div[data-testid="stSegmentedControl"] button[aria-checked="true"],
-div[data-testid="stSegmentedControl"] button[data-checked="true"] {
+div[data-testid="stSegmentedControl"] button[data-checked="true"],
+div[data-testid="stSegmentedControl"] button[data-selected="true"],
+div[data-testid="stSegmentedControl"] button[class*="st-"][aria-selected="true"],
+div[data-testid="stSegmentedControl"] button[class*="st-"][aria-checked="true"],
+div[data-testid="stSegmentedControl"] button[class*="st-"][data-checked="true"],
+div[data-testid="stSegmentedControl"] button[class*="st-"][data-selected="true"],
+div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][aria-selected="true"],
+div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][aria-checked="true"],
+div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][data-checked="true"],
+div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][data-selected="true"] {
     background: var(--forest) !important;
     color: var(--white) !important;
     border-color: var(--forest) !important;
@@ -1856,6 +1869,69 @@ elif selected_tab == "Discovery & Leagues":
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 elif selected_tab == "Centres & Academies":
     st.markdown('<div class="stitle sticky-header" title="Monitor infrastructure, coaching capacity, and academies"> Centres & Academies <span class="chip chip-blue">Ecosystem Directory</span></div>', unsafe_allow_html=True)
+    
+    # Inline stylesheet to force segmented control sub-navigation to match stTabs layout
+    st.markdown("""
+    <style>
+    /* Base buttons style */
+    div[data-testid="stSegmentedControl"] button,
+    div[data-testid="stSegmentedControl"] button[class*="st-"],
+    div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"],
+    .st-key-ca_sub_navigation button,
+    .st-key-ca_sub_navigation [data-testid="stSegmentedControlItem"],
+    div[class*="st-key-ca_sub_navigation"] button,
+    div[class*="st-key-ca_sub_navigation"] [data-testid="stSegmentedControlItem"] {
+        background-color: var(--white) !important;
+        border: 1px solid var(--line) !important;
+        border-radius: 0px !important;
+        color: var(--ink-soft) !important;
+        font-family: var(--mono) !important;
+        font-size: 11px !important;
+        letter-spacing: 0.04em !important;
+        padding: 9px 18px !important;
+        transition: all 0.25s ease !important;
+        box-shadow: none !important;
+        margin-right: 4px !important;
+        height: auto !important;
+    }
+    
+    /* Hover state overrides */
+    div[data-testid="stSegmentedControl"] button:hover,
+    div[data-testid="stSegmentedControl"] button[class*="st-"]:hover,
+    .st-key-ca_sub_navigation button:hover,
+    div[class*="st-key-ca_sub_navigation"] button:hover {
+        border-color: var(--gold) !important;
+        color: var(--forest) !important;
+        background-color: var(--white) !important;
+    }
+    
+    /* Selected active state overrides */
+    div[data-testid="stSegmentedControl"] button[aria-checked="true"],
+    div[data-testid="stSegmentedControl"] button[aria-selected="true"],
+    div[data-testid="stSegmentedControl"] button[data-checked="true"],
+    div[data-testid="stSegmentedControl"] button[data-selected="true"],
+    div[data-testid="stSegmentedControl"] button[class*="st-"][aria-checked="true"],
+    div[data-testid="stSegmentedControl"] button[class*="st-"][aria-selected="true"],
+    div[data-testid="stSegmentedControl"] button[class*="st-"][data-checked="true"],
+    div[data-testid="stSegmentedControl"] button[class*="st-"][data-selected="true"],
+    div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][aria-checked="true"],
+    div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][aria-selected="true"],
+    div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][data-checked="true"],
+    div[data-testid="stSegmentedControl"] [data-testid="stSegmentedControlItem"][data-selected="true"],
+    .st-key-ca_sub_navigation [aria-checked="true"],
+    .st-key-ca_sub_navigation [aria-selected="true"],
+    .st-key-ca_sub_navigation [data-checked="true"],
+    .st-key-ca_sub_navigation [data-selected="true"],
+    div[class*="st-key-ca_sub_navigation"] [aria-checked="true"],
+    div[class*="st-key-ca_sub_navigation"] [aria-selected="true"],
+    div[class*="st-key-ca_sub_navigation"] [data-checked="true"],
+    div[class*="st-key-ca_sub_navigation"] [data-selected="true"] {
+        background-color: #113E21 !important;
+        color: #FEFEFE !important;
+        border-color: #113E21 !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
     st.markdown(insight("ℹ Infrastructure & Coaching Capacity", 
         "AthletIQ maps government training centres (SAI), private academies, and tracks Coach-to-Athlete ratios to identify capacity gaps and sponsorship opportunities.", "blue"), unsafe_allow_html=True)
