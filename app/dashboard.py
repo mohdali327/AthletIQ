@@ -1730,11 +1730,11 @@ elif selected_tab == "Discovery & Leagues":
     </div>
     ''', unsafe_allow_html=True)
     
-    fc1, fc2, fc3 = st.columns(3)
+    fc1, fc2, fc3, fc4 = st.columns([1, 1, 1, 1.2])
     with fc1:
-        f_sport = st.selectbox("Filter by Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
+        f_sport = st.selectbox("Sport Focus", ["All Core Sports"] + sorted(list(set(leagues_disp["Sport"]))), key="live_sport_select")
     with fc2:
-        f_state = st.selectbox("Filter by State Hub", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
+        f_state = st.selectbox("State Registry", ["All Mapped States"] + sorted(list(set(leagues_disp["State"]))), key="live_state_select")
     with fc3:
         status_options = [
             "All Statuses",
@@ -1744,11 +1744,15 @@ elif selected_tab == "Discovery & Leagues":
             "Completed",
             "Just Completed"
         ]
-        f_status = st.selectbox("Filter by Event Status", status_options, key="live_status_select")
+        f_status = st.selectbox("Event Status", status_options, key="live_status_select")
+    with fc4:
+        f_search = st.text_input("Search Tournament", placeholder="Type tournament name...", key="live_search_query")
         
     filtered_leagues = leagues_disp.copy()
     if f_sport != "All Core Sports":
         filtered_leagues = filtered_leagues[filtered_leagues["Sport"] == f_sport]
+    if f_search and f_search.strip():
+        filtered_leagues = filtered_leagues[filtered_leagues["Tournament/League Name"].str.lower().str.contains(f_search.strip().lower(), na=False)]
     if f_state != "All Mapped States":
         filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
     if f_status != "All Statuses":
