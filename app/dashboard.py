@@ -1782,13 +1782,13 @@ elif selected_tab == "Discovery & Leagues":
         f_search = st.text_input("Search Tournament", placeholder="Type tournament name...", key="live_search_query")
         
     filtered_leagues = leagues_disp.copy()
-    if f_sport != "All Core Sports":
+    if f_sport is not None:
         filtered_leagues = filtered_leagues[filtered_leagues["Sport"] == f_sport]
     if f_search and f_search.strip():
         filtered_leagues = filtered_leagues[filtered_leagues["Tournament/League Name"].str.lower().str.contains(f_search.strip().lower(), na=False)]
-    if f_state != "All Mapped States":
+    if f_state is not None:
         filtered_leagues = filtered_leagues[filtered_leagues["State"] == f_state]
-    if f_status != "All Statuses":
+    if f_status is not None:
         if f_status == "Live Now":
             filtered_leagues = filtered_leagues[filtered_leagues["Live Status"].str.upper().str.contains("LIVE NOW")]
         elif f_status == "Starting Soon":
