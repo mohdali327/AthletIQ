@@ -2766,7 +2766,7 @@ elif selected_tab == "Profile":
                         else:
                             st.info(f"No {lvl.lower()} athletes found matching the current filters.")
                     else:
-                        if state_choice != "All States" or sport_choice != "All Sports" or name_query.strip():
+                        if state_choice is not None or sport_choice is not None or name_query.strip():
                             st.markdown("---")
                             st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">Matching Athletes</div>', unsafe_allow_html=True)
                             if not filtered_athletes.empty:
@@ -2784,7 +2784,13 @@ elif selected_tab == "Profile":
                             else:
                                 st.info("No athletes found matching the current filters.")
                         else:
-                            pass
+                            st.markdown("""
+                            <div style="border: 1px dashed var(--line); padding: 3rem 1.5rem; text-align:center; color: var(--ink-soft); font-size:0.9rem; margin-top:1rem; border-radius:12px; background: rgba(0,0,0,0.01); max-width: 600px;">
+                                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                                <div style="font-weight:600; color: var(--ink); margin-bottom: 0.25rem;">Athlete Directory Search</div>
+                                <div>Select a Sport Focus, State Registry, or type a name to begin searching mapped profiles.</div>
+                            </div>
+                            """, unsafe_allow_html=True)
 
         with tab_coa:
             coach_names = sorted(filtered_coaches["name"].dropna().unique().tolist()) if not filtered_coaches.empty else []
@@ -3068,7 +3074,7 @@ elif selected_tab == "Womens":
                 else:
                     st.info(f"No {lvl.lower()} women athletes found matching the current filters.")
             else:
-                if w_state_choice != "All States" or w_sport_choice != "All Sports" or w_name_query.strip():
+                if w_state_choice is not None or w_sport_choice is not None or w_name_query.strip():
                     st.markdown("---")
                     st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.3rem;">Matching Women Athletes</div>', unsafe_allow_html=True)
                     if not filtered_women.empty:
@@ -3076,8 +3082,13 @@ elif selected_tab == "Womens":
                     else:
                         st.info("No women athletes found matching the current filters.")
                 else:
-                    # Show nothing at start (same as Profile directory start condition)
-                    pass
+                    st.markdown("""
+                    <div style="border: 1px dashed var(--line); padding: 3rem 1.5rem; text-align:center; color: var(--ink-soft); font-size:0.9rem; margin-top:1rem; border-radius:12px; background: rgba(0,0,0,0.01); max-width: 600px;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+                        <div style="font-weight:600; color: var(--ink); margin-bottom: 0.25rem;">Womens Directory Search</div>
+                        <div>Select a Sport Focus, State Registry, or type a name to begin searching emerging women athlete profiles.</div>
+                    </div>
+                    """, unsafe_allow_html=True)
 
 elif selected_tab == "AI Assistant":
     import requests
