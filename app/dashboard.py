@@ -7,12 +7,19 @@ Decision-Making Dashboard — Built for Action, Not Display
 import streamlit as st
 import os
 import pandas as pd
-import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import os
 import json
+import requests
+from dotenv import load_dotenv
+from pathlib import Path
+from datetime import datetime, timedelta, timezone
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
+
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+print("NEWS API KEY LOADED:", bool(NEWS_API_KEY))
 # ─────────────────────────────────────────────────────────────────────────────
 # PAGE CONFIG
 # ─────────────────────────────────────────────────────────────────────────────
@@ -821,7 +828,7 @@ st.markdown('''<style>
 if "main_navigation" not in st.session_state:
     st.session_state.main_navigation = "Pathway Overview"
 
-nav_options = ["Pathway Overview", "Discovery & Leagues", "Centres & Academies", "Sponsor Pipeline", "Profile", "Womens", "AI Assistant"]
+nav_options = ["Pathway Overview", "Discovery & Leagues", "Centres & Academies", "Sponsor Pipeline", "Profile", "Womens", "Sports News", "AI Assistant"]
 
 if "main_navigation" not in st.session_state:
     st.session_state.main_navigation = "Pathway Overview"
@@ -3089,6 +3096,249 @@ elif selected_tab == "Womens":
                         <div>Select a Sport Focus, State Registry, or type a name to begin searching emerging women athlete profiles.</div>
                     </div>
                     """, unsafe_allow_html=True)
+
+elif selected_tab == "Sports News":
+
+    st.markdown(
+        '<div class="stitle sticky-header">Sports News</div>',
+        unsafe_allow_html=True
+    )
+
+    # Refresh button
+    if st.button("🔄 Refresh News"):
+        st.rerun()
+
+    if not NEWS_API_KEY:
+        st.error("NewsAPI key was not loaded from .env")
+
+    else:
+
+        try:
+            response = requests.get(
+                "https://newsapi.org/v2/everything",
+                params={
+                    "q": "sports",
+                    "language": "en",
+                    "sortBy": "publishedAt",
+                    "pageSize": 100,
+                    "apiKey": NEWS_API_KEY
+                },
+                timeout=10
+            )
+
+            data = response.json()
+
+            if data.get("status") != "ok":
+                st.error("Unable to fetch sports news.")
+
+            else:
+
+                articles = data.get("articles", [])
+
+                # Current time
+                now = datetime.now(timezone.utc)
+
+                # Keep all returned articles and remove invalid dates
+                fresh_articles = []
+
+                for article in articles:
+
+                    published = article.get("publishedAt")
+
+                    if not published:
+                        continue
+
+                    try:
+                        datetime.fromisoformat(
+                            published.replace("Z", "+00:00")
+                        )
+
+                        fresh_articles.append(article)
+
+                    except ValueError:
+                        continue
+
+                # Remove duplicate articles
+                unique_articles = []
+                seen_urls = set()
+
+                for article in fresh_articles:
+
+                    article_url = article.get("url")
+
+                    if not article_url:
+                        continue
+
+                    if article_url in seen_urls:
+                        continue
+
+                    seen_urls.add(article_url)
+                    unique_articles.append(article)
+
+                # Newest first
+                unique_articles.sort(
+                    key=lambda x: x.get("publishedAt", ""),
+                    reverse=True
+                )
+
+                if not unique_articles:
+
+                    st.info(
+                        "No fresh sports news available right now."
+                    )
+
+                else:
+
+                    st.caption(
+                        f"Showing {len(unique_articles)} fresh articles "
+                        "from the last 24 hours."
+                    )
+
+                    # 3-column layout
+                    for i in range(
+                        0,
+                        len(unique_articles),
+                        3
+                    ):
+
+                        cols = st.columns(3)
+
+                        for col, article in zip(
+                            cols,
+                            unique_articles[i:i + 3]
+                        ):
+
+                            with col:
+
+                                # Image
+                                image_url = article.get(
+                                    "urlToImage"
+                                )
+
+                                if image_url:
+
+                                    st.image(
+                                        image_url,
+                                        use_container_width=True
+                                    )
+
+                                else:
+
+                                    st.markdown(
+                                        """
+                                        <div style="
+                                            height:180px;
+                                            background:#f0f2f1;
+                                            display:flex;
+                                            align-items:center;
+                                            justify-content:center;
+                                            border-radius:8px;
+                                            color:#777;
+                                        ">
+                                            📰 No Image Available
+                                        </div>
+                                        """,
+                                        unsafe_allow_html=True
+                                    )
+
+                                # Source
+                                st.caption(
+                                    article.get(
+                                        "source",
+                                        {}
+                                    ).get(
+                                        "name",
+                                        "Sports News"
+                                    )
+                                )
+
+                                # Title
+                                st.markdown(
+                                    f"**{article.get(
+                                        'title',
+                                        'No title'
+                                    )}**"
+                                )
+
+                                # Description
+                                description = article.get(
+                                    "description"
+                                )
+
+                                if description:
+
+                                    st.write(
+                                        description[:160] + "..."
+                                        if len(description) > 160
+                                        else description
+                                    )
+
+                                # Published time
+                                published = article.get(
+                                    "publishedAt"
+                                )
+
+                                if published:
+
+                                    try:
+
+                                        published_time = (
+                                            datetime.fromisoformat(
+                                                published.replace(
+                                                    "Z",
+                                                    "+00:00"
+                                                )
+                                            )
+                                        )
+
+                                        minutes_old = int(
+                                            (
+                                                now -
+                                                published_time
+                                            ).total_seconds() / 60
+                                        )
+
+                                        if minutes_old < 60:
+
+                                            time_text = (
+                                                f"{minutes_old} min ago"
+                                            )
+
+                                        else:
+
+                                            hours_old = (
+                                                minutes_old // 60
+                                            )
+
+                                            time_text = (
+                                                f"{hours_old}h ago"
+                                            )
+
+                                        st.caption(
+                                            f"🕐 {time_text}"
+                                        )
+
+                                    except ValueError:
+
+                                        st.caption(
+                                            f"🕐 {published}"
+                                        )
+
+                                # Read article
+                                                                # Read article
+                                if article.get("url"):
+
+                                    st.link_button(
+                                        "Read Full Article →",
+                                        article["url"],
+                                        use_container_width=True
+                                    )
+
+        except requests.RequestException as e:
+            st.error(
+                f"Unable to load sports news: {e}"
+            )
+
 
 elif selected_tab == "AI Assistant":
     import requests
