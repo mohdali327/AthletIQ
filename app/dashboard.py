@@ -2841,7 +2841,7 @@ elif selected_tab == "Profile":
             st.markdown('<div class="stitle" style="font-size:0.95rem;margin-top:0.5rem;margin-bottom:0.8rem;">Matching Academies</div>', unsafe_allow_html=True)
             sai_df_disp = sai_df[["name", "city", "state", "type", "region", "capacity", "coaches", "facilities"]].copy()
             if state_choice != "All States":
-                sai_df_disp = sai_df_disp[sai_df_disp["state"].str.lower() == state_choice.lower()]
+                sai_df_disp = sai_df_disp[sai_df_disp["state"].fillna("").astype(str).str.strip().str.lower()== str(state_choice).strip().lower()]
             sai_df_disp.columns = ["Centre Name", "City", "State", "Type", "Region", "Capacity", "Coaches", "Facilities"]
             st.write(f"Showing all matching academies (total: {len(sai_df_disp)}):")
             st.dataframe(sai_df_disp.reset_index(drop=True), use_container_width=True, height=450, hide_index=True)
