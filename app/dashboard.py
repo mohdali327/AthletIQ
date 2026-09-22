@@ -1339,269 +1339,41 @@ if selected_tab == "Pathway Overview":
             st.markdown('<a href="#interactive-india-sports-map" style="display:inline-block; margin-top:0.6rem; color:var(--forest); font-family:var(--sans); font-size:0.95rem; font-weight:600; text-decoration:underline;">See the India map</a>', unsafe_allow_html=True)
 
     with col_hero_r:
-        canvas_html = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-        <meta charset="utf-8">
-        <style>
-          * { margin: 0; padding: 0; box-sizing: border-box; }
-          body {
-            background: transparent;
-            overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            user-select: none;
-          }
-          #canvas-card {
-            position: relative;
-            width: 100%;
-            height: 380px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, rgba(17,62,33,0.035) 0%, rgba(179,139,89,0.05) 50%, rgba(17,62,33,0.025) 100%);
-            border: 1px solid rgba(17,62,33,0.14);
-            box-shadow: 0 4px 20px rgba(17,62,33,0.04);
-            overflow: hidden;
-          }
-          canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
-          }
-          .overlay-header {
-            position: absolute;
-            top: 12px;
-            left: 14px;
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            background: rgba(254,254,254,0.9);
-            backdrop-filter: blur(8px);
-            padding: 5px 11px;
-            border-radius: 20px;
-            border: 1px solid rgba(17,62,33,0.14);
-            font-size: 11px;
-            font-weight: 600;
-            color: #113E21;
-            letter-spacing: 0.5px;
-            pointer-events: none;
-          }
-          .pulse-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #10E5B3;
-            box-shadow: 0 0 6px #10E5B3;
-            animation: live-pulse 1.8s infinite;
-          }
-          @keyframes live-pulse {
-            0% { transform: scale(0.9); opacity: 0.7; }
-            50% { transform: scale(1.4); opacity: 1; }
-            100% { transform: scale(0.9); opacity: 0.7; }
-          }
-          .hint-tag {
-            position: absolute;
-            bottom: 12px;
-            right: 14px;
-            font-size: 10.5px;
-            font-family: 'IBM Plex Mono', monospace, monospace;
-            color: #526658;
-            background: rgba(254,254,254,0.9);
-            padding: 3px 9px;
-            border-radius: 12px;
-            border: 1px solid rgba(17,62,33,0.12);
-            pointer-events: none;
-          }
-        </style>
-        </head>
-        <body>
-        <div id="canvas-card">
-          <div class="overlay-header">
-            <div class="pulse-dot"></div>
-            <span>LIVE TALENT & HUB NETWORK</span>
-          </div>
-          <div class="hint-tag">✦ Move cursor to connect hubs</div>
-          <canvas id="sportsCanvas"></canvas>
-        </div>
-
-        <script>
-          const canvas = document.getElementById("sportsCanvas");
-          const ctx = canvas.getContext("2d");
-          const card = document.getElementById("canvas-card");
-
-          let width, height;
-          function setDimensions() {
-            width = card.clientWidth;
-            height = card.clientHeight;
-            canvas.width = width * window.devicePixelRatio;
-            canvas.height = height * window.devicePixelRatio;
-            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-          }
-          window.addEventListener("resize", setDimensions);
-          setDimensions();
-
-          const keyEntities = [
-            { label: "Patiala NCOE", type: "hub", color: "#113E21" },
-            { label: "Sonepat Hub", type: "hub", color: "#113E21" },
-            { label: "Bangalore STC", type: "hub", color: "#113E21" },
-            { label: "Odisha HPC", type: "hub", color: "#113E21" },
-            { label: "Neeraj C. (Javelin)", type: "athlete", color: "#B38B59" },
-            { label: "Priya S. (Boxing)", type: "athlete", color: "#B38B59" },
-            { label: "Mirabai C. (Weightlifting)", type: "athlete", color: "#B38B59" },
-            { label: "Manikanta L. (Athletics)", type: "athlete", color: "#B38B59" },
-            { label: "CSR Sponsor Pipeline", type: "sponsor", color: "#10E5B3" },
-            { label: "Khelo India Scout", type: "scout", color: "#683DE4" },
-          ];
-
-          const particles = [];
-          keyEntities.forEach((item) => {
-            particles.push({
-              x: Math.random() * (width - 60) + 30,
-              y: Math.random() * (height - 60) + 30,
-              vx: (Math.random() - 0.5) * 0.55,
-              vy: (Math.random() - 0.5) * 0.55,
-              radius: item.type === "hub" ? 5 : 4,
-              color: item.color,
-              label: item.label,
-              isNamed: true
-            });
-          });
-
-          for (let i = 0; i < 26; i++) {
-            particles.push({
-              x: Math.random() * width,
-              y: Math.random() * height,
-              vx: (Math.random() - 0.5) * 0.4,
-              vy: (Math.random() - 0.5) * 0.4,
-              radius: Math.random() * 2 + 1.5,
-              color: Math.random() > 0.5 ? "#113E21" : "#B38B59",
-              label: null,
-              isNamed: false
-            });
-          }
-
-          let mouse = { x: null, y: null, radius: 115 };
-          card.addEventListener("mousemove", (e) => {
-            const rect = card.getBoundingClientRect();
-            mouse.x = e.clientX - rect.left;
-            mouse.y = e.clientY - rect.top;
-          });
-
-          card.addEventListener("mouseleave", () => {
-            mouse.x = null;
-            mouse.y = null;
-          });
-
-          let waves = [];
-          card.addEventListener("click", (e) => {
-            const rect = card.getBoundingClientRect();
-            waves.push({
-              x: e.clientX - rect.left,
-              y: e.clientY - rect.top,
-              radius: 4,
-              alpha: 0.75
-            });
-          });
-
-          function render() {
-            ctx.clearRect(0, 0, width, height);
-
-            // Expanding click ripples
-            for (let i = waves.length - 1; i >= 0; i--) {
-              const w = waves[i];
-              ctx.beginPath();
-              ctx.arc(w.x, w.y, w.radius, 0, Math.PI * 2);
-              ctx.strokeStyle = `rgba(179,139,89, ${w.alpha})`;
-              ctx.lineWidth = 1.4;
-              ctx.stroke();
-              w.radius += 2.8;
-              w.alpha -= 0.022;
-              if (w.alpha <= 0) waves.splice(i, 1);
-            }
-
-            // Network lines between close nodes
-            for (let i = 0; i < particles.length; i++) {
-              for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                const maxLink = 80;
-
-                if (dist < maxLink) {
-                  const alpha = (1 - dist / maxLink) * 0.2;
-                  ctx.beginPath();
-                  ctx.moveTo(particles[i].x, particles[i].y);
-                  ctx.lineTo(particles[j].x, particles[j].y);
-                  ctx.strokeStyle = `rgba(17,62,33, ${alpha})`;
-                  ctx.lineWidth = 0.8;
-                  ctx.stroke();
-                }
-              }
-            }
-
-            // Mouse interaction & golden reticle lines
-            if (mouse.x !== null && mouse.y !== null) {
-              ctx.beginPath();
-              ctx.arc(mouse.x, mouse.y, 7, 0, Math.PI * 2);
-              ctx.strokeStyle = "rgba(179,139,89, 0.7)";
-              ctx.lineWidth = 1.2;
-              ctx.stroke();
-
-              for (let i = 0; i < particles.length; i++) {
-                const dx = particles[i].x - mouse.x;
-                const dy = particles[i].y - mouse.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < mouse.radius) {
-                  const alpha = (1 - dist / mouse.radius) * 0.65;
-                  ctx.beginPath();
-                  ctx.moveTo(particles[i].x, particles[i].y);
-                  ctx.lineTo(mouse.x, mouse.y);
-                  ctx.strokeStyle = `rgba(179,139,89, ${alpha})`;
-                  ctx.lineWidth = 1.2;
-                  ctx.stroke();
-
-                  particles[i].x -= dx * 0.012;
-                  particles[i].y -= dy * 0.012;
-                }
-              }
-            }
-
-            // Move and draw particles
-            particles.forEach((p) => {
-              p.x += p.vx;
-              p.y += p.vy;
-
-              if (p.x < 8 || p.x > width - 8) p.vx *= -1;
-              if (p.y < 8 || p.y > height - 8) p.vy *= -1;
-
-              if (p.isNamed) {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius + 3.5, 0, Math.PI * 2);
-                ctx.fillStyle = p.color === "#B38B59" ? "rgba(179,139,89, 0.18)" : "rgba(17,62,33, 0.14)";
-                ctx.fill();
-              }
-
-              ctx.beginPath();
-              ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-              ctx.fillStyle = p.color;
-              ctx.fill();
-
-              if (p.isNamed) {
-                ctx.font = "500 9.5px -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
-                ctx.fillStyle = "#132318";
-                ctx.fillText(p.label, p.x + 8, p.y + 3);
-              }
-            });
-
-            requestAnimationFrame(render);
-          }
-
-          render();
-        </script>
-        </body>
-        </html>
-        """
-        components.html(canvas_html, height=385)
+        st.markdown("""
+            <div class="hierarchy-tree-container">
+                <div class="hierarchy-tree">
+                    <div class="tree-node active-node">
+                        <div class="node-tag" style="color: #FEFEFE !important;">INDIA</div>
+                        <div class="node-title">National Layer</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">STATE</div>
+                        <div class="node-title">36 States & UTs</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">DISTRICT</div>
+                        <div class="node-title">700+ Districts</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">SPORT</div>
+                        <div class="node-title">42 Disciplines</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node">
+                        <div class="node-tag">CATEGORY</div>
+                        <div class="node-title">U-12 · Senior</div>
+                    </div>
+                    <div class="tree-line"></div>
+                    <div class="tree-node active-node-bottom">
+                        <div class="node-tag" style="color: #FEFEFE !important;">ATHLETE</div>
+                        <div class="node-title">Priya Singh · Boxing</div>
+                    </div>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
         
     st.markdown("---")
 
