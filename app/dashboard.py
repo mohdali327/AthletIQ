@@ -3482,12 +3482,8 @@ elif selected_tab == "Sports News":
                                 )
 
                                 # Title
-                                st.markdown(
-                                    f"**{article.get(
-                                        'title',
-                                        'No title'
-                                    )}**"
-                                )
+                                art_title = article.get('title', 'No title')
+                                st.markdown(f"**{art_title}**")
 
                                 # Description
                                 description = article.get(
@@ -3686,5 +3682,4 @@ elif selected_tab == "AI Assistant":
                     response_placeholder.error("The google-genai package is not installed. Please add google-genai to requirements.txt and reboot the app.")
                 except Exception as e:
                     response_placeholder.error(f"Error communicating with Gemini via SDK: {e}")
-
 
